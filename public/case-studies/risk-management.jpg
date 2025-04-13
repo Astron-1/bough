@@ -1,0 +1,14 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#4a1c24"/>
+  <g transform="translate(400, 225)">
+    <path d="M-200,-100 L200,-100 L200,100 L-200,100 Z" fill="#ffa726" fill-opacity="0.1"/>
+    <path d="M-150,-75 L150,-75 L150,75 L-150,75 Z" fill="#ffa726" fill-opacity="0.1"/>
+    <path d="M-100,-50 L100,-50 L100,50 L-100,50 Z" fill="#ffa726" fill-opacity="0.1"/>
+  </g>
+  <g transform="translate(400, 225)">
+    <path d="M0,-50 C-60,-50 -70,-15 -70,30 C-70,60 -40,80 0,95 C40,80 70,60 70,30 C70,-15 60,-50 0,-50 Z" fill="#ff5722" fill-opacity="0.7"/>
+    <path d="M0,-35 C-45,-35 -55,-10 -55,25 C-55,48 -30,65 0,75 C30,65 55,48 55,25 C55,-10 45,-35 0,-35 Z" fill="#ff5722"/>
+    <path d="M0,10 L-20,-15 L-10,-15 L-10,-30 L10,-30 L10,-15 L20,-15 Z" fill="white"/>
+  </g>
+  <text x="400" y="350" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Risk Management</text>
+</svg> 
