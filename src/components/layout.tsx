@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
-import GlobalClickSpark from "./components/GlobalClickSpark";
+import GlobalClickSpark from "./GlobalClickSpark";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,9 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${sourceSans3.variable} antialiased`}
       >
-        <GlobalClickSpark>
-          {children}
-        </GlobalClickSpark>
+        <GlobalClickSpark>{children}</GlobalClickSpark>
       </body>
     </html>
   );

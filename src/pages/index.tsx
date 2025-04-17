@@ -1,10 +1,10 @@
-import Hero from './components/Hero';
-import Header from './components/Header';
-import CircuitSection from './components/CircuitSection';
-import ServicesSection from './components/ServicesSection';
-import PartnersSection from './components/PartnersSection';
-import CaseStudiesSection from './components/CaseStudiesSection';
-import Footer from './components/Footer';
+import Hero from "@app/components/Hero";
+import Header from "@app/components/Header";
+import CircuitSection from "@app/components/CircuitSection";
+import ServicesSection from "@app/components/ServicesSection";
+import PartnersSection from "@app/components/PartnersSection";
+import CaseStudiesSection from "@app/components/CaseStudiesSection";
+import Footer from "@app/components/Footer";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
       <ServicesSection className="z-10" />
       <PartnersSection className="z-10" />
       <CaseStudiesSection className="z-10" />
-      
+
       <Footer />
     </main>
   );
