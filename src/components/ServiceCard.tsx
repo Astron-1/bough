@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ServiceTabProps {
   id: string;
@@ -37,38 +37,46 @@ interface ServiceCardProps {
   defaultActiveTab?: string;
 }
 
-const ServiceTab: React.FC<ServiceTabProps> = ({ 
-  id, 
-  label, 
-  isActive, 
-  onClick, 
-  index, 
+const ServiceTab: React.FC<ServiceTabProps> = ({
+  id,
+  label,
+  isActive,
+  onClick,
+  index,
   totalTabs,
-  setTabMeasurements
+  setTabMeasurements,
 }) => {
   // Adjust spacing based on position (first, middle, last)
-  const paddingClass = index === 0 ? 'pl-8 pr-10' : index === totalTabs - 1 ? 'pl-10 pr-8' : 'px-10';
+  const paddingClass =
+    index === 0
+      ? "pl-8 pr-10"
+      : index === totalTabs - 1
+      ? "pl-10 pr-8"
+      : "px-10";
   const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (textRef.current) {
       const rect = textRef.current.getBoundingClientRect();
-      const parentRect = textRef.current.parentElement?.getBoundingClientRect() || { left: 0 };
+      const parentRect =
+        textRef.current.parentElement?.getBoundingClientRect() || { left: 0 };
       const textWidth = rect.width;
       const textLeft = rect.left - parentRect.left;
       setTabMeasurements(index, textWidth, textLeft);
     }
   }, [index, label, setTabMeasurements]); // Added label back to ensure measurements update when text changes
-  
+
   return (
     <button
       onClick={() => onClick(id)}
-      className={`${paddingClass} py-4 text-white transition-all duration-300 relative`}
-      style={{ background: 'transparent' }}
+      className={`${paddingClass} py-4   transition-all duration-300 relative`}
+      style={{ background: "transparent" }}
     >
-      <span 
+      <span
         ref={textRef}
-        className={`${isActive ? 'font-bold' : 'font-normal'} text-[1.5rem] leading-[1.5rem] inline-block`}
+        className={`${
+          isActive ? "font-bold" : "font-normal"
+        } text-[1.5rem] leading-[1.5rem] inline-block`}
         style={{ fontFamily: "var(--font-sf-pro)" }}
       >
         {label}
@@ -77,33 +85,41 @@ const ServiceTab: React.FC<ServiceTabProps> = ({
   );
 };
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ 
-  className = '', 
-  tabs, 
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  className = "",
+  tabs,
   contents,
-  defaultActiveTab 
+  defaultActiveTab,
 }) => {
-  const [activeTab, setActiveTab] = useState<string>(defaultActiveTab || tabs[0].id);
+  const [activeTab, setActiveTab] = useState<string>(
+    defaultActiveTab || tabs[0].id
+  );
   const [tabMeasurements, setTabMeasurements] = useState<TabMeasurement[]>([]);
-  const activeTabIndex = tabs.findIndex(tab => tab.id === activeTab);
+  const activeTabIndex = tabs.findIndex((tab) => tab.id === activeTab);
   const tabContainerRef = useRef<HTMLDivElement>(null);
 
   // Use useCallback to memoize the function and prevent infinite loops
-  const updateTabMeasurement = useCallback((index: number, width: number, left: number) => {
-    setTabMeasurements(prev => {
-      const newMeasurements = [...prev];
-      newMeasurements[index] = { width, left };
-      return newMeasurements;
-    });
-  }, []);
+  const updateTabMeasurement = useCallback(
+    (index: number, width: number, left: number) => {
+      setTabMeasurements((prev) => {
+        const newMeasurements = [...prev];
+        newMeasurements[index] = { width, left };
+        return newMeasurements;
+      });
+    },
+    []
+  );
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
   };
 
-  const activeContent = contents.find(content => content.id === activeTab);
-  
-  const currentTabMeasurement = tabMeasurements[activeTabIndex] || { width: 0, left: 0 };
+  const activeContent = contents.find((content) => content.id === activeTab);
+
+  const currentTabMeasurement = tabMeasurements[activeTabIndex] || {
+    width: 0,
+    left: 0,
+  };
 
   // Calculate the precise position for the tab underline
   const getUnderlinePosition = () => {
@@ -126,7 +142,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     <div className={`relative mx-auto max-w-[65rem] px-0 ${className}`}>
       <div className="relative">
         {/* Tabs Outside Container */}
-        <div ref={tabContainerRef} className="flex bg-transparent mb-0 relative z-20">
+        <div
+          ref={tabContainerRef}
+          className="flex bg-transparent mb-0 relative z-20"
+        >
           {tabs.map((tab, index) => (
             <ServiceTab
               key={tab.id}
@@ -139,42 +158,43 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               setTabMeasurements={updateTabMeasurement}
             />
           ))}
-          
+
           {/* Tab Underline with Glow Effect */}
-          <div className="absolute" style={{ bottom: '0px', zIndex: 10 }}>
-            <motion.div 
+          <div className="absolute" style={{ bottom: "0px", zIndex: 10 }}>
+            <motion.div
               className="absolute h-0.5 bg-[#53fbfb] z-20 rounded-full"
               initial={{ width: tabMeasurements[0]?.width || 0, left: 32 }}
-              animate={{ 
+              animate={{
                 width: currentTabMeasurement.width,
-                left: getUnderlinePosition()
+                left: getUnderlinePosition(),
               }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
               style={{
                 boxShadow: "0 4px 16px rgba(83, 251, 251, 0.4)",
-                filter: "drop-shadow(0 2px 10px rgba(83, 251, 251, 0.25))"
+                filter: "drop-shadow(0 2px 10px rgba(83, 251, 251, 0.25))",
               }}
             />
-            
+
             {/* Semi-circular glow underneath the underline */}
-            <motion.div 
+            <motion.div
               className="absolute rounded-b-full"
-              initial={{ 
-                width: tabMeasurements[0]?.width || 0, 
+              initial={{
+                width: tabMeasurements[0]?.width || 0,
                 left: 32,
-                height: 40
+                height: 40,
               }}
-              animate={{ 
+              animate={{
                 width: currentTabMeasurement.width,
                 left: getUnderlinePosition(),
-                height: 40
+                height: 40,
               }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
               style={{
-                top: '0px',
-                background: "radial-gradient(ellipse at top, rgba(83, 251, 251, 0.2) 0%, transparent 80%)",
+                top: "0px",
+                background:
+                  "radial-gradient(ellipse at top, rgba(83, 251, 251, 0.2) 0%, transparent 80%)",
                 filter: "blur(6px)",
-                zIndex: 15
+                zIndex: 15,
               }}
             />
           </div>
@@ -182,12 +202,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       </div>
 
       {/* Main Card Container */}
-      <div 
+      <div
         className="w-full h-[26.625rem] flex-shrink-0 rounded-[1.25rem] overflow-hidden flex flex-col mt-[-4px]"
         style={{
           background: "rgba(0, 0, 0, 0.60)",
           boxShadow: "0px 12px 20px 0px rgba(0, 0, 0, 0.30)",
-          zIndex: 5
+          zIndex: 5,
         }}
       >
         {/* Border Line */}
@@ -196,7 +216,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         {/* Content Area */}
         <div className="flex px-14 pt-14 pb-12 flex-1">
           <AnimatePresence mode="wait">
-            <motion.div 
+            <motion.div
               key={activeTab}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -206,22 +226,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             >
               {/* Text content */}
               <div className="w-[55%] pr-6 flex flex-col">
-                <h2 
-                  className="text-[2rem] font-bold mb-6 leading-[2.25rem] text-white"
+                <h2
+                  className="text-[2rem] font-bold mb-6 leading-[2.25rem]  "
                   style={{ fontFamily: "var(--font-sf-pro)" }}
                 >
                   {activeContent?.title}
                 </h2>
-                <p  
-                  className="text-[1.125rem] font-normal leading-[1.75rem] text-white opacity-80 mb-auto"
+                <p
+                  className="text-[1.125rem] font-normal leading-[1.75rem]   opacity-80 mb-auto"
                   style={{ fontFamily: "var(--font-sf-pro)" }}
                 >
                   {activeContent?.description}
                 </p>
                 <div className="mt-8">
-                  <Link 
-                    href={activeContent?.learnMoreUrl || "#"} 
-                    className="inline-block rounded-full bg-[#1143e8] hover:bg-[#0f39cc] text-white font-medium px-8 py-3 transition-colors duration-300"
+                  <Link
+                    href={activeContent?.learnMoreUrl || "#"}
+                    className="inline-block rounded-full bg-[#1143e8] hover:bg-[#0f39cc]   font-medium px-8 py-3 transition-colors duration-300"
                   >
                     Learn more
                   </Link>
@@ -230,14 +250,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
               {/* Circle placeholder */}
               <div className="w-[45%] flex items-center">
-                <motion.div 
+                <motion.div
                   className="w-[18rem] h-[18rem] rounded-full overflow-hidden ml-auto"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    boxShadow: "0 0 40px rgba(255, 255, 255, 0.1) inset"
+                    boxShadow: "0 0 40px rgba(255, 255, 255, 0.1) inset",
                   }}
                 />
               </div>
@@ -249,4 +269,4 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   );
 };
 
-export default ServiceCard; 
+export default ServiceCard;
