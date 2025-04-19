@@ -5,6 +5,7 @@ import Image from "next/image";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 import { useState, useEffect } from "react";
+import Text, { Font } from "./Text";
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
@@ -26,6 +27,13 @@ export default function Header() {
     };
   }, []);
 
+  const navLinks = [
+    { href: "#services", name: "Services" },
+    { href: "#insights", name: "Insights" },
+    { href: "#careers", name: "Careers" },
+    { href: "#about", name: "About us" },
+  ];
+
   const navLinkStyle = {
     fontFamily: "var(--font-sf-pro)",
     fontSize: "16px",
@@ -36,9 +44,9 @@ export default function Header() {
   return (
     <>
       <header
-        className={`w-full fixed z-50 transition-all duration-300 ${
+        className={`w-full fixed z-49 transition-all duration-300 bg-transparent ${
           isSticky
-            ? "fixed top-0 left-0 right-0 bg-[#0a1b3a]/95 backdrop-blur-sm py-3"
+            ? "fixed top-0 left-0 right-0 backdrop-blur-sm py-3"
             : "relative bg-transparent py-4"
         }`}
       >
@@ -62,34 +70,16 @@ export default function Header() {
           {/* Nav links centered */}
           <div className="flex-1 -ml-44 flex justify-center">
             <nav className="flex space-x-6 text-black items-center">
-              <Link
-                href="#services"
-                className="hover:opacity-80 transition-opacity"
-                style={navLinkStyle}
-              >
-                Services
-              </Link>
-              <Link
-                href="#insights"
-                className="hover:opacity-80 transition-opacity"
-                style={navLinkStyle}
-              >
-                Insights
-              </Link>
-              <Link
-                href="#careers"
-                className="hover:opacity-80 transition-opacity"
-                style={navLinkStyle}
-              >
-                Careers
-              </Link>
-              <Link
-                href="#about"
-                className="hover:opacity-80 transition-opacity"
-                style={navLinkStyle}
-              >
-                About us
-              </Link>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="hover:opacity-80 transition-opacity"
+                  style={navLinkStyle}
+                >
+                  <Text type={Font.SOURCE_SANS}>{link.name}</Text>
+                </Link>
+              ))}
             </nav>
           </div>
 

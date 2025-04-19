@@ -1,7 +1,6 @@
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 import Text, { Font } from "./Text";
-import Image from "next/image";
 import BackgroundPattern from "./BackgroundPattern";
 
 export default function Hero() {
@@ -30,7 +29,7 @@ export default function Hero() {
               <span>transformative solutions</span>
             </h1>
             <Text>
-              <h4 style={{ fontFamily: "font-sans" }}>
+              <h4>
                 <span>Embracing change,</span>
                 <br />
                 <span>elevating performance</span>

@@ -358,7 +358,7 @@ const PartnersSection: React.FC<PartnersSectionProps> = ({
     <section className={`py-20 relative overflow-hidden ${className}`}>
       <div className="max-w-[1200px] mx-auto px-4">
         <h2
-          className="text-center text-[2.5rem] font-semibold leading-[2.5rem] mb-16  "
+          className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem] mb-16  "
           style={{ fontFamily: "var(--font-source-sans)" }}
         >
           Partnerships & capabilities

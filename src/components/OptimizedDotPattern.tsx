@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+
 import Image from "next/image";
 
 interface OptimizedDotPatternProps {
@@ -42,7 +42,7 @@ export default function OptimizedDotPattern({
       {/* Interactive hover effect - positioned absolutely to the mouse position */}
 
       {/* Ambient glow effect - simpler animation */}
-      <div className="absolute inset-0 z-1 pointer-events-none pulse-animation">
+      <div className=" inset-0 z-1 pointer-events-none pulse-animation">
         <div
           className="absolute top-1/2 left-1/2 w-[80%] h-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10"
           style={{
