@@ -1,11 +1,18 @@
-"use client";
-
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import sample from "../../public/sampleacc.png";
 import ServiceCard from "./ServiceCard";
+import accountingImage from "../../public/accounting.png";
+import esgImage from "../../public/esg.png";
+import transformationImage from "../../public/transformation.png";
+import riskImage from "../../public/risk.png";
 
-const services = ["Accounting", "Finance", "Legal", "Marketing"];
+// Services array with names and images
+const services = [
+  { name: "Accounting", image: accountingImage },
+  { name: "ESG", image: esgImage },
+  { name: "Transformation", image: transformationImage },
+  { name: "Risk", image: riskImage },
+];
 
 export default function BoughServices() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -13,7 +20,6 @@ export default function BoughServices() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [pathLength, setPathLength] = useState(0);
   const [pathData, setPathData] = useState("");
-
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
@@ -31,8 +37,8 @@ export default function BoughServices() {
       const sectionTop = sectionRect.top + window.scrollY;
 
       const centerX = 50;
-      const offsetX = 10; // distance away from card horizontally
-      const offsetY = 10; // vertical spacing around cards
+      const offsetX = 20;
+      const offsetY = 20;
 
       let path = `M${centerX},0 `;
 
@@ -45,25 +51,20 @@ export default function BoughServices() {
         const cardLeft = rect.left - sectionRect.left;
         const cardRight = cardLeft + rect.width;
 
-        if (index % 2 === 0) {
-          // Right side
-          const xRight = cardRight + offsetX;
-          path += `L${centerX},${cardTop - offsetY} `;
-          path += `L${xRight},${cardTop - offsetY} `;
-          path += `L${xRight},${cardTop} `;
-          path += `L${xRight},${cardBottom} `;
-          path += `L${xRight},${cardBottom + offsetY} `;
-          path += `L${centerX},${cardBottom + offsetY} `;
-        } else {
-          // Left side
-          const xLeft = cardLeft - offsetX;
-          path += `L${centerX},${cardTop - offsetY} `;
-          path += `L${xLeft},${cardTop - offsetY} `;
-          path += `L${xLeft},${cardTop} `;
-          path += `L${xLeft},${cardBottom} `;
-          path += `L${xLeft},${cardBottom + offsetY} `;
-          path += `L${centerX},${cardBottom + offsetY} `;
-        }
+        const midY = cardTop + rect.height / 2;
+        const isLeft = index % 2 !== 0;
+
+        const textSideX = isLeft ? cardLeft : cardRight;
+        const entryX = isLeft ? textSideX - offsetX : textSideX + offsetX;
+        const frontX = isLeft ? textSideX + 5 : textSideX - 5;
+
+        path += `L${centerX},${cardTop - offsetY} `;
+        path += `L${entryX},${cardTop - offsetY} `;
+        path += `L${entryX},${midY - 20} `;
+        path += `L${frontX},${midY} `;
+        path += `L${entryX},${midY + 20} `;
+        path += `L${entryX},${cardBottom + offsetY} `;
+        path += `L${centerX},${cardBottom + offsetY} `;
       });
 
       path += `L${centerX},${sectionRect.height}`;
@@ -98,22 +99,16 @@ export default function BoughServices() {
     >
       {/* SVG Path */}
       <svg
-        className="absolute left-0 top-0 z-0 w-full h-full"
+        className="absolute left-0 top-0 z-0 w-full h-full pointer-events-none"
         viewBox="0 0 100 2000"
         preserveAspectRatio="none"
       >
-        <path
-          ref={pathRef}
-          d={pathData}
-          stroke="#2563eb"
-          strokeWidth="2"
-          fill="none"
-        />
+        <path ref={pathRef} d={pathData} strokeWidth="2" fill="none" />
       </svg>
 
       {/* Moving Ball */}
       <motion.div
-        className="w-6 h-6 rounded-full bg-blue-600 border-2 border-white shadow-lg z-20 absolute"
+        className="w-6 h-6 rounded-full bg-blue-600 border-2 border-white shadow-lg z-50 absolute"
         style={{
           top: position.y,
           left: position.x,
@@ -121,10 +116,10 @@ export default function BoughServices() {
         }}
       />
 
-      {/* Cards */}
+      {/* Service Cards */}
       {services.map((service, i) => (
         <div
-          key={service}
+          key={service.name}
           ref={(el) => {
             cardRefs.current[i] = el;
           }}
@@ -132,7 +127,7 @@ export default function BoughServices() {
             i % 2 === 0 ? "md:self-end" : "md:self-start"
           } z-10`}
         >
-          <ServiceCard image={sample} serviceType={service} />
+          <ServiceCard image={service.image} serviceType={service.name} />
         </div>
       ))}
     </div>

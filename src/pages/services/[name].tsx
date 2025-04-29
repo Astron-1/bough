@@ -1,7 +1,19 @@
 import Header from "@app/components/Header";
 import Text, { Font } from "@app/components/Text";
+import { serviceContent } from "@app/lib/serviceContent";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import vector2 from "../../../public/boughVector2.png";
 
 export default function AccountingPage() {
+  const router = useRouter();
+  const { name } = router.query;
+  let content;
+  if (name) content = serviceContent[name];
+  if (!content) {
+    return null;
+  }
+
   return (
     <section className=" bg-gradient-to-b from-blue-50 to-white px-4 md:px-12 lg:px-32 py-12 space-y-24">
       <Header />
@@ -19,25 +31,29 @@ export default function AccountingPage() {
             type={Font.SOURCE_SANS}
             className="text-blue-900 text-sm font-semibold"
           >
-            Record, recognize, and report, confidently
+            {content?.topHeading}
           </Text>
           <Text
             type={Font.GARAMOND}
             className="text-4xl text-black md:text-5xl font-bold"
           >
-            Accounting
+            {name}
           </Text>
           <Text type={Font.SOURCE_SANS} className="text-gray-700 text-base">
-            Modern accounting challenges demand agility, precision, and
-            strategic foresight. Our Accounting Advisory services integrate
-            finance and accounting operations, navigate complex regulatory
-            landscapes, and implement best practices that drive financial
-            clarity and operational excellence.
+            {content?.topSubHeading}
           </Text>
         </div>
-
+        <div className="absolute hidden md:block  md:w-full md:h-[1000px] z-0">
+          <Image
+            src={vector2}
+            alt="DNA visual placeholder"
+            className="object-cover absolute mt-44 mr-32 -ml-32"
+            fill
+            priority
+          />
+        </div>
         {/* Right Image */}
-        <div className="w-full md:w-1/4">
+        <div className="w-full md:w-1/4 z-1">
           {/* Replace src below with actual image */}
           <div className="w-full h-60 bg-gray-200 rounded-xl" />
         </div>
@@ -50,21 +66,15 @@ export default function AccountingPage() {
             type={Font.GARAMOND}
             className="text-2xl font-semibold text-black"
           >
-            The Bough way’s Accounting
+            {content.body?.heading1}
           </Text>
         </div>
         <div className="space-y-4">
           <Text type={Font.SOURCE_SANS} className="font-bold text-black">
-            We dive deep into your toughest accounting challenges, offering
-            hands-on expertise to ensure your finance and accounting operations
-            run smoothly and with integrity.
+            {content.body?.contentHeading1}
           </Text>
           <Text type={Font.SOURCE_SANS} className="text-gray-700">
-            From implementing complex accounting standards to managing risks and
-            uncertainties, we don’t just consult—we roll up our sleeves and work
-            alongside you. Our goal is straightforward: to handle the
-            complexities of accounting and regulations so you can stay focused
-            on confidently moving your business forward.
+            {content.body?.contentHeading2}
           </Text>
         </div>
       </section>
@@ -79,9 +89,7 @@ export default function AccountingPage() {
             Our offerings
           </Text>
           <Text type={Font.SOURCE_SANS} className="text-gray-700">
-            Our specialized services are designed for CFOs, CAOs, and Corporate
-            Controllers, addressing your most pressing challenges and unlocking
-            your organization’s full financial potential
+            {content.body?.offerings}
           </Text>
         </div>
 
