@@ -6,9 +6,16 @@ import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 import { useState, useEffect } from "react";
 import Text, { Font } from "./Text";
+import { useRouter } from "next/router";
 
-export default function Header() {
+interface HeaderProps {
+  transparent?: boolean;
+}
+
+export default function Header({ transparent = false }: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
+  const router = useRouter();
+  const isConnectPage = router.pathname === "/connect";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +36,7 @@ export default function Header() {
 
   const navLinks = [
     { href: "#services", name: "Services" },
-    { href: "#insights", name: "Insights" },
+    { href: transparent ? "/insights" : "#insights", name: "Insights" },
     { href: "#careers", name: "Careers" },
     { href: "#about", name: "About us" },
   ];
@@ -44,37 +51,45 @@ export default function Header() {
   return (
     <>
       <header
-        className={`w-full fixed z-49 transition-all duration-300 bg-transparent ${
+        className={`w-full z-50 transition-all duration-300 ${
           isSticky
-            ? "fixed top-0 left-0 right-0 backdrop-blur-sm py-3"
-            : "relative bg-transparent py-4"
+            ? "fixed top-0 left-0 right-0 backdrop-blur-md bg-white/30 py-2"
+            : transparent ? "relative bg-transparent py-6" : "relative bg-transparent py-6"
         }`}
+        style={{ 
+          boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.05)" : "none",
+          borderBottom: "none"
+        }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 relative">
           {/* Logo on the left */}
-          <div
-            className={`flex-row flex items-center justify-center space-x-32${
-              isSticky ? "w-[11rem]" : "w-[13.33331rem]"
-            } transition-all duration-300`}
-          >
+          <div className="flex items-center relative">
             <Image
-              src="/bough.png"
+              src={transparent && !isSticky ? "/boughWhite.svg" : "/bough.png"}
               alt="Bough Consulting"
               width={150}
-              height={100}
+              height={50}
+              className="object-contain"
               priority
             />
-            <div className=" bg-gray-400 h-[0.5] w-44 ml-5"></div>
+            
+            {/* Absolutely positioned horizontal line */}
+            <div 
+              className={`absolute h-[1px] w-[8rem] ${transparent && !isSticky ? "bg-white/60" : "bg-gray-300"}`}
+              style={{ left: '100%', top: '50%' }}
+            ></div>
           </div>
 
           {/* Nav links centered */}
-          <div className="flex-1 -ml-44 flex justify-center">
-            <nav className="flex space-x-6 text-black items-center">
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <nav className="flex space-x-10 items-center">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="hover:opacity-80 transition-opacity"
+                  className={`hover:opacity-80 transition-opacity ${
+                    transparent && !isSticky ? "text-white" : "text-black"
+                  }`}
                   style={navLinkStyle}
                 >
                   <Text type={Font.SOURCE_SANS}>{link.name}</Text>
@@ -84,18 +99,24 @@ export default function Header() {
           </div>
 
           {/* Button on the right */}
-          <div className="flex-shrink-0">
-            <Button
-              href="#connect"
-              className="ml-2 bg-[#1143E8] hover:bg-[#0035d9] px-7"
-            >
-              <ShinyText text="Connect" speed={3} />
-            </Button>
+          <div>
+            {isConnectPage ? (
+              <div className="px-7 py-2.5 rounded-full bg-gray-200 text-gray-500 cursor-not-allowed">
+                <Text type={Font.SOURCE_SANS} className="font-semibold">Connect</Text>
+              </div>
+            ) : (
+              <Button
+                href="/connect"
+                className="bg-[#1143E8] hover:bg-[#0035d9] px-7"
+              >
+                <ShinyText text="Connect" speed={3} />
+              </Button>
+            )}
           </div>
         </div>
       </header>
       {/* Add a spacer when header is fixed to prevent content jumps */}
-      {isSticky && <div className="h-[5rem]"></div>}
+      {isSticky && <div className="h-20"></div>}
     </>
   );
 }

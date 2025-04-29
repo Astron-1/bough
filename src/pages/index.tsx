@@ -1,5 +1,5 @@
 import Hero from "@app/components/Hero";
-
+import Header from "@app/components/Header";
 import Footer from "@app/components/Footer";
 import Image from "next/image";
 import BodyComponent from "@app/components/BodyComponent";
@@ -8,8 +8,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white overflow-x-hidden relative w-full">
       {/* Header and Hero with gradients */}
+      <Header />
 
-      <div className="relative z-50">
+      <div className="relative z-40">
         {/* Gradient Overlays specifically for Header and Hero */}
 
         <Image
@@ -17,7 +18,7 @@ export default function Home() {
           alt="left gradient"
           width={800}
           height={800}
-          className="absolute z-50 -top-52 left-0 lg:block hidden pointer-events-none"
+          className="absolute z-30 -top-52 left-0 lg:block hidden pointer-events-none"
           priority
         />
         <Image
@@ -25,11 +26,11 @@ export default function Home() {
           alt="right gradient"
           width={800}
           height={800}
-          className="absolute z-50 -top-64 right-0 lg:block hidden pointer-events-none"
+          className="absolute z-30 -top-64 right-0 lg:block hidden pointer-events-none"
           priority
         />
 
-        {/* Header and Hero above gradients */}
+        {/* Hero with gradients */}
       </div>
 
       <Hero />
