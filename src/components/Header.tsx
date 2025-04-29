@@ -6,7 +6,6 @@ import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 import { useState, useEffect } from "react";
 import Text, { Font } from "./Text";
-import { useRouter } from "next/router";
 
 interface HeaderProps {
   transparent?: boolean;
@@ -14,8 +13,6 @@ interface HeaderProps {
 
 export default function Header({ transparent = false }: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
-  const router = useRouter();
-  const isConnectPage = router.pathname === "/connect";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,8 +32,8 @@ export default function Header({ transparent = false }: HeaderProps) {
   }, []);
 
   const navLinks = [
-    { href: "/services", name: "Services" },
-    { href: transparent ? "/insights" : "#insights", name: "Insights" },
+    { href: "/service", name: "Services" },
+    { href: "/insights", name: "Insights" },
     { href: "careers", name: "Careers" },
     { href: "about", name: "About us" },
   ];
@@ -108,20 +105,12 @@ export default function Header({ transparent = false }: HeaderProps) {
 
           {/* Button on the right */}
           <div>
-            {isConnectPage ? (
-              <div className="px-7 py-2.5 rounded-full bg-gray-200 text-gray-500 cursor-not-allowed">
-                <Text type={Font.SOURCE_SANS} className="font-semibold">
-                  Connect
-                </Text>
-              </div>
-            ) : (
-              <Button
-                href="/connect"
-                className="bg-[#1143E8] hover:bg-[#0035d9] px-7"
-              >
-                <ShinyText text="Connect" speed={3} />
-              </Button>
-            )}
+            <Button
+              href="/connect"
+              className="bg-[#1143E8] hover:bg-[#0035d9] px-7"
+            >
+              <ShinyText text="Connect" speed={3} />
+            </Button>
           </div>
         </div>
       </header>
