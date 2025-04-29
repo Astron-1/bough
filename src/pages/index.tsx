@@ -1,6 +1,6 @@
 import Hero from "@app/components/Hero";
 import Header from "@app/components/Header";
-import Footer from "@app/components/Footer";
+
 import Image from "next/image";
 import BodyComponent from "@app/components/BodyComponent";
 
@@ -37,7 +37,6 @@ export default function Home() {
 
       {/* Content Below Gradients */}
       <BodyComponent />
-      <Footer />
     </main>
   );
 }

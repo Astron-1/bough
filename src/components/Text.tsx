@@ -19,7 +19,7 @@ export default function Text({ type, children, className = "" }: TextProps) {
     fontClass = { fontFamily: "font-secondary" };
   }
   return (
-    <div className={`${className}`} style={fontClass}>
+    <div className={`${className} `} style={fontClass}>
       {children}
     </div>
   );

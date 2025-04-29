@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "@app/components/Header";
-import Footer from "@app/components/Footer";
+
 import InsightsSlider from "@app/components/InsightsSlider";
 import CaseStudies from "@app/components/CaseStudies";
 import ConnectCTA from "@app/components/ConnectCTA";
@@ -30,12 +30,15 @@ export default function InsightsPage() {
           <div className="mx-auto w-[45.5rem] max-w-[90%]">
             <div className="bg-white/95 backdrop-blur-md rounded-[1.25rem] p-8 shadow-xl border border-gray-100">
               <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
-                Delivering better<br /> insights with better data
+                Delivering better
+                <br /> insights with better data
               </h1>
               <p className="text-center mb-6 mx-auto text-base max-w-xl text-gray-700">
-                Bough helps a global technology company implement an effective and a cost-effective revenue assurance program to ensure regulatory compliance and meet audit requirements
+                Bough helps a global technology company implement an effective
+                and a cost-effective revenue assurance program to ensure
+                regulatory compliance and meet audit requirements
               </p>
-              
+
               {/* Read More Button */}
               <div className="flex justify-center">
                 <button className="bg-[#1143E8] text-white py-2.5 px-8 rounded-full text-sm hover:bg-[#0035d9] transition-colors shadow-md">
@@ -51,19 +54,17 @@ export default function InsightsPage() {
           <InsightsSlider />
         </div>
       </div>
-      
+
       {/* Fixed width container for content below hero */}
       <div className="mx-auto" style={{ width: "70rem", maxWidth: "100%" }}>
         {/* Featured Case Studies */}
         <CaseStudies />
       </div>
-      
+
       {/* Connect CTA Section */}
       <div className="mt-16">
         <ConnectCTA />
       </div>
-      
-      <Footer />
     </main>
   );
-} 
+}
