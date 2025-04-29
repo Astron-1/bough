@@ -1,5 +1,5 @@
 import GlobalClickSpark from "./GlobalClickSpark";
-import { ebGaramond, sourceSans } from "@app/lib/font";
+// import { ebGaramond, sourceSans } from "@app/lib/font";
 
 export default function RootLayout({
   children,
