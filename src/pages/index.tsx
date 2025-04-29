@@ -1,12 +1,12 @@
 import Hero from "@app/components/Hero";
 import Header from "@app/components/Header";
-import Footer from "@app/components/Footer";
+
 import Image from "next/image";
 import BodyComponent from "@app/components/BodyComponent";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white overflow-x-hidden relative w-full">
+    <section className="min-h-screen bg-white overflow-x-hidden relative w-full">
       {/* Header and Hero with gradients */}
       <Header />
 
@@ -37,7 +37,6 @@ export default function Home() {
 
       {/* Content Below Gradients */}
       <BodyComponent />
-      <Footer />
-    </main>
+    </section>
   );
 }

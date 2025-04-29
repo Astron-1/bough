@@ -46,13 +46,22 @@ export default function CaseStudyCarousel() {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row items-stretch justify-between max-w-7xl  mx-auto md:space-x-10 px-6 md:px-16 space-y-12 md:space-y-0">
         {/* Progress Bar */}
-        <div className="flex flex-col justify-between items-center h-full">
-          <div className="relative h-96 w-4 rounded bg-[#53FBFB] overflow-hidden">
-            {/* Cool Blue Liquid */}
+        <div className="relative h-96 w-6 flex justify-center items-start mt-4">
+          {/* Progress Container */}
+          <div className="relative h-full  rounded bg-[#53FBFB] overflow-hidden w-10">
+            {/* Fill */}
             <div
               className="absolute bottom-0 left-0 w-full bg-blue-500 transition-all duration-700"
               style={{ height: `${progressPercent}%` }}
             />
+          </div>
+
+          {/* Moving Percentage Text */}
+          <div
+            className="absolute mr-20  text-sm font-semibold text-black transition-all duration-700"
+            style={{ bottom: `calc(${progressPercent}% - 1rem)` }} // adjusts position
+          >
+            {Math.round(progressPercent)}%
           </div>
         </div>
 
@@ -74,13 +83,13 @@ export default function CaseStudyCarousel() {
               onClick={prevSlide}
               className="w-10 h-10 rounded-full border font-bold  border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
             >
-              <ChevronLeft size={20} overlineThickness={100} />
+              <ChevronLeft size={20} strokeWidth={3} />
             </button>
             <button
               onClick={nextSlide}
               className="w-10 h-10 rounded-full border border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={20} strokeWidth={3} />
             </button>
           </div>
         </div>
@@ -92,7 +101,7 @@ export default function CaseStudyCarousel() {
             alt="Case study image"
             width={400}
             height={400}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain float-right absolute"
           />
         </div>
       </div>

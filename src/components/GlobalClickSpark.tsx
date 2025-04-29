@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import ClickSpark from './ClickSpark';
+import React from "react";
+import ClickSpark from "./ClickSpark";
 
 interface GlobalClickSparkProps {
   children: React.ReactNode;
@@ -15,15 +15,15 @@ const GlobalClickSpark: React.FC<GlobalClickSparkProps> = ({ children }) => {
   return (
     <ClickSpark
       sparkColor="#3498db"
-      sparkRadius={50}
+      sparkRadius={25}
       sparkCount={8}
       sparkSize={14}
       extraScale={1.2}
-      duration={400}
+      duration={200}
     >
       {children}
     </ClickSpark>
   );
 };
 
-export default GlobalClickSpark; 
+export default GlobalClickSpark;
