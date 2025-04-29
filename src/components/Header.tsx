@@ -35,10 +35,10 @@ export default function Header({ transparent = false }: HeaderProps) {
   }, []);
 
   const navLinks = [
-    { href: "#services", name: "Services" },
-    { href: transparent ? "/insights" : "#insights", name: "Insights" },
-    { href: "#careers", name: "Careers" },
-    { href: "#about", name: "About us" },
+    { href: "/services", name: "Services" },
+    { href: "/insights", name: "Insights" },
+    { href: "/careers", name: "Careers" },
+    { href: "/about", name: "About us" },
   ];
 
   const navLinkStyle = {
