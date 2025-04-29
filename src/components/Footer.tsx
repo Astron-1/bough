@@ -35,7 +35,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 lg:w-3/4">
             {/* Column 1 */}
             <div>
-              <h3 className="font-semibold mb-4">Services</h3>
+              <h3 className="font-semibold mb-4 text-[#53FBFB]">Services</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -74,7 +74,7 @@ export default function Footer() {
 
             {/* Column 2 */}
             <div>
-              <h3 className="font-semibold mb-4">Insights</h3>
+              <h3 className="font-semibold mb-4 text-[#53FBFB]">Insights</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -89,7 +89,7 @@ export default function Footer() {
 
             {/* Column 3 */}
             <div>
-              <h3 className="font-semibold mb-4">Careers</h3>
+              <h3 className="font-semibold mb-4 text-[#53FBFB]">Careers</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -120,7 +120,7 @@ export default function Footer() {
 
             {/* Column 4 */}
             <div>
-              <h3 className="font-semibold mb-4">About us</h3>
+              <h3 className="font-semibold mb-4 text-[#53FBFB]">About us</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -151,7 +151,7 @@ export default function Footer() {
 
             {/* Column 5 */}
             <div>
-              <h3 className="font-semibold mb-4">Locations</h3>
+              <h3 className="font-semibold mb-4 text-[#53FBFB]">Locations</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
