@@ -113,7 +113,7 @@ export default function InsightsPage() {
               >
                 <Text 
                   type={Font.GARAMOND}
-                  className="text-center text-[#111827] text-6xl font-semibold leading-[70px] mb-5 w-[648px] max-w-full mx-auto"
+                  className="text-center text-[#111827] text-6xl font-semibold leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
                 >
                   {currentInsight.title}
                 </Text>

@@ -9,7 +9,13 @@ export default function AccountingPage() {
   const router = useRouter();
   const { name } = router.query;
   let content;
-  if (name) content = serviceContent[name];
+  
+  // Fix type error by ensuring name is a string and a valid key of serviceContent
+  const serviceName = Array.isArray(name) ? name[0] : name;
+  if (serviceName && typeof serviceName === 'string' && serviceName in serviceContent) {
+    content = serviceContent[serviceName as keyof typeof serviceContent];
+  }
+  
   if (!content) {
     return null;
   }
@@ -37,7 +43,7 @@ export default function AccountingPage() {
             type={Font.GARAMOND}
             className="text-4xl text-black md:text-5xl font-bold"
           >
-            {name}
+            {serviceName}
           </Text>
           <Text type={Font.SOURCE_SANS} className="text-gray-700 text-base">
             {content?.topSubHeading}
@@ -89,7 +95,9 @@ export default function AccountingPage() {
             Our offerings
           </Text>
           <Text type={Font.SOURCE_SANS} className="text-gray-700">
-            {content.body?.offerings}
+            {Array.isArray(content.body?.offerings) 
+              ? content.body?.offerings.join(", ") 
+              : content.body?.offerings}
           </Text>
         </div>
 
