@@ -62,7 +62,7 @@ export default function ConnectPage() {
   ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
-    
+
     // Clear error when user types
     if (errors[id as keyof FormData]) {
       setErrors((prev) => ({ ...prev, [id]: undefined }));
@@ -98,7 +98,8 @@ export default function ConnectPage() {
 
     // Phone validation (optional field but validate format if provided)
     if (formData.phone.trim()) {
-      const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+      const phoneRegex =
+        /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
       if (!phoneRegex.test(formData.phone)) {
         newErrors.phone = "Please enter a valid phone number";
         isValid = false;
@@ -111,7 +112,7 @@ export default function ConnectPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -141,7 +142,7 @@ export default function ConnectPage() {
           company: "",
           message: "",
         });
-        
+
         // Add a slight delay for a smoother transition to success state
         setTimeout(() => {
           setSubmitStatus({
@@ -169,7 +170,7 @@ export default function ConnectPage() {
     <main className="min-h-screen bg-[#f0f7ff] overflow-x-hidden relative w-full">
       {/* Add style tag with keyframes */}
       <style jsx>{animationStyles}</style>
-      
+
       {/* Header */}
       <div className="relative z-50">
         <Header transparent={false} />
@@ -189,12 +190,23 @@ export default function ConnectPage() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold font-[EB_Garamond] leading-[1.1] text-black mb-6 lg:mb-8">
                 Let&apos;s work together to solve your next big challenge.
               </h1>
-              
+
               <div className="text-xl md:text-2xl flex items-center justify-center lg:justify-start mt-4 lg:mt-6">
                 <p className="mr-4 text-black">Connect with us on</p>
-                <Link href="https://www.linkedin.com" aria-label="LinkedIn" className="inline-block">
-                  <svg className="text-[#0A66C2] w-7 h-7 md:w-8 md:h-8" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M27.2655 27.2659H22.5241V19.8405C22.5241 18.0699 22.4925 15.7905 20.0581 15.7905C17.5886 15.7905 17.2108 17.7198 17.2108 19.7116V27.2654H12.4695V11.9959H17.0211V14.0826H17.0849C17.5404 13.3038 18.1987 12.6631 18.9895 12.2287C19.7804 11.7944 20.6742 11.5826 21.5759 11.616C26.3815 11.616 27.2675 14.777 27.2675 18.8893L27.2655 27.2659ZM7.1195 9.90877C5.59988 9.90902 4.36775 8.67727 4.3675 7.15764C4.36725 5.63802 5.59888 4.40589 7.1185 4.40564C8.63812 4.40527 9.87025 5.63702 9.8705 7.15664C9.87063 7.8864 9.58087 8.58632 9.06497 9.10244C8.54906 9.61856 7.84925 9.9086 7.1195 9.90877ZM9.49025 27.266H4.74388V11.9959H9.49012L9.49025 27.266ZM29.6293 0.00226795H2.36137C1.07262 -0.012232 0.01575 1.02014 0 2.30889V29.6905C0.01525 30.9799 1.072 32.0133 2.36125 31.9998H29.6293C30.9213 32.0158 31.9821 30.9824 32 29.6905V2.30677C31.9816 1.01552 30.9206 -0.0167321 29.6293 0.000142951"/>
+                <Link
+                  href="https://www.linkedin.com"
+                  aria-label="LinkedIn"
+                  className="inline-block"
+                >
+                  <svg
+                    className="text-[#0A66C2] w-7 h-7 md:w-8 md:h-8"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M27.2655 27.2659H22.5241V19.8405C22.5241 18.0699 22.4925 15.7905 20.0581 15.7905C17.5886 15.7905 17.2108 17.7198 17.2108 19.7116V27.2654H12.4695V11.9959H17.0211V14.0826H17.0849C17.5404 13.3038 18.1987 12.6631 18.9895 12.2287C19.7804 11.7944 20.6742 11.5826 21.5759 11.616C26.3815 11.616 27.2675 14.777 27.2675 18.8893L27.2655 27.2659ZM7.1195 9.90877C5.59988 9.90902 4.36775 8.67727 4.3675 7.15764C4.36725 5.63802 5.59888 4.40589 7.1185 4.40564C8.63812 4.40527 9.87025 5.63702 9.8705 7.15664C9.87063 7.8864 9.58087 8.58632 9.06497 9.10244C8.54906 9.61856 7.84925 9.9086 7.1195 9.90877ZM9.49025 27.266H4.74388V11.9959H9.49012L9.49025 27.266ZM29.6293 0.00226795H2.36137C1.07262 -0.012232 0.01575 1.02014 0 2.30889V29.6905C0.01525 30.9799 1.072 32.0133 2.36125 31.9998H29.6293C30.9213 32.0158 31.9821 30.9824 32 29.6905V2.30677C31.9816 1.01552 30.9206 -0.0167321 29.6293 0.000142951" />
                   </svg>
                 </Link>
               </div>
@@ -208,32 +220,78 @@ export default function ConnectPage() {
                     <div className="flex flex-col items-center justify-center">
                       <div className="relative w-20 h-20 flex items-center justify-center mb-6">
                         {/* Pulsing circles */}
-                        <div className="absolute inset-0 rounded-full bg-[rgba(0,82,255,0.15)]" 
-                             style={{animation: 'pulsing 3.5s ease-out infinite'}}></div>
-                        <div className="absolute inset-0 rounded-full bg-[rgba(0,82,255,0.15)]" 
-                             style={{animation: 'pulsing 3.5s ease-out infinite 1.2s'}}></div>
-                        <div className="absolute inset-0 rounded-full bg-[rgba(0,82,255,0.15)]" 
-                             style={{animation: 'pulsing 3.5s ease-out infinite 2.3s'}}></div>
-                        
+                        <div
+                          className="absolute inset-0 rounded-full bg-[rgba(0,82,255,0.15)]"
+                          style={{
+                            animation: "pulsing 3.5s ease-out infinite",
+                          }}
+                        ></div>
+                        <div
+                          className="absolute inset-0 rounded-full bg-[rgba(0,82,255,0.15)]"
+                          style={{
+                            animation: "pulsing 3.5s ease-out infinite 1.2s",
+                          }}
+                        ></div>
+                        <div
+                          className="absolute inset-0 rounded-full bg-[rgba(0,82,255,0.15)]"
+                          style={{
+                            animation: "pulsing 3.5s ease-out infinite 2.3s",
+                          }}
+                        ></div>
+
                         {/* Checkmark container */}
-                        <div className="relative z-10 w-16 h-16 bg-[rgba(0,82,255,0.15)] rounded-full flex items-center justify-center"
-                             style={{animation: 'checkmarkAppear 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards'}}>
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#0052ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        <div
+                          className="relative z-10 w-16 h-16 bg-[rgba(0,82,255,0.15)] rounded-full flex items-center justify-center"
+                          style={{
+                            animation:
+                              "checkmarkAppear 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards",
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-10 w-10 text-[#0052ff]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
                           </svg>
                         </div>
                       </div>
-                      
-                      <h3 className="text-2xl font-semibold text-center mb-4 text-black"
-                          style={{animation: 'slideUp 0.6s ease-out 0.4s forwards', opacity: 0, transform: 'translateY(20px)'}}>
+
+                      <h3
+                        className="text-2xl font-semibold text-center mb-4 text-black"
+                        style={{
+                          animation: "slideUp 0.6s ease-out 0.4s forwards",
+                          opacity: 0,
+                          transform: "translateY(20px)",
+                        }}
+                      >
                         Thank You!
                       </h3>
-                      <p className="text-lg text-center text-black/80"
-                         style={{animation: 'slideUp 0.6s ease-out 0.6s forwards', opacity: 0, transform: 'translateY(20px)'}}>
+                      <p
+                        className="text-lg text-center text-black/80"
+                        style={{
+                          animation: "slideUp 0.6s ease-out 0.6s forwards",
+                          opacity: 0,
+                          transform: "translateY(20px)",
+                        }}
+                      >
                         {submitStatus.message}
                       </p>
-                      <p className="text-sm text-center text-black/60 mt-8"
-                         style={{animation: 'slideUp 0.6s ease-out 0.8s forwards', opacity: 0, transform: 'translateY(20px)'}}>
+                      <p
+                        className="text-sm text-center text-black/60 mt-8"
+                        style={{
+                          animation: "slideUp 0.6s ease-out 0.8s forwards",
+                          opacity: 0,
+                          transform: "translateY(20px)",
+                        }}
+                      >
                         We&apos;ll get back to you shortly.
                       </p>
                     </div>
@@ -248,10 +306,17 @@ export default function ConnectPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                       {/* Name Field */}
                       <div className="relative">
-                        <label htmlFor="name" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="name"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           Name*
                         </label>
-                        <div className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.name ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.name ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <input
                             type="text"
                             id="name"
@@ -263,16 +328,25 @@ export default function ConnectPage() {
                           />
                         </div>
                         {errors.name && (
-                          <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.name}
+                          </p>
                         )}
                       </div>
 
                       {/* Email Field */}
                       <div className="relative">
-                        <label htmlFor="email" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="email"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           Email*
                         </label>
-                        <div className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.email ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.email ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <input
                             type="email"
                             id="email"
@@ -284,16 +358,25 @@ export default function ConnectPage() {
                           />
                         </div>
                         {errors.email && (
-                          <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.email}
+                          </p>
                         )}
                       </div>
 
                       {/* City Field */}
                       <div className="relative">
-                        <label htmlFor="city" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="city"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           City
                         </label>
-                        <div className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.city ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.city ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <input
                             type="text"
                             id="city"
@@ -304,16 +387,25 @@ export default function ConnectPage() {
                           />
                         </div>
                         {errors.city && (
-                          <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.city}
+                          </p>
                         )}
                       </div>
 
                       {/* Country Field */}
                       <div className="relative">
-                        <label htmlFor="country" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="country"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           Country
                         </label>
-                        <div className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.country ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.country ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <input
                             type="text"
                             id="country"
@@ -324,16 +416,25 @@ export default function ConnectPage() {
                           />
                         </div>
                         {errors.country && (
-                          <p className="text-red-500 text-xs mt-1">{errors.country}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.country}
+                          </p>
                         )}
                       </div>
 
                       {/* Phone Field */}
                       <div className="relative">
-                        <label htmlFor="phone" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="phone"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           Phone
                         </label>
-                        <div className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.phone ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.phone ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <input
                             type="tel"
                             id="phone"
@@ -344,16 +445,25 @@ export default function ConnectPage() {
                           />
                         </div>
                         {errors.phone && (
-                          <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.phone}
+                          </p>
                         )}
                       </div>
 
                       {/* Company Field */}
                       <div className="relative">
-                        <label htmlFor="company" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="company"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           Company*
                         </label>
-                        <div className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.company ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-12 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.company ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <input
                             type="text"
                             id="company"
@@ -365,16 +475,25 @@ export default function ConnectPage() {
                           />
                         </div>
                         {errors.company && (
-                          <p className="text-red-500 text-xs mt-1">{errors.company}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.company}
+                          </p>
                         )}
                       </div>
 
                       {/* Message Field - Full Width */}
                       <div className="col-span-1 sm:col-span-2 relative mt-2">
-                        <label htmlFor="message" className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2">
+                        <label
+                          htmlFor="message"
+                          className="block text-black text-lg sm:text-xl font-semibold font-['Source_Sans_Pro'] mb-2"
+                        >
                           Message
                         </label>
-                        <div className={`w-full h-20 bg-[rgba(200,224,253,0.30)] rounded-md relative ${errors.message ? 'border-2 border-red-500' : ''}`}>
+                        <div
+                          className={`w-full h-20 bg-[rgba(200,224,253,0.30)] rounded-md relative ${
+                            errors.message ? "border-2 border-red-500" : ""
+                          }`}
+                        >
                           <textarea
                             id="message"
                             placeholder="Enter details about your project"
@@ -384,7 +503,9 @@ export default function ConnectPage() {
                           ></textarea>
                         </div>
                         {errors.message && (
-                          <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.message}
+                          </p>
                         )}
                       </div>
                     </div>
@@ -395,14 +516,32 @@ export default function ConnectPage() {
                         type="submit"
                         disabled={isSubmitting}
                         className={`w-full sm:w-[200px] h-[45px] bg-[#0052ff] text-white font-semibold text-lg rounded-full transition-colors flex items-center justify-center ${
-                          isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-600'
+                          isSubmitting
+                            ? "opacity-70 cursor-not-allowed"
+                            : "hover:bg-blue-600"
                         }`}
                       >
                         {isSubmitting ? (
                           <>
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            <svg
+                              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
                             </svg>
                             Sending...
                           </>
@@ -420,13 +559,22 @@ export default function ConnectPage() {
 
         {/* Locations Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-8 md:mb-12 text-black text-center md:text-left">Locations</h2>
-          
+          <h2 className="text-3xl md:text-4xl font-semibold mb-8 md:mb-12 text-black text-center md:text-left">
+            Locations
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
             {/* United States Location */}
             <div>
               <div className="flex items-center mb-4 justify-center md:justify-start">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-4">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-4"
+                >
                   <g clipPath="url(#clip0_239_19161)">
                     <rect width="40" height="40" fill="white" />
                     <path
@@ -460,7 +608,9 @@ export default function ConnectPage() {
                     </clipPath>
                   </defs>
                 </svg>
-                <h3 className="text-2xl md:text-3xl font-semibold text-black">United States</h3>
+                <h3 className="text-2xl md:text-3xl font-semibold text-black">
+                  United States
+                </h3>
               </div>
               <p className="text-lg md:text-xl leading-relaxed pl-2 text-black text-center md:text-left">
                 231 Portside Dr, Edgewater, NJ 07020, United States
@@ -470,7 +620,14 @@ export default function ConnectPage() {
             {/* India Location */}
             <div>
               <div className="flex items-center mb-4 justify-center md:justify-start">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-4">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-4"
+                >
                   <g clipPath="url(#clip0_239_19211)">
                     <path
                       d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z"
@@ -503,12 +660,17 @@ export default function ConnectPage() {
                     </clipPath>
                   </defs>
                 </svg>
-                <h3 className="text-2xl md:text-3xl font-semibold text-black">India</h3>
+                <h3 className="text-2xl md:text-3xl font-semibold text-black">
+                  India
+                </h3>
               </div>
               <p className="text-lg md:text-xl leading-relaxed pl-2 text-black text-center md:text-left">
-                04-120, Blue 1 Square, Phase IV, Udyog Vihar, Sector 18, Gurugram, Haryana 122016
-                <br className="hidden md:block" /><br className="hidden md:block" />
-                R-13 & 14, LGF, Ansal Chamber - II, 6, Bhikaji Cama Place, New Delhi – 110066
+                04-120, Blue 1 Square, Phase IV, Udyog Vihar, Sector 18,
+                Gurugram, Haryana 122016
+                <br className="hidden md:block" />
+                <br className="hidden md:block" />
+                R-13 & 14, LGF, Ansal Chamber - II, 6, Bhikaji Cama Place, New
+                Delhi – 110066
               </p>
             </div>
           </div>

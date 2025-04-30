@@ -2,9 +2,11 @@ import React from "react";
 import Header from "@app/components/Header";
 
 import InsightsSlider from "@app/components/InsightsSlider";
-import CaseStudies from "@app/components/CaseStudies";
+
 import ConnectCTA from "@app/components/ConnectCTA";
 import Image from "next/image";
+import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
+import Text from "@app/components/Text";
 
 export default function InsightsPage() {
   return (
@@ -13,7 +15,7 @@ export default function InsightsPage() {
       <div className="relative w-full h-screen">
         {/* Background Image */}
         <Image
-          src="/insightheroImage.jpg"
+          src="/insights-bg.png"
           alt="Insight Hero"
           fill
           className="object-cover z-0"
@@ -29,10 +31,10 @@ export default function InsightsPage() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full">
           <div className="mx-auto w-[45.5rem] max-w-[90%]">
             <div className="bg-white/95 backdrop-blur-md rounded-[1.25rem] p-8 shadow-xl border border-gray-100">
-              <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
+              <Text className="text-4xl font-bold mb-6 text-center text-gray-800">
                 Delivering better
                 <br /> insights with better data
-              </h1>
+              </Text>
               <p className="text-center mb-6 mx-auto text-base max-w-xl text-gray-700">
                 Bough helps a global technology company implement an effective
                 and a cost-effective revenue assurance program to ensure
@@ -56,9 +58,9 @@ export default function InsightsPage() {
       </div>
 
       {/* Fixed width container for content below hero */}
-      <div className="mx-auto" style={{ width: "70rem", maxWidth: "100%" }}>
+      <div style={{ width: "70rem", maxWidth: "100%" }}>
         {/* Featured Case Studies */}
-        <CaseStudies />
+        <CaseStudyCarousel />
       </div>
 
       {/* Connect CTA Section */}

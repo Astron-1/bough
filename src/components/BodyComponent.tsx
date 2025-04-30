@@ -7,7 +7,7 @@ import BoughServices from "./Services";
 
 export default function BodyComponent() {
   return (
-    <div className="bg-[url('/body.png')]  bg-center h-full w-full">
+    <div className="bg-[url('/body.png')] bg-no-repeat  bg-center h-full w-full">
       <GlobalClickSpark>
         <HeroText />
         <BoughServices />
