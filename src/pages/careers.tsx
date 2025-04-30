@@ -143,7 +143,7 @@ export default function Careers() {
           <div className="container mx-auto px-4">
             <div className="w-full h-[320px] md:h-[400px] relative rounded-lg overflow-hidden">
               <Image
-                src="/corporate.jpg"
+                src="/careerbough.png"
                 alt="Bough team members collaborating"
                 fill
                 className="object-cover"
@@ -203,7 +203,6 @@ export default function Careers() {
           </div>
         </section>
 
-        {/* Final CTA section */}
         <section className="relative overflow-hidden" style={{ zIndex: 1 }}>
           <div className="w-full h-[590px] relative bg-blue-700">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600">

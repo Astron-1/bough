@@ -1,8 +1,9 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Button from './ui/Button';
-import ShinyText from './ui/ShinyText';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Button from "./ui/Button";
+import ShinyText from "./ui/ShinyText";
+import Text, { Font } from "./Text";
 
 interface ConnectCTAProps {
   className?: string;
@@ -21,16 +22,19 @@ const ConnectCTA: React.FC<ConnectCTAProps> = ({ className = "" }) => {
           priority
         />
       </div>
-      
+
       {/* Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
-        <h2 className="text-white text-4xl md:text-5xl font-bold mb-4 leading-tight">
+        <Text
+          type={Font.SOURCE_SANS}
+          className="text-white text-4xl md:text-5xl font-bold mb-4 leading-tight"
+        >
           Let&apos;s drive outcomes by crafting changes
-        </h2>
-        <p className="text-white text-2xl md:text-3xl mb-8 font-light">
+        </Text>
+        <Text className="text-white text-2xl md:text-3xl mb-8 font-light">
           for a meaningful tomorrow, now
-        </p>
-        
+        </Text>
+
         {/* Connect Button */}
         <div className="flex justify-center mt-8">
           <Link href="/connect">
@@ -44,4 +48,4 @@ const ConnectCTA: React.FC<ConnectCTAProps> = ({ className = "" }) => {
   );
 };
 
-export default ConnectCTA; 
+export default ConnectCTA;
