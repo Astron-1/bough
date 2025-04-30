@@ -54,7 +54,10 @@ export default function CaseStudyCarousel() {
             </div>
             <div
               className="absolute text-sm font-semibold text-black transition-all duration-700"
-              style={{ bottom: `calc(${progressPercent}% - 1rem)` }}
+              style={{
+                bottom: `calc(${progressPercent}% - 2rem)`,
+                marginRight: 50,
+              }}
             >
               {current + 1}
             </div>

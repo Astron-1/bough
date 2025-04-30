@@ -2,9 +2,10 @@ import React from "react";
 import Header from "@app/components/Header";
 
 import InsightsSlider from "@app/components/InsightsSlider";
-import CaseStudies from "@app/components/CaseStudies";
+
 import ConnectCTA from "@app/components/ConnectCTA";
 import Image from "next/image";
+import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
 
 export default function InsightsPage() {
   return (
@@ -56,9 +57,9 @@ export default function InsightsPage() {
       </div>
 
       {/* Fixed width container for content below hero */}
-      <div className="mx-auto" style={{ width: "70rem", maxWidth: "100%" }}>
+      <div style={{ width: "70rem", maxWidth: "100%" }}>
         {/* Featured Case Studies */}
-        <CaseStudies />
+        <CaseStudyCarousel />
       </div>
 
       {/* Connect CTA Section */}
