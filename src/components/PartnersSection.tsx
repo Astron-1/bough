@@ -30,31 +30,31 @@ const partnerLogos: PartnerLogo[] = [
   {
     id: 1,
     name: "Klarity",
-    logoPath: "/",
+    logoPath: "/partner/klarity.svg",
     website: "https://www.klarity.ai",
   },
   {
     id: 2,
     name: "Vic.ai",
-    logoPath: "/",
+    logoPath: "/partner/vic.ai.svg",
     website: "https://www.vic.ai",
   },
   {
     id: 3,
     name: "Trullion",
-    logoPath: "/",
+    logoPath: "/partner/trullion.svg",
     website: "https://trullion.com",
   },
   {
     id: 4,
     name: "Ramp",
-    logoPath: "/",
+    logoPath: "/partner/ramp.svg",
     website: "https://ramp.com/intelligence",
   },
   {
     id: 5,
     name: "Numeric",
-    logoPath: "/",
+    logoPath: "/partner/numeric.svg",
     website: "https://www.numeric.io",
   },
 ];
@@ -63,63 +63,57 @@ const partnerLogos: PartnerLogo[] = [
 const secondRowLogos = [
   {
     id: 11,
-    name: "Adobe",
-    logoPath: "https://logoipsum.com/logo/logo-11.svg",
-    website: "https://adobe.com",
+    name: "Uipath",
+    logoPath: "/capabilities/uipath.svg",
+    website: "https://www.uipath.com/",
   },
   {
     id: 12,
-    name: "PwC",
-    logoPath: "https://logoipsum.com/logo/logo-12.svg",
-    website: "https://pwc.com",
+    name: "Tableau",
+    logoPath: "/capabilities/tableau.svg",
+    website: "https://www.tableau.com/",
   },
   {
     id: 13,
-    name: "EY",
-    logoPath: "https://logoipsum.com/logo/logo-13.svg",
-    website: "https://ey.com",
+    name: "Power BI",
+    logoPath: "/capabilities/powerbi.svg",
+    website: "https://www.microsoft.com/en-us/power-platform/products/power-bi",
   },
   {
     id: 14,
-    name: "McKinsey",
-    logoPath: "https://logoipsum.com/logo/logo-14.svg",
-    website: "https://mckinsey.com",
+    name: "Celonis",
+    logoPath: "/capabilities/celonis.svg",
+    website: "https://www.celonis.com/",
   },
   {
     id: 15,
-    name: "BCG",
-    logoPath: "https://logoipsum.com/logo/logo-15.svg",
-    website: "https://bcg.com",
+    name: "Onestream",
+    logoPath: "/capabilities/onestream.svg",
+    website: "https://www.onestream.com/",
   },
   {
     id: 16,
-    name: "Bain",
-    logoPath: "https://logoipsum.com/logo/logo-16.svg",
-    website: "https://bain.com",
+    name: "Automation Anywhere",
+    logoPath: "/capabilities/automation-anywhere.svg",
+    website: "https://www.automationanywhere.com/",
   },
   {
     id: 17,
-    name: "Cisco",
-    logoPath: "https://logoipsum.com/logo/logo-17.svg",
-    website: "https://cisco.com",
+    name: "Power Automate",
+    logoPath: "/capabilities/powerautomate.svg",
+    website: "https://www.microsoft.com/en-us/power-platform/products/power-automate",
   },
   {
     id: 18,
-    name: "ServiceNow",
-    logoPath: "https://logoipsum.com/logo/logo-18.svg",
-    website: "https://servicenow.com",
+    name: "Alteryx",
+    logoPath: "/capabilities/alteryx.svg",
+    website: "https://www.alteryx.com/",
   },
   {
     id: 19,
-    name: "Workday",
-    logoPath: "https://logoipsum.com/logo/logo-19.svg",
-    website: "https://workday.com",
-  },
-  {
-    id: 20,
-    name: "VMware",
-    logoPath: "https://logoipsum.com/logo/logo-20.svg",
-    website: "https://vmware.com",
+    name: "Workiva",
+    logoPath: "/capabilities/workiva.svg",
+    website: "https://www.workiva.com/en-in/",
   },
 ];
 
@@ -156,7 +150,7 @@ const PartnerLogo: React.FC<{
 
   return (
     <div
-      className="cursor-pointer h-24 flex items-center justify-center relative group"
+      className="cursor-pointer h-32 flex items-center justify-center relative group"
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -180,7 +174,7 @@ const PartnerLogo: React.FC<{
       </div>
 
       <div
-        className="w-24 h-24 flex items-center justify-center p-2 overflow-hidden transition-all duration-300 hover:z-10"
+        className="w-36 h-32 flex items-center justify-center p-2 overflow-hidden transition-all duration-300 hover:z-10"
         style={{
           transform: isHovered ? "scale(1.15)" : "scale(1)",
           filter: isOtherHovered ? "blur(2px) grayscale(0.7)" : "none",
@@ -194,9 +188,9 @@ const PartnerLogo: React.FC<{
               <Image
                 src={logo.logoPath}
                 alt={logo.name}
-                width={80}
-                height={80}
-                className="w-full h-full object-contain transition-opacity duration-300"
+                width={140}
+                height={140}
+                className="w-auto h-auto max-h-24 object-contain transition-opacity duration-300"
                 priority
                 onError={handleImageError}
               />
@@ -335,10 +329,12 @@ const PartnersSection: React.FC<PartnersSectionProps> = ({
         </h2>
 
         <div
-          className="w-full mx-auto py-10 px-4 flex flex-col justify-center items-center rounded-[1rem] partner-container"
+          className="w-full mx-auto py-10 px-4 flex flex-col justify-center items-center rounded-[1rem] partner-container backdrop-blur-sm"
           style={{
-            background: "rgba(0, 0, 0, 0.3)",
-            boxShadow: "0px 4px 24px rgba(0, 0, 0, 0.1)",
+            background: "rgba(255, 255, 255, 0.15)",
+            boxShadow: "0px 4px 24px rgba(0, 0, 0, 0.08)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.2)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.2)",
           }}
         >
           {/* First row - moves right to left */}
@@ -348,7 +344,12 @@ const PartnersSection: React.FC<PartnersSectionProps> = ({
                 ref={firstSwiperRef}
                 modules={[Autoplay]}
                 spaceBetween={20}
-                slidesPerView={5}
+                slidesPerView={2}
+                breakpoints={{
+                  640: { slidesPerView: 3 },
+                  768: { slidesPerView: 4 },
+                  1024: { slidesPerView: 5 }
+                }}
                 loop={true}
                 speed={8000}
                 autoplay={{
@@ -380,7 +381,12 @@ const PartnersSection: React.FC<PartnersSectionProps> = ({
                 ref={secondSwiperRef}
                 modules={[Autoplay]}
                 spaceBetween={20}
-                slidesPerView={5}
+                slidesPerView={2}
+                breakpoints={{
+                  640: { slidesPerView: 3 },
+                  768: { slidesPerView: 4 },
+                  1024: { slidesPerView: 5 }
+                }}
                 loop={true}
                 speed={8000}
                 autoplay={{

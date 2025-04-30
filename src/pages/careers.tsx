@@ -87,19 +87,20 @@ export default function Careers() {
         {/* Decorative Background Path */}
         <div
           className="absolute left-0 w-full overflow-visible pointer-events-none"
-          style={{ zIndex: 0, top: "280px", height: "calc(100% - 200px)" }}
+          style={{ zIndex: 0, top: "600px", height: "calc(100% - 200px)", opacity: 0.4 }}
         >
           <svg
-            width="100%"
+            width="150%"
             height="3000"
-            viewBox="0 0 1440 3000"
+            viewBox="0 0 1720 3000"
             preserveAspectRatio="none"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{ marginLeft: "-10%" }}
           >
             <path
               opacity="0.2"
-              d="M-112.5 60C-97.8333 271.999 356.8 285.899 1080 31.4995C1803.2 -222.899 1117 743.5 638 989.5C-218.5 1510.5 219.4 3345.9 683 3423.5"
+              d="M-250 460C-112.5 671.999 356.8 685.899 1250 431.4995C2100 177.1 1300 1143.5 638 1389.5C-218.5 1910.5 219.4 3345.9 683 3423.5"
               stroke="#6fa3e1"
               strokeWidth="200"
               strokeLinecap="round"
@@ -109,7 +110,7 @@ export default function Careers() {
         </div>
 
         {/* The Bough Way Section */}
-        <section className="pt-24 pb-16 md:pt-32 md:py-24 relative z-10">
+        <section className="pt-40 pb-16 md:pt-60 md:py-24 relative z-10">
           <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-12">
             <div className="lg:w-1/3">
               <Text className="text-3xl md:text-4xl font-semibold mb-6 text-black ">
