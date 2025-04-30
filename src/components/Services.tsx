@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ServiceCard from "./ServiceCard";
@@ -36,38 +38,62 @@ export default function BoughServices() {
       const sectionRect = sectionRef.current.getBoundingClientRect();
       const sectionTop = sectionRect.top + window.scrollY;
 
-      const centerX = 50;
-      const offsetX = 20;
-      const offsetY = 20;
+      // Starting point at the top center
+      let path = "M50,0 ";
 
-      let path = `M${centerX},0 `;
+      // Add initial vertical line
+      path += "C50,50 50,100 50,150 ";
 
+      // Create smooth curved path around each card
       cards.forEach((card, index) => {
         if (!card) return;
 
         const rect = card.getBoundingClientRect();
         const cardTop = rect.top + window.scrollY - sectionTop;
         const cardBottom = cardTop + rect.height;
-        const cardLeft = rect.left - sectionRect.left;
-        const cardRight = cardLeft + rect.width;
+        const isLeft = index % 2 === 0; // Left or right aligned card
 
-        const midY = cardTop + rect.height / 2;
-        const isLeft = index % 2 !== 0;
+        // Control points for smooth curves
+        const controlPointY1 = cardTop - 100;
+        const controlPointY2 = cardTop - 50;
 
-        const textSideX = isLeft ? cardLeft : cardRight;
-        const entryX = isLeft ? textSideX - offsetX : textSideX + offsetX;
-        const frontX = isLeft ? textSideX + 5 : textSideX - 5;
+        // Calculate x positions based on card alignment
+        const curveStartX = 50; // Center
+        const curveEndX = isLeft ? 80 : 20; // Left or right side
+        const cardSideX = isLeft ? 85 : 15; // Further left or right for card edge
 
-        path += `L${centerX},${cardTop - offsetY} `;
-        path += `L${entryX},${cardTop - offsetY} `;
-        path += `L${entryX},${midY - 20} `;
-        path += `L${frontX},${midY} `;
-        path += `L${entryX},${midY + 20} `;
-        path += `L${entryX},${cardBottom + offsetY} `;
-        path += `L${centerX},${cardBottom + offsetY} `;
+        // Curve from center to card top
+        path += `C${curveStartX},${controlPointY1} ${curveEndX},${controlPointY2} ${curveEndX},${cardTop} `;
+
+        // Curve around the card (following the contour)
+        if (isLeft) {
+          // Right-aligned card, curve goes around left side
+          path += `C${curveEndX - 5},${cardTop + 50} ${cardSideX},${
+            cardTop + 100
+          } ${cardSideX},${cardTop + rect.height / 2} `;
+          path += `C${cardSideX},${cardBottom - 100} ${curveEndX - 5},${
+            cardBottom - 50
+          } ${curveEndX},${cardBottom} `;
+        } else {
+          // Left-aligned card, curve goes around right side
+          path += `C${curveEndX + 5},${cardTop + 50} ${cardSideX},${
+            cardTop + 100
+          } ${cardSideX},${cardTop + rect.height / 2} `;
+          path += `C${cardSideX},${cardBottom - 100} ${curveEndX + 5},${
+            cardBottom - 50
+          } ${curveEndX},${cardBottom} `;
+        }
+
+        // Curve back to center for next card
+        const nextControlY1 = cardBottom + 50;
+        const nextControlY2 = cardBottom + 100;
+        path += `C${curveEndX},${nextControlY1} ${curveStartX},${nextControlY2} ${curveStartX},${
+          cardBottom + 150
+        } `;
       });
 
-      path += `L${centerX},${sectionRect.height}`;
+      // End at the bottom center
+      path += `L50,${sectionRect.height}`;
       setPathData(path);
     };
 
@@ -103,7 +129,14 @@ export default function BoughServices() {
         viewBox="0 0 100 2000"
         preserveAspectRatio="none"
       >
-        <path ref={pathRef} d={pathData} strokeWidth="2" fill="none" />
+        <path
+          ref={pathRef}
+          d={pathData}
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
       </svg>
 
       {/* Moving Ball */}
