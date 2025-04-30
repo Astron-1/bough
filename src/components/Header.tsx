@@ -48,7 +48,7 @@ export default function Header({ transparent = false }: HeaderProps) {
       <header
         className={`w-full z-50 transition-all duration-300 ${
           isSticky
-            ? "fixed top-0 left-0 right-0 backdrop-blur-md bg-white/30 py-2"
+            ? "fixed top-0 left-0 right-0 backdrop-blur-md  bg-white/30 py-5"
             : transparent
             ? "relative bg-transparent py-6"
             : "relative bg-transparent py-6"
