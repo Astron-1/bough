@@ -188,7 +188,11 @@ export default function Footer() {
             © {year.getFullYear()}, Bough Consulting, LLC. All rights reserved.
           </p>
           <div>
-            <Link href="https://www.linkedin.com" aria-label="LinkedIn">
+            <Link
+              target="_blank"
+              href="https://www.linkedin.com/company/boughconsulting/"
+              aria-label="LinkedIn"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
