@@ -4,7 +4,7 @@ import Header from '@app/components/Header';
 import Text, { Font } from '@app/components/Text';
 import Link from 'next/link';
 import { teamMembers } from '@app/pages/about-us';
-import ConnectCTA from '@app/components/ConnectCTA';
+// import ConnectCTA from '@app/components/ConnectCTA';
 import BottomSection from '@app/components/BottomSection';
 
 // Type definition for team member data
