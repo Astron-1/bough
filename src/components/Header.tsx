@@ -33,7 +33,7 @@ export default function Header({ transparent = false }: HeaderProps) {
     { href: "/service", name: "Services" },
     { href: "/insights", name: "Insights" },
     { href: "/careers", name: "Careers" },
-    { href: "/about", name: "About us" },
+    { href: "/about-us", name: "About us" },
   ];
 
   const navLinkStyle = {
