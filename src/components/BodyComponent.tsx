@@ -1,5 +1,5 @@
 import BottomSection from "./BottomSection";
-import CaseStudyCarousel from "./CaseStudyCarousel";
+import MainCarousel from "./MainCarousel";
 import GlobalClickSpark from "./GlobalClickSpark";
 import HeroText from "./heroText";
 import PartnersSection from "./PartnersSection";
@@ -11,7 +11,7 @@ export default function BodyComponent() {
       <GlobalClickSpark>
         <HeroText />
         <BoughServices />
-        <CaseStudyCarousel />
+        <MainCarousel />
         <PartnersSection />
         <BottomSection />
       </GlobalClickSpark>

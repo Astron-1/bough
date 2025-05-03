@@ -6,7 +6,7 @@ import coin1 from "../../public/service-hero-1.png";
 import coin2 from "../../public/service-hero-2.png";
 import Header from "@app/components/Header";
 
-import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
+import MainCarousel from "@app/components/MainCarousel";
 
 export default function ServicesPage() {
   return (
@@ -68,7 +68,7 @@ export default function ServicesPage() {
 
       {/* Featured Case Studies */}
       <div className="" style={{ width: "70rem", maxWidth: "100%" }}>
-        <CaseStudyCarousel />
+        <MainCarousel />
       </div>
     </section>
   );
