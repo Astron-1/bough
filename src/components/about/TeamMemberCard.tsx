@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Text, { Font } from "@app/components/Text";
@@ -66,8 +68,8 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
       >
         <ImageContent />
         
-        {/* Text container - now part of the same group for consistent hover */}
-        <div className="text-center mt-4 w-full group-hover:transform group-hover:translate-y-[-5px] transition-all duration-500">
+        {/* Fixed class name to ensure it's always the same between server and client */}
+        <div className="text-center mt-4 w-full transition-all duration-500">
           <div className="flex items-center justify-between">
             <div className="text-left">
               <Text 
@@ -105,4 +107,4 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
   );
 };
 
-export default TeamMemberCard; 
+export default TeamMemberCard;

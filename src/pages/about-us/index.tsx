@@ -4,6 +4,8 @@ import HeroSection from "@app/components/about/HeroSection";
 import WhoWeAreSection from "@app/components/about/WhoWeAreSection";
 import ValuesSection from "@app/components/about/ValuesSection";
 import TeamSection from "@app/components/about/TeamSection";
+import CoreValuesSection from "@app/components/about/CoreValuesSection";
+import GallerySection from "@app/components/about/GallerySection";
 import { KnowledgeIcon, ImpactIcon, TrustIcon } from "@app/components/about/icons/ValueIcons";
 import BottomSection from "@app/components/BottomSection";
 
@@ -230,7 +232,19 @@ export default function AboutUsPage() {
   // Team section content
   const teamContent = {
     title: "Say hello to some of our team members!",
+    description: ""
+  };
+
+  // Core values section content
+  const coreValuesContent = {
+    title: "Values that drive us!",
     description: "Bough was born out of an eagerness to run a business with a sense of ethos, pathos & logos. We came about to create a space that calls people of varied passions to fearlessly work towards creating value for themselves and their customers. Our foundation rests on these core values:"
+  };
+
+  // Gallery section content
+  const galleryContent = {
+    title: "Our journey in pictures",
+    description: "Explore our visual story — moments of collaboration, innovation, and growth that define Bough's culture and commitment to excellence."
   };
 
   return (
@@ -252,9 +266,9 @@ export default function AboutUsPage() {
           subtitle={heroContent.subtitle} 
         />
 
-        {/* Who we are Section */}
+        {/* Who We Are Section */}
         <WhoWeAreSection 
-          title={whoWeAreContent.title}
+          title={whoWeAreContent.title} 
           paragraphs={whoWeAreContent.paragraphs}
           photos={whoWeAreContent.photos}
         />
@@ -262,19 +276,31 @@ export default function AboutUsPage() {
         {/* Values Section */}
         <ValuesSection 
           values={valuesContent} 
-          showMeasurements={false}
+          sectionTitle="What we believe"
         />
-        
+
         {/* Team Section */}
-        <TeamSection
-          title={teamContent.title}
+        <TeamSection 
+          title={teamContent.title} 
           description={teamContent.description}
           members={teamMembers}
-          showMeasurements={false}
         />
-      </div>
 
-      <BottomSection />
+        {/* Core Values Section */}
+        <CoreValuesSection
+          title={coreValuesContent.title}
+          description={coreValuesContent.description}
+        />
+
+        {/* Gallery Section */}
+        <GallerySection
+          title={galleryContent.title}
+          description={galleryContent.description}
+        />
+
+        {/* Bottom Section */}
+        <BottomSection />
+      </div>
     </main>
   );
 } 

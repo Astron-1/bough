@@ -90,8 +90,11 @@ export default function InsightsPage() {
 
   return (
     <main className="min-h-screen bg-white overflow-x-hidden relative w-full">
+      {/* Add Header with transparent prop */}
+      <Header transparent={true} />
+      
       {/* Hero Section with InsightHero Background - Full Viewport Height */}
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-screen -mt-24">
         {/* Background Image */}
         <Image
           src="/insights-bg.png"
@@ -100,11 +103,6 @@ export default function InsightsPage() {
           className="object-cover z-0"
           priority
         />
-
-        {/* Navbar overlay positioned absolute with transparent background */}
-        <div className="absolute top-0 left-0 right-0 z-50 pt-4">
-          <Header transparent={true} />
-        </div>
 
         {/* Content Container - Centered vertically and horizontally */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full">

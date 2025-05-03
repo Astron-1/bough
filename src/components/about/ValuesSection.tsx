@@ -24,8 +24,8 @@ export default function ValuesSection({
   sectionTitle = "What we believe" 
 }: ValuesSectionProps) {
   return (
-    <div className="relative z-10 py-16 md:py-20 px-4 sm:px-6" style={figmaSectionContainer()}>
-      <div className="max-w-[90rem] mx-auto">
+    <div className="relative z-10 py-16 md:py-20 px-4 sm:px-6 lg:px-8" style={figmaSectionContainer()}>
+      <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <Text 
           type={Font.GARAMOND} 

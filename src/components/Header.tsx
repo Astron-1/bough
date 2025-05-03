@@ -5,7 +5,6 @@ import Image from "next/image";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 import { useState, useEffect } from "react";
-import Text, { Font } from "./Text";
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
@@ -36,6 +35,11 @@ export default function Header({ transparent = false }: HeaderProps) {
     { href: "/about-us", name: "About us" },
   ];
 
+  const textColor = transparent && !isSticky ? "text-white" : "text-black";
+  const borderColor = transparent && !isSticky ? "bg-white/60" : "bg-gray-300";
+  
+  const logoFilter = transparent && !isSticky ? "brightness-0 invert" : "";
+   
   const navLinkStyle = {
     fontFamily: "var(--font-sf-pro)",
     fontSize: "16px",
@@ -46,58 +50,55 @@ export default function Header({ transparent = false }: HeaderProps) {
   return (
     <>
       <header
-        className={`w-full z-50 transition-all duration-300 ${
+        className={`w-full z-[100] transition-all duration-300 ${
           isSticky
-            ? "fixed top-0 left-0 right-0 backdrop-blur-md  bg-white/30 py-5"
-            : transparent
-            ? "relative bg-transparent py-6"
-            : "relative bg-transparent py-6"
+            ? "fixed top-0 left-0 right-0 backdrop-blur-md bg-white/30 py-5"
+            : "relative py-6 pt-5"
         }`}
         style={{
           boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.05)" : "none",
         }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 relative">
-          {/* Logo and Line */}
+        {/* Main container with consistent width and padding */}
+        <div className={`max-w-[1280px] mx-auto flex justify-between items-center ${transparent ? "px-0" : "px-6"}`}>
+          {/* Logo container */}
           <div className="flex items-center relative">
-            <Link href="/">
+            <Link href="/" className="flex items-center">
               <Image
-                src={
-                  transparent && !isSticky ? "/boughWhite.svg" : "/bough.png"
-                }
+                src="/bough.png"
                 alt="Bough Consulting"
-                width={150}
-                height={50}
-                className="object-contain"
+                width={155}
+                height={45}
+                className={`object-contain ${logoFilter}`}
                 priority
               />
             </Link>
             {/* Line hidden on small screens */}
             <div
-              className={`hidden sm:block absolute h-[1px] w-[8rem] ${
-                transparent && !isSticky ? "bg-white/60" : "bg-gray-300"
-              }`}
+              className={`hidden sm:block absolute h-[1px] w-44 ${borderColor}`}
               style={{ left: "100%", top: "50%" }}
             />
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 space-x-10 items-center">
+          {/* Center-aligned nav - NOT absolute positioned */}
+          <div className="hidden md:flex items-center justify-center space-x-14">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`hover:opacity-80 transition-opacity ${
-                  transparent && !isSticky ? "text-white" : "text-black"
-                }`}
-                style={navLinkStyle}
+                className={`hover:opacity-80 transition-opacity ${textColor}`}
               >
-                <Text type={Font.SOURCE_SANS}>{link.name}</Text>
+                <span
+                  className={textColor}
+                  style={navLinkStyle}
+                >
+                  {link.name}
+                </span>
               </Link>
             ))}
           </div>
 
-          {/* Button on desktop */}
+          {/* Button container */}
           <div className="hidden md:block">
             <Button
               href="/connect"
@@ -108,19 +109,15 @@ export default function Header({ transparent = false }: HeaderProps) {
           </div>
 
           {/* Hamburger on mobile */}
-          <div className="md:hidden z-50">
+          <div className="md:hidden z-[100]">
             <button onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
                 <X
-                  className={`w-6 h-6 ${
-                    transparent && !isSticky ? "text-white" : "text-black"
-                  }`}
+                  className={`w-6 h-6 ${textColor}`}
                 />
               ) : (
                 <Menu
-                  className={`w-6 h-6 ${
-                    transparent && !isSticky ? "text-white" : "text-black"
-                  }`}
+                  className={`w-6 h-6 ${textColor}`}
                 />
               )}
             </button>

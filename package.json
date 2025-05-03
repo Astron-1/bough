@@ -17,6 +17,7 @@
     "nodemailer": "^6.10.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-spring": "^9.7.5",
     "swiper": "^11.2.6"
   },
   "devDependencies": {

@@ -16,7 +16,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
   members,
   showMeasurements = false
 }) => {
-  // Exact spacing measurements from Figma
+  // Exact spacing measurements from Figma (kept for measurement indicators)
   const spacing = {
     horizontalGap: "3.48rem", // Exact from Figma
     verticalGap: "9.56rem",   // Exact from Figma
@@ -24,17 +24,8 @@ const TeamSection: React.FC<TeamSectionProps> = ({
     rightMargin: "4.1rem"     // Exact from Figma
   };
 
-  // Card dimensions from Figma
-  const cardDimensions = {
-    width: "19rem",
-    height: "19rem"
-  };
-
-  // Calculate width for a row of exactly 3 cards
-  const threeCardRowWidth = `calc(${cardDimensions.width} * 3 + ${spacing.horizontalGap} * 2)`;
-
   return (
-    <div className="relative z-10 py-16 md:py-20 px-4 sm:px-6" style={figmaSectionContainer()}>
+    <div className="relative z-10 py-16 md:py-20 px-4 sm:px-6 lg:px-8" style={figmaSectionContainer()}>
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <Text 
@@ -73,26 +64,11 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           )}
 
           {/* Fixed grid layout with exactly 3 cards per row */}
-          <div className="mx-auto overflow-hidden" style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(3, ${cardDimensions.width})`,
-            gap: spacing.horizontalGap,
-            rowGap: spacing.verticalGap,
-            width: threeCardRowWidth,
-            maxWidth: "100%",
-            justifyContent: "center",
-            paddingLeft: spacing.leftMargin,
-            paddingRight: spacing.rightMargin
-          }}>
+          <div className="w-full overflow-hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
             {members.map((member) => (
               <div 
                 key={member.id} 
-                style={{ 
-                  flexShrink: 0,
-                  width: cardDimensions.width,
-                  height: "auto"
-                }}
-                className="flex justify-center items-start"
+                className="flex justify-start items-start"
               >
                 <TeamMemberCard 
                   id={member.id}
@@ -109,7 +85,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         
         {/* Description (optional) - moved to bottom */}
         {description && (
-          <div className="max-w-3xl mx-auto text-center mt-16 mb-8">
+          <div className="max-w-3xl text-left mt-16 mb-8">
             <Text type={Font.SOURCE_SANS} className="text-lg text-black/80">
               {description}
             </Text>
