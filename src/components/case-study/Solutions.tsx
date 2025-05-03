@@ -15,13 +15,15 @@ interface SolutionProps {
         src: string | StaticImageData;
       };
     }[];
-  };
+  }[];
 }
 
 const Solutions = ({ solutions }: SolutionProps) => {
   if (!solutions) {
     return null;
   }
+
+  console.log("Solutions : ", solutions);
 
   return (
     <div className="bg-gray-50 py-12 px-6 md:px-12">
@@ -31,24 +33,29 @@ const Solutions = ({ solutions }: SolutionProps) => {
       >
         Solutions
       </Text>
-      <div className="bg-white shadow-lg rounded-lg p-6 md:p-8">
-        <Text
-          type={Font.SOURCE_SANS}
-          className="text-xl font-semibold mb-6 text-gray-800"
-        >
-          {solutions.heading}
-        </Text>
-        <div className="flex flex-col gap-8">
-          {solutions.description.map((desc, index) => (
-            <CommonCard
-              key={index}
-              heading={desc.subHeading}
-              description={desc.subDescription}
-              image={desc.image}
-            />
-          ))}
-        </div>
+      <div>
+        {solutions.map((solution, index) => (
+          <div key={index} className="bg-white shadow-lg rounded-lg p-6 md:p-8">
+            <Text
+              type={Font.SOURCE_SANS}
+              className="text-xl font-semibold mb-6 text-gray-800"
+            >
+              {solution.heading}
+            </Text>
+            <div className="flex flex-col gap-8">
+              {solution.description.map((desc, desIndex) => (
+                <CommonCard
+                  key={desIndex}
+                  heading={desc.subHeading}
+                  description={desc.subDescription}
+                  image={desc.image}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
+
     </div>
   );
 };

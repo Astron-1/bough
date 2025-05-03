@@ -23,8 +23,15 @@ interface CaseStoryProps {
 
 const CaseStory = ({ caseStory }: CaseStoryProps) => {
   return (
-    <div className="relative bg-gray-50 py-12 px-6 md:px-12 z-20">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+    <div  
+      className="relative py-12 px-6 md:px-12 z-20"
+      style={{
+        backgroundImage: "url('/bg-wave-img-for-above-footer.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <h1 className="text-4xl font-bold mb-8 text-gray-100 text-center">
         Case Story
       </h1>
       {caseStory.map((story, index) => (
