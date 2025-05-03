@@ -8,6 +8,12 @@ import cs2Image2 from "../../public/caseStudies/CS2/image2.png";
 import cs2Image3 from "../../public/caseStudies/CS2/image3.png";
 import cs3Image1 from "../../public/caseStudies/CS3/image1.png";
 
+interface ImageProps {
+  heading?: string;
+  description?: string;
+  src: string | StaticImageData;
+}
+
 interface CaseStudyContent {
   id: string;
   heading: string;
@@ -18,38 +24,22 @@ interface CaseStudyContent {
     description: {
       subHeading: string;
       subDescription?: string[];
-      image?: {
-        heading?: string;
-        description?: string;
-        src: string | StaticImageData;
-      };
+      image?: ImageProps;
     }[];
-    images?: {
-      heading?: string;
-      description?: string;
-      src: string | StaticImageData;
-    }[];
+    images?: ImageProps[];
   }[];
   solution?: {
     heading: string;
     description: {
       subHeading: string;
       subDescription?: string[];
-      image?: {
-        heading?: string;
-        description?: string;
-        src: string | StaticImageData;
-      };
+      image?: ImageProps;
     }[];
-  };
+  }[];
   results: {
     heading: string;
     description?: string[];
-    image?: {
-      heading?: string;
-      description?: string;
-      src: string | StaticImageData;
-    };
+    image?: ImageProps;
   }[];
 }
 
@@ -94,7 +84,7 @@ export const caseStudyContent: CaseStudyContent[] = [
         ],
       },
     ],
-    solution: {
+    solution: [{
       heading:
         "To make standardizing and optimizing data fields in the global revenue platform manageable, we prioritized small number of data fields based on their degree of impact and importance to business priorities. We compiled data and process maps to help data producers and owners fix data and prevent errors going forward.",
       description: [
@@ -137,7 +127,7 @@ export const caseStudyContent: CaseStudyContent[] = [
           },
         },
       ],
-    },
+    }],
     results: [
       {
         heading:
@@ -290,7 +280,7 @@ export const caseStudyContent: CaseStudyContent[] = [
         ],
       },
     ],
-    solution: {
+    solution: [{
       heading:
         "Strategic intervention by Bough to navigate complexity with expertise.",
       description: [
@@ -336,7 +326,7 @@ export const caseStudyContent: CaseStudyContent[] = [
           },
         },
       ],
-    },
+    }],
     results: [
       {
         heading: "Enhancing audit effectiveness and quality",
