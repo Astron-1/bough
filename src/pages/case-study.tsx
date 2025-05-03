@@ -6,7 +6,6 @@ import WhatWeDid from "@app/components/case-study/WhatWeDid";
 import CaseStory from "@app/components/case-study/CaseStory";
 import Solutions from "@app/components/case-study/Solutions";
 import Result from "@app/components/case-study/Result";
-import BackgroundPattern from "@app/components/BackgroundPattern";
 
 export default function CaseStudy() {
   const router = useRouter();
@@ -22,7 +21,6 @@ export default function CaseStudy() {
 
   return (
     <div className="text-black relative">
-      <BackgroundPattern />
       <Header transparent={false} />
       <CaseStudyHeadings
         heading={content.id}

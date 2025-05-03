@@ -1,6 +1,7 @@
 import React from "react";
 import { StaticImageData } from "next/image";
 import CommonCard from "./CommonCard";
+import Text, { Font } from "../Text";
 
 interface ResultProps {
   results: {
@@ -17,9 +18,12 @@ interface ResultProps {
 const Result = ({ results }: ResultProps) => {
   return (
     <div className="bg-gray-50 py-12 px-6 md:px-12 ">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+      <Text
+        type={Font.GARAMOND}
+        className="text-4xl font-bold mb-8 text-gray-800 text-center"
+      >
         Results
-      </h1>
+      </Text>
       <div className="flex flex-col gap-8">
         {results.map((result, index) => (
           <CommonCard

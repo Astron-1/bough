@@ -1,6 +1,7 @@
 import React from "react";
 import { StaticImageData } from "next/image";
 import CommonCard from "./CommonCard";
+import Text, { Font } from "../Text";
 
 interface SolutionProps {
   solutions?: {
@@ -24,13 +25,19 @@ const Solutions = ({ solutions }: SolutionProps) => {
 
   return (
     <div className="bg-gray-50 py-12 px-6 md:px-12">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+      <Text
+        type={Font.GARAMOND}
+        className="text-4xl font-bold mb-8 text-gray-800 text-center"
+      >
         Solutions
-      </h1>
+      </Text>
       <div className="bg-white shadow-lg rounded-lg p-6 md:p-8">
-        <h2 className="text-xl font-semibold mb-6 text-gray-800">
+        <Text
+          type={Font.SOURCE_SANS}
+          className="text-xl font-semibold mb-6 text-gray-800"
+        >
           {solutions.heading}
-        </h2>
+        </Text>
         <div className="flex flex-col gap-8">
           {solutions.description.map((desc, index) => (
             <CommonCard

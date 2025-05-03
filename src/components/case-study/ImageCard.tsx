@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+import { Font } from "../Text";
+import Text from "../Text";
 
 interface ImagesCardProps {
   imageData: {
@@ -20,11 +22,16 @@ const ImageCard = ({ imageData }: ImagesCardProps) => {
         width={500}
         // height={400}
       />
-      <h4 className="text-lg font-semibold mt-8 text-gray-800">
+      <Text
+        type={Font.GARAMOND}
+        className="text-lg font-semibold mt-8 text-gray-800"
+      >
         {imageData.heading}
-      </h4>
+      </Text>
       {imageData.description && (
-        <p className="text-gray-600 mt-2">{imageData.description}</p>
+        <Text type={Font.SOURCE_SANS} className="text-gray-600 mt-2">
+          {imageData.description}
+        </Text>
       )}
     </div>
   );

@@ -23,7 +23,7 @@ interface CaseStoryProps {
 
 const CaseStory = ({ caseStory }: CaseStoryProps) => {
   return (
-    <div className="bg-gray-50 py-12 px-6 md:px-12">
+    <div className="relative bg-gray-50 py-12 px-6 md:px-12 z-20">
       <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
         Case Story
       </h1>
