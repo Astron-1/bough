@@ -1,10 +1,12 @@
-import Image from "next/image";
 import React from "react";
+import { StaticImageData } from "next/image";
+import ImageCard from "./ImageCard";
+import CommonCard from "./CommonCard";
 
 interface ImagesProps {
   heading?: string;
   description?: string;
-  src: string;
+  src: string | StaticImageData;
 }
 
 interface CaseStoryProps {
@@ -13,48 +15,48 @@ interface CaseStoryProps {
     description?: {
       subHeading: string;
       subDescription?: string[];
-      images?: ImagesProps[];
+      image?: ImagesProps;
     }[];
     images?: ImagesProps[];
   }[];
 }
 
 const CaseStory = ({ caseStory }: CaseStoryProps) => {
-  console.log("Data", caseStory);
   return (
-    <div>
+    <div className="bg-gray-50 py-12 px-6 md:px-12">
+      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+        Case Story
+      </h1>
       {caseStory.map((story, index) => (
-        <div key={index} className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">{story.heading}</h2>
-          <div>
+        <div
+          key={index}
+          className="mb-12 bg-white shadow-lg rounded-lg p-6 md:p-8"
+        >
+          {/* Story Heading */}
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+            {story.heading}
+          </h2>
+
+          {/* Story Description */}
+          <div className="flex flex-col gap-6">
             {story.description?.map((desc, descIndex) => (
-              <div key={descIndex} className="mb-6">
-                <h3 className="text-xl font-semibold mb-2">
-                  {desc.subHeading}
-                </h3>
-                {desc.subDescription?.map((subDesc, subDescIndex) => (
-                  <p key={subDescIndex} className="mb-2">
-                    {subDesc}
-                  </p>
-                ))}
-                {desc.images?.map((image, imageIndex) => (
-                  <div key={imageIndex} className="mb-4">
-                    <Image
-                      src={image.src}
-                      alt={image.heading || "Image"}
-                      className="w-full h-auto rounded-lg"
-                    />
-                    <h4 className="text-lg font-semibold mt-2">
-                      {image.heading}
-                    </h4>
-                    {image.description && (
-                      <p className="text-gray-600">{image.description}</p>
-                    )}
-                  </div>
-                ))}
-              </div>
+              <CommonCard
+                key={descIndex}
+                heading={desc.subHeading}
+                description={desc.subDescription}
+                image={desc.image}
+              />
             ))}
           </div>
+
+          {/* Additional Images */}
+          {story.images && story.images.length > 0 && (
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {story.images.map((image, imageIndex) => (
+                <ImageCard key={imageIndex} imageData={image} />
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>

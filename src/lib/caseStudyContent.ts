@@ -1,4 +1,59 @@
-export const caseStudyContent = [
+import { StaticImageData } from "next/image";
+import cs1Image1 from "../../public/caseStudies/CS1/image1.png";
+import cs1Image2 from "../../public/caseStudies/CS1/image2.png";
+import cs1Image3 from "../../public/caseStudies/CS1/image3.png";
+import cs1Image4 from "../../public/caseStudies/CS1/image4.png";
+import cs2Image1 from "../../public/caseStudies/CS2/image1.png";
+import cs2Image2 from "../../public/caseStudies/CS2/image2.png";
+import cs2Image3 from "../../public/caseStudies/CS2/image3.png";
+import cs3Image1 from "../../public/caseStudies/CS3/image1.png";
+
+interface CaseStudyContent {
+  id: string;
+  heading: string;
+  at_a_glance: string;
+  what_we_did: string[];
+  case_story: {
+    heading: string;
+    description: {
+      subHeading: string;
+      subDescription?: string[];
+      image?: {
+        heading?: string;
+        description?: string;
+        src: string | StaticImageData;
+      };
+    }[];
+    images?: {
+      heading?: string;
+      description?: string;
+      src: string | StaticImageData;
+    }[];
+  }[];
+  solution?: {
+    heading: string;
+    description: {
+      subHeading: string;
+      subDescription?: string[];
+      image?: {
+        heading?: string;
+        description?: string;
+        src: string | StaticImageData;
+      };
+    }[];
+  };
+  results: {
+    heading: string;
+    description?: string[];
+    image?: {
+      heading?: string;
+      description?: string;
+      src: string | StaticImageData;
+    };
+  }[];
+}
+
+export const caseStudyContent: CaseStudyContent[] = [
   {
     id: "Data optimization and governance",
     heading: "Delivering better insights with better data.",
@@ -55,7 +110,7 @@ export const caseStudyContent = [
           image: {
             heading:
               "Filtering out the noise through a tiered process to focus on the key data fields.",
-            src: "/images/case-study/1.png",
+            src: cs1Image1,
           },
         },
         {
@@ -78,7 +133,7 @@ export const caseStudyContent = [
           image: {
             heading:
               "Illustrative workflow data quality rules to assess data from its point of creation and appropriately categorize it for governance purposes.",
-            src: "/images/case-study/2.png",
+            src: cs1Image2,
           },
         },
       ],
@@ -89,7 +144,7 @@ export const caseStudyContent = [
           "Data optimization efforts resulted in 99% of SAP records being analyzed and optimized for either transitioning to SAP RAR in an accurate and consistent manner or management through an alternate solution.",
         image: {
           heading: "Data optimization results.",
-          src: "/images/case-study/3.png",
+          src: cs1Image3,
         },
       },
       {
@@ -104,7 +159,7 @@ export const caseStudyContent = [
         image: {
           heading:
             "Providing adequate assurance through continuous monitoring and regular audits.",
-          src: "/images/case-study/4.png",
+          src: cs1Image4,
         },
       },
     ],
@@ -169,13 +224,13 @@ export const caseStudyContent = [
             heading: "Cross functional stakeholder engagement and leadership",
             description:
               "Bough's project leadership included engaging cross-functional stakeholders to understand their needs, identifying quick wins, and implementing a 'strawman' strategy for precise execution of the new accounting solution.",
-            src: "/images/case-study/1.png",
+            src: cs2Image1,
           },
           {
             heading: "Establishing a single version of data",
             description:
               "Ensuring all key data in one place, i.e., the data warehouse that stored ~80% of all enterprise revenue transactions (transactions not covered were the non- ASC 606 impacting e.g., recurring revenues), enabled us to pull in the requisite information efficiently into our accounting solution to calculate revenues and post journal entries",
-            src: "/images/case-study/1.png",
+            src: cs2Image2,
           },
         ],
       },
@@ -198,7 +253,7 @@ export const caseStudyContent = [
         ],
         image: {
           heading: "Benefit realization",
-          src: "/images/case-study/4.png",
+          src: cs2Image3,
         },
       },
     ],
@@ -277,7 +332,7 @@ export const caseStudyContent = [
           ],
           image: {
             heading: "Example of high-level audit response process workflow.",
-            src: "/images/case-study/2.png",
+            src: cs3Image1,
           },
         },
       ],

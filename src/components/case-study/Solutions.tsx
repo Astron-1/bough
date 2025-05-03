@@ -1,5 +1,6 @@
 import React from "react";
-import Image from "next/image";
+import { StaticImageData } from "next/image";
+import CommonCard from "./CommonCard";
 
 interface SolutionProps {
   solutions?: {
@@ -8,8 +9,9 @@ interface SolutionProps {
       subHeading: string;
       subDescription?: string[];
       image?: {
-        heading: string;
-        src: string;
+        heading?: string;
+        description?: string;
+        src: string | StaticImageData;
       };
     }[];
   };
@@ -21,36 +23,25 @@ const Solutions = ({ solutions }: SolutionProps) => {
   }
 
   return (
-    <div className="my-12">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">
-        {solutions.heading}
-      </h2>
-      {solutions.description.map((desc, index) => (
-        <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold mb-2">{desc.subHeading}</h3>
-            {desc.subDescription?.map((subDesc, subIndex) => (
-              <p key={subIndex} className="text-gray-700 mb-2">
-                {subDesc}
-              </p>
-            ))}
-          </div>
-          {desc.image && (
-            <div className="flex-1">
-              <Image
-                src={desc.image.src}
-                alt={desc.image.heading}
-                className="rounded-lg shadow-lg"
-                width={500}
-                height={300}
-              />
-              <h4 className="text-lg font-semibold mt-2">
-                {desc.image.heading}
-              </h4>
-            </div>
-          )}
+    <div className="bg-gray-50 py-12 px-6 md:px-12">
+      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+        Solutions
+      </h1>
+      <div className="bg-white shadow-lg rounded-lg p-6 md:p-8">
+        <h2 className="text-xl font-semibold mb-6 text-gray-800">
+          {solutions.heading}
+        </h2>
+        <div className="flex flex-col gap-8">
+          {solutions.description.map((desc, index) => (
+            <CommonCard
+              key={index}
+              heading={desc.subHeading}
+              description={desc.subDescription}
+              image={desc.image}
+            />
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

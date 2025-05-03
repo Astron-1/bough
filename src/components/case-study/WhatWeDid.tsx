@@ -8,10 +8,10 @@ interface WhatWeDidProps {
 
 const WhatWeDid = ({ whatWeDid }: WhatWeDidProps) => {
   return (
-    <div className="w-10/12 mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 my-24">
+    <div className="lg:11/12 w-8/12 mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 my-24">
       <Image
         src={sampleImage}
-        alt="What we did"
+        alt="What we did ?"
         className="rounded-lg shadow-lg"
         width={250}
         height={250}
