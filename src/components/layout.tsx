@@ -1,42 +1,19 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Source_Sans_3 } from "next/font/google";
-import "./globals.css";
 import GlobalClickSpark from "./GlobalClickSpark";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const sourceSans3 = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans",
-  weight: ["400", "600"],
-});
-
-export const metadata: Metadata = {
-  title: "Bough Consulting",
-  description: "Building resilience through better governance",
-};
+// import { ebGaramond, sourceSans } from "@app/lib/font";
 
 export default function RootLayout({
   children,
+  className,
 }: Readonly<{
   children: React.ReactNode;
+  className: string;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sourceSans3.variable} antialiased`}
-      >
-        <GlobalClickSpark>{children}</GlobalClickSpark>
-      </body>
-    </html>
+    <div
+      className={`px-32 py-10 text-black text-3xl ${className}`}
+      style={{ fontWeight: 500 }}
+    >
+      <GlobalClickSpark>{children}</GlobalClickSpark>
+    </div>
   );
 }

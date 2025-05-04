@@ -1,33 +1,46 @@
 "use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import Button from './ui/Button';
-import ShinyText from './ui/ShinyText';
-import { useState, useEffect } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import Button from "./ui/Button";
+import ShinyText from "./ui/ShinyText";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
-export default function Header() {
+interface HeaderProps {
+  transparent?: boolean;
+}
+
+export default function Header({ transparent = false }: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
-  
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      // Start being sticky after scrolling past 100px
-      setIsSticky(scrollPosition > 100);
+      setIsSticky(window.scrollY > 100);
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    // Check initial scroll position
+
+    window.addEventListener("scroll", handleScroll);
     handleScroll();
-    
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  const navLinks = [
+    { href: "/service", name: "Services" },
+    { href: "/insights", name: "Insights" },
+    { href: "/careers", name: "Careers" },
+    { href: "/about-us", name: "About us" },
+  ];
+
+  const textColor = transparent && !isSticky ? "text-white" : "text-black";
+  const borderColor = transparent && !isSticky ? "bg-white/60" : "bg-gray-300";
+  
+  const logoFilter = transparent && !isSticky ? "brightness-0 invert" : "";
+   
   const navLinkStyle = {
-    color: "#FFF",
     fontFamily: "var(--font-sf-pro)",
     fontSize: "16px",
     fontWeight: 400,
@@ -36,47 +49,112 @@ export default function Header() {
 
   return (
     <>
-      <header 
-        className={`w-full z-50 transition-all duration-300 ${
-          isSticky 
-            ? 'fixed top-0 left-0 right-0 bg-[#0a1b3a]/95 backdrop-blur-sm py-3' 
-            : 'relative bg-transparent py-4'
+      <header
+        className={`w-full z-[100] transition-all duration-300 ${
+          isSticky
+            ? "fixed top-0 left-0 right-0 backdrop-blur-md bg-white/30 py-5"
+            : "relative py-6 pt-5"
         }`}
+        style={{
+          boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.05)" : "none",
+        }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4">
-          <div className={`${isSticky ? 'w-[11rem]' : 'w-[13.33331rem]'} transition-all duration-300`}>
-            <Image
-              src="/Bough Logo.svg"
-              alt="Bough Consulting"
-              width={213}
-              height={120}
-              priority
-              className="brightness-0 invert"
-              style={{ aspectRatio: "213.33/120.00" }}
+        {/* Main container with consistent width and padding */}
+        <div className={`max-w-[1280px] mx-auto flex justify-between items-center ${transparent ? "px-0" : "px-6"}`}>
+          {/* Logo container */}
+          <div className="flex items-center relative">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/bough.png"
+                alt="Bough Consulting"
+                width={155}
+                height={45}
+                className={`object-contain ${logoFilter}`}
+                priority
+              />
+            </Link>
+            {/* Line hidden on small screens */}
+            <div
+              className={`hidden sm:block absolute h-[1px] w-44 ${borderColor}`}
+              style={{ left: "100%", top: "50%" }}
             />
           </div>
-          
-          <nav className="flex items-center space-x-6">
-            <Link href="#services" className="text-white hover:opacity-80 transition-opacity" style={navLinkStyle}>
-              Services
-            </Link>
-            <Link href="#insights" className="text-white hover:opacity-80 transition-opacity" style={navLinkStyle}>
-              Insights
-            </Link>
-            <Link href="#careers" className="text-white hover:opacity-80 transition-opacity" style={navLinkStyle}>
-              Careers
-            </Link>
-            <Link href="#about" className="text-white hover:opacity-80 transition-opacity" style={navLinkStyle}>
-              About us
-            </Link>
-            <Button href="#connect" className="ml-2 bg-[#1143E8] hover:bg-[#0035d9] px-7">
+
+          {/* Center-aligned nav - NOT absolute positioned */}
+          <div className="hidden md:flex items-center justify-center space-x-14">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`hover:opacity-80 transition-opacity ${textColor}`}
+              >
+                <span
+                  className={textColor}
+                  style={navLinkStyle}
+                >
+                  {link.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Button container */}
+          <div className="hidden md:block">
+            <Button
+              href="/connect"
+              className="bg-[#1143E8] hover:bg-[#0035d9] px-7"
+            >
               <ShinyText text="Connect" speed={3} />
             </Button>
-          </nav>
+          </div>
+
+          {/* Hamburger on mobile */}
+          <div className="md:hidden z-[100]">
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? (
+                <X
+                  className={`w-6 h-6 ${textColor}`}
+                />
+              ) : (
+                <Menu
+                  className={`w-6 h-6 ${textColor}`}
+                />
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {menuOpen && (
+          <div
+            className={`md:hidden px-4 pt-4 pb-6 bg-white ${
+              isSticky ? "shadow-md" : ""
+            }`}
+          >
+            <nav className="flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-black text-base font-medium"
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Button
+                href="/connect"
+                className="mt-4 bg-[#1143E8] hover:bg-[#0035d9]"
+              >
+                <ShinyText text="Connect" speed={3} />
+              </Button>
+            </nav>
+          </div>
+        )}
       </header>
-      {/* Add a spacer when header is fixed to prevent content jumps */}
-      {isSticky && <div className="h-[5rem]"></div>}
+
+      {/* Spacer */}
+      {isSticky && <div className="h-20"></div>}
     </>
   );
-} 
+}
