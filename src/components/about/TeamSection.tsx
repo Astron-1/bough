@@ -18,7 +18,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
 }) => {
   // Exact spacing measurements from Figma (kept for measurement indicators)
   const spacing = {
-    horizontalGap: "3.48rem", // Exact from Figma
+    horizontalGap: "3.48rem",
     verticalGap: "9.56rem", // Exact from Figma
     leftMargin: "3.9rem", // Exact from Figma
     rightMargin: "4.1rem", // Exact from Figma
