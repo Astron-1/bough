@@ -1,17 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import Text, { Font } from "@app/components/Text";
-import { figmaSectionContainer } from "@app/utils/figmaUtils";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCoverflow, Keyboard } from "swiper/modules";
-import { Swiper as SwiperClass } from "swiper";
-import styles from "./GallerySection.module.css";
-
-// Import required Swiper styles
-import "swiper/css";
-import "swiper/css/effect-coverflow";
+import React from "react";
+import BentoGallery from "./BentoGallery";
 
 interface GalleryItem {
   id: number;
@@ -26,47 +16,26 @@ interface GallerySectionProps {
   images?: GalleryItem[];
 }
 
-// Fallback images that will be used initially and if API fails
-const fallbackImages: GalleryItem[] = [
-  {
-    id: 1,
-    imagePath: "/bough.png",
-    altText: "Team collaboration session",
-    caption: "Team collaboration"
-  },
-  {
-    id: 2,
-    imagePath: "/bough.png",
-    altText: "Company office space",
-    caption: "Our workspace"
-  },
-  {
-    id: 3,
-    imagePath: "/bough.png",
-    altText: "Team event",
-    caption: "Community engagement"
-  }
-];
-
-// Captions to use for dynamically loaded images
-const captions = [
-  "Team collaboration",
-  "Our workspace",
-  "Community engagement",
-  "Team building",
-  "Innovation sessions",
-  "Celebrating success",
-  "Leadership meeting",
-  "Training workshop",
-  "Company offsite",
-  "Client engagement"
-];
-
 const GallerySection: React.FC<GallerySectionProps> = ({ 
   title, 
   description,
-  images: propImages
+  images
 }) => {
+  // Convert regular gallery items to bento gallery items with height
+  const bentoImages = images?.map(img => ({
+    ...img,
+    height: 200 + Math.floor(Math.random() * 200) // Random height between 200-400px
+  }));
+
+  return (
+    <BentoGallery
+      title={title}
+      description={description}
+      images={bentoImages}
+    />
+  );
+
+  /* Original Gallery implementation - temporarily hidden
   const [isHovered, setIsHovered] = useState(false);
   const swiperRef = useRef<SwiperClass | null>(null);
   
@@ -133,7 +102,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
   return (
     <div className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8" style={figmaSectionContainer()}>
       <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
+        
         <Text 
           type={Font.GARAMOND} 
           className="text-4xl md:text-5xl font-semibold text-left text-black mb-8"
@@ -141,7 +110,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
           {title}
         </Text>
 
-        {/* Description */}
+        
         <Text 
           type={Font.SOURCE_SANS} 
           className="text-lg md:text-xl text-left max-w-4xl mb-12 text-black"
@@ -149,7 +118,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
           {description}
         </Text>
 
-        {/* Gallery Swiper */}
+        
         <div 
           className={styles.galleryContainer}
           onMouseEnter={() => setIsHovered(true)}
@@ -221,7 +190,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
             ))}
           </Swiper>
           
-          {/* Bottom Navigation Arrows */}
+          
           <div className={styles.navigationContainer}>
             <div 
               className={styles.navigationPrev}
@@ -244,6 +213,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
       </div>
     </div>
   );
+  */
 };
 
 export default GallerySection; 
