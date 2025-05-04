@@ -94,9 +94,11 @@ export default function Header({ transparent = false }: HeaderProps) {
               onMouseLeave={() => setIsHovered(false)}
             >
               <div className="flex items-center space-x-1 cursor-pointer">
-                <span className={`${textColor}`} style={navLinkStyle}>
-                  Services
-                </span>
+                <Link href="/service">
+                  <span className={`${textColor}`} style={navLinkStyle}>
+                    Services
+                  </span>
+                </Link>
                 <ChevronDown size={16} className={textColor} />
               </div>
 
