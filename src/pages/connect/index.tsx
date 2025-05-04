@@ -187,12 +187,17 @@ export default function ConnectPage() {
           <div className="w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
             {/* Left Column - Headline */}
             <div className="lg:w-[45%] flex flex-col justify-center text-center lg:text-left mb-8 lg:mb-0">
-              <Text type={Font.GARAMOND} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] text-black mb-6 lg:mb-8">
+              <Text
+                type={Font.GARAMOND}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] text-black mb-6 lg:mb-8"
+              >
                 Let&apos;s work together to solve your next big challenge.
               </Text>
 
               <div className="text-xl md:text-2xl flex items-center justify-center lg:justify-start mt-4 lg:mt-6">
-                <Text type={Font.SOURCE_SANS} className="mr-4 text-black">Connect with us on</Text>
+                <Text type={Font.SOURCE_SANS} className="mr-4 text-black">
+                  Connect with us on
+                </Text>
                 <Link
                   href="https://www.linkedin.com"
                   aria-label="LinkedIn"
@@ -571,7 +576,10 @@ export default function ConnectPage() {
 
         {/* Locations Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
-          <Text type={Font.GARAMOND} className="text-3xl md:text-4xl font-semibold mb-8 md:mb-12 text-black text-center md:text-left">
+          <Text
+            type={Font.GARAMOND}
+            className="text-3xl md:text-4xl font-semibold mb-8 md:mb-12 text-black text-center md:text-left"
+          >
             Locations
           </Text>
 
@@ -579,7 +587,7 @@ export default function ConnectPage() {
             {/* United States Location */}
             <div>
               <div className="flex items-center mb-4 justify-center md:justify-start">
-              <svg
+                <svg
                   width="40"
                   height="40"
                   viewBox="0 0 40 40"
@@ -588,24 +596,48 @@ export default function ConnectPage() {
                   className="mr-4"
                 >
                   <g clipPath="url(#clip0_239_19161)">
-                    <path d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z" fill="#F0F0F0"/>
-                    <path d="M19.1301 20H39.9996C39.9996 18.1949 39.759 16.4461 39.3107 14.7826H19.1301V20Z" fill="#D80027"/>
-                    <path d="M19.1301 9.56422H37.0642C35.8399 7.56641 34.2745 5.80055 32.4493 4.3468H19.1301V9.56422Z" fill="#D80027"/>
-                    <path d="M19.9997 40C24.7067 40 29.033 38.3732 32.4494 35.6522H7.55005C10.9665 38.3732 15.2928 40 19.9997 40Z" fill="#D80027"/>
-                    <path d="M2.93521 30.4332H37.0643C38.0472 28.8293 38.8094 27.0762 39.3108 25.2158H0.688721C1.19005 27.0762 1.95231 28.8293 2.93521 30.4332Z" fill="#D80027"/>
-                    <path d="M9.26437 3.12328H11.087L9.39164 4.35492L10.0392 6.34781L8.34398 5.11617L6.64875 6.34781L7.20813 4.62617C5.71547 5.86953 4.40719 7.32625 3.32906 8.94938H3.91305L2.83391 9.73336C2.66578 10.0138 2.50453 10.2987 2.35 10.5879L2.86531 12.1739L1.90391 11.4754C1.66492 11.9817 1.44633 12.4995 1.24984 13.028L1.81758 14.7755H3.91305L2.21773 16.0071L2.86531 18L1.17008 16.7684L0.154609 17.5062C0.0529687 18.3232 0 19.1554 0 20H20C20 8.95437 20 7.65219 20 0C16.0491 0 12.366 1.14609 9.26437 3.12328ZM10.0392 18L8.34398 16.7684L6.64875 18L7.29633 16.0071L5.60102 14.7755H7.69648L8.34398 12.7826L8.99148 14.7755H11.087L9.39164 16.0071L10.0392 18ZM9.39164 10.181L10.0392 12.1739L8.34398 10.9423L6.64875 12.1739L7.29633 10.181L5.60102 8.94938H7.69648L8.34398 6.95648L8.99148 8.94938H11.087L9.39164 10.181ZM17.2131 18L15.5179 16.7684L13.8227 18L14.4702 16.0071L12.7749 14.7755H14.8704L15.5179 12.7826L16.1654 14.7755H18.2609L16.5655 16.0071L17.2131 18ZM16.5655 10.181L17.2131 12.1739L15.5179 10.9423L13.8227 12.1739L14.4702 10.181L12.7749 8.94938H14.8704L15.5179 6.95648L16.1654 8.94938H18.2609L16.5655 10.181ZM16.5655 4.35492L17.2131 6.34781L15.5179 5.11617L13.8227 6.34781L14.4702 4.35492L12.7749 3.12328H14.8704L15.5179 1.13039L16.1654 3.12328H18.2609L16.5655 4.35492Z" fill="#0052B4"/>
+                    <path
+                      d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z"
+                      fill="#F0F0F0"
+                    />
+                    <path
+                      d="M19.1301 20H39.9996C39.9996 18.1949 39.759 16.4461 39.3107 14.7826H19.1301V20Z"
+                      fill="#D80027"
+                    />
+                    <path
+                      d="M19.1301 9.56422H37.0642C35.8399 7.56641 34.2745 5.80055 32.4493 4.3468H19.1301V9.56422Z"
+                      fill="#D80027"
+                    />
+                    <path
+                      d="M19.9997 40C24.7067 40 29.033 38.3732 32.4494 35.6522H7.55005C10.9665 38.3732 15.2928 40 19.9997 40Z"
+                      fill="#D80027"
+                    />
+                    <path
+                      d="M2.93521 30.4332H37.0643C38.0472 28.8293 38.8094 27.0762 39.3108 25.2158H0.688721C1.19005 27.0762 1.95231 28.8293 2.93521 30.4332Z"
+                      fill="#D80027"
+                    />
+                    <path
+                      d="M9.26437 3.12328H11.087L9.39164 4.35492L10.0392 6.34781L8.34398 5.11617L6.64875 6.34781L7.20813 4.62617C5.71547 5.86953 4.40719 7.32625 3.32906 8.94938H3.91305L2.83391 9.73336C2.66578 10.0138 2.50453 10.2987 2.35 10.5879L2.86531 12.1739L1.90391 11.4754C1.66492 11.9817 1.44633 12.4995 1.24984 13.028L1.81758 14.7755H3.91305L2.21773 16.0071L2.86531 18L1.17008 16.7684L0.154609 17.5062C0.0529687 18.3232 0 19.1554 0 20H20C20 8.95437 20 7.65219 20 0C16.0491 0 12.366 1.14609 9.26437 3.12328ZM10.0392 18L8.34398 16.7684L6.64875 18L7.29633 16.0071L5.60102 14.7755H7.69648L8.34398 12.7826L8.99148 14.7755H11.087L9.39164 16.0071L10.0392 18ZM9.39164 10.181L10.0392 12.1739L8.34398 10.9423L6.64875 12.1739L7.29633 10.181L5.60102 8.94938H7.69648L8.34398 6.95648L8.99148 8.94938H11.087L9.39164 10.181ZM17.2131 18L15.5179 16.7684L13.8227 18L14.4702 16.0071L12.7749 14.7755H14.8704L15.5179 12.7826L16.1654 14.7755H18.2609L16.5655 16.0071L17.2131 18ZM16.5655 10.181L17.2131 12.1739L15.5179 10.9423L13.8227 12.1739L14.4702 10.181L12.7749 8.94938H14.8704L15.5179 6.95648L16.1654 8.94938H18.2609L16.5655 10.181ZM16.5655 4.35492L17.2131 6.34781L15.5179 5.11617L13.8227 6.34781L14.4702 4.35492L12.7749 3.12328H14.8704L15.5179 1.13039L16.1654 3.12328H18.2609L16.5655 4.35492Z"
+                      fill="#0052B4"
+                    />
                   </g>
                   <defs>
                     <clipPath id="clip0_239_19161">
-                      <rect width="40" height="40" fill="white"/>
+                      <rect width="40" height="40" fill="white" />
                     </clipPath>
                   </defs>
                 </svg>
-                <Text type={Font.GARAMOND} className="text-2xl md:text-3xl font-semibold text-black">
+                <Text
+                  type={Font.GARAMOND}
+                  className="text-2xl md:text-3xl font-semibold text-black"
+                >
                   United States
                 </Text>
               </div>
-              <Text type={Font.SOURCE_SANS} className="text-lg md:text-xl leading-relaxed pl-2 text-black text-center md:text-left">
+              <Text
+                type={Font.SOURCE_SANS}
+                className="text-lg md:text-xl leading-relaxed pl-2 text-black text-center md:text-left"
+              >
                 231 Portside Dr, Edgewater, NJ 07020, United States
               </Text>
             </div>
@@ -653,11 +685,17 @@ export default function ConnectPage() {
                     </clipPath>
                   </defs>
                 </svg>
-                <Text type={Font.GARAMOND} className="text-2xl md:text-3xl font-semibold text-black">
+                <Text
+                  type={Font.GARAMOND}
+                  className="text-2xl md:text-3xl font-semibold text-black"
+                >
                   India
                 </Text>
               </div>
-              <Text type={Font.SOURCE_SANS} className="text-lg md:text-xl leading-relaxed pl-2 text-black text-center md:text-left">
+              <Text
+                type={Font.SOURCE_SANS}
+                className="text-lg md:text-xl leading-relaxed pl-2 text-black text-center md:text-left"
+              >
                 04-120, Blue 1 Square, Phase IV, Udyog Vihar, Sector 18,
                 Gurugram, Haryana 122016
                 <br className="hidden md:block" />

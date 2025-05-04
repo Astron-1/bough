@@ -12,7 +12,7 @@ export default function BottomSection() {
         </Text>
 
         <Text
-          type={Font.SOURCE_SANS}
+          type={Font.GARAMOND}
           className="text-white text-3xl md:text-5xl font-bold"
         >
           Starting today
