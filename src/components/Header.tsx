@@ -44,10 +44,10 @@ export default function Header({ transparent = false }: HeaderProps) {
   };
 
   const services = [
-    { title: "Accounting", href: "/service/accounting" },
-    { title: "Risk", href: "/service/risk" },
-    { title: "ESG", href: "/service/esg" },
-    { title: "Transformation", href: "/service/transformation" },
+    { title: "Accounting", href: "/services/Accounting" },
+    { title: "Risk", href: "/services/Risk" },
+    { title: "ESG", href: "/services/ESG" },
+    { title: "Transformation", href: "/services/Transformation" },
   ];
 
   return (
@@ -80,8 +80,8 @@ export default function Header({ transparent = false }: HeaderProps) {
               />
             </Link>
             <div
-              className={`hidden sm:block absolute h-[1px] w-44 ${borderColor}`}
-              style={{ left: "100%", top: "50%" }}
+              className={`hidden md:block absolute h-[1px] w-44 ${borderColor}`}
+              style={{ left: "120%", top: "50%" }}
             />
           </div>
 
