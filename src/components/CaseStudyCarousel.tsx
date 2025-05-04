@@ -49,34 +49,37 @@ export default function CaseStudyCarousel() {
                 </Text>
               </div>
             </div>
-            <div className="w-full flex justify-between items-center mt-8">
-              <div className="flex space-x-4 font-bold ml-7">
-                <button
-                  onClick={prevSlide}
-                  className="w-10 h-10 rounded-full border font-bold border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
-                  aria-label="Previous Slide"
+            <div className="w-full flex justify-between items-center mt-2">
+              <div className="flex flex-col space-y-4 font-bold ml-3">
+                <Button
+                  className="outline-1 px-7"
+                  href={`/case-study?name=${caseStudyContent[current].id}`}
                 >
-                  <ChevronLeft size={20} strokeWidth={3} />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="w-10 h-10 rounded-full border border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
-                  aria-label="Next Slide"
-                >
-                  <ChevronRight size={20} strokeWidth={3} />
-                </button>
+                  <ShinyText text="Know More" speed={3} />
+                </Button>
+                <div className="flex space-x-4 ml-2 mt-5">
+                  <button
+                    onClick={prevSlide}
+                    className="w-10 h-10 rounded-full border font-bold border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
+                    aria-label="Previous Slide"
+                  >
+                    <ChevronLeft size={20} strokeWidth={3} />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="w-10 h-10 rounded-full border border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
+                    aria-label="Next Slide"
+                  >
+                    <ChevronRight size={20} strokeWidth={3} />
+                  </button>
+                </div>
               </div>
-              <Button
-                className="outline-1 px-7"
-                href={`/case-study?name=${caseStudyContent[current].id}`}
-              >
-                <ShinyText text="Know More" speed={3} />
-              </Button>
             </div>
           </div>
         </div>
         {/* Right: Image */}
-        <div className="hidden lg:block w-[600px] h-auto">
+
+        <div className="hidden md:block absolute right-0   z-0 w-[600px] h-auto">
           <Image
             src={sample}
             alt="Case study image"

@@ -165,7 +165,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Fixed width container for content below hero */}
-      <div className="mx-auto" style={{ width: "70rem", maxWidth: "100%" }}>
+      <div className="">
         {/* Featured Case Studies */}
         <CaseStudyCarousel />
       </div>
