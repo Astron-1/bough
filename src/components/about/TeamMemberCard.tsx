@@ -46,12 +46,11 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
             backgroundImage: `url(${image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            height: "25rem"
           }}
           aria-label={alt || `${name}, ${title}`}
         />
       ) : (
-        <div className="aspect-square w-full bg-blue-100 flex items-center justify-center transition-transform duration-500 ease-in-out group-hover:scale-105" style={{ height: "21rem" }}>
+        <div className="aspect-square w-full bg-blue-100 flex items-center justify-center transition-transform duration-500 ease-in-out group-hover:scale-105">
           <PlaceholderImage />
         </div>
       )}
@@ -60,7 +59,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
 
   // Entire card with image linking to profile and name/title below
   return (
-    <div className="flex flex-col items-center" style={cardStyle}>
+    <div className="flex flex-col items-start" style={cardStyle}>
       {/* Image always links to profile */}
       <Link 
         href={`/team/${id}`}
@@ -68,9 +67,9 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
       >
         <ImageContent />
         
-        {/* Fixed class name to ensure it's always the same between server and client */}
-        <div className="text-center mt-4 w-full transition-all duration-500">
-          <div className="flex items-center justify-between">
+        {/* Content below image */}
+        <div className="mt-4 w-full transition-all duration-500">
+          <div className="flex items-start justify-between">
             <div className="text-left">
               <Text 
                 type={Font.GARAMOND} 
@@ -86,17 +85,18 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
               </Text>
             </div>
             
-            {/* LinkedIn icon in separate column */}
+            {/* LinkedIn icon - improved styling */}
             {linkedIn && (
               <a 
                 href={linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-[#0074FF] transition-colors duration-300"
+                className="ml-2 bg-[#0A66C2] hover:bg-[#004182] text-white p-1.5 rounded transition-colors duration-300 flex items-center justify-center"
                 aria-label={`View ${name}'s LinkedIn profile`}
+                style={{ minWidth: "28px", height: "28px" }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
               </a>
             )}

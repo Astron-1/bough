@@ -27,14 +27,14 @@ const TeamSection: React.FC<TeamSectionProps> = ({
   return (
     <div
       id="meet-the-team"
-      className="relative z-10 py-16 md:py-20 px-4 sm:px-6 justify-center text-center lg:px-8"
+      className="relative z-10 py-16 md:py-20 px-4 sm:px-6 lg:px-8"
       style={figmaSectionContainer()}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
+        {/* Section Title - Changed to text-left */}
         <Text
           type={Font.GARAMOND}
-          className="text-4xl md:text-5xl font-semibold text-black mb-12 md:mb-16"
+          className="text-4xl md:text-5xl font-semibold text-black mb-12 md:mb-16 text-left"
         >
           {title}
         </Text>
@@ -67,10 +67,10 @@ const TeamSection: React.FC<TeamSectionProps> = ({
             </>
           )}
 
-          {/* Fixed grid layout with exactly 3 cards per row */}
-          <div className="w-full overflow-hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+          {/* Grid layout with responsive columns and proper gap values according to Figma dimensions */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[9.56rem] gap-x-[3.48rem]">
             {members.map((member) => (
-              <div key={member.id} className="flex justify-center items-start">
+              <div key={member.id} className="flex">
                 <TeamMemberCard
                   id={member.id}
                   name={member.name}
@@ -84,7 +84,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           </div>
         </div>
 
-        {/* Description (optional) - moved to bottom */}
+        {/* Description (optional) - kept left-aligned */}
         {description && (
           <div className="max-w-3xl text-left mt-16 mb-8">
             <Text type={Font.SOURCE_SANS} className="text-lg text-black/80">

@@ -20,14 +20,12 @@ export default function BoughServices() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [animate, setAnimate] = useState<boolean>(false);
-  const [isInView, setIsInView] = useState<boolean>(false);
 
   useEffect(() => {
     // Check if section is in viewport
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setIsInView(true);
           // Start animation when component is in view
           setTimeout(() => {
             setAnimate(true);
@@ -49,7 +47,7 @@ export default function BoughServices() {
   }, []);
 
   return (
-    <div className="relative w-full py-16" style={{ minHeight: "1200px" }}>
+    <div className="relative w-full py-16" style={{ minHeight: "1600px" }}>
       {/* Service Cards Container with embedded SVG path */}
       <div ref={sectionRef} className="relative flex flex-col gap-20 w-full">
         {/* SVG Path connecting the service cards */}
@@ -58,7 +56,7 @@ export default function BoughServices() {
           animate={animate}
           pathColor="#0066FF"
           strokeWidth={3}
-          showBall={isInView}
+          showBall={true}
         />
 
         {services.map((service, i) => {

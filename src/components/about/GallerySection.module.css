@@ -2,9 +2,11 @@
 .galleryContainer {
   overflow: hidden;
   padding-top: 2rem;
-  padding-bottom: 4.5rem;
+  padding-bottom: 5rem;
   position: relative;
   width: 100%;
+  max-width: 90vw;
+  margin: 0 auto;
 }
 
 /* Override Swiper styles for our theme */
@@ -17,7 +19,7 @@
 .galleryContainer :global(.gallery-slide) {
   width: auto;
   transition: transform 0.5s;
-  max-width: 70%;
+  max-width: 85%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -25,7 +27,7 @@
 
 @media (min-width: 768px) {
   .galleryContainer :global(.gallery-slide) {
-    max-width: 550px;
+    max-width: 700px;
   }
 }
 
@@ -85,23 +87,25 @@
 .imageWrapper {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 116, 255, 0.1);
   transition: all 0.4s ease;
-  height: 300px;
+  aspect-ratio: 16/9;
   width: 100%;
+  background-color: transparent;
 }
 
 @media (min-width: 768px) {
   .imageWrapper {
-    height: 400px;
-    max-width: 600px;
+    height: auto;
+    min-width: 650px;
+    max-width: 850px;
   }
 }
 
 .imageWrapper:hover {
-  transform: scale(1.03);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+  box-shadow: 0 12px 25px rgba(0, 116, 255, 0.15);
 }
 
 .caption {

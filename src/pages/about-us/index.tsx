@@ -17,7 +17,7 @@ export const teamMembers = [
     title: "Founder & Chief Executive Officer",
     image: "/profile/Rohit.jpg",
     alt: "Rohit Qamra - Founder & CEO",
-    linkedIn: "https://www.linkedin.com/in/rohit-qamra/"
+    linkedIn: "https://www.linkedin.com/in/rohitqamra/"
   },
   {
     id: "ratan-postwalla",
@@ -25,7 +25,7 @@ export const teamMembers = [
     title: "Chief People Officer",
     image: "/profile/Ratan.png",
     alt: "Ratan Postwalla - Chief People Officer",
-    linkedIn: "https://www.linkedin.com/in/ratan-postwalla/"
+    linkedIn: "https://www.linkedin.com/in/ratanpostwalla/"
   },
   {
     id: "akshendra-sahi",
@@ -33,7 +33,7 @@ export const teamMembers = [
     title: "Senior Manager",
     image: "/profile/Akshendra%20Sahi.jpg",
     alt: "Akshendra Sahi - Senior Manager",
-    linkedIn: "https://www.linkedin.com/in/akshendra-sahi/"
+    linkedIn: "https://www.linkedin.com/in/akshendra-sahi-a4883221/"
   },
   {
     id: "sanya-singh",
@@ -41,7 +41,7 @@ export const teamMembers = [
     title: "Senior Manager",
     image: "/profile/Sanya%20Singh.JPG",
     alt: "Sanya Singh - Senior Manager",
-    linkedIn: "https://www.linkedin.com/in/sanya-singh/"
+    linkedIn: "https://www.linkedin.com/in/sanya-singh-55635a35/"
   },
   {
     id: "jason-polyzou",
@@ -49,7 +49,7 @@ export const teamMembers = [
     title: "Manager",
     image: "/profile/Jason%20Polyzou.jpg",
     alt: "Jason Polyzou - Manager",
-    linkedIn: "https://www.linkedin.com/in/jason-polyzou/"
+    linkedIn: "https://www.linkedin.com/in/jason-polyzou-49382450/"
   },
   {
     id: "abhishek-anand",
@@ -73,7 +73,7 @@ export const teamMembers = [
     title: "Manager",
     image: "/profile/Firdaush%20Ansari.jpg",
     alt: "Firdaush Ansari - Manager",
-    linkedIn: "https://www.linkedin.com/in/firdaush-ansari/"
+    linkedIn: "https://www.linkedin.com/in/firdaush-ansari-12ba08120/"
   },
   {
     id: "aditya-sharma",
@@ -94,8 +94,9 @@ export const teamMembers = [
   {
     id: "puneeta-puri",
     name: "Puneeta Puri",
+    image: "/profile/Puneeta%20Puri.png",
     title: "ESG Advisor",
-    linkedIn: "https://www.linkedin.com/in/puneeta-puri/"
+    linkedIn: "https://in.linkedin.com/in/ca-puneeta-puri-35208b9"
   },
   {
     id: "rohan-budhraja",
@@ -103,7 +104,7 @@ export const teamMembers = [
     title: "Manager",
     image: "/profile/Rohan%20Budhraja.jpg",
     alt: "Rohan Budhraja - Manager",
-    linkedIn: "https://www.linkedin.com/in/rohan-budhraja/"
+    linkedIn: "https://www.linkedin.com/in/rohan-budhraja-97759514/"
   },
   {
     id: "saket-gupta",
@@ -111,7 +112,7 @@ export const teamMembers = [
     title: "Senior Consultant",
     image: "/profile/Saket%20Gupta_Senior%20Consultant.jpeg",
     alt: "Saket Gupta - Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/saket-gupta/"
+    linkedIn: ""
   },
   {
     id: "khushi-singh",
@@ -119,7 +120,7 @@ export const teamMembers = [
     title: "Associate Consultant",    
     image: "/profile/Khushi.JPG",
     alt: "Khushi Singh - Associate Consultant",
-    linkedIn: "https://www.linkedin.com/in/khushi-singh/"
+    linkedIn: "https://www.linkedin.com/in/khushi-singh-400081236/"
   },
   {
     id: "rishabh-singhal",
@@ -127,7 +128,7 @@ export const teamMembers = [
     title: "Manager",
     image: "/profile/Rishabh.jpeg",
     alt: "Rishabh Singhal - Manager",
-    linkedIn: "https://www.linkedin.com/in/rishabh-singhal/"
+    linkedIn: "https://www.linkedin.com/in/rishabh-singhal-497686aa/"
   },
   {
     id: "anoushka-bhati",
@@ -143,7 +144,7 @@ export const teamMembers = [
     title: "Associate",
     image: "/profile/Sakshi.jpg",
     alt: "Sakshi Vaishnav - Associate",
-    linkedIn: "https://www.linkedin.com/in/sakshi-vaishnav/"
+    linkedIn: "https://in.linkedin.com/in/sakshi-vaishnav2003"
   },
   {
     id: "saurabh-sharma",
@@ -151,14 +152,14 @@ export const teamMembers = [
     title: "Senior Consultant",
     image: "/profile/Saurabh.jpeg",
     alt: "Saurabh Sharma - Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/saurabh-sharma/"
+    linkedIn: ""
   },
   {
     id: "khushbu-singh",
     name: "Khushbu Singh",
     image: "/profile/Khushbu%20Singh.png",
     title: "Senior Visual Communications Designer",
-    linkedIn: "https://www.linkedin.com/in/khushbu-singh/"
+    linkedIn: "https://www.linkedin.com/in/khushbu-singh-8b221919b/"
   },
   {
     id: "uddeshya-pal",
@@ -166,7 +167,7 @@ export const teamMembers = [
     title: "Senior Consultant",
     image: "/profile/Uddeshya%20@%20Bough%20Consulting%20LLC.url.jpg",
     alt: "Uddeshya Pal - Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/uddeshya-pal/"
+    linkedIn: "https://www.linkedin.com/in/uddeshya-pal-279527149"
   },
   {
     id: "ridhima-arora",
@@ -174,7 +175,7 @@ export const teamMembers = [
     title: "HR Business Partner",
     image: "/profile/Ridhima%201.jpeg",
     alt: "Ridhima Arora - HR Business Partner",
-    linkedIn: "https://www.linkedin.com/in/ridhima-arora/"
+    linkedIn: "https://www.linkedin.com/in/arora-ridhima/"
   }
 ];
 

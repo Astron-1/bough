@@ -55,7 +55,7 @@ const ServicePath: React.FC<ServicePathProps> = ({
   const y2 = card2Top + verticalOffset;
   const y3 = card3Top + verticalOffset;
   const y4 = card4Top + verticalOffset;
-  const y5 = 1499 + verticalOffset; // Bottom position
+  const y5 = 1550 + verticalOffset; // Increased bottom position to ensure full path is drawn and colored
 
   // Path definition with smoother curves
   const pathD = `
@@ -157,13 +157,13 @@ const ServicePath: React.FC<ServicePathProps> = ({
 
   // Improved scroll handler with smooth animation using requestAnimationFrame
   useEffect(() => {
-    if (!showBall || !pathRef.current) return;
+    if (!pathRef.current) return;
 
     const handleScroll = () => {
-      // Only update if we're in the viewport
       if (isInViewport()) {
+        // Make ball visible when in viewport
         setIsVisible(true);
-
+        
         // Use requestAnimationFrame for smoother animation
         if (animationFrameId.current) {
           cancelAnimationFrame(animationFrameId.current);
@@ -191,6 +191,7 @@ const ServicePath: React.FC<ServicePathProps> = ({
           setBallPosition(position);
         });
       } else {
+        // Set visibility to false when not in viewport
         setIsVisible(false);
       }
     };
@@ -291,6 +292,8 @@ const ServicePath: React.FC<ServicePathProps> = ({
           strokeLinecap="round"
           strokeOpacity="0.15"
           fill="none"
+          strokeDasharray="10000"
+          strokeDashoffset="0"
         />
 
         {/* Main path with improved styling */}
@@ -356,7 +359,7 @@ const ServicePath: React.FC<ServicePathProps> = ({
       <style jsx global>{`
         @keyframes drawPath {
           0% {
-            stroke-dashoffset: 5000;
+            stroke-dashoffset: 10000;
           }
           100% {
             stroke-dashoffset: 0;
@@ -364,9 +367,9 @@ const ServicePath: React.FC<ServicePathProps> = ({
         }
 
         .path-animation {
-          stroke-dasharray: 5000;
-          stroke-dashoffset: 5000;
-          animation: drawPath 2s ease-out forwards;
+          stroke-dasharray: 10000;
+          stroke-dashoffset: 10000;
+          animation: drawPath 3s ease-out forwards;
         }
       `}</style>
     </div>

@@ -30,39 +30,21 @@ interface GallerySectionProps {
 const fallbackImages: GalleryItem[] = [
   {
     id: 1,
-    imagePath: "/galleryShowcase/WhatsApp Image 2025-04-29 at 15.30.33_fd052234.jpg",
+    imagePath: "/bough.png",
     altText: "Team collaboration session",
     caption: "Team collaboration"
   },
   {
     id: 2,
-    imagePath: "/galleryShowcase/WhatsApp Image 2025-04-29 at 15.29.20_2fb6715a.jpg",
+    imagePath: "/bough.png",
     altText: "Company office space",
     caption: "Our workspace"
   },
   {
     id: 3,
-    imagePath: "/galleryShowcase/WhatsApp Image 2025-04-29 at 15.29.18_1b80b0d4.jpg",
+    imagePath: "/bough.png",
     altText: "Team event",
     caption: "Community engagement"
-  },
-  {
-    id: 4,
-    imagePath: "/galleryShowcase/WhatsApp Image 2025-04-29 at 14.57.22_01f59abc.jpg",
-    altText: "Team building event",
-    caption: "Team building"
-  },
-  {
-    id: 5,
-    imagePath: "/galleryShowcase/WhatsApp Image 2025-04-29 at 14.29.57_06c97f4c.jpg",
-    altText: "Team meeting",
-    caption: "Innovation sessions"
-  },
-  {
-    id: 6,
-    imagePath: "/galleryShowcase/WhatsApp Image 2025-04-29 at 14.28.47_d9d9da00.jpg",
-    altText: "Company celebration",
-    caption: "Celebrating success"
   }
 ];
 
@@ -183,8 +165,19 @@ const GallerySection: React.FC<GallerySectionProps> = ({
             effect="coverflow"
             grabCursor={true}
             centeredSlides={true}
-            loop={true}
-            slidesPerView={'auto'}
+            loop={galleryImages.length >= 3}
+            slidesPerView={1}
+            breakpoints={{
+              640: {
+                slidesPerView: Math.min(2, galleryImages.length),
+              },
+              768: {
+                slidesPerView: Math.min(2.5, galleryImages.length),
+              },
+              1024: {
+                slidesPerView: Math.min(3, galleryImages.length),
+              },
+            }}
             spaceBetween={20}
             coverflowEffect={{
               rotate: 0,
@@ -216,7 +209,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
                     alt={image.altText}
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 600px"
-                    className="object-cover"
+                    className="object-cover rounded-lg"
                     priority={image.id <= 2}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
