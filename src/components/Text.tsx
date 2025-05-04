@@ -14,13 +14,9 @@ type TextProps = {
 export default function Text({ type, children, className = "" }: TextProps) {
   let fontClass;
   if (type === Font.GARAMOND) {
-    fontClass = { fontFamily: "font-primary" };
+    fontClass = "font-[EB_Garamond]";
   } else {
-    fontClass = { fontFamily: "font-secondary" };
+    fontClass = "font-[source-sans]";
   }
-  return (
-    <div className={`${className} `} style={fontClass}>
-      {children}
-    </div>
-  );
+  return <div className={`${className} ` + fontClass}>{children}</div>;
 }

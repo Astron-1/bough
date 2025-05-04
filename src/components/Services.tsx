@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
 import ServicePath from "./ServicePath";
@@ -32,36 +34,31 @@ export default function BoughServices() {
   return (
     <div className="relative w-full py-16" style={{ minHeight: "1200px" }}>
       {/* Service Cards Container with embedded SVG path */}
-    <div
-      ref={sectionRef}
-        className="relative flex flex-col gap-20 w-full"
-    >
+      <div ref={sectionRef} className="relative flex flex-col gap-20 w-full">
         {/* SVG Path connecting the service cards */}
-        <ServicePath 
-          animate={animate} 
-          pathColor="#0066FF" 
-          strokeWidth={3} 
-        />
-        
+        <ServicePath animate={animate} pathColor="#0066FF" strokeWidth={3} />
+
         {services.map((service, i) => {
           const isEven = i % 2 === 0;
-          
+
           return (
-        <div
-          key={service.name}
-          ref={(el) => {
-            cardRefs.current[i] = el;
-          }}
-              className={`w-full flex ${isEven ? 'justify-end' : 'justify-start'} relative z-10`}
-        >
-          <div className="w-[95%] md:w-[90%] lg:w-[85%] xl:w-[1010px]">
-                <ServiceCard 
-                  image={service.image} 
-                  serviceType={service.name} 
+            <div
+              key={service.name}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className={`w-full flex ${
+                isEven ? "justify-end" : "justify-start"
+              } relative z-10`}
+            >
+              <div className="w-[95%] md:w-[90%] lg:w-[85%] xl:w-[1010px]">
+                <ServiceCard
+                  image={service.image}
+                  serviceType={service.name}
                   position={isEven ? "right" : "left"}
                 />
-          </div>
-        </div>
+              </div>
+            </div>
           );
         })}
       </div>
