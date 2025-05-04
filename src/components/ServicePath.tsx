@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 
 interface ServicePathProps {
   animate?: boolean;
@@ -21,37 +23,41 @@ interface ServicePathProps {
 
 const ServicePath: React.FC<ServicePathProps> = ({
   animate = false,
-  className = '',
-  pathColor = '#0066FF',
+  className = "",
+  pathColor = "#0066FF",
   strokeWidth = 70,
   verticalOffset = 0,
-  card1LeftSpace = 242,    // Controls left side space of first card
-  card2RightSpace = 1061,  // Controls right side curve of second card
-  card3LeftSpace = 242,    // Controls left side space of third card
-  card4RightSpace = 1061,  // Controls right side curve of fourth card
-  card1Top = 11,           // Controls top position of first card
-  card2Top = 369,          // Controls top position of second card
-  card3Top = 757,          // Controls top position of third card
-  card4Top = 1145,         // Controls top position of fourth card
-  showBall = true,         // Controls if ball is visible
-  ballColor = '#0066FF',   // Ball color
-  ballSize = 40            // Ball size in pixels - increased for better visibility
+  card1LeftSpace = 260,
+  card2RightSpace = 1020,
+  card3LeftSpace = 270,
+  card4RightSpace = 1030,
+  card1Top = -10,
+  card2Top = 380,
+  card3Top = 757,
+  card4Top = 1145,
+  showBall = true,
+  ballColor = "#0066FF",
+  ballSize = 40,
 }) => {
-  const [ballPosition, setBallPosition] = useState({ x: 1283, y: card1Top + verticalOffset });
+  const [ballPosition, setBallPosition] = useState({
+    x: 1283,
+    y: card1Top + verticalOffset,
+  });
+  const [isVisible, setIsVisible] = useState(false);
   const pathRef = useRef<SVGPathElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const ballRef = useRef<SVGCircleElement>(null);
+  const lastScrollY = useRef(0);
+  const animationFrameId = useRef<number | null>(null);
+
   // Vertical spacing calculations with offsets
   const y1 = card1Top + verticalOffset;
   const y2 = card2Top + verticalOffset;
   const y3 = card3Top + verticalOffset;
   const y4 = card4Top + verticalOffset;
   const y5 = 1499 + verticalOffset; // Bottom position
-  
-  // Path classes for animation
-  const pathClass = animate ? 'path-animation' : '';
 
-  // Path definition - we keep it as a variable to use it for both the path and ball positioning
+  // Path definition with smoother curves
   const pathD = `
     M1283 ${y1} 
     H300.465
@@ -76,128 +82,145 @@ const ServicePath: React.FC<ServicePathProps> = ({
   // Function to calculate ball position at a given percentage along the path
   const calculateBallPosition = (percentage: number) => {
     if (!pathRef.current) return { x: 0, y: 0 };
-    
+
     // Ensure percentage is between 0 and 1
     const safePercentage = Math.max(0, Math.min(1, percentage));
-    
+
     // Get path length and calculate position
     const pathLength = pathRef.current.getTotalLength();
     const point = pathRef.current.getPointAtLength(pathLength * safePercentage);
     return { x: point.x, y: point.y };
   };
 
-  // Fixed anchor points throughout the path - adjusted for better alignment with cards
+  // Improved fixed anchor points with better distribution
   const fixedPositions = [
-    { scrollPercent: 0, pathPercent: 0 },       // Start
-    { scrollPercent: 0.15, pathPercent: 0.20 }, // First card middle
-    { scrollPercent: 0.25, pathPercent: 0.33 }, // First to second transition
-    { scrollPercent: 0.4, pathPercent: 0.50 },  // Second card middle
-    { scrollPercent: 0.5, pathPercent: 0.62 },  // Second to third transition
-    // Adjusted third card positioning to ensure ball is in middle of card
-    { scrollPercent: 0.6, pathPercent: 0.70 },  // Third card early
-    { scrollPercent: 0.65, pathPercent: 0.75 }, // Third card middle
-    { scrollPercent: 0.7, pathPercent: 0.80 },  // Third card late
-    // Adjusted fourth card positioning for better visibility
-    { scrollPercent: 0.75, pathPercent: 0.82 }, // Third to fourth transition
-    { scrollPercent: 0.85, pathPercent: 0.90 }, // Fourth card middle
-    { scrollPercent: 0.9, pathPercent: 0.92 },  // Fourth card middle-late
-    { scrollPercent: 0.95, pathPercent: 0.96 }, // Fourth card late
-    { scrollPercent: 1, pathPercent: 1 }        // End
+    { scrollPercent: 0, pathPercent: 0 },
+    { scrollPercent: 0.1, pathPercent: 0.15 },
+    { scrollPercent: 0.2, pathPercent: 0.25 },
+    { scrollPercent: 0.3, pathPercent: 0.35 },
+    { scrollPercent: 0.4, pathPercent: 0.45 },
+    { scrollPercent: 0.5, pathPercent: 0.55 },
+    { scrollPercent: 0.6, pathPercent: 0.65 },
+    { scrollPercent: 0.7, pathPercent: 0.75 },
+    { scrollPercent: 0.8, pathPercent: 0.85 },
+    { scrollPercent: 0.9, pathPercent: 0.95 },
+    { scrollPercent: 1, pathPercent: 1 },
   ];
 
-  // Function to check if we're in the third or fourth card region and adjust positioning
-  const getSpecialCardAdjustment = (scrollPercent: number) => {
-    // Add extra adjustment for third card middle
-    if (scrollPercent >= 0.55 && scrollPercent <= 0.7) {
-      return 0.09; // 15% boost for the third card
-    }
-    
-    // Add extra adjustment for fourth card to keep ball with visible content
-    if (scrollPercent >= 0.75) {
-      return 0.15; // 15% boost for the fourth card
-    }
-    
-    return 0;
-  };
-
-  // Function to map scroll percentage to path percentage using fixed positions
+  // Function to map scroll percentage to path percentage using fixed positions with easing
   const mapScrollToPath = (scrollPercent: number) => {
     // Find the two fixed positions that our scroll percentage falls between
     let lower = fixedPositions[0];
     let upper = fixedPositions[fixedPositions.length - 1];
-    
+
     for (let i = 0; i < fixedPositions.length - 1; i++) {
-      if (scrollPercent >= fixedPositions[i].scrollPercent && 
-          scrollPercent <= fixedPositions[i + 1].scrollPercent) {
+      if (
+        scrollPercent >= fixedPositions[i].scrollPercent &&
+        scrollPercent <= fixedPositions[i + 1].scrollPercent
+      ) {
         lower = fixedPositions[i];
         upper = fixedPositions[i + 1];
         break;
       }
     }
-    
-    // Interpolate between the two fixed positions
+
+    // Interpolate between the two fixed positions with easing
     const scrollRange = upper.scrollPercent - lower.scrollPercent;
     const pathRange = upper.pathPercent - lower.pathPercent;
-    
-    // Calculate the percentage of the way between lower and upper
-    const percentBetween = scrollRange === 0 
-      ? 0 
-      : (scrollPercent - lower.scrollPercent) / scrollRange;
-    
+
+    // Calculate the percentage with easing function (ease-out-cubic)
+    const percentBetween =
+      scrollRange === 0
+        ? 0
+        : (scrollPercent - lower.scrollPercent) / scrollRange;
+
+    // Apply easing function (ease-out-cubic: t*(2-t))
+    const easedPercent = percentBetween * (2 - percentBetween);
+
     // Calculate the path percentage
-    let result = lower.pathPercent + (percentBetween * pathRange);
-    
-    // Apply special adjustments for problematic regions
-    result += getSpecialCardAdjustment(scrollPercent);
-    
+    const result = lower.pathPercent + easedPercent * pathRange;
+
     // Ensure result stays in bounds
     return Math.min(Math.max(result, 0), 1);
   };
 
-  // Improved scroll handler with better card-specific handling
+  // Check if element is in viewport
+  const isInViewport = () => {
+    if (!containerRef.current) return false;
+    const rect = containerRef.current.getBoundingClientRect();
+    return (
+      rect.top <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.bottom >= 0
+    );
+  };
+
+  // Improved scroll handler with smooth animation using requestAnimationFrame
   useEffect(() => {
     if (!showBall || !pathRef.current) return;
-    
+
     const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      const scrollY = window.scrollY;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      
-      // Calculate scroll percentage
-      const scrollPercentage = Math.min(Math.max(scrollY / documentHeight, 0), 1);
-      
-      // Map scroll percentage to path percentage using our fixed positions
-      const pathPercentage = mapScrollToPath(scrollPercentage);
-      
-      // Get position on path
-      const position = calculateBallPosition(pathPercentage);
-      setBallPosition(position);
+      // Only update if we're in the viewport
+      if (isInViewport()) {
+        setIsVisible(true);
+
+        // Use requestAnimationFrame for smoother animation
+        if (animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+        }
+
+        animationFrameId.current = requestAnimationFrame(() => {
+          const windowHeight = window.innerHeight;
+          const scrollY = window.scrollY;
+          lastScrollY.current = scrollY;
+
+          const documentHeight =
+            document.documentElement.scrollHeight - windowHeight;
+
+          // Calculate scroll percentage
+          const scrollPercentage = Math.min(
+            Math.max(scrollY / documentHeight, 0),
+            1
+          );
+
+          // Map scroll percentage to path percentage with easing
+          const pathPercentage = mapScrollToPath(scrollPercentage);
+
+          // Get position on path
+          const position = calculateBallPosition(pathPercentage);
+          setBallPosition(position);
+        });
+      } else {
+        setIsVisible(false);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
     // Call initially and also after a short delay to ensure path is loaded
     handleScroll();
     setTimeout(handleScroll, 200);
-    setTimeout(handleScroll, 500);
-    setTimeout(handleScroll, 1000);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showBall]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`absolute z-50 pointer-events-none ${className}`}
       style={{
-        position: 'absolute',
+        position: "absolute",
         top: -30,
         left: 0,
-        width: '100%',
-        height: '100%'
+        width: "100%",
+        height: "100%",
       }}
     >
       <svg
@@ -207,93 +230,147 @@ const ServicePath: React.FC<ServicePathProps> = ({
         preserveAspectRatio="none"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ overflow: 'visible' }}
+        style={{ overflow: "visible" }}
       >
         {/* Define filters and animations */}
         <defs>
-          {/* Glow filter for the ball */}
+          {/* Improved glow filter for the ball */}
           <filter id="ball-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feFlood floodColor={ballColor} floodOpacity="0.7" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feComposite in="SourceGraphic" in2="glow" operator="over" />
           </filter>
-          
-          Ball pulse animation
-          <radialGradient id="ballGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+
+          {/* Improved ball gradient */}
+          <radialGradient
+            id="ballGradient"
+            cx="50%"
+            cy="50%"
+            r="50%"
+            fx="30%"
+            fy="30%"
+          >
             <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="20%" stopColor={ballColor} />
+            <stop offset="40%" stopColor={ballColor} />
             <stop offset="100%" stopColor="#0044BB" />
           </radialGradient>
-          
+
+          {/* Path glow effect */}
+          <filter id="path-glow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feFlood floodColor={pathColor} floodOpacity="0.3" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feComposite in="SourceGraphic" in2="glow" operator="over" />
+          </filter>
+
           {/* Trail effect for the ball */}
-          <filter id="trail-effect" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-            <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="trail" />
+          <filter
+            id="trail-effect"
+            x="-100%"
+            y="-100%"
+            width="300%"
+            height="300%"
+          >
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+            <feColorMatrix
+              in="blur"
+              type="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+              result="trail"
+            />
             <feComposite in="SourceGraphic" in2="trail" operator="over" />
           </filter>
         </defs>
-        
-        {/* Background path with extra thickness */}
+
+        {/* Background path with subtle glow */}
         <path
           d={pathD}
           stroke={pathColor}
-          strokeWidth={strokeWidth * 2}
-          strokeDasharray="none"
+          strokeWidth={strokeWidth * 1.5}
           strokeLinecap="round"
-          strokeOpacity="0.9"
-          filter="none"
+          strokeOpacity="0.15"
           fill="none"
         />
-        
-        {/* Main path with subtle shadow instead of glow */}
+
+        {/* Main path with improved styling */}
         <path
           ref={pathRef}
           d={pathD}
           stroke={pathColor}
           strokeWidth={strokeWidth}
-          strokeDasharray="none"
           strokeLinecap="round"
-          strokeOpacity="1"
-          strokeMiterlimit="4"
-          filter="drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))"
+          strokeOpacity="0.8"
+          filter="url(#path-glow)"
           fill="none"
-          className={pathClass}
+          className={animate ? "path-animation" : ""}
           style={{
-            vectorEffect: 'non-scaling-stroke'
+            vectorEffect: "non-scaling-stroke",
           }}
         />
-        
-        {/* Ball trail effect */}
-        {showBall && (
-          <circle
-            cx={ballPosition.x}
-            cy={ballPosition.y}
-            r={ballSize * 0.6}
-            fill="rgba(0, 102, 255, 0.3)"
-            filter="url(#trail-effect)"
-            style={{
-              transition: 'all 0.3s ease-out',
-              transformOrigin: 'center'
-            }}
-          />
-        )}
-        
-        {/* Ball with pulsing effect */}
-        {showBall && (
-          <circle
-            cx={ballPosition.x}
-            cy={ballPosition.y}
-            r={ballSize / 2}
-            fill="url(#ballGradient)"
-            filter="url(#ball-glow)"
-            style={{
-              transition: 'all 0.15s ease-out',
-              transformOrigin: 'center'
-            }}
-          />
+
+        {/* Ball with trail and glow effects */}
+        {showBall && isVisible && (
+          <>
+            {/* Ball trail/shadow effect */}
+            <circle
+              cx={ballPosition.x}
+              cy={ballPosition.y}
+              r={ballSize * 0.7}
+              fill={`${ballColor}40`} // Semi-transparent version of ball color
+              filter="url(#trail-effect)"
+              style={{
+                transition: "all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)",
+              }}
+            />
+
+            {/* Main ball */}
+            <circle
+              ref={ballRef}
+              cx={ballPosition.x}
+              cy={ballPosition.y}
+              r={ballSize / 2}
+              fill="url(#ballGradient)"
+              filter="url(#ball-glow)"
+              style={{
+                transition: "all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                transformOrigin: "center",
+              }}
+            />
+
+            {/* Inner highlight for 3D effect */}
+            <circle
+              cx={ballPosition.x - ballSize * 0.15}
+              cy={ballPosition.y - ballSize * 0.15}
+              r={ballSize * 0.2}
+              fill="rgba(255, 255, 255, 0.7)"
+              style={{
+                transition: "all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)",
+              }}
+            />
+          </>
         )}
       </svg>
+
+      {/* CSS animations */}
+      <style jsx global>{`
+        @keyframes drawPath {
+          0% {
+            stroke-dashoffset: 5000;
+          }
+          100% {
+            stroke-dashoffset: 0;
+          }
+        }
+
+        .path-animation {
+          stroke-dasharray: 5000;
+          stroke-dashoffset: 5000;
+          animation: drawPath 2s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default ServicePath; 
+export default ServicePath;

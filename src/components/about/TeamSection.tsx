@@ -10,26 +10,29 @@ interface TeamSectionProps {
   showMeasurements?: boolean;
 }
 
-const TeamSection: React.FC<TeamSectionProps> = ({ 
-  title, 
-  description, 
+const TeamSection: React.FC<TeamSectionProps> = ({
+  title,
+  description,
   members,
-  showMeasurements = false
+  showMeasurements = false,
 }) => {
   // Exact spacing measurements from Figma (kept for measurement indicators)
   const spacing = {
     horizontalGap: "3.48rem", // Exact from Figma
-    verticalGap: "9.56rem",   // Exact from Figma
-    leftMargin: "3.9rem",     // Exact from Figma
-    rightMargin: "4.1rem"     // Exact from Figma
+    verticalGap: "9.56rem", // Exact from Figma
+    leftMargin: "3.9rem", // Exact from Figma
+    rightMargin: "4.1rem", // Exact from Figma
   };
 
   return (
-    <div className="relative z-10 py-16 md:py-20 px-4 sm:px-6 lg:px-8" style={figmaSectionContainer()}>
+    <div
+      className="relative z-10 py-16 md:py-20 px-4 sm:px-6 justify-center text-center lg:px-8"
+      style={figmaSectionContainer()}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
-        <Text 
-          type={Font.GARAMOND} 
+        <Text
+          type={Font.GARAMOND}
           className="text-4xl md:text-5xl font-semibold text-black mb-12 md:mb-16"
         >
           {title}
@@ -66,11 +69,8 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           {/* Fixed grid layout with exactly 3 cards per row */}
           <div className="w-full overflow-hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
             {members.map((member) => (
-              <div 
-                key={member.id} 
-                className="flex justify-start items-start"
-              >
-                <TeamMemberCard 
+              <div key={member.id} className="flex justify-center items-start">
+                <TeamMemberCard
                   id={member.id}
                   name={member.name}
                   title={member.title}
@@ -82,7 +82,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
             ))}
           </div>
         </div>
-        
+
         {/* Description (optional) - moved to bottom */}
         {description && (
           <div className="max-w-3xl text-left mt-16 mb-8">
@@ -96,4 +96,4 @@ const TeamSection: React.FC<TeamSectionProps> = ({
   );
 };
 
-export default TeamSection; 
+export default TeamSection;

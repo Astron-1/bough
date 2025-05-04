@@ -1,3 +1,8 @@
+import AccountingImage from "../../public/AccountingImage.jpeg";
+import ESGImage from "../../public/ESGImage.jpeg";
+import RiskImage from "../../public/RiskImage.jpeg";
+import TransformationImage from "../../public/TransformationImage.jpeg";
+
 export const serviceContent = {
   Accounting: {
     topHeading: "Record, recognize, and report, confidently",
@@ -10,9 +15,36 @@ export const serviceContent = {
         "We dive deep into your toughest accounting challenges, offering hands-on expertise to ensure your finance and accounting operations run smoothly and with integrity.",
       contentHeading2:
         "From implementing complex accounting standards to managing risks and uncertainties, we don’t just consult—we roll up our sleeves and work alongside you. Our goal is straightforward: to handle the complexities of accounting and regulations so you can stay focused on confidently moving your business forward.",
-      offerings:
-        "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential",
+      offerings: {
+        subheading:
+          "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential",
+        sections: [
+          {
+            heading: "Technical accounting and new standard implementation",
+            content:
+              "Navigate complex accounting standards with confidence. We provide expert guidance on technical accounting issues and new regulations, ensuring precise and compliant financial reporting",
+          },
+          {
+            heading: "Revenue recognition and assurance",
+            content:
+              "Simplify revenue recognition with our deep expertise in ASC 606 compliance, contract evaluations, and system implementation. We help you achieve transparency and accuracy in your revenue management processes ",
+          },
+          {
+            heading: "Accounting process improvement and optimization",
+            content:
+              "Transform your accounting operations by enhancing processes, policies, and practices. Our approach improves efficiency, ensures compliance, and builds agility, enabling your team to focus on strategic priorities. ",
+          },
+          {
+            heading: "Budgeting, forecasting, & modelling ",
+            content:
+              "Improve your financial planning processes for clearer insights and better decision-making. ",
+          },
+        ],
+      },
     },
+    heroImage: AccountingImage,
+    bottomText:
+      "Craft nimble accounting solutions that adapt to the standards and your business, alike",
   },
 
   Risk: {
@@ -26,9 +58,46 @@ export const serviceContent = {
         "We delve deep into your business to uncover and understand the full spectrum of risks you face. By identifying potential vulnerabilities early, we help you stay ahead of the curve.",
       contentHeading2:
         "Through comprehensive and cohesive risk assessments, we work to minimize exposure, optimize controls, and provide a clear, actionable path forward. With the right systems and people in place, we support your organization in managing and mitigating risks across all levels—people, processes, and technology.",
-      offerings:
-        "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential. Internal audit and co-sourcing; Enterprise risk management; SOX readiness and compliance; Vendor risk management; Operational risk and transformation; Cybersecurity risk assessment",
+      offerings: {
+        subheading:
+          "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential. Internal audit and co-sourcing; Enterprise risk management; SOX readiness and compliance; Vendor risk management; Operational risk and transformation; Cybersecurity risk assessment",
+        sections: [
+          {
+            heading: "Internal audit and co-sourcing",
+            content:
+              "Enhance the reliability and efficiency of your financial reporting and controls. Ensure internal controls reliability and compliance with financial regulations to safeguard your organization’s integrity",
+          },
+          {
+            heading: "Enterprise risk management",
+            content:
+              "Implement a holistic ERM framework that integrates risk management into your strategic decision-making processes",
+          },
+          {
+            heading: "SOX readiness and compliance",
+            content:
+              "Achieve Sarbanes-Oxley (SOX) compliance with expert guidance on internal controls and financial reporting processes",
+          },
+          {
+            heading: "Vendor risk management",
+            content:
+              "Protect your operations by effectively managing risks associated with third-party vendors, ensuring their reliability and compliance",
+          },
+          {
+            heading: "Operational risk and transformation",
+            content:
+              "Identify and mitigate operational risks while driving business transformation",
+          },
+          {
+            heading: "Cybersecurity risk assessment",
+            content:
+              "Secure your IT environment through rigorous audits that assess the effectiveness of your controls and identify potential vulnerabilities",
+          },
+        ],
+      },
     },
+    heroImage: RiskImage,
+    bottomText:
+      "Build agile and risk aware organization and transform the way you manage risk",
   },
   Transformation: {
     topHeading: "Embracing change, elevating performance",
@@ -41,9 +110,35 @@ export const serviceContent = {
         "We help CFOs and finance leaders navigate transformation by identifying inefficiencies, implementing automation, and aligning operations with future-ready goals.",
       contentHeading2:
         "Transformation isn’t a one-time act—it’s a mindset. We reduce costs, remove manual burdens, and leverage technologies like GenAI and advanced analytics to unlock your team’s full potential.",
-      offerings:
-        "Finance process reengineering, systems strategy and design, data optimization and governance, and GenAI-driven automation are at the core of our approach to scalable, intelligent transformation.",
+      offerings: {
+        subheading:
+          "Finance process reengineering, systems strategy and design, data optimization and governance, and GenAI-driven automation are at the core of our approach to scalable, intelligent transformation.",
+        sections: [
+          {
+            heading: "Finance process reengineering",
+            content:
+              "Redesign finance processes to enhance performance, compliance, and decision-making.",
+          },
+          {
+            heading: "Systems strategy, selection, & design",
+            content:
+              "Identify and implement the right technologies to support your strategic goals.",
+          },
+          {
+            heading: "Data optimization, analytics, and governance",
+            content:
+              "Harness data to drive insights, optimize processes, and ensure robust governance",
+          },
+          {
+            heading: "GenAI driven automation",
+            content:
+              "Leverage Generative AI to revolutionize decision-making, automate complex tasks, and unlock new levels of efficiency. Our GenAI solutions are tailored to enhance your business operations and drive exponential growth.",
+          },
+        ],
+      },
     },
+    heroImage: TransformationImage,
+    bottomText: "Defining and executing change with you",
   },
   ESG: {
     topHeading: "Doing the right thing for a better planet",
@@ -56,16 +151,53 @@ export const serviceContent = {
         "Identify: Understanding how ESG issues can impact the organization’s ability to create & maintain value, including dependencies on ESG factors, physical risks, transition risks, reputational risks, and market changes.",
       contentHeading2:
         "Assess: Perform coherent and cohesive assessments to minimize risk and ensure ESG policies are in place. Address: Implement the right systems and people to manage and mitigate ESG risks across your organization.",
-      offerings: [
-        "Decarbonization",
-        "Supply chain sustainability",
-        "Business model strategy and value chain optimization",
-        "ESG material topics identification",
-        "ESG risk management",
-        "Reporting and assurance readiness",
-        "Investment and financing integration",
-        "Stakeholder engagement and disclosure",
-      ],
+      offerings: {
+        subheading: "",
+        sections: [
+          {
+            heading: "Decarbonization",
+            content:
+              "Implement actionable plans to reduce carbon emissions and achieve sustainability targets and regulatory compliance",
+          },
+          {
+            heading: "Supply chain sustainability",
+            content:
+              "Optimize the ethical and sustainable footprint of your supply chain and ensure third-party compliance with existing and upcoming regulations",
+          },
+          {
+            heading: "Business model strategy and value chain optimization",
+            content:
+              "Develop and implement strategies to integrate ESG into your business model and optimize your value chain for sustainability and resilience",
+          },
+          {
+            heading: "ESG material topics identification",
+            content:
+              "Identify and prioritize key ESG topics relevant to your business and align ESG initiatives with your strategic objectives",
+          },
+          {
+            heading: "ESG risk management",
+            content:
+              "Assess and mitigate ESG-related risks and enhance your organization's resilience to environmental and social challenges",
+          },
+          {
+            heading: "Reporting and assurance readiness",
+            content:
+              "Prepare for comprehensive ESG reporting and assurance and meet investor expectations and regulatory requirements",
+          },
+          {
+            heading: "Investment and financing integration",
+            content:
+              "Incorporate ESG into your investment approaches and embed ESG into debt financing to potentially lower funding costs",
+          },
+          {
+            heading: "Stakeholder engagement and disclosure",
+            content:
+              "Engage stakeholders effectively to secure buy-in and ensure transparent and impactful ESG disclosures",
+          },
+        ],
+      },
     },
+    heroImage: ESGImage,
+    bottomText: "Doing the right thing for a better planet",
   },
 };

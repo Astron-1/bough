@@ -20,15 +20,32 @@ export default function BoughServices() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [animate, setAnimate] = useState<boolean>(false);
+  const [isInView, setIsInView] = useState<boolean>(false);
 
   useEffect(() => {
-    // Start animation when component mounts
-    const timer = setTimeout(() => {
-      setAnimate(true);
-    }, 500);
+    // Check if section is in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsInView(true);
+          // Start animation when component is in view
+          setTimeout(() => {
+            setAnimate(true);
+          }, 300);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    // Cleanup timer on unmount
-    return () => clearTimeout(timer);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -36,7 +53,13 @@ export default function BoughServices() {
       {/* Service Cards Container with embedded SVG path */}
       <div ref={sectionRef} className="relative flex flex-col gap-20 w-full">
         {/* SVG Path connecting the service cards */}
-        <ServicePath animate={animate} pathColor="#0066FF" strokeWidth={3} />
+        <ServicePath
+          className="hidden md:block"
+          animate={animate}
+          pathColor="#0066FF"
+          strokeWidth={3}
+          showBall={isInView}
+        />
 
         {services.map((service, i) => {
           const isEven = i % 2 === 0;

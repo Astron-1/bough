@@ -16,7 +16,7 @@ export default function Text({ type, children, className = "" }: TextProps) {
   if (type === Font.GARAMOND) {
     fontClass = "font-[EB_Garamond]";
   } else {
-    fontClass = "font-[source-sans]";
+    fontClass = "font-[var(--font-source-sans)]";
   }
   return <div className={`${className} ` + fontClass}>{children}</div>;
 }
