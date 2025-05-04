@@ -75,15 +75,40 @@ const ServicePath: React.FC<ServicePathProps> = ({
 
   // Function to calculate ball position at a given percentage along the path
   const calculateBallPosition = (percentage: number) => {
-    if (!pathRef.current) return { x: 0, y: 0 };
+    if (!pathRef.current) {
+      // Default fallback position if path is not available
+      return { x: 1283, y: card1Top + verticalOffset };
+    }
     
-    // Ensure percentage is between 0 and 1
-    const safePercentage = Math.max(0, Math.min(1, percentage));
-    
-    // Get path length and calculate position
-    const pathLength = pathRef.current.getTotalLength();
-    const point = pathRef.current.getPointAtLength(pathLength * safePercentage);
-    return { x: point.x, y: point.y };
+    try {
+      // Ensure percentage is between 0 and 1
+      const safePercentage = Math.max(0, Math.min(1, percentage));
+      
+      // Get path length and calculate position
+      const pathLength = pathRef.current.getTotalLength();
+      
+      // Check if path length is valid
+      if (!pathLength || pathLength <= 0 || isNaN(pathLength)) {
+        console.debug('Invalid path length, using default positions');
+        
+        // Return appropriate position based on percentage
+        if (percentage < 0.25) {
+          return { x: 1283, y: card1Top + verticalOffset };
+        } else if (percentage < 0.5) {
+          return { x: 242, y: card2Top + verticalOffset };
+        } else if (percentage < 0.75) {
+          return { x: 1283, y: card3Top + verticalOffset };
+        } else {
+          return { x: 242, y: card4Top + verticalOffset };
+        }
+      }
+      
+      const point = pathRef.current.getPointAtLength(pathLength * safePercentage);
+      return { x: point.x, y: point.y };
+    } catch (error) {
+      console.error('Error calculating ball position:', error);
+      return { x: 1283, y: card1Top + verticalOffset };
+    }
   };
 
   // Fixed anchor points throughout the path - adjusted for better alignment with cards
@@ -174,19 +199,55 @@ const ServicePath: React.FC<ServicePathProps> = ({
       setBallPosition(position);
     };
 
+    // Add resize event listener to recalculate positions when window size changes
+    const handleResize = () => {
+      // Need to wait for layout to stabilize after resize
+      setTimeout(handleScroll, 100);
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
     
     // Call initially and also after a short delay to ensure path is loaded
     handleScroll();
-    setTimeout(handleScroll, 200);
-    setTimeout(handleScroll, 500);
-    setTimeout(handleScroll, 1000);
+    
+    // Multiple timeouts to ensure animation starts correctly even with slow loading
+    const timeouts = [
+      setTimeout(handleScroll, 200),
+      setTimeout(handleScroll, 500),
+      setTimeout(handleScroll, 1000),
+      setTimeout(handleScroll, 2000)
+    ];
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      timeouts.forEach(timeout => clearTimeout(timeout));
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showBall]);
+
+  // Add a separate effect to initialize the ball position when component mounts
+  useEffect(() => {
+    // Force path calculation after the component has fully rendered
+    if (pathRef.current) {
+      // Initialize the ball at the start position
+      const startPosition = calculateBallPosition(0);
+      setBallPosition(startPosition);
+      
+      // Wait for any animations to complete, then update position to current scroll
+      setTimeout(() => {
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        const documentHeight = document.documentElement.scrollHeight - windowHeight;
+        const scrollPercentage = Math.min(Math.max(scrollY / documentHeight, 0), 1);
+        const pathPercentage = mapScrollToPath(scrollPercentage);
+        const position = calculateBallPosition(pathPercentage);
+        setBallPosition(position);
+      }, 100);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div 
@@ -271,8 +332,9 @@ const ServicePath: React.FC<ServicePathProps> = ({
             fill="rgba(0, 102, 255, 0.3)"
             filter="url(#trail-effect)"
             style={{
-              transition: 'all 0.3s ease-out',
-              transformOrigin: 'center'
+              transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+              transformOrigin: 'center',
+              willChange: 'transform'
             }}
           />
         )}
@@ -286,8 +348,9 @@ const ServicePath: React.FC<ServicePathProps> = ({
             fill="url(#ballGradient)"
             filter="url(#ball-glow)"
             style={{
-              transition: 'all 0.15s ease-out',
-              transformOrigin: 'center'
+              transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+              transformOrigin: 'center',
+              willChange: 'transform'
             }}
           />
         )}
