@@ -1,9 +1,9 @@
 import BottomSection from "./BottomSection";
-import MainCarousel from "./MainCarousel";
 
 import HeroText from "./heroText";
 import PartnersSection from "./PartnersSection";
 import BoughServices from "./Services";
+import CaseStudyCarousel from "./CaseStudyCarousel";
 
 export default function BodyComponent() {
   return (
@@ -38,7 +38,8 @@ export default function BodyComponent() {
       </div>
       <HeroText />
       <BoughServices />
-      <MainCarousel />
+      <CaseStudyCarousel />
+
       <PartnersSection />
       <BottomSection />
     </div>

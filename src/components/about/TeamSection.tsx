@@ -26,6 +26,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
 
   return (
     <div
+      id="meet-the-team"
       className="relative z-10 py-16 md:py-20 px-4 sm:px-6 justify-center text-center lg:px-8"
       style={figmaSectionContainer()}
     >

@@ -124,7 +124,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/about/who-we-are"
+                    href="/about-us#who-we-are"
                     className="hover:text-gray-300 block"
                   >
                     Who we are
@@ -132,7 +132,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/about/meet-the-team"
+                    href="/about-us#meet-the-team"
                     className="hover:text-gray-300 block"
                   >
                     Meet the team
@@ -140,7 +140,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/about/our-values"
+                    href="/about-us#our-values"
                     className="hover:text-gray-300 block"
                   >
                     Our values
@@ -154,28 +154,13 @@ export default function Footer() {
               <h3 className="font-semibold mb-4 text-[#53FBFB]">Locations</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link
-                    href="/locations/united-states"
-                    className="hover:text-gray-300 block"
-                  >
-                    United States
-                  </Link>
+                  <p className="hover:text-gray-300 block">United States</p>
                 </li>
                 <li>
-                  <Link
-                    href="/locations/gurugram"
-                    className="hover:text-gray-300 block"
-                  >
-                    Gurugram
-                  </Link>
+                  <p className="hover:text-gray-300 block">Gurugram</p>
                 </li>
                 <li>
-                  <Link
-                    href="/locations/delhi"
-                    className="hover:text-gray-300 block"
-                  >
-                    Delhi
-                  </Link>
+                  <p className="hover:text-gray-300 block">Delhi</p>
                 </li>
               </ul>
             </div>

@@ -42,9 +42,11 @@ export default function ServicesPage() {
             We are advisors, thought leaders, and problem solvers, dedicated to
             creating long-term value and sustainable solutions.
           </Text>
-          <Link href="/careers">
+          <Link href="#serviceslist">
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full">
-              View current openings
+              <Text type={Font.GARAMOND} className="font-medium">
+                View Our Services
+              </Text>
             </button>
           </Link>
         </div>
@@ -62,7 +64,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16">
+      <section className="py-16" id="serviceslist">
         <BoughServices />
       </section>
 
