@@ -53,7 +53,7 @@ export default function CaseStudyCarousel() {
               <div className="flex flex-col space-y-4 font-bold ml-3">
                 <Button
                   className="outline-1 px-7"
-                  href={`/case-study?name=${caseStudyContent[current].id}`}
+                  href={`/case-study?name=${caseStudyContent[current].route}`}
                 >
                   <ShinyText text="Know More" speed={3} />
                 </Button>

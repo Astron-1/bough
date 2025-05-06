@@ -15,6 +15,7 @@ interface ImageProps {
 }
 
 interface CaseStudyContent {
+  route: string;
   id: string;
   heading: string;
   at_a_glance: string;
@@ -45,6 +46,7 @@ interface CaseStudyContent {
 
 export const caseStudyContent: CaseStudyContent[] = [
   {
+    route:"CASE%20STUDY%201%20–%20Data%20optimization%20and%20governance",
     id: "Data optimization and governance",
     heading: "Delivering better insights with better data.",
     at_a_glance:
@@ -155,6 +157,7 @@ export const caseStudyContent: CaseStudyContent[] = [
     ],
   },
   {
+    route: "CASE%20STUDY%202%20–%20ASC%20606%20Reporting%20Solution%20(Plan%20B)",
     id: "ASC 606 Reporting Solution (Plan B)",
     heading: "Delivering change at the speed of light.",
     at_a_glance:
@@ -249,6 +252,7 @@ export const caseStudyContent: CaseStudyContent[] = [
     ],
   },
   {
+    route: "CASE%20STUDY%203%20–%20Revenue%20Assurance%20and%20audit%20readiness",
     id: "Revenue Assurance and audit readiness",
     heading: "Developing a robust revenue assurance function.",
     at_a_glance:

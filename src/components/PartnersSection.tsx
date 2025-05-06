@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import Text, { Font } from '@app/components/Text';
 // Import Swiper styles
 import "swiper/css";
 // Import required modules
@@ -322,10 +323,11 @@ const PartnersSection: React.FC<PartnersSectionProps> = ({
     <section className={`py-20 relative overflow-hidden ${className}`}>
       <div className="max-w-[1200px] mx-auto px-4">
         <h2
-          className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem] mb-16  "
-          style={{ fontFamily: "var(--font-source-sans)" }}
+          className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem] mb-16"
         >
-          Partnerships & capabilities
+          <Text type={Font.GARAMOND}>
+            Partnerships & capabilities
+          </Text>
         </h2>
 
         <div

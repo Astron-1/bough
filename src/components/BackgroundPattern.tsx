@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -64,9 +65,9 @@ export default function BackgroundPattern() {
     tension: 0.012,
     horizontalWaves: true,
     // Threads specific options
-    threadsAmplitude: 1.0,
-    threadsDistance: 0.5,
-    threadsColor: [0.47, 0.68, 1.0] // RGB normalized to 0-1
+    threadsAmplitude: 1.5,
+    threadsDistance: 0.30,
+    threadsColor: [0.47, 0.68, 1.0] 
   });
 
   // Handle clicks outside the settings panel
@@ -126,9 +127,9 @@ export default function BackgroundPattern() {
   return (
     <>
       {/* Background visualization based on selected type */}
-      {settings.backgroundType === 'particles' && (
-        <AnimatedParticles 
-          className="z-0"
+      {/* {settings.backgroundType === 'particles' && (
+      <AnimatedParticles 
+        className="z-0"
           particleCount={particleCount}
           particleColor={settings.particleColor}
           particleOpacityRange={settings.particleOpacityRange}
@@ -144,9 +145,9 @@ export default function BackgroundPattern() {
           patternDensity={settings.patternDensity}
           {...additionalProps}
         />
-      )}
+      )} */}
 
-      {settings.backgroundType === 'threads' && (
+      
         <Threads
           className="z-0"
           amplitude={settings.threadsAmplitude}
@@ -154,10 +155,8 @@ export default function BackgroundPattern() {
           color={settings.threadsColor}
           enableMouseInteraction={true}
         />
-      )}
-      
       {/* Settings button */}
-      <button 
+      {/* <button 
         onClick={toggleSettings}
         className="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full z-50 w-12 h-12 flex items-center justify-center"
         aria-label="Background Settings"
@@ -166,7 +165,7 @@ export default function BackgroundPattern() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
-      </button>
+      </button> */}
 
       {/* Settings panel */}
       {showSettings && (
