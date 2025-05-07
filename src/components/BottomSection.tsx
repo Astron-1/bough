@@ -1,11 +1,11 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Text, { Font } from "./Text";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 
 interface BottomCTAInterface {
   content: string;
-  backgroundImage: any;
+  backgroundImage: string | StaticImageData;
   buttonText?: string;
   className?: string;
 }
