@@ -1,11 +1,16 @@
+"use client";
+
 import Header from "@app/components/Header";
 import Text, { Font } from "@app/components/Text";
 import { serviceContent } from "@app/lib/serviceContent";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import vector2 from "../../../public/boughVector2.png";
+import careerCTA from "../../../public/serviceCTA.png";
+import BottomSection from "@app/components/BottomSection";
+import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
 
-export default function AccountingPage() {
+export default function ServicePage() {
   const router = useRouter();
   const { name } = router.query;
   let content;
@@ -60,31 +65,46 @@ export default function AccountingPage() {
 
   return (
     <section>
-      <section className="bg-gradient-to-b from-blue-50 to-white px-4 sm:px-8 md:px-12 lg:px-32 space-y-24">
+      <section className=" bg-gradient-to-b from-blue-50 to-white overflow-hidden">
         <Header />
-        {/* Hero Section */}
-        <section className="flex flex-col md:flex-row items-center justify-between gap-8 relative py-12">
-          {/* Left Image */}
-          <div className="w-full md:w-1/4 h-[200px] sm:h-[250px] md:h-[300px] relative">
+        {/* Mobile Top Full-Width Image */}
+        <div className="w-full mb-8 md:hidden">
+          <Image
+            src={content.heroImage || "/placeholder.svg"}
+            alt="heroImage mobile full"
+            className="w-full h-48 object-cover rounded-md"
+            width={1000}
+            height={400}
+          />
+        </div>
+        <section className="relative w-full px-4 py-16 md:py-24 flex flex-col-reverse md:flex-row items-center justify-center">
+          {/* Left Image for Desktop */}
+
+          <div className="absolute left-0 top-0 bottom-0 w-1/4 hidden md:block">
             <Image
-              src={content.heroImage}
+              src={content.heroImage || "/placeholder.svg"}
               alt="heroImage left"
-              className="h-full w-full object-cover hidden md:block"
+              className="h-full w-full object-cover"
               style={{ clipPath: "inset(0 50% 0 0)" }}
               width={400}
               height={400}
             />
+          </div>
+
+          {/* Right Image for Desktop */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/4 hidden md:block">
             <Image
-              src={content.heroImage}
-              alt="heroImage left"
-              className="h-full w-full object-cover block md:hidden"
+              src={content.heroImage || "/placeholder.svg"}
+              alt="heroImage right"
+              className="h-full w-full object-cover"
+              style={{ clipPath: "inset(0 0 0 50%)" }}
               width={400}
               height={400}
             />
           </div>
 
           {/* Center Text */}
-          <div className="text-center md:w-2/4 space-y-4 z-10 px-2">
+          <div className="w-full md:w-3/5 text-center py-12 z-10 mx-auto">
             <Text
               type={Font.SOURCE_SANS}
               className="text-blue-900 text-xs sm:text-sm font-semibold"
@@ -93,34 +113,22 @@ export default function AccountingPage() {
             </Text>
             <Text
               type={Font.GARAMOND}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold text-black"
+              className="text-4xl text-black my-4 md:text-5xl font-bold"
             >
               {serviceName}
             </Text>
             <Text
               type={Font.SOURCE_SANS}
-              className="text-gray-700 text-sm sm:text-base"
+              className="text-black max-w-2xl mx-auto"
             >
               {content?.topSubHeading}
             </Text>
           </div>
-
-          {/* Right Image */}
-          <div className="w-full md:w-1/4 h-[200px] sm:h-[250px] md:h-[300px] relative hidden md:block">
-            <Image
-              src={content.heroImage}
-              alt="heroImage right"
-              className="h-full w-full object-cover hidden md:block"
-              style={{ clipPath: "inset(0 0 0 50%)" }}
-              width={400}
-              height={400}
-            />
-          </div>
         </section>
 
         {/* The Bough Way */}
-        <section className="text-center ">
-          <div className="space-y-4 px-4 sm:px-12 md:px-24 lg:px-32 mt-32">
+        <section className="text-center">
+          <div className="space-y-4 px-4 sm:px-12 md:px-24 lg:px-32 mt-10 md:mt-32">
             <Text
               type={Font.SOURCE_SANS}
               className="font-bold text-lg sm:text-xl md:text-2xl text-black"
@@ -137,49 +145,51 @@ export default function AccountingPage() {
         </section>
 
         {/* Our Offerings */}
-        <section className="space-y-8 mb-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Text
-              type={Font.GARAMOND}
-              className="text-3xl md:text-4xl font-semibold text-black"
-            >
-              Our offerings
-            </Text>
-            <Text
-              type={Font.SOURCE_SANS}
-              className="text-gray-700 text-sm sm:text-base"
-            >
-              {content.body?.offerings.subheading}
-            </Text>
-          </div>
-
-          <div className="space-y-4 w-full md:w-1/2 ml-auto">
-            {content.body?.offerings.sections?.map((item, index) => (
-              <details
-                key={index}
-                className="bg-blue-50 rounded-lg p-4 group open:bg-blue-100 transition-all duration-200"
+        <section className="space-y-8 mb-10 mt-20 px-10 md:px-20">
+          <div className="md:flex md:justify-between md:items-start gap-10">
+            <div className="space-y-6 md:w-1/3">
+              <Text
+                type={Font.GARAMOND}
+                className="text-3xl md:text-4xl font-semibold text-black"
               >
-                <summary className="font-semibold cursor-pointer text-black flex justify-between items-center marker:hidden">
-                  <Text type={Font.SOURCE_SANS}>{item.heading}</Text>
-                  <svg
-                    className="w-4 h-4 ml-2 transition-transform duration-200 transform group-open:rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </summary>
-                <div className="mt-2 text-sm text-gray-700">
-                  <Text type={Font.SOURCE_SANS}>{item.content}</Text>
-                </div>
-              </details>
-            ))}
+                Our offerings
+              </Text>
+              <Text
+                type={Font.SOURCE_SANS}
+                className="text-gray-700 text-sm sm:text-base"
+              >
+                {content.body?.offerings.subheading}
+              </Text>
+            </div>
+
+            <div className="space-y-4 w-full md:w-1/2 mt-8 md:mt-0">
+              {content.body?.offerings.sections?.map((item, index) => (
+                <details
+                  key={index}
+                  className="bg-blue-50 rounded-lg p-4 group open:bg-blue-100 transition-all duration-200"
+                >
+                  <summary className="font-semibold cursor-pointer text-black flex justify-between items-center marker:hidden">
+                    <Text type={Font.SOURCE_SANS}>{item.heading}</Text>
+                    <svg
+                      className="w-4 h-4 ml-2 transition-transform duration-200 transform group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </summary>
+                  <div className="mt-2 text-sm text-gray-700">
+                    <Text type={Font.SOURCE_SANS}>{item.content}</Text>
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -187,7 +197,7 @@ export default function AccountingPage() {
       </section>
       <section className="w-full px-4 sm:px-8 py-10 flex flex-col items-center justify-center bg-gradient-to-r from-[#13294C] to-[#1043e8] relative">
         <Image
-          src={vector2}
+          src={vector2 || "/placeholder.svg"}
           alt="vector decoration"
           className="absolute top-0 right-0 w-24 opacity-20"
           width={150}
@@ -200,6 +210,12 @@ export default function AccountingPage() {
           {content.bottomText}
         </Text>
       </section>
+      <CaseStudyCarousel />
+      <BottomSection
+        content="Let's drive outcomes by crafting changes for a meaningful tomorrow, now"
+        backgroundImage={careerCTA}
+        className="px-4 md:px-12 lg:px-32"
+      />
     </section>
   );
 }

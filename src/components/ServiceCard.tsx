@@ -8,13 +8,17 @@ interface ServiceCardProps {
   position?: "left" | "right";
 }
 
-export default function ServiceCard({ image, serviceType, position = "left" }: ServiceCardProps) {
+export default function ServiceCard({
+  image,
+  serviceType,
+  position = "left",
+}: ServiceCardProps) {
   return (
     <Link className="w-full block" href={"/services/" + serviceType}>
       <div
-        className={`relative h-[180px] sm:h-[220px] md:h-[270px] overflow-hidden bg-gray-200 ${
-          position === "left" 
-            ? "rounded-tr-[20px] rounded-br-[20px]" 
+        className={`relative h-[180px] sm:h-[220px] md:h-[270px] 2xl:h-[350px] 4xl:h-[400px] 5xl:h-[600px] 5xl:w-[2000px] overflow-hidden bg-gray-200 ${
+          position === "left"
+            ? "rounded-tr-[20px] rounded-br-[20px]"
             : "rounded-tl-[20px] rounded-bl-[20px]"
         }`}
         style={{

@@ -80,14 +80,13 @@ export default function Header({ transparent = false }: HeaderProps) {
               />
             </Link>
             <div
-              className={`hidden md:block absolute h-[1px] w-44 ${borderColor}`}
+              className={`hidden lg:block absolute h-[1px] w-44 ${borderColor}`}
               style={{ left: "120%", top: "50%" }}
             />
           </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center justify-center space-x-14 relative">
-            {/* Services dropdown with hover area */}
             <div
               className="relative"
               onMouseEnter={() => setIsHovered(true)}
@@ -109,36 +108,39 @@ export default function Header({ transparent = false }: HeaderProps) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-0 top-full mt-4 w-[900px] bg-[#d9e6fc] shadow-lg rounded-md z-50 flex p-6"
+                    className="absolute left-0 top-full w-screen bg-[#d9e6fc] shadow-md z-50 flex justify-center"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
-                    {/* Left Title */}
-                    <div className="min-w-[120px] pr-8 border-r border-gray-300">
-                      <h3 className="text-2xl font-semibold text-black">
-                        Services
-                      </h3>
-                    </div>
+                    <div className="w-full max-w-[1280px] px-6 py-6 flex gap-8">
+                      {/* Left Title */}
+                      <div className="min-w-[120px] pr-8 border-r border-gray-300">
+                        <h3 className="text-2xl font-semibold text-black">
+                          Services
+                        </h3>
+                      </div>
 
-                    {/* Service items */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pl-8">
-                      {services.map((item) => (
-                        <div key={item.title} className="text-sm text-black">
-                          <h4 className="font-semibold text-lg">
-                            {item.title}
-                          </h4>
-                          <p className="text-[13px] leading-5 mt-1">
-                            We help companies become more resilient and
-                            future-ready by effectively managing.
-                          </p>
-                          <Link
-                            href={item.href}
-                            className="mt-2 inline-block text-blue-600 text-sm underline"
-                          >
-                            View more
-                          </Link>
-                        </div>
-                      ))}
+                      {/* Service items */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {services.map((item) => (
+                          <div key={item.title} className="text-sm text-black">
+                            <h4 className="font-semibold text-lg">
+                              {item.title}
+                            </h4>
+
+                            <p className="text-[13px] leading-5 mt-1">
+                              We help companies become more resilient and
+                              future-ready by effectively managing.
+                            </p>
+                            <Link
+                              href={item.href}
+                              className="mt-2 inline-block text-blue-600 text-sm underline"
+                            >
+                              View more
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -206,7 +208,7 @@ export default function Header({ transparent = false }: HeaderProps) {
                   />
                 </button>
                 {serviceDropdownOpen && (
-                  <div className="pl-4 mt-2 space-y-3">
+                  <div className="pl-4 mt-2 space-y-3 border-l border-gray-200 ml-2">
                     {services.map((item) => (
                       <Link
                         key={item.href}

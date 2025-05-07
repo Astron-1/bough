@@ -21,13 +21,17 @@ interface InsightsSliderProps {
   onIndexChange: (index: number) => void;
 }
 
-export default function InsightsSlider({ insights, activeIndex, onIndexChange }: InsightsSliderProps) {
+export default function InsightsSlider({
+  insights,
+  activeIndex,
+  onIndexChange,
+}: InsightsSliderProps) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Add custom styles for smoother transitions
   useEffect(() => {
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.innerHTML = `
       .insights-slider .progress-bar {
         transition: width 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -92,45 +96,59 @@ export default function InsightsSlider({ insights, activeIndex, onIndexChange }:
             </SwiperSlide>
           ))}
         </Swiper>
-        
+
         {/* Custom navigation/indicators that work with Swiper */}
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 w-full">
           {/* Base translucent line */}
-          <div className="absolute inset-0 w-full" style={{ 
-            height: "0.125rem", 
-            background: "rgba(255, 255, 255, 0.60)",
-            zIndex: 10 
-          }} />
-          
+          <div
+            className="absolute inset-0 w-full"
+            style={{
+              height: "0.125rem",
+              background: "rgba(255, 255, 255, 0.60)",
+              zIndex: 10,
+            }}
+          />
+
           {/* Progress bar */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 progress-bar" style={{ 
-            width: `${(100 / insights.length) * (activeIndex + 1)}%`, 
-            height: "0.25rem",
-            background: "#FFF",
-            zIndex: 15,
-            borderRadius: "0.125rem"
-          }} />
+          <div
+            className="absolute left-0 top-1/2 -translate-y-1/2 progress-bar"
+            style={{
+              width: `${(100 / insights.length) * (activeIndex + 1)}%`,
+              height: "0.25rem",
+              background: "#FFF",
+              zIndex: 15,
+              borderRadius: "0.125rem",
+            }}
+          />
         </div>
-        
+
         {/* Custom bullet indicators */}
         <div className="w-full flex justify-between items-center relative z-20">
           {insights.map((item, index) => (
-            <div 
+            <div
               key={item.id}
               className="flex flex-col items-center cursor-pointer"
-              onClick={() => !isTransitioning && swiper && swiper.slideTo(index)}
+              onClick={() =>
+                !isTransitioning && swiper && swiper.slideTo(index)
+              }
             >
-              <div 
+              <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center text-base font-medium cursor-pointer bullet-indicator ${
-                  activeIndex === index ? "bullet-active bg-white text-blue-800" : "bg-transparent text-white border-2 border-white hover:bg-white/20"
+                  activeIndex === index
+                    ? "bullet-active bg-white text-blue-800"
+                    : "bg-transparent text-white border-2 border-white hover:bg-white/20"
                 }`}
               >
                 {item.id}
               </div>
-              <p className={`mt-4 text-white text-sm font-medium text-center max-w-[220px] whitespace-normal bullet-text ${
-                activeIndex === index ? "bullet-text-active opacity-100" : "opacity-70"
-              }`} 
-                 style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.9)" }}>
+              <p
+                className={` mt-4 text-white text-xs md:text-sm font-medium text-center max-w-[220px] whitespace-normal bullet-text ${
+                  activeIndex === index
+                    ? "bullet-text-active opacity-100"
+                    : "opacity-70"
+                }`}
+                style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.9)" }}
+              >
                 {item.title}
               </p>
             </div>
@@ -139,4 +157,4 @@ export default function InsightsSlider({ insights, activeIndex, onIndexChange }:
       </div>
     </div>
   );
-} 
+}

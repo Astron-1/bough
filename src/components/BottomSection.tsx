@@ -3,12 +3,24 @@ import Text, { Font } from "./Text";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 
-export default function BottomSection() {
+interface BottomCTAInterface {
+  content: string;
+  backgroundImage: any;
+  buttonText?: string;
+  className?: string;
+}
+
+export default function BottomSection({
+  content,
+  backgroundImage,
+  buttonText,
+  className,
+}: BottomCTAInterface) {
   return (
     <div className="relative w-full flex items-center justify-center overflow-hidden min-h-[400px]">
       {/* Background Image */}
       <Image
-        src="/bottomImage.png"
+        src={backgroundImage}
         alt="bottom image"
         layout="fill"
         objectFit="cover"
@@ -18,18 +30,15 @@ export default function BottomSection() {
 
       {/* Overlay Content */}
       <div className="z-10 flex flex-col justify-center items-center space-y-4 px-6 py-16 text-center">
-        <Text className="text-white text-3xl md:text-5xl font-bold">
-          Shape tomorrow,
-        </Text>
         <Text
-          type={Font.SOURCE_SANS}
-          className="text-white text-3xl md:text-5xl font-bold"
+          type={Font.GARAMOND}
+          className={"text-white text-3xl md:text-5xl font-bold " + className}
         >
-          Starting today
+          {content}
         </Text>
 
         <Button href="/connect" className="outline-1 px-7 mt-8">
-          <ShinyText text="Connect" speed={3} />
+          <ShinyText text={buttonText || "Connect"} speed={3} />
         </Button>
       </div>
     </div>

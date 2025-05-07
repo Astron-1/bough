@@ -5,8 +5,9 @@ import BoughServices from "@app/components/Services";
 import coin1 from "../../public/service-hero-1.png";
 import coin2 from "../../public/service-hero-2.png";
 import Header from "@app/components/Header";
-
 import MainCarousel from "@app/components/MainCarousel";
+import BottomSection from "@app/components/BottomSection";
+import serviceCTA from "../../public/serviceCTA.png";
 
 export default function ServicesPage() {
   return (
@@ -17,7 +18,7 @@ export default function ServicesPage() {
       {/* Hero Section */}
       <section className="relative w-full px-4 py-16 md:py-24 flex flex-col md:flex-row items-center justify-center">
         {/* Left Image */}
-        <div className="hidden md:block absolute left-0 top-0 bottom-0">
+        <div className="hidden lg:block absolute left-0 top-0 bottom-0 2xl">
           <Image
             src={coin1}
             alt="Plant growing from coins"
@@ -31,7 +32,7 @@ export default function ServicesPage() {
         <div className="w-full md:w-2/4 text-center py-12 z-10">
           <Text
             type={Font.GARAMOND}
-            className="text-4xl text-black m-12 md:text-5xl font-bold mb-4"
+            className="text-5xl text-black m-12 md:text-5xl font-bold mb-4"
           >
             Tailored services, for your unique needs
           </Text>
@@ -52,7 +53,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Right Image */}
-        <div className="hidden md:block absolute right-0 top-0 bottom-0">
+        <div className="hidden lg:block absolute right-0 top-0 bottom-0">
           <Image
             src={coin2}
             alt="Plant growing from coins"
@@ -65,13 +66,19 @@ export default function ServicesPage() {
 
       {/* Services Section */}
       <section className="py-16" id="serviceslist">
-        <BoughServices />
+        <BoughServices servicePage />
       </section>
 
       {/* Featured Case Studies */}
       <div className="" style={{ width: "70rem", maxWidth: "100%" }}>
         <MainCarousel />
       </div>
+      <BottomSection
+        content="Let's drive outcomes by crafting changes
+for a meaningful tomorrow, now"
+        backgroundImage={serviceCTA}
+        className="px-32"
+      />
     </section>
   );
 }

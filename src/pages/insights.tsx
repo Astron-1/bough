@@ -3,11 +3,12 @@ import Header from "@app/components/Header";
 
 import InsightsSlider from "@app/components/InsightsSlider";
 
-import ConnectCTA from "@app/components/ConnectCTA";
+import ConnectCTA from "../../public/careersCTA.png";
 import Image from "next/image";
 import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
 import Text from "@app/components/Text";
 import { Font } from "@app/components/Text";
+import BottomSection from "@app/components/BottomSection";
 
 // Define the data structure for slider items
 interface InsightItem {
@@ -118,7 +119,7 @@ export default function InsightsPage() {
               >
                 <Text
                   type={Font.GARAMOND}
-                  className="text-center text-[#111827] text-5xl font-semibold leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
+                  className="text-center text-[#111827] text-3xl md:text-5xl font-semibold leading-[40px] md:leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
                 >
                   {currentInsight.title}
                 </Text>
@@ -172,7 +173,12 @@ export default function InsightsPage() {
 
       {/* Connect CTA Section */}
       <div className="mt-16">
-        <ConnectCTA />
+        <BottomSection
+          content="Let's drive outcomes by crafting changes
+for a meaningful tomorrow, now"
+          backgroundImage={ConnectCTA}
+          className="md:px-12"
+        />
       </div>
     </main>
   );

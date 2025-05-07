@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 
 interface ButtonProps {
@@ -12,39 +12,37 @@ interface ButtonProps {
 export default function Button({
   href,
   children,
-  variant = "primary",
   className = "",
+  variant = "primary",
   onClick,
 }: ButtonProps) {
+  const [hover, setHover] = useState(false);
+
   const baseStyles =
-    "flex justify-center items-center w-[8.5rem] h-[2.5rem] ml-2 rounded-full transition-colors   text-center";
+    "flex justify-center items-center w-[8.5rem] h-[2.5rem] ml-2 rounded-full transition-colors duration-200 text-center whitespace-nowrap";
 
-  const variantStyles = {
-    primary: "bg-[#1143E8] hover:bg-[#0e39c5]",
-    secondary: "bg-transparent border border-white hover:bg-white/10",
-  };
+  const primary = "bg-[#1143E8] text-white border border-transparent";
+  const secondary = "bg-white text-black border border-blue-500";
 
-  const buttonStyles = `${baseStyles} ${variantStyles[variant]} ${className}`;
+  const dynamicStyle = variant === "secondary" || hover ? secondary : primary;
 
-  const buttonStyle = {
-    fontFamily: "var(--font-sf-pro)",
-    fontSize: "16px",
-    fontWeight: 500,
-    color: "white",
-    lineHeight: "22px",
-    padding: "0.5rem 1rem",
+  const buttonStyles = `${baseStyles} ${dynamicStyle} ${className}`;
+
+  const hoverHandlers = {
+    onMouseEnter: () => setHover(true),
+    onMouseLeave: () => setHover(false),
   };
 
   if (href) {
     return (
-      <Link href={href} className={buttonStyles} style={buttonStyle}>
+      <Link href={href} className={buttonStyles} {...hoverHandlers}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={buttonStyles} onClick={onClick} style={buttonStyle}>
+    <button onClick={onClick} className={buttonStyles} {...hoverHandlers}>
       {children}
     </button>
   );

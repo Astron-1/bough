@@ -14,7 +14,7 @@ export default function Footer() {
               style={{ aspectRatio: "284.44 / 160.00" }}
             >
               <Image
-                src="/boughWhite.svg"
+                src="/bough-white.svg"
                 alt="Bough Consulting Logo"
                 width={400}
                 height={400}
@@ -77,10 +77,7 @@ export default function Footer() {
               <h3 className="font-semibold mb-4 text-[#53FBFB]">Insights</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link
-                    href="/insights/case-studies"
-                    className="hover:text-gray-300 block"
-                  >
+                  <Link href="/insights" className="hover:text-gray-300 block">
                     Case studies
                   </Link>
                 </li>

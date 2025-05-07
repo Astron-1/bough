@@ -2,6 +2,10 @@ import AccountingImage from "../../public/AccountingImage.jpeg";
 import ESGImage from "../../public/ESGImage.jpeg";
 import RiskImage from "../../public/RiskImage.jpeg";
 import TransformationImage from "../../public/TransformationImage.jpeg";
+import AccountingSec from "../../public/AccountingSec.png";
+import RiskSec from "../../public/RiskSec.png";
+import TransformationSec from "../../public/TransformationSec.png";
+import ESGSec from "../../public/ESGSec.png";
 
 export const serviceContent = {
   Accounting: {
@@ -45,6 +49,7 @@ export const serviceContent = {
     heroImage: AccountingImage,
     bottomText:
       "Craft nimble accounting solutions that adapt to the standards and your business, alike",
+    secondaryImage: AccountingSec,
   },
 
   Risk: {
@@ -96,6 +101,7 @@ export const serviceContent = {
       },
     },
     heroImage: RiskImage,
+    secondaryImage: RiskSec,
     bottomText:
       "Build agile and risk aware organization and transform the way you manage risk",
   },
@@ -138,6 +144,7 @@ export const serviceContent = {
       },
     },
     heroImage: TransformationImage,
+    secondaryImage: TransformationSec,
     bottomText: "Defining and executing change with you",
   },
   ESG: {
@@ -198,6 +205,7 @@ export const serviceContent = {
       },
     },
     heroImage: ESGImage,
+    secondaryImage: ESGSec,
     bottomText: "Doing the right thing for a better planet",
   },
 };

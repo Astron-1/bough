@@ -16,6 +16,7 @@ interface ImageProps {
 
 interface CaseStudyContent {
   route: string;
+  image: string;
   id: string;
   heading: string;
   at_a_glance: string;
@@ -46,7 +47,8 @@ interface CaseStudyContent {
 
 export const caseStudyContent: CaseStudyContent[] = [
   {
-    route:"CASE%20STUDY%201%20–%20Data%20optimization%20and%20governance",
+    image: "/wavy.avif",
+    route: "CASE%20STUDY%201%20–%20Data%20optimization%20and%20governance",
     id: "Data optimization and governance",
     heading: "Delivering better insights with better data.",
     at_a_glance:
@@ -86,50 +88,52 @@ export const caseStudyContent: CaseStudyContent[] = [
         ],
       },
     ],
-    solution: [{
-      heading:
-        "To make standardizing and optimizing data fields in the global revenue platform manageable, we prioritized small number of data fields based on their degree of impact and importance to business priorities. We compiled data and process maps to help data producers and owners fix data and prevent errors going forward.",
-      description: [
-        {
-          subHeading: "STAGE 1 - Pre-migration data optimization",
-          subDescription: [
-            "Analyzed the entire migration data dump",
-            "Evaluated quality and stability of the data being moved",
-            "Defined various inclusion / exclusion criteria based on SAP RAR data quality requirements",
-            "Evaluated and categorized each line item per the devised data categorization criteria",
-            "Identified and corrected issues",
-          ],
-          image: {
-            heading:
-              "Filtering out the noise through a tiered process to focus on the key data fields.",
-            src: cs1Image1,
+    solution: [
+      {
+        heading:
+          "To make standardizing and optimizing data fields in the global revenue platform manageable, we prioritized small number of data fields based on their degree of impact and importance to business priorities. We compiled data and process maps to help data producers and owners fix data and prevent errors going forward.",
+        description: [
+          {
+            subHeading: "STAGE 1 - Pre-migration data optimization",
+            subDescription: [
+              "Analyzed the entire migration data dump",
+              "Evaluated quality and stability of the data being moved",
+              "Defined various inclusion / exclusion criteria based on SAP RAR data quality requirements",
+              "Evaluated and categorized each line item per the devised data categorization criteria",
+              "Identified and corrected issues",
+            ],
+            image: {
+              heading:
+                "Filtering out the noise through a tiered process to focus on the key data fields.",
+              src: cs1Image1,
+            },
           },
-        },
-        {
-          subHeading: "STAGE 2 – Migration data readiness",
-          subDescription: [
-            "Determined what data to move, and the quality of that data before and after the move",
-            "Enabled a solid migration baselining and stakeholder confidence on the go-live",
-            "Optimized 99% data to increase precision of SAP RAR results",
-            "Reconciled balances between legacy and new reporting systems. Investigated underlying causes for differences identified and suggested appropriate accounting treatment",
-          ],
-        },
-        {
-          subHeading: "STAGE 3 – Ongoing data governance",
-          subDescription: [
-            "Established a strong data quality rules management and monitoring process",
-            "Structured root cause analysis to identify and address underlying causes of a problem and prevent future bad data",
-            "Built new processes and controls to achieve compliance and provide assurance over data flowing into SAP RAR",
-            "Deployed Alteryx and RPA managed solutions to monitor data quality (next to real time data governance)",
-          ],
-          image: {
-            heading:
-              "Illustrative workflow data quality rules to assess data from its point of creation and appropriately categorize it for governance purposes.",
-            src: cs1Image2,
+          {
+            subHeading: "STAGE 2 – Migration data readiness",
+            subDescription: [
+              "Determined what data to move, and the quality of that data before and after the move",
+              "Enabled a solid migration baselining and stakeholder confidence on the go-live",
+              "Optimized 99% data to increase precision of SAP RAR results",
+              "Reconciled balances between legacy and new reporting systems. Investigated underlying causes for differences identified and suggested appropriate accounting treatment",
+            ],
           },
-        },
-      ],
-    }],
+          {
+            subHeading: "STAGE 3 – Ongoing data governance",
+            subDescription: [
+              "Established a strong data quality rules management and monitoring process",
+              "Structured root cause analysis to identify and address underlying causes of a problem and prevent future bad data",
+              "Built new processes and controls to achieve compliance and provide assurance over data flowing into SAP RAR",
+              "Deployed Alteryx and RPA managed solutions to monitor data quality (next to real time data governance)",
+            ],
+            image: {
+              heading:
+                "Illustrative workflow data quality rules to assess data from its point of creation and appropriately categorize it for governance purposes.",
+              src: cs1Image2,
+            },
+          },
+        ],
+      },
+    ],
     results: [
       {
         heading:
@@ -157,7 +161,9 @@ export const caseStudyContent: CaseStudyContent[] = [
     ],
   },
   {
-    route: "CASE%20STUDY%202%20–%20ASC%20606%20Reporting%20Solution%20(Plan%20B)",
+    image: "/manhattan.avif",
+    route:
+      "CASE%20STUDY%202%20–%20ASC%20606%20Reporting%20Solution%20(Plan%20B)",
     id: "ASC 606 Reporting Solution (Plan B)",
     heading: "Delivering change at the speed of light.",
     at_a_glance:
@@ -252,7 +258,9 @@ export const caseStudyContent: CaseStudyContent[] = [
     ],
   },
   {
-    route: "CASE%20STUDY%203%20–%20Revenue%20Assurance%20and%20audit%20readiness",
+    image: "/lightroom.avif",
+    route:
+      "CASE%20STUDY%203%20–%20Revenue%20Assurance%20and%20audit%20readiness",
     id: "Revenue Assurance and audit readiness",
     heading: "Developing a robust revenue assurance function.",
     at_a_glance:
@@ -284,53 +292,55 @@ export const caseStudyContent: CaseStudyContent[] = [
         ],
       },
     ],
-    solution: [{
-      heading:
-        "Strategic intervention by Bough to navigate complexity with expertise.",
-      description: [
-        {
-          subHeading:
-            "Bough leveraged their subject matter expertise and assessed the client’s accounting and finance processes and controls, primarily focusing on the timeliness and accuracy of the financial and management reporting",
-        },
-        {
-          subHeading:
-            "Reviewed client’s business transactions across various geographies including North America, Latin America, Europe, Middle East and Africa and the Asia-Pacific regions",
-        },
-        {
-          subHeading:
-            "Applied our in-depth understanding of the client’s business and nature of revenue arrangements to: ",
-          subDescription: [
-            "Identify underlying risks",
-            "Assess adequacy of existing controls and procedures around revenue recognition",
-            "Highlight areas of concern due to inefficient/loosely implemented processes and controls",
-          ],
-        },
-        {
-          subHeading:
-            "Worked closely with the management and external audit team to:",
-          subDescription: [
-            "Validate components of financial data",
-            "Perform cut-off procedures",
-            "Execute key SOX controls involving revenue recognition related to software license provisioning and resolve issues",
-            "Review auditor’s exceptions listing from revenue testing procedures performed in prior periods to devise remediation plans",
-            "Proposed process & control enhancements to prevent future issues",
-          ],
-        },
-        {
-          subHeading:
-            "Acted as a liaison between the Company and the audit team to ensure that the audit is completed timely and efficiently",
-          subDescription: [
-            "Prepared technical accounting calculations, policies, and memos, as required",
-            "Reconciled balance sheets, as appropriate for each audit period",
-            "Deployed a full-time augmented staff that played a role within the company’s operational accounting function and proactively planned/executed necessary daily, weekly, monthly, and quarterly accounting activities as required",
-          ],
-          image: {
-            heading: "Example of high-level audit response process workflow.",
-            src: cs3Image1,
+    solution: [
+      {
+        heading:
+          "Strategic intervention by Bough to navigate complexity with expertise.",
+        description: [
+          {
+            subHeading:
+              "Bough leveraged their subject matter expertise and assessed the client’s accounting and finance processes and controls, primarily focusing on the timeliness and accuracy of the financial and management reporting",
           },
-        },
-      ],
-    }],
+          {
+            subHeading:
+              "Reviewed client’s business transactions across various geographies including North America, Latin America, Europe, Middle East and Africa and the Asia-Pacific regions",
+          },
+          {
+            subHeading:
+              "Applied our in-depth understanding of the client’s business and nature of revenue arrangements to: ",
+            subDescription: [
+              "Identify underlying risks",
+              "Assess adequacy of existing controls and procedures around revenue recognition",
+              "Highlight areas of concern due to inefficient/loosely implemented processes and controls",
+            ],
+          },
+          {
+            subHeading:
+              "Worked closely with the management and external audit team to:",
+            subDescription: [
+              "Validate components of financial data",
+              "Perform cut-off procedures",
+              "Execute key SOX controls involving revenue recognition related to software license provisioning and resolve issues",
+              "Review auditor’s exceptions listing from revenue testing procedures performed in prior periods to devise remediation plans",
+              "Proposed process & control enhancements to prevent future issues",
+            ],
+          },
+          {
+            subHeading:
+              "Acted as a liaison between the Company and the audit team to ensure that the audit is completed timely and efficiently",
+            subDescription: [
+              "Prepared technical accounting calculations, policies, and memos, as required",
+              "Reconciled balance sheets, as appropriate for each audit period",
+              "Deployed a full-time augmented staff that played a role within the company’s operational accounting function and proactively planned/executed necessary daily, weekly, monthly, and quarterly accounting activities as required",
+            ],
+            image: {
+              heading: "Example of high-level audit response process workflow.",
+              src: cs3Image1,
+            },
+          },
+        ],
+      },
+    ],
     results: [
       {
         heading: "Enhancing audit effectiveness and quality",

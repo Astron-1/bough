@@ -18,8 +18,7 @@ export default function CaseStudyCarousel() {
       (prev) => (prev - 1 + caseStudyContent.length) % caseStudyContent.length
     );
 
-  // const progressPercent = ((current + 1) / data.length) * 100;
-  const progressPercent = 100;
+  const progressPercent = ((current + 1) / caseStudyContent.length) * 100;
 
   return (
     <div className="my-32 w-full px-6 md:px-12 mx-auto">
@@ -27,15 +26,18 @@ export default function CaseStudyCarousel() {
         {/* Left: Content */}
         <div className="flex flex-row justify-between flex-1 max-w-xl z-10">
           {/* Progress Bar */}
-
           <div className="relative h-96 w-6 flex justify-center items-start mt-4 ml-6">
-            <div className="relative h-full rounded bg-[#53FBFB] overflow-hidden w-10">
+            <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
               <div
-                className="absolute bottom-0 left-0 w-full bg-blue-500 transition-all duration-700"
-                style={{ height: `${progressPercent}%` }}
+                className="absolute bottom-0 left-0 w-full transition-all duration-500"
+                style={{
+                  height: `${progressPercent}%`,
+                  backgroundColor: "#53FBFB",
+                }}
               />
             </div>
           </div>
+
           <div className="flex-col flex justify-start items-start">
             <div className="ml-7 mt-2">
               <h2 className="text-black text-4xl font-bold leading-tight">
@@ -49,6 +51,7 @@ export default function CaseStudyCarousel() {
                 </Text>
               </div>
             </div>
+
             <div className="w-full flex justify-between items-center mt-2">
               <div className="flex flex-col space-y-4 font-bold ml-3">
                 <Button
@@ -77,11 +80,11 @@ export default function CaseStudyCarousel() {
             </div>
           </div>
         </div>
-        {/* Right: Image */}
 
-        <div className="hidden md:block absolute right-0   z-0 w-[600px] h-auto">
+        {/* Right: Image */}
+        <div className="hidden md:block absolute right-0 z-0 w-[600px] h-auto">
           <Image
-            src={sample}
+            src={caseStudyContent[current].image}
             alt="Case study image"
             width={600}
             height={600}

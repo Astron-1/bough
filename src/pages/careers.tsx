@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Text, { Font } from "@app/components/Text";
+import BottomSection from "@app/components/BottomSection";
+import careerCTA from "../../public/careersCTA.png";
 
 const CustomHead = () => {
   useEffect(() => {
@@ -236,9 +238,8 @@ export default function Careers() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden" style={{ zIndex: 1 }}>
-          <div className="w-full h-[400px] sm:h-[500px] md:h-[590px] relative bg-blue-700">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600">
+        {/* <div className="w-full h-[400px] sm:h-[500px] md:h-[590px] relative bg-blue-700"> */}
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600">
               <Image
                 src="/corporate.jpg"
                 alt="Corporate background"
@@ -246,8 +247,8 @@ export default function Careers() {
                 className="object-cover mix-blend-overlay opacity-30"
                 priority
               />
-            </div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
+            </div> */}
+        {/* <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
               <h2 className='font-["EB_Garamond"] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-white text-center mb-6 sm:mb-8 drop-shadow-md'>
                 Set to thrive in
                 <br />
@@ -261,9 +262,12 @@ export default function Careers() {
                   View current openings
                 </Link>
               </div>
-            </div>
-          </div>
-        </section>
+            </div> */}
+        <BottomSection
+          content="Set to thrive in, your future?"
+          backgroundImage={careerCTA}
+        />
+        {/* </div> */}
       </section>
     </>
   );
