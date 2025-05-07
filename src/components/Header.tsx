@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -17,6 +17,7 @@ export default function Header({ transparent = false }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsSticky(window.scrollY > 100);
@@ -24,6 +25,23 @@ export default function Header({ transparent = false }: HeaderProps) {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsHovered(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleServiceDropdown = () => {
+    setIsHovered(!isHovered);
+  };
 
   const navLinks = [
     { href: "/service", name: "Services" },
@@ -88,17 +106,28 @@ export default function Header({ transparent = false }: HeaderProps) {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center justify-center space-x-14 relative">
             <div
+              ref={dropdownRef}
               className="relative"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <div className="flex items-center space-x-1 cursor-pointer">
-                <Link href="/service">
+              <div 
+                className="flex items-center space-x-1 cursor-pointer"
+                onClick={toggleServiceDropdown}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    toggleServiceDropdown();
+                  }
+                }}
+              >
+                <Link href="/service" onClick={(e) => e.stopPropagation()}>
                   <span className={`${textColor}`} style={navLinkStyle}>
                     Services
                   </span>
                 </Link>
-                <ChevronDown size={16} className={textColor} />
+                <ChevronDown size={16} className={`${textColor} transition-transform duration-200 ${isHovered ? 'rotate-180' : ''}`} />
               </div>
 
               <AnimatePresence>
@@ -107,39 +136,34 @@ export default function Header({ transparent = false }: HeaderProps) {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-0 top-full w-screen bg-[#d9e6fc] shadow-md z-50 flex justify-center"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 w-auto min-w-[800px] bg-[#f0f7ff] shadow-md z-50 rounded-md overflow-hidden"
                   >
-                    <div className="w-full max-w-[1280px] px-6 py-6 flex gap-8">
+                    <div className="w-full py-8 px-10 flex">
                       {/* Left Title */}
-                      <div className="min-w-[120px] pr-8 border-r border-gray-300">
+                      <div className="min-w-[140px] pr-8 border-r border-gray-300 flex items-center">
                         <h3 className="text-2xl font-semibold text-black">
                           Services
                         </h3>
                       </div>
 
                       {/* Service items */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {services.map((item) => (
-                          <div key={item.title} className="text-sm text-black">
-                            <h4 className="font-semibold text-lg">
-                              {item.title}
-                            </h4>
-
-                            <p className="text-[13px] leading-5 mt-1">
-                              We help companies become more resilient and
-                              future-ready by effectively managing.
-                            </p>
-                            <Link
-                              href={item.href}
-                              className="mt-2 inline-block text-blue-600 text-sm underline"
-                            >
-                              View more
-                            </Link>
-                          </div>
-                        ))}
+                      <div className="flex flex-1 items-center pl-10">
+                        <div className="flex items-center space-x-16 w-full">
+                          {services.map((item) => (
+                            <div key={item.title}>
+                              <Link 
+                                href={item.href} 
+                                className="block"
+                                onClick={() => setIsHovered(false)}
+                              >
+                                <h4 className="font-semibold text-lg text-black hover:text-[#1143E8] transition-colors">
+                                  {item.title}
+                                </h4>
+                              </Link>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -214,7 +238,7 @@ export default function Header({ transparent = false }: HeaderProps) {
                         key={item.href}
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-sm text-gray-700"
+                        className="text-black hover:text-[#1143E8] transition-colors text-sm font-medium block"
                       >
                         {item.title}
                       </Link>
