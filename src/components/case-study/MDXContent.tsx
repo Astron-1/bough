@@ -23,11 +23,20 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
     }
   };
   
+  // Track if we're looking at the paragraph following a Headline section
+  let afterHeadline = false;
+  
   // Define custom components for MDX with title-aware rendering
   const components = {
     h1: ({ children }: { children: React.ReactNode }) => {
       // Skip rendering the title if it matches the one in BlogHeader
       const text = typeof children === 'string' ? children : '';
+      
+      // Always hide any h1 containing case study
+      if (text.toLowerCase().includes('case study')) {
+        return null;
+      }
+      
       // Handle various formats of title text including bold markers and case variations
       const cleanText = text.replace(/\*\*/g, '').trim();
       const titleLowerCase = title.toLowerCase().trim();
@@ -37,14 +46,13 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
       if (cleanText === title || 
           cleanTextLowerCase === titleLowerCase || 
           cleanTextLowerCase.includes(titleLowerCase) || 
-          titleLowerCase.includes(cleanTextLowerCase) ||
-          text.includes("CASE STUDY") // Specifically target case study headers
+          titleLowerCase.includes(cleanTextLowerCase)
       ) {
         return null;
       }
       
       return (
-        <Text type={Font.GARAMOND} className="text-4xl font-bold mb-6 text-gray-800 mt-8">
+        <Text type={Font.SOURCE_SANS} className="text-4xl font-bold mb-6 text-gray-800 mt-8">
           {children}
         </Text>
       );
@@ -53,54 +61,90 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
       // Special styling for specific case study sections
       const text = typeof children === 'string' ? children : '';
       
-      // Hide the Headline section header but keep other sections
+      // For Headline section, set a flag to format the next paragraph
       if (text === 'Headline') {
+        afterHeadline = true;
         return null;
       }
+      
+      // Reset the flag when we hit another section
+      afterHeadline = false;
       
       const isSection = text.includes('At a Glance') || 
                         text.includes('At a glance') ||
                         text.includes('What We Did') || 
+                        text.includes('What we did') || 
                         text.includes('Case Story') || 
+                        text.includes('Case story') || 
                         text.includes('Results');
       
       return (
         <Text 
-          type={Font.GARAMOND} 
+          type={Font.SOURCE_SANS} 
           className={`text-2xl font-bold ${isSection ? 'mt-12 mb-4 text-gray-900 border-b pb-2' : 'mt-10 mb-4 text-gray-800'}`}
         >
           {children}
         </Text>
       );
     },
-    h3: ({ children }: { children: React.ReactNode }) => (
-      <Text type={Font.GARAMOND} className="text-xl font-semibold mt-8 mb-3 text-gray-800">
-        {children}
-      </Text>
-    ),
-    h4: ({ children }: { children: React.ReactNode }) => (
-      <Text type={Font.GARAMOND} className="text-lg font-semibold mt-6 mb-2 text-gray-800">
-        {children}
-      </Text>
-    ),
-    p: ({ children }: { children: React.ReactNode }) => (
-      <Text type={Font.SOURCE_SANS} className="mb-4 text-gray-700 text-lg">
-        {children}
-      </Text>
-    ),
-    ul: ({ children }: { children: React.ReactNode }) => (
-      <ul className="list-disc list-inside space-y-2 pl-4 mb-6">{children}</ul>
-    ),
-    ol: ({ children }: { children: React.ReactNode }) => (
-      <ol className="list-decimal list-inside space-y-2 pl-4 mb-6">{children}</ol>
-    ),
-    li: ({ children }: { children: React.ReactNode }) => (
-      <li className="text-base">
-        <Text type={Font.SOURCE_SANS} className="inline text-gray-700">
+    h3: ({ children }: { children: React.ReactNode }) => {
+      // Reset headline flag
+      afterHeadline = false;
+      return (
+        <Text type={Font.SOURCE_SANS} className="text-xl font-semibold mt-8 mb-3 text-gray-800">
           {children}
         </Text>
-      </li>
+      );
+    },
+    h4: ({ children }: { children: React.ReactNode }) => {
+      // Reset headline flag
+      afterHeadline = false;
+      return (
+        <Text type={Font.SOURCE_SANS} className="text-lg font-semibold mt-6 mb-2 text-gray-800">
+          {children}
+        </Text>
+      );
+    },
+    p: ({ children }: { children: React.ReactNode }) => {
+      // Check if this paragraph follows the Headline section
+      if (afterHeadline) {
+        // Reset the flag so we only format the first paragraph after the headline
+        afterHeadline = false;
+        
+        // Format the headline content as an H1 with Garamond font
+        return (
+          <Text type={Font.GARAMOND} className="text-4xl font-bold mb-6 text-gray-900 mt-4">
+            {children}
+          </Text>
+        );
+      }
+      
+      // Regular paragraph formatting
+      return (
+        <Text type={Font.SOURCE_SANS} className="mb-4 text-gray-700 text-lg">
+          {children}
+        </Text>
+      );
+    },
+    ul: ({ children }: { children: React.ReactNode }) => (
+      <ul className="list-disc space-y-4 pl-6 mb-6">{children}</ul>
     ),
+    ol: ({ children }: { children: React.ReactNode }) => (
+      <ol className="list-decimal space-y-4 pl-6 mb-6">{children}</ol>
+    ),
+    li: ({ children }: { children: React.ReactNode }) => {
+      return (
+        <li className="text-base pl-2">
+          <div className="flex">
+            <div className="flex-1">
+              <Text type={Font.SOURCE_SANS} className="text-gray-700">
+                {children}
+              </Text>
+            </div>
+          </div>
+        </li>
+      );
+    },
     blockquote: ({ children }: { children: React.ReactNode }) => (
       <blockquote className="border-l-4 border-gray-300 pl-4 italic mb-6">
         {children}
@@ -148,6 +192,7 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
               width={800}
               height={450}
               className="w-full max-w-3xl h-auto rounded-lg shadow-md"
+              loading="lazy"
             />
           </div>
           {alt && (

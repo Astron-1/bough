@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import Image from 'next/image';
 import Text, { Font } from '@app/components/Text';
@@ -44,7 +45,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({
       </div>
 
       {/* Title and Description */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      {/* <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
         {formattedDate && (
           <div className="mb-4">
             <Text type={Font.SOURCE_SANS} className="text-gray-500">
@@ -76,11 +77,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({
             ))}
           </div>
         )}
-      </div>
-
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-2">
-        <hr className="border-t border-gray-200" />
-      </div>
+      </div> */}
     </div>
   );
 };

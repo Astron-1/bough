@@ -28,13 +28,13 @@ export default function Careers() {
       step: "01",
       title: "Application Submission",
       description:
-        "The first step is to submit your application through our careers portal. Our team conducts a thorough evaluation to identify the best potential matches. We carefully review each application to shortlist candidates whose skills and experiences align closely with the role’s requirements",
+        "The first step is to submit your application through our careers portal. Our team conducts a thorough evaluation to identify the best potential matches. We carefully review each application to shortlist candidates whose skills and experiences align closely with the role's requirements",
     },
     {
       step: "02",
       title: "Video Introduction",
       description:
-        "After your application is shortlisted, you'll be asked to record a brief 3-5 minute video introduction. In this video, tell us about yourself, your journey so far, and why you’re excited about this opportunity. We value authenticity over perfection, so just be yourself.",
+        "After your application is shortlisted, you'll be asked to record a brief 3-5 minute video introduction. In this video, tell us about yourself, your journey so far, and why you're excited about this opportunity. We value authenticity over perfection, so just be yourself.",
     },
     {
       step: "03",
@@ -56,6 +56,19 @@ export default function Careers() {
 
       <section className="relative min-h-screen overflow-hidden bg-[#F8FBFF]">
         <Header />
+
+        {/* Background Wave - positioned to span across hero and part of content */}
+        <div className="absolute h-[100px] overflow-visible w-full pt-120 pb-36">
+          <div className="absolute w-[105%] h-full top-30 z-0 " style={{ transform: 'rotate(-15deg)' }}>
+            <Image
+              src="/about-us/herosection.svg"
+              alt="Wave background"
+              fill
+              priority
+              className="object-cover object-center opacity-15"
+            />
+          </div>
+        </div>
 
         {/* Hero section */}
         <section className="relative pt-20 pb-32 md:pt-32 md:pb-40">
@@ -129,6 +142,9 @@ export default function Careers() {
             </div>
           </div>
         </section>
+
+        {/* Visual spacer to transition between hero and content */}
+        <div className="h-16 md:h-32 relative z-0"></div>
 
         {/* Decorative Background Path */}
         <div
@@ -239,37 +255,12 @@ export default function Careers() {
           </div>
         </section>
 
-        {/* <div className="w-full h-[400px] sm:h-[500px] md:h-[590px] relative bg-blue-700"> */}
-        {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600">
-              <Image
-                src="/corporate.jpg"
-                alt="Corporate background"
-                fill
-                className="object-cover mix-blend-overlay opacity-30"
-                priority
-              />
-            </div> */}
-        {/* <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-              <h2 className='font-["EB_Garamond"] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-white text-center mb-6 sm:mb-8 drop-shadow-md'>
-                Set to thrive in
-                <br />
-                your future?
-              </h2>
-              <div>
-                <Link
-                  href="/careers/openings"
-                  className="inline-block bg-transparent border-2 border-white text-white font-semibold px-8 sm:px-12 py-2 sm:py-2.5 rounded-full hover:bg-white/20 transition-colors text-sm sm:text-base"
-                >
-                  View current openings
-                </Link>
-              </div>
-            </div> */}
         <BottomSection
           content="Set to thrive in, your future?"
           backgroundImage={careerCTA}
+          buttonText="View current openings"
           className=""
         />
-        {/* </div> */}
       </section>
     </>
   );

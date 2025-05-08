@@ -19,20 +19,20 @@ const ShinyText: React.FC<ShinyTextProps> = ({
 
   return (
     <span
-      className={`  inline-block ${
+      className={`inline-block ${
         disabled ? "" : "animate-shine"
-      } ${className}`}
+      } ${className} max-w-full`}
       style={{
         position: "relative",
         zIndex: 1,
       }}
     >
       {/* Static visible text */}
-      <span className="relative z-10">{text}</span>
+      <span className="relative z-10 break-words">{text}</span>
 
       {/* Shiny overlay */}
       <span
-        className="absolute inset-0 z-20"
+        className="absolute inset-0 z-20 break-words"
         style={{
           backgroundImage:
             "linear-gradient(120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 60%)",

@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}", // Adjust based on where your components are
     "./pages/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}", // Add this to include src directory
   ],
   theme: {
     extend: {
@@ -13,7 +14,8 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn 0.8s ease-out forwards',
         slideUp: 'slideUp 0.6s ease-out forwards',
-        checkmarkAppear: 'checkmarkAppear 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards'
+        checkmarkAppear: 'checkmarkAppear 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards',
+        shine: 'shine 5s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -28,6 +30,10 @@ module.exports = {
           '0%': { transform: 'scale(0)', opacity: '0' },
           '60%': { transform: 'scale(1.1)' },
           '100%': { transform: 'scale(1)', opacity: '1' }
+        },
+        shine: {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '-200% 0' }
         }
       }
     },

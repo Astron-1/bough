@@ -86,11 +86,23 @@ export function getAllCaseStudies(): CaseStudyData[] {
       // Extract title from first heading if not in frontmatter
       let title = matterData.title;
       if (!title) {
-        const match = content.match(/^#\s+(.+)$/m);
-        if (match) {
-          title = match[1].replace(/\*\*/g, '').trim();
-        } else {
-          title = slug;
+        // Look for the headline section first - this is a higher priority
+        const lines = content.split('\n');
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].startsWith('## Headline') && i + 1 < lines.length) {
+            title = lines[i + 1].trim();
+            break;
+          }
+        }
+        
+        // If no headline found, fall back to first h1
+        if (!title) {
+          const match = content.match(/^#\s+(.+)$/m);
+          if (match) {
+            title = match[1].replace(/\*\*/g, '').trim();
+          } else {
+            title = slug;
+          }
         }
       }
       
@@ -133,7 +145,7 @@ export function getAllCaseStudies(): CaseStudyData[] {
         ...defaultFrontMatter,
         ...matterData,
         title: title,
-        description: description || 'Case study by Bough',
+        description: description || '',
         date: date,
       };
 
@@ -173,11 +185,26 @@ export function getCaseStudyBySlug(slug: string): CaseStudyData | null {
     // Extract title and description from content if not in frontmatter
     let title = matterData.title;
     if (!title) {
-      const match = rawContent.match(/^#\s+(.+)$/m);
-      if (match) {
-        title = match[1].replace(/\*\*/g, '').trim();
-      } else {
-        title = slug;
+      // Look for the headline section first - this is a higher priority
+      const lines = rawContent.split('\n');
+      let foundHeadline = false;
+      
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('## Headline') && i + 1 < lines.length) {
+          title = lines[i + 1].trim();
+          foundHeadline = true;
+          break;
+        }
+      }
+      
+      // If no headline found, fall back to first h1
+      if (!foundHeadline) {
+        const match = rawContent.match(/^#\s+(.+)$/m);
+        if (match) {
+          title = match[1].replace(/\*\*/g, '').trim();
+        } else {
+          title = slug;
+        }
       }
     }
     
@@ -226,7 +253,7 @@ export function getCaseStudyBySlug(slug: string): CaseStudyData | null {
       ...defaultFrontMatter,
       ...matterData,
       title: title,
-      description: description || 'Case study by Bough',
+      description: description || '',
       coverImage: coverImage,
       date: date,
     };
