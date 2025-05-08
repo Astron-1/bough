@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { useEffect } from "react";
 import Header from "@app/components/Header";
 import BlogHeader from "@app/components/case-study/BlogHeader";
 import MDXContent from "@app/components/case-study/MDXContent";
@@ -15,6 +16,7 @@ interface FrontMatter {
   readTime?: string;
   tags?: string[];
   author?: string;
+  headline?: string;
   [key: string]: string | string[] | undefined | null;
 }
 
@@ -25,6 +27,11 @@ interface CaseStudyProps {
 
 export default function CaseStudy({ source, frontMatter }: CaseStudyProps) {
   const router = useRouter();
+
+  // Debug log for headline
+  useEffect(() => {
+    console.log('Headline value:', frontMatter.headline);
+  }, [frontMatter.headline]);
 
   // If the page is still being generated, show loading state
   if (router.isFallback) {
@@ -49,7 +56,11 @@ export default function CaseStudy({ source, frontMatter }: CaseStudyProps) {
         readTime={frontMatter.readTime}
         tags={frontMatter.tags}
       />
-      <MDXContent content={source} title={frontMatter.title} />
+      <MDXContent 
+        content={source} 
+        title={frontMatter.title} 
+        headline={frontMatter.headline || frontMatter.title} 
+      />
     </div>
   );
 }

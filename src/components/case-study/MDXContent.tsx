@@ -7,9 +7,10 @@ import { motion } from 'framer-motion';
 interface MDXContentProps {
   content: MDXRemoteSerializeResult;
   title: string; // Add title prop to identify which h1 to skip
+  headline: string; // Add headline prop for consistent display
 }
 
-const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
+const MDXContent: React.FC<MDXContentProps> = ({ content, title, headline }) => {
   // Define animation variants for images
   const imageAnimationVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -34,6 +35,11 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
       
       // Always hide any h1 containing case study
       if (text.toLowerCase().includes('case study')) {
+        return null;
+      }
+      
+      // Always hide any h1 that matches our headline content
+      if (text === headline || text.replace(/\*\*/g, '').trim() === headline) {
         return null;
       }
       
@@ -64,6 +70,7 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
       // For Headline section, set a flag to format the next paragraph
       if (text === 'Headline') {
         afterHeadline = true;
+        // Skip rendering this section entirely
         return null;
       }
       
@@ -106,14 +113,22 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
       );
     },
     p: ({ children }: { children: React.ReactNode }) => {
+      // Get the text content
+      const text = typeof children === 'string' ? children : '';
+      
+      // If this paragraph content matches our headline, don't display it (regardless of location)
+      if (text === headline) {
+        return null;
+      }
+      
       // Check if this paragraph follows the Headline section
       if (afterHeadline) {
-        // Reset the flag so we only format the first paragraph after the headline
+        // Reset the flag so only the first paragraph after the headline is affected
         afterHeadline = false;
         
-        // Format the headline content as an H1 with Garamond font
+        // Format normally (headline content is already filtered out above)
         return (
-          <Text type={Font.GARAMOND} className="text-4xl font-bold mb-6 text-gray-900 mt-4">
+          <Text type={Font.SOURCE_SANS} className="mb-4 text-gray-700 text-lg">
             {children}
           </Text>
         );
@@ -224,7 +239,13 @@ const MDXContent: React.FC<MDXContentProps> = ({ content, title }) => {
 
   return (
     <div className="w-full">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        {/* Display the headline with clean, minimal styling */}
+        <h1 className="text-left mb-6 mt-12 ">
+          <Text type={Font.GARAMOND} className="text-4xl font-bold text-black tracking-tight leading-tight ">
+            {headline}
+          </Text>
+        </h1>
         <MDXRemote {...content} components={components} />
       </div>
     </div>

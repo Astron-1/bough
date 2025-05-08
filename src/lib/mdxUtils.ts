@@ -20,6 +20,7 @@ interface CaseStudyFrontMatter {
   readTime?: string;
   tags?: string[];
   author?: string;
+  headline?: string;
   [key: string]: string | string[] | undefined | null;
 }
 
@@ -82,6 +83,33 @@ export function getAllCaseStudies(): CaseStudyData[] {
 
       // Use gray-matter to parse the case study metadata
       const { data: matterData, content } = matter(fileContents);
+      
+      // Extract headline content directly
+      let headlineContent = '';
+      const lines = content.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('## Headline') && i + 1 < lines.length) {
+          // Make sure we have a non-empty line after "## Headline"
+          const nextLine = lines[i + 1].trim();
+          if (nextLine) {
+            headlineContent = nextLine;
+            break;
+          }
+          // If the next line is empty, look for the next non-empty line
+          for (let j = i + 2; j < lines.length; j++) {
+            const potentialHeadline = lines[j].trim();
+            if (potentialHeadline && !potentialHeadline.startsWith('#')) {
+              headlineContent = potentialHeadline;
+              break;
+            }
+            // Stop if we hit another heading
+            if (potentialHeadline.startsWith('#')) {
+              break;
+            }
+          }
+          break;
+        }
+      }
       
       // Extract title from first heading if not in frontmatter
       let title = matterData.title;
@@ -147,6 +175,7 @@ export function getAllCaseStudies(): CaseStudyData[] {
         title: title,
         description: description || '',
         date: date,
+        headline: headlineContent || title,
       };
 
       // Combine the data with the slug
@@ -181,6 +210,33 @@ export function getCaseStudyBySlug(slug: string): CaseStudyData | null {
     
     // Process the content to replace base64 images with proper image paths
     const content = processContent(rawContent, slug);
+    
+    // Extract headline content directly
+    let headlineContent = '';
+    const lines = rawContent.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].startsWith('## Headline') && i + 1 < lines.length) {
+        // Make sure we have a non-empty line after "## Headline"
+        const nextLine = lines[i + 1].trim();
+        if (nextLine) {
+          headlineContent = nextLine;
+          break;
+        }
+        // If the next line is empty, look for the next non-empty line
+        for (let j = i + 2; j < lines.length; j++) {
+          const potentialHeadline = lines[j].trim();
+          if (potentialHeadline && !potentialHeadline.startsWith('#')) {
+            headlineContent = potentialHeadline;
+            break;
+          }
+          // Stop if we hit another heading
+          if (potentialHeadline.startsWith('#')) {
+            break;
+          }
+        }
+        break;
+      }
+    }
     
     // Extract title and description from content if not in frontmatter
     let title = matterData.title;
@@ -256,6 +312,7 @@ export function getCaseStudyBySlug(slug: string): CaseStudyData | null {
       description: description || '',
       coverImage: coverImage,
       date: date,
+      headline: headlineContent || title,
     };
 
     return {
