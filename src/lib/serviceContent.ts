@@ -155,9 +155,9 @@ export const serviceContent = {
       heading1: "Our approach",
       heading2: "Our offerings",
       contentHeading1:
-        "Identify: Understanding how ESG issues can impact the organization’s ability to create & maintain value, including dependencies on ESG factors, physical risks, transition risks, reputational risks, and market changes.",
+        "Our world faces numerous global challenges, climate change, transitioning from a linear economy to a circular one, increasing inequality, balancing economic needs with societal needs. We provide strategic, operational, and financial solutions that not only meet regulatory requirements but also drive sustainable growth and resilience",
       contentHeading2:
-        "Assess: Perform coherent and cohesive assessments to minimize risk and ensure ESG policies are in place. Address: Implement the right systems and people to manage and mitigate ESG risks across your organization.",
+        "",
       offerings: {
         subheading: "",
         sections: [

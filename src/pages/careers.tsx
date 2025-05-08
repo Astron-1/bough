@@ -28,25 +28,25 @@ export default function Careers() {
       step: "01",
       title: "Application Submission",
       description:
-        "Submit your application through our careers portal. We evaluate applications to shortlist candidates who align closely with the role.",
+        "The first step is to submit your application through our careers portal. Our team conducts a thorough evaluation to identify the best potential matches. We carefully review each application to shortlist candidates whose skills and experiences align closely with the role’s requirements",
     },
     {
       step: "02",
       title: "Video Introduction",
       description:
-        "Shortlisted applicants record a 3–5 min video introducing themselves, their journey, and excitement for the role.",
+        "After your application is shortlisted, you'll be asked to record a brief 3-5 minute video introduction. In this video, tell us about yourself, your journey so far, and why you’re excited about this opportunity. We value authenticity over perfection, so just be yourself.",
     },
     {
       step: "03",
       title: "Assessment",
       description:
-        "Depending on the role, an assessment may be required — tasks, case studies, or projects to evaluate your skills.",
+        "Depending on the role, you may be asked to complete an assessment that demonstrates your skills and problem-solving abilities. This assessment could include tasks, case studies, or projects designed to gauge your suitability for the position.",
     },
     {
       step: "04",
       title: "Interview",
       description:
-        "Selected candidates attend virtual/in-person interviews focused on skills, experience, and team fit.",
+        "Selected candidates are invited for virtual and in-person interviews tailored to the specific role. During these interviews, you'll have the opportunity to showcase your strengths, discuss your experiences, and learn more about our company culture and values. Our interview process may include multiple rounds to ensure a comprehensive evaluation.",
     },
   ];
 

@@ -1,13 +1,7 @@
 import React from "react";
 import Text, { Font } from "@app/components/Text";
 import { figmaSectionContainer } from "@app/utils/figmaUtils";
-import {
-  BetterIcon,
-  RelationsIcon,
-  ValuesIcon,
-  TrustIcon,
-  ProfitabilityIcon,
-} from "./icons/CoreValuesIcons";
+import { Compass, HeartHandshake, Landmark, TrendingUp, Lock } from "lucide-react";
 
 interface CoreValueProps {
   icon: React.ReactNode;
@@ -25,23 +19,23 @@ const CoreValuesSection: React.FC<CoreValuesSectionProps> = ({
 }) => {
   const coreValues: CoreValueProps[] = [
     {
-      icon: <BetterIcon />,
+      icon: <Compass  color="white" size={40}/>,
       title: "Better is not by chance",
     },
     {
-      icon: <RelationsIcon />,
+      icon: <HeartHandshake color="white" size={40}/>,
       title: "Relations are not entitlements",
     },
     {
-      icon: <ValuesIcon />,
+      icon: <Landmark color="white" size={40}/>,
       title: "Values are not convenience",
     },
     {
-      icon: <TrustIcon />,
+      icon: <Lock color="white" size={40}/>,
       title: "Trust is not a coincidence",
     },
     {
-      icon: <ProfitabilityIcon />,
+      icon: <TrendingUp color="white" size={40}/>,
       title: "Profitability is not a reckless pursuit",
     },
   ];

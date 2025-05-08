@@ -58,7 +58,7 @@ export const teamMembers = [
     title: "Senior Consultant",
     image: "/profile/Abhishek.JPG",
     alt: "Abhishek Anand - Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/abhishek-anand/",
+    linkedIn: "https://www.linkedin.com/in/abhishek-anand-a95a93212",
   },
   {
     id: "gunjan-rajpal",
@@ -72,7 +72,7 @@ export const teamMembers = [
     id: "firdaush-ansari",
     name: "Firdaush Ansari",
     title: "Manager",
-    image: "/profile/Firdaush%20Ansari.jpg",
+    image: "/profile/Firdaush%20Ansari.JPG",
     alt: "Firdaush Ansari - Manager",
     linkedIn: "https://www.linkedin.com/in/firdaush-ansari-12ba08120/",
   },
@@ -90,7 +90,7 @@ export const teamMembers = [
     title: "Consultant",
     image: "/profile/Shubham.jpg",
     alt: "Shubham Kapoor - Consultant",
-    linkedIn: "https://www.linkedin.com/in/shubham-kapoor/",
+    linkedIn: "https://www.linkedin.com/in/shubham-kapoor61/",
   },
   {
     id: "puneeta-puri",
@@ -113,7 +113,7 @@ export const teamMembers = [
     title: "Senior Consultant",
     image: "/profile/Saket%20Gupta_Senior%20Consultant.jpeg",
     alt: "Saket Gupta - Senior Consultant",
-    linkedIn: "",
+    linkedIn: "https://www.linkedin.com/in/saket-gupta-a1600b85/",
   },
   {
     id: "khushi-singh",
@@ -143,9 +143,9 @@ export const teamMembers = [
     id: "sakshi-vaishnav",
     name: "Sakshi Vaishnav",
     title: "Associate",
-    image: "/profile/Sakshi.jpg",
+    image: "/profile/Sakshi.JPG",
     alt: "Sakshi Vaishnav - Associate",
-    linkedIn: "https://in.linkedin.com/in/sakshi-vaishnav2003",
+    linkedIn: "https://in.linkedin.com/in/sakshi-vaishnav2003/",
   },
   {
     id: "saurabh-sharma",
@@ -153,7 +153,7 @@ export const teamMembers = [
     title: "Senior Consultant",
     image: "/profile/Saurabh.jpeg",
     alt: "Saurabh Sharma - Senior Consultant",
-    linkedIn: "",
+    linkedIn: "https://www.linkedin.com/in/saurabh-sharma-0303/",
   },
   {
     id: "khushbu-singh",

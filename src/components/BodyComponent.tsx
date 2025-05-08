@@ -45,7 +45,7 @@ export default function BodyComponent() {
         <HomeInsights />
         <PartnersSection />
         <BottomSection
-          content={"Shaping tomorrow, Starting today"}
+          content={"Shaping tomorrow, starting today"}
           backgroundImage={homeBottomImage}
         />
       </div>

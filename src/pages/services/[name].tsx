@@ -131,7 +131,7 @@ export default function ServicePage() {
           <div className="space-y-4 px-4 sm:px-12 md:px-24 lg:px-32 mt-10 md:mt-32">
             <Text
               type={Font.SOURCE_SANS}
-              className="font-bold text-lg sm:text-xl md:text-2xl text-black"
+              className="text-lg sm:text-xl md:text-2xl text-black"
             >
               {content.body?.contentHeading1}
             </Text>
