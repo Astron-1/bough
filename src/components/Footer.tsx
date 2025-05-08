@@ -14,10 +14,10 @@ export default function Footer() {
               style={{ aspectRatio: "284.44 / 160.00" }}
             >
               <Image
-                src="/bough-white.svg"
+                src="/bough-white.png"
                 alt="Bough Consulting Logo"
-                width={400}
-                height={400}
+                width={200}
+                height={200}
                 className="object-contain object-left"
               />
             </div>

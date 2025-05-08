@@ -120,7 +120,8 @@ export default function Careers() {
                 and elevate your career
               </Text>
               <Link
-                href="/careers/openings"
+                href="https://bough.keka.com/careers/"
+                target="_blank"
                 className="bg-blue-600 text-white font-semibold px-8 sm:px-12 py-2 sm:py-2.5 rounded-full hover:bg-blue-700 transition-colors text-sm sm:text-base"
               >
                 View current openings
@@ -266,6 +267,7 @@ export default function Careers() {
         <BottomSection
           content="Set to thrive in, your future?"
           backgroundImage={careerCTA}
+          className=""
         />
         {/* </div> */}
       </section>

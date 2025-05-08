@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import sample from "../../public/corporate.jpg";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import Text, { Font } from "./Text";
@@ -26,7 +25,7 @@ export default function CaseStudyCarousel() {
         {/* Left: Content */}
         <div className="flex flex-row justify-between flex-1 max-w-xl z-10">
           {/* Progress Bar */}
-          <div className="relative h-96 w-6 flex justify-center items-start mt-4 ml-6">
+          <div className="relative h-96 w-6 flex justify-center items-start mt-4 md:ml-6">
             <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
               <div
                 className="absolute bottom-0 left-0 w-full transition-all duration-500"
@@ -41,26 +40,26 @@ export default function CaseStudyCarousel() {
           <div className="flex-col flex justify-start items-start">
             <div className="ml-7 mt-2">
               <h2 className="text-black text-4xl font-bold leading-tight">
-                <Text className="max-w-[200px]" type={Font.GARAMOND}>
+                <Text className="max-w-[300px]" type={Font.GARAMOND}>
                   {caseStudyContent[current].heading}
                 </Text>
               </h2>
-              <div className="text-gray-700 max-h-32 mt-4">
+              <div className="text-gray-700 max-h-32 text-sm md:text-lg mt-4">
                 <Text type={Font.SOURCE_SANS}>
                   {caseStudyContent[current].at_a_glance}
                 </Text>
               </div>
             </div>
 
-            <div className="w-full flex justify-between items-center mt-2">
-              <div className="flex flex-col space-y-4 font-bold ml-3">
+            <div className="w-full flex justify-between items-center mt-2 relative">
+              <div className="flex flex-col space-y-4 font-bold ml-3 relative   ">
                 <Button
-                  className="outline-1 px-7"
+                  className="outline-1 px-7 mt-1"
                   href={`/case-study?name=${caseStudyContent[current].route}`}
                 >
                   <ShinyText text="Know More" speed={3} />
                 </Button>
-                <div className="flex space-x-4 ml-2 mt-5">
+                <div className="flex space-x-4 ml-2 relative  -bottom-8">
                   <button
                     onClick={prevSlide}
                     className="w-10 h-10 rounded-full border font-bold border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
@@ -88,7 +87,7 @@ export default function CaseStudyCarousel() {
             alt="Case study image"
             width={600}
             height={600}
-            className="object-contain"
+            className="object-contain rounded-lg min-h-full"
           />
         </div>
       </div>
