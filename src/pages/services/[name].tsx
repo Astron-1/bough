@@ -72,19 +72,19 @@ export default function ServicePage() {
           <Image
             src={content.heroImage || "/placeholder.svg"}
             alt="heroImage mobile full"
-            className="w-full h-48 object-cover rounded-md"
+            className="w-full h-48 object-cover "
             width={1000}
             height={400}
           />
         </div>
-        <section className="relative w-full px-4 py-16 md:py-24 flex flex-col-reverse md:flex-row items-center justify-center">
+        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 flex flex-col-reverse md:flex-row items-center justify-center">
           {/* Left Image for Desktop */}
 
           <div className="absolute left-0 top-0 bottom-0 w-1/4 hidden md:block">
             <Image
               src={content.heroImage || "/placeholder.svg"}
               alt="heroImage left"
-              className="h-full w-full object-cover"
+              className="h-screen w-full object-cover"
               style={{ clipPath: "inset(0 50% 0 0)" }}
               width={400}
               height={400}
@@ -96,7 +96,7 @@ export default function ServicePage() {
             <Image
               src={content.heroImage || "/placeholder.svg"}
               alt="heroImage right"
-              className="h-full w-full object-cover"
+              className="h-screen w-full object-cover"
               style={{ clipPath: "inset(0 0 0 50%)" }}
               width={400}
               height={400}
@@ -106,8 +106,8 @@ export default function ServicePage() {
           {/* Center Text */}
           <div className="w-full md:w-3/5 text-center py-12 z-10 mx-auto">
             <Text
-              type={Font.SOURCE_SANS}
-              className="text-blue-900 text-xs sm:text-sm font-semibold"
+              type={Font.GARAMOND}
+              className="text-[#1043E8] text-xs sm:text-sm font-semibold"
             >
               {content?.topHeading}
             </Text>

@@ -1,26 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Text, { Font } from "@app/components/Text";
 import BottomSection from "@app/components/BottomSection";
 import careerCTA from "../../public/careersCTA.png";
-
-const CustomHead = () => {
-  useEffect(() => {
-    document.title = "Careers | Bough Consulting";
-    const meta = document.createElement("meta");
-    meta.name = "description";
-    meta.content =
-      "Join the Bough team. We offer value-driven work with flexibility, discipline, and balance.";
-    document.head.appendChild(meta);
-    return () => {
-      document.head.removeChild(meta);
-    };
-  }, []);
-
-  return null;
-};
 
 export default function Careers() {
   const hiringProcedure = [
@@ -52,8 +36,6 @@ export default function Careers() {
 
   return (
     <>
-      <CustomHead />
-
       <section className="relative min-h-screen overflow-hidden bg-[#F8FBFF]">
         <Header />
 
@@ -73,6 +55,16 @@ export default function Careers() {
         {/* Hero section */}
         <section className="relative pt-20 pb-32 md:pt-32 md:pb-40">
           {/* Blur shapes */}
+          <div className="absolute inset-0 z-0 w-full h-full">
+            <Image
+              src="/careerVector.svg"
+              alt="Decorative vector background"
+              width={200}
+              height={200}
+              className="w-screen -mt-32 "
+              priority
+            />
+          </div>
           <div className="absolute w-[200px] h-[300px] sm:w-[300px] sm:h-[400px] md:w-[496px] md:h-[594px] -left-[100px] sm:-left-[150px] md:-left-[197px] top-[100px] sm:top-[150px] md:top-[192px] bg-blue-600/30 rounded-full blur-[150px] sm:blur-[200px] md:blur-[312px]" />
           <div className="absolute w-[200px] h-[300px] sm:w-[300px] sm:h-[400px] md:w-[493px] md:h-[590px] -right-[50px] sm:right-0 top-[80px] sm:top-[100px] md:top-[157px] bg-blue-600/30 rounded-full blur-[150px] sm:blur-[200px] md:blur-[312px]" />
 
@@ -80,15 +72,6 @@ export default function Careers() {
           <div className="md:hidden w-full h-[200px] absolute left-0 top-[50px] overflow-hidden">
             <Image
               src="/career-1.png"
-              alt="City skyline"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-          </div>
-          <div className="md:hidden w-full h-[200px] absolute right-0 top-[250px] overflow-hidden">
-            <Image
-              src="/career-2.png"
               alt="City skyline"
               fill
               className="object-cover object-center"
@@ -240,10 +223,7 @@ export default function Careers() {
                     {step}.
                   </span>
                   <div className="w-full h-px bg-zinc-400 mb-3 sm:mb-4" />
-                  <Text
-                    type={Font.GARAMOND}
-                    className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-black"
-                  >
+                  <Text className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-black">
                     {title}
                   </Text>
                   <Text className="text-base sm:text-lg md:text-xl leading-relaxed text-black">

@@ -288,49 +288,49 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
   // Calculate masonry layout
   const gridItems = useMemo<CalculatedGridItem[]>(() => {
     if (width === 0) return [];
-    
+
     // Create a fixed grid structure with equal column heights
     const columnGap = 10; // Reducing gap to minimize right-side space
     const rowGap = 20;
     const colWidth = width / columns;
     const heights = new Array(columns).fill(0);
-    
+
     return galleryImages.map((item) => {
       // Determine if this image should span multiple columns
       const columnSpan = getColumnSpan(item);
-      
+
       // Find consecutive columns with minimum height
       let startColumn = 0;
       let minHeight = Infinity;
-      
+
       for (let i = 0; i <= columns - columnSpan; i++) {
         // Find the max height among the columns this item would span
         const maxColumnHeight = Math.max(...heights.slice(i, i + columnSpan));
-        
+
         if (maxColumnHeight < minHeight) {
           minHeight = maxColumnHeight;
           startColumn = i;
         }
       }
-      
+
       // Calculate position
       const x = colWidth * startColumn + columnGap / 2;
       const y = heights[startColumn];
-      
+
       // Calculate dimensions - make items slightly wider to fill more space
       const itemWidth = colWidth * columnSpan - columnGap;
-      
+
       // Use aspect ratio or fixed height
-      const itemHeight = item.aspectRatio 
+      const itemHeight = item.aspectRatio
         ? Math.round(itemWidth / item.aspectRatio)
         : item.height;
-      
+
       // Update heights for each column this item spans
       const newHeight = y + itemHeight + rowGap;
       for (let i = 0; i < columnSpan; i++) {
         heights[startColumn + i] = newHeight;
       }
-      
+
       return {
         ...item,
         x,
@@ -352,7 +352,7 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
 
   return (
     <div
-      className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8"
+      className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 flex-row flex justify-center"
       style={figmaSectionContainer()}
     >
       <div className="max-w-full mx-auto">

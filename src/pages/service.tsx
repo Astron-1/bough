@@ -1,22 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
 import Text, { Font } from "@app/components/Text";
 import BoughServices from "@app/components/Services";
 import coin1 from "../../public/service-hero-1.png";
 import coin2 from "../../public/service-hero-2.png";
 import Header from "@app/components/Header";
-import MainCarousel from "@app/components/MainCarousel";
 import BottomSection from "@app/components/BottomSection";
 import serviceCTA from "../../public/serviceCTA.png";
+import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
+import Button from "@app/components/ui/Button";
 
 export default function ServicesPage() {
   return (
     <section className=" bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-      {/* Header/Navigation */}
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative w-full px-4 py-16 md:py-24 flex flex-col md:flex-row items-center justify-center">
+      <section className="md:h-screen relative w-full px-4 py-16 md:py-24 flex flex-col md:flex-row items-center justify-center">
         {/* Left Image */}
         <div className="hidden lg:block absolute left-0 top-0 bottom-0 2xl">
           <Image
@@ -24,7 +22,7 @@ export default function ServicesPage() {
             alt="Plant growing from coins"
             width={300}
             height={400}
-            className="object-contain h-full w-auto"
+            className="h-screen object-contain w-auto"
           />
         </div>
 
@@ -43,13 +41,11 @@ export default function ServicesPage() {
             We are advisors, thought leaders, and problem solvers, dedicated to
             creating long-term value and sustainable solutions.
           </Text>
-          <Link href="#serviceslist">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full">
-              <Text type={Font.GARAMOND} className="font-medium">
-                View Our Services
-              </Text>
-            </button>
-          </Link>
+          <div className="text-center flex-row flex justify-center">
+            <Button href="#servicelist">
+              <Text className="font-medium">View Services</Text>
+            </Button>
+          </div>
         </div>
 
         {/* Right Image */}
@@ -57,9 +53,9 @@ export default function ServicesPage() {
           <Image
             src={coin2}
             alt="Plant growing from coins"
-            width={300}
+            width={500}
             height={400}
-            className="object-contain h-full w-full"
+            className="h-screen object-contain w-full"
           />
         </div>
       </section>
@@ -71,7 +67,7 @@ export default function ServicesPage() {
 
       {/* Featured Case Studies */}
       <div className="" style={{ width: "70rem", maxWidth: "100%" }}>
-        <MainCarousel />
+        <CaseStudyCarousel />
       </div>
       <BottomSection
         content="Let's drive outcomes by crafting changes
