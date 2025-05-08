@@ -6,11 +6,7 @@ import ValuesSection from "@app/components/about/ValuesSection";
 import TeamSection from "@app/components/about/TeamSection";
 import CoreValuesSection from "@app/components/about/CoreValuesSection";
 import GallerySection from "@app/components/about/GallerySection";
-import {
-  KnowledgeIcon,
-  ImpactIcon,
-  TrustIcon,
-} from "@app/components/about/icons/ValueIcons";
+import { ShieldCheck, Zap, BookOpen } from "lucide-react";
 import BottomSection from "@app/components/BottomSection";
 import homeBottomImage from "../../../public/bottomImage.png";
 
@@ -28,7 +24,7 @@ export const teamMembers = [
     id: "ratan-postwalla",
     name: "Ratan Postwalla",
     title: "Chief People Officer",
-    image: "/profile/Ratan.png",
+    image: "/profile/Ratan.jpg",
     alt: "Ratan Postwalla - Chief People Officer",
     linkedIn: "https://www.linkedin.com/in/ratanpostwalla/",
   },
@@ -92,14 +88,14 @@ export const teamMembers = [
     id: "shubham-kapoor",
     name: "Shubham Kapoor",
     title: "Consultant",
-    image: "/profile/Shubham.png",
+    image: "/profile/Shubham.jpg",
     alt: "Shubham Kapoor - Consultant",
     linkedIn: "https://www.linkedin.com/in/shubham-kapoor/",
   },
   {
     id: "puneeta-puri",
     name: "Puneeta Puri",
-    image: "/profile/Puneeta%20Puri.png",
+    image: "/profile/Puneeta%20Puri.jpg",
     title: "ESG Advisor",
     linkedIn: "https://in.linkedin.com/in/ca-puneeta-puri-35208b9",
   },
@@ -162,7 +158,7 @@ export const teamMembers = [
   {
     id: "khushbu-singh",
     name: "Khushbu Singh",
-    image: "/profile/Khushbu%20Singh.png",
+    image: "/profile/Khushbu%20Singh.jpg",
     title: "Senior Visual Communications Designer",
     linkedIn: "https://www.linkedin.com/in/khushbu-singh-8b221919b/",
   },
@@ -241,28 +237,21 @@ export default function AboutUsPage() {
       title: "Power of knowledge",
       description:
         "We believe that knowledge is the key to unlocking endless possibilities. Our relentless pursuit of understanding drives our unwavering dedication to solving the toughest challenges. We thrive in the face of disruption, always pushing forward to ensure our clients' success with consistency and precision.",
-      icon: <KnowledgeIcon />,
-      measurementLeftValue: "10.64",
-      measurementRightValue: "47.2",
-      measurementBottomValue: "2.97",
+      icon: <ShieldCheck color="white" size={40} />,
     },
     {
       title: "Impact that matters",
       description:
         "Our mission goes beyond delivering results; it's about making a meaningful impact on the world around us—both for our clients and our team. We are committed to earning and maintaining the trust of our clients, always going the extra mile to deliver excellence.",
-      icon: <ImpactIcon />,
-      measurementLeftValue: "2.97",
-      measurementRightValue: "47.2",
+      icon: <Zap color="white" size={40} />,
     },
     {
       title: "Pioneering trust and growth",
       description:
         "In everything we do, we strive to be a force for positive change, ensuring that our actions leave a legacy of trust, innovation, and growth.",
-      icon: <TrustIcon />,
-      measurementRightValue: "4.2",
+      icon: <BookOpen color="white" size={40} />,
     },
   ];
-
   // Team section content
   const teamContent = {
     title: "Say hello to some of our team members!",

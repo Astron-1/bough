@@ -13,7 +13,7 @@ export default function BodyComponent() {
       <HeroText />
       <div className="3xl:mt-96">
         <div
-          className="absolute left-0 w-full h-[200%] overflow-visible pointer-events-none"
+          className="absolute left-0 w-full h-full overflow-visible pointer-events-none"
           style={{
             zIndex: 0,
             top: "600px",

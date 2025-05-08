@@ -28,14 +28,17 @@ export default function Header({ transparent = false }: HeaderProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsHovered(false);
       }
     };
-    
-    document.addEventListener('mousedown', handleClickOutside);
+
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -111,13 +114,13 @@ export default function Header({ transparent = false }: HeaderProps) {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <div 
+              <div
                 className="flex items-center space-x-1 cursor-pointer"
                 onClick={toggleServiceDropdown}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === "Enter" || e.key === " ") {
                     toggleServiceDropdown();
                   }
                 }}
@@ -127,7 +130,12 @@ export default function Header({ transparent = false }: HeaderProps) {
                     Services
                   </span>
                 </Link>
-                <ChevronDown size={16} className={`${textColor} transition-transform duration-200 ${isHovered ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  size={16}
+                  className={`${textColor} transition-transform duration-200 ${
+                    isHovered ? "rotate-180" : ""
+                  }`}
+                />
               </div>
 
               <AnimatePresence>
@@ -152,8 +160,8 @@ export default function Header({ transparent = false }: HeaderProps) {
                         <div className="flex items-center space-x-16 w-full">
                           {services.map((item) => (
                             <div key={item.title}>
-                              <Link 
-                                href={item.href} 
+                              <Link
+                                href={item.href}
                                 className="block"
                                 onClick={() => setIsHovered(false)}
                               >

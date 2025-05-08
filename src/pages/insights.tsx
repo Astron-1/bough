@@ -177,7 +177,7 @@ export default function InsightsPage() {
           content="Let's drive outcomes by crafting changes
 for a meaningful tomorrow, now"
           backgroundImage={ConnectCTA}
-          className="md:px-12"
+          className="md:px-4 text-xl md:text-2xl"
         />
       </div>
     </main>

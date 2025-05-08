@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <div
-      className={`px-32 py-10 text-black text-3xl ${className}`}
+      className={` py-10 text-black ${className}`}
       style={{ fontWeight: 500 }}
     >
       <GlobalClickSpark>{children}</GlobalClickSpark>
