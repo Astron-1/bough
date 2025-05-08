@@ -17,7 +17,7 @@ export default function BottomSection({
   className,
 }: BottomCTAInterface) {
   return (
-    <div className="relative w-full flex items-center justify-center overflow-hidden min-h-[400px] py-24">
+    <div className="relative w-full flex items-center justify-center overflow-hidden py-24">
       {/* Background Image */}
       <Image
         src={backgroundImage}

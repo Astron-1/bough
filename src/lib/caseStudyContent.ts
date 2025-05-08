@@ -20,8 +20,8 @@ interface CaseStudyContent {
   id: string;
   heading: string;
   at_a_glance: string;
-  what_we_did: string[];
-  case_story: {
+  what_we_did?: string[];
+  case_story?: {
     heading: string;
     description: {
       subHeading: string;
@@ -38,7 +38,7 @@ interface CaseStudyContent {
       image?: ImageProps;
     }[];
   }[];
-  results: {
+  results?: {
     heading: string;
     description?: string[];
     image?: ImageProps;
@@ -353,5 +353,23 @@ export const caseStudyContent: CaseStudyContent[] = [
         ],
       },
     ],
+  },
+  {
+    id: "SOX",
+    heading:
+      "Revamping SOX compliance for enhanced agility and cost efficiency",
+    at_a_glance:
+      "Bough helps a global leader in publishing education and research transform their SOX compliance program to achieve agility and cost-effectiveness ",
+    image: "/manhattan.avif",
+    route: "CASE%20STUDY%207%20–%20Wiley%20SOX",
+  },
+  {
+    id: "Revenue",
+    heading: "Revenue Assurance and audit readiness",
+    at_a_glance:
+      "Bough helps a global technology company implement an effective and a cost-effective revenue assurance program to ensure regulatory compliance and meet audit requirements",
+    image: "/manhattan.avif",
+    route:
+      "CASE%20STUDY%203%20–%20Revenue%20Assurance%20and%20audit%20readiness",
   },
 ];

@@ -57,7 +57,7 @@ export default function BoughServices({
   // }, []);
 
   return (
-    <div className="relative w-full py-16" style={{ minHeight: "1600px" }}>
+    <div className="relative w-full py-16" style={{ minHeight: "100px" }}>
       {/* Service Cards Container with embedded SVG path */}
       <div ref={sectionRef} className="relative flex flex-col gap-20 w-full">
         {/* SVG Path connecting the service cards */}
