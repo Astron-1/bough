@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Text, { Font } from "@app/components/Text";
 import BottomSection from "@app/components/BottomSection";
 import careerCTA from "../../public/careersCTA.png";
+import Button from "@app/components/ui/Button";
 
 export default function Careers() {
   const hiringProcedure = [
@@ -41,7 +42,10 @@ export default function Careers() {
 
         {/* Background Wave - positioned to span across hero and part of content */}
         <div className="absolute h-[100px] overflow-visible w-full pt-120 pb-36">
-          <div className="absolute w-[105%] h-full top-30 z-0 " style={{ transform: 'rotate(-15deg)' }}>
+          <div
+            className="absolute w-[105%] h-full top-30 z-0 "
+            style={{ transform: "rotate(-15deg)" }}
+          >
             <Image
               src="/about-us/herosection.svg"
               alt="Wave background"
@@ -118,9 +122,9 @@ export default function Careers() {
               <Link
                 href="https://bough.keka.com/careers/"
                 target="_blank"
-                className="bg-blue-600 text-white font-semibold px-8 sm:px-12 py-2 sm:py-2.5 rounded-full hover:bg-blue-700 transition-colors text-sm sm:text-base"
+                className=""
               >
-                View current openings
+                <Button>View current openings</Button>
               </Link>
             </div>
           </div>

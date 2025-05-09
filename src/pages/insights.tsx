@@ -9,7 +9,8 @@ import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
 import Text from "@app/components/Text";
 import { Font } from "@app/components/Text";
 import BottomSection from "@app/components/BottomSection";
-
+import Button from "@app/components/ui/Button";
+import { motion } from "framer-motion";
 // Define the data structure for slider items
 interface InsightItem {
   id: number;
@@ -21,6 +22,7 @@ interface InsightItem {
 
 export default function InsightsPage() {
   // Sample data for the slider
+
   const insights: InsightItem[] = [
     {
       id: 1,
@@ -116,123 +118,98 @@ export default function InsightsPage() {
   return (
     <main className="min-h-screen bg-white overflow-x-hidden relative w-full">
       {/* Add Header with transparent prop */}
-      <Header transparent={true} />
+      <Header transparent />
 
       {/* Hero Section with InsightHero Background - Full Viewport Height */}
-      <div className="relative w-full h-screen -mt-24 overflow-hidden">
-        {/* Previous Background Image */}
-        {isTransitioning && (
-          <div className="absolute inset-0 z-0">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="relative w-full h-screen -mt-24 overflow-hidden">
+          {/* Previous Background Image */}
+          {isTransitioning && (
+            <motion.div
+              className="absolute inset-0 z-0"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Image
+                src={prevInsight.backgroundImage}
+                alt="Previous Insight"
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          )}
+
+          {/* Current Background Image */}
+          <motion.div
+            key={activeIndex}
+            className="absolute inset-0 z-0"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
             <Image
-              src={prevInsight.backgroundImage}
-              alt="Previous Insight"
+              src={currentInsight.backgroundImage}
+              alt="Current Insight"
               fill
-              className="object-cover fade-out"
+              className="object-cover"
               priority
             />
-          </div>
-        )}
-        
-        {/* Current Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={currentInsight.backgroundImage}
-            alt="Current Insight"
-            fill
-            className={`object-cover ${isTransitioning ? 'fade-in' : ''}`}
-            priority
-          />
-        </div>
+          </motion.div>
 
-        {/* Content Container - Centered vertically and horizontally */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full">
-          <div className="mx-auto" style={{ width: "728px", maxWidth: "95%" }}>
-            <div className="bg-white/75 backdrop-blur-sm rounded-[20px] p-8 shadow-xl border border-gray-50 h-96 flex flex-col justify-center overflow-hidden">
-              <div
+          {/* Content Container */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full">
+            <div
+              className="mx-auto"
+              style={{ width: "728px", maxWidth: "95%" }}
+            >
+              <motion.div
                 key={activeIndex}
-                className="flex flex-col items-center"
-                style={{
-                  animation:
-                    "fadeIn 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards",
-                }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                className="bg-white/75 backdrop-blur-sm rounded-[20px] p-8 shadow-xl border border-gray-50 h-96 flex flex-col justify-center overflow-hidden"
               >
-                <Text
-                  type={Font.GARAMOND}
-                  className="text-center text-[#111827] text-3xl md:text-5xl font-semibold leading-[40px] md:leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
-                >
-                  {currentInsight.title}
-                </Text>
-                <Text
-                  type={Font.SOURCE_SANS}
-                  className="text-center text-[#333333] text-xl font-normal leading-relaxed mb-8 w-[648px] max-w-full mx-auto"
-                >
-                  {currentInsight.description}
-                </Text>
-
-                {/* Read More Button */}
-                <div className="flex justify-center">
-                  <Link href={currentInsight.url}>
-                    <button className="bg-[#1143E8] text-white py-2.5 px-8 rounded-full text-sm hover:bg-[#0035d9] transition-colors shadow-md">
-                      Read more
-                    </button>
-                  </Link>
+                <div className="flex flex-col items-center">
+                  <Text
+                    type={Font.GARAMOND}
+                    className="text-center text-[#111827] text-3xl md:text-5xl font-semibold leading-[40px] md:leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
+                  >
+                    {currentInsight.title}
+                  </Text>
+                  <Text
+                    type={Font.SOURCE_SANS}
+                    className="text-center text-[#333333] text-xl font-normal leading-relaxed mb-8 w-[648px] max-w-full mx-auto"
+                  >
+                    {currentInsight.description}
+                  </Text>
+                  <div className="flex justify-center">
+                    <Link href={currentInsight.url}>
+                      <Button className=" text-white py-2.5 px-8 text-sm transition-colors shadow-md">
+                        Read more
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
+
+          {/* Slider at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 bg-gradient-to-t from-black/60 to-transparent pt-20">
+            <InsightsSlider
+              insights={insights}
+              activeIndex={activeIndex}
+              onIndexChange={handleIndexChange}
+            />
+          </div>
         </div>
-
-        {/* Add keyframe animation for content transitions */}
-        <style jsx>{`
-          @keyframes fadeIn {
-            0% {
-              opacity: 0;
-              transform: translateY(15px);
-            }
-            100% {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes fadeOut {
-            0% {
-              opacity: 1;
-            }
-            100% {
-              opacity: 0;
-            }
-          }
-
-          @keyframes fadeInBg {
-            0% {
-              opacity: 0;
-              transform: scale(1.05);
-            }
-            100% {
-              opacity: 1;
-              transform: scale(1);
-            }
-          }
-
-          :global(.fade-in) {
-            animation: fadeInBg 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-          }
-
-          :global(.fade-out) {
-            animation: fadeOut 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-          }
-        `}</style>
-
-        {/* Slider positioned at the bottom of the screen with improved visibility */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 bg-gradient-to-t from-black/60 to-transparent pt-20">
-          <InsightsSlider
-            insights={insights}
-            activeIndex={activeIndex}
-            onIndexChange={handleIndexChange}
-          />
-        </div>
-      </div>
+      </motion.div>
 
       {/* Fixed width container for content below hero */}
       <div className="">
