@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image";
 import Text, { Font } from "./Text";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface ServiceCardProps {
   image: StaticImageData;
@@ -15,7 +16,20 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   return (
     <Link className="w-full block" href={"/services/" + serviceType}>
-      <div
+      <motion.div
+        whileHover={{
+          scale: 1.04,
+          boxShadow: "0px 12px 30px rgba(0, 0, 0, 0.2)",
+        }}
+        whileTap={{
+          scale: 0.98,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 12,
+          mass: 0.5,
+        }}
         className={`relative h-[180px] sm:h-[220px] md:h-[270px] 2xl:h-[380px] 2xl:w-[130%] 4xl:h-[400px] 5xl:h-[600px] 5xl:w-[80%] overflow-hidden bg-gray-200 ${
           position === "left"
             ? "rounded-tr-[20px] rounded-br-[20px]"
@@ -25,6 +39,7 @@ export default function ServiceCard({
           backgroundImage: `url(${image.src})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          willChange: "transform, box-shadow",
         }}
       >
         {/* Overlay gradient */}
@@ -37,7 +52,7 @@ export default function ServiceCard({
         >
           {serviceType}
         </Text>
-      </div>
+      </motion.div>
     </Link>
   );
 }

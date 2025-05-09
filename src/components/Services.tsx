@@ -59,7 +59,10 @@ export default function BoughServices({
   return (
     <div className="relative w-full py-16" style={{ minHeight: "100px" }}>
       {/* Service Cards Container with embedded SVG path */}
-      <div ref={sectionRef} className="relative flex flex-col gap-20 w-full">
+      <div
+        ref={sectionRef}
+        className="relative flex flex-col gap-10 md:gap-20 w-full"
+      >
         {/* SVG Path connecting the service cards */}
         {/* <ServicePath
           className="hidden md:block"
@@ -82,7 +85,7 @@ export default function BoughServices({
                 isEven ? "justify-end" : "justify-start"
               } relative z-10`}
             >
-              <div className="w-2/3 ">
+              <div className="w-3/4 md:w-2/3 ">
                 <ServiceCard
                   image={servicePage ? service.sec : service.image}
                   serviceType={service.name}
