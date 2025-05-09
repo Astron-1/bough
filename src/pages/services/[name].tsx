@@ -84,10 +84,10 @@ export default function ServicePage() {
             <Image
               src={content.heroImage || "/placeholder.svg"}
               alt="heroImage left"
-              className="h-screen w-full object-cover"
+              className="h-screen w-full object-cover -mt-24 z-0 relative"
               style={{ clipPath: "inset(0 50% 0 0)" }}
-              width={400}
-              height={400}
+              width={800}
+              height={800}
             />
           </div>
 
@@ -96,18 +96,18 @@ export default function ServicePage() {
             <Image
               src={content.heroImage || "/placeholder.svg"}
               alt="heroImage right"
-              className="h-screen w-full object-cover"
+              className="h-screen w-full object-cover -mt-24 z-0 relative"
               style={{ clipPath: "inset(0 0 0 50%)" }}
-              width={400}
-              height={400}
+              width={800}
+              height={800}
             />
           </div>
 
           {/* Center Text */}
-          <div className="w-full md:w-3/5 text-center py-12 z-10 mx-auto">
+          <div className="w-full md:w-3/5 text-center py-12 z-10 mx-auto -mt-20 md:-mt-24">
             <Text
               type={Font.GARAMOND}
-              className="text-[#1043E8] text-xs sm:text-sm font-semibold"
+              className="text-[#1043E8] text-sm sm:text-lg font-semibold"
             >
               {content?.topHeading}
             </Text>
