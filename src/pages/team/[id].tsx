@@ -89,7 +89,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "akshendra-sahi": {
     name: "Akshendra Sahi",
     title: "Senior Manager",
-    linkedIn: "https://www.linkedin.com/in/akshendrasahi/",
+    linkedIn: "https://www.linkedin.com/in/akshendra-sahi-a4883221/",
     bio: [
       "Akshendra is a Senior Manager at Bough, with over 14 years of progressive consulting experience in driving growth, process improvement, risk management, and technology transformation initiatives across global organizations. Currently, he spearheads our transformation advisory practice, leading the digital finance transformation vertical.",
       "He also leads the company's growth initiatives, playing a multifaceted go-to-market role at the intersection of business development, client success, partnerships, and sales. He has his vision set to build Bough into a niche player in the market by developing growth strategies and executing plans to drive the company's next phase of growth.",
@@ -108,7 +108,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "sanya-singh": {
     name: "Sanya Singh",
     title: "Senior Manager",
-    linkedIn: "https://www.linkedin.com/in/sanyasingh/",
+    linkedIn: "https://www.linkedin.com/in/sanya-singh-55635a35/",
     bio: [
       "Sanya is a Senior Manager in Accounting Advisory services at Bough, has been with the organization for over 8 years. With more than 13 years of experience in accounting advisory, audit assurance, and finance transformation, she manages several accounting advisory engagements and oversees client delivery for India operations.",
       "Sanya works closely with clients' controllership and finance leadership teams to support their technical and operational accounting needs and drive process improvements to enhance efficiency and effectiveness.",
@@ -127,7 +127,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "jason-polyzou": {
     name: "Jason Polyzou",
     title: "Manager",
-    linkedIn: "https://www.linkedin.com/in/jasonpolyzou/",
+    linkedIn: "https://www.linkedin.com/in/jason-polyzou-49382450/",
     bio: [
       "Jason brings over 13 years of extensive experience in financial planning and analysis. At Bough, he oversees financial systems and processes, ensuring seamless operations and strategic financial management.",
       "His career spans a diverse range of industries, including technology, medical manufacturing, logistics, and data management, showcasing his versatility and adaptability.",
@@ -185,7 +185,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "firdaush-ansari": {
     name: "Firdaush Ansari",
     title: "Manager",
-    linkedIn: "https://www.linkedin.com/in/firdaushansari/",
+    linkedIn: "https://www.linkedin.com/in/firdaush-ansari-12ba08120/",
     bio: [
       "Firdaush is a Manager in Accounting Advisory Services at Bough, where he has been contributing for over 3 years. With extensive experience in Accounting Advisory, financial analysis & reporting and project management, Firdaush specializes in revenue assurance, particularly focusing on ASC 606 for technology clients.",
       "Firdaush is proficient in US GAAP and ASC 606 revenue recognition and reporting. He collaborates closely with clients' finance leadership teams to support their technical and operational accounting needs.",
@@ -204,7 +204,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "aditya-sharma": {
     name: "Aditya Sharma",
     title: "Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/asharma13598",
+    linkedIn: "https://www.linkedin.com/in/asharma13598/",
     bio: [
       "Aditya is a Senior Consultant in the Accounting Advisory Services at Bough, with 5+ years of experience in accounting advisory, audit, and assurance. He excels at statutory audit, ASC 606 financial reporting, and process transformations; and has led accounting and transformation engagements.",
       "Aditya previously worked at Deloitte, where he audited UK-based consumer and retail businesses; performed substantive testing procedures and analyzed their internal controls per the PCAOB standards.",
@@ -223,7 +223,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "shubham-kapoor": {
     name: "Shubham Kapoor",
     title: "Consultant",
-    linkedIn: "https://www.linkedin.com/in/shubhamkapoor/",
+    linkedIn: "https://www.linkedin.com/in/shubham-kapoor61/",
     bio: [
       "Shubham is a consultant at Bough with over 2+ years of experience. He drives strategic FP&A engagements for diverse clients and leverage various tools like Excel, Power BI, Salesforce, and NetSuite to deliver impactful, actionable, key, and data-driven insights.",
       "He performs comprehensive financial risk and flux analyses to pinpoint financial outliers and provide insights. He has also created dynamic, user-friendly Excel dashboards and project planners to streamline workflows, automated manual tasks with Power Automate, and advanced macros.",
@@ -241,7 +241,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "puneeta-puri": {
     name: "Puneeta Puri",
     title: "ESG Advisor",
-    linkedIn: "https://www.linkedin.com/in/puneetapuri/",
+    linkedIn: "https://in.linkedin.com/in/ca-puneeta-puri-35208b9",
     bio: [
       "Puneeta is a seasoned professional with over 25+ years of experience in finance, governance, assurance, and risk management. She is deeply involved in ESG (Environmental, Social, and Governance) and serves as a Consultant with the Sustainability Reporting Standards Board (SRSB) at the Institute of Chartered Accountants of India (ICAI) and as a Director at the Indian ESG Network.",
       "Her expertise includes building capacity for sustainable practices and providing training on ESG Readiness and BRSR (Business Responsibility and Sustainability Reporting) reporting and disclosures. Puneeta is passionate about environmental awareness and excels in researching and developing resources to enhance ESG capabilities.",
@@ -260,7 +260,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "rohan-budhraja": {
     name: "Rohan Budhraja",
     title: "Manager",
-    linkedIn: "https://www.linkedin.com/in/rohanbudhraja/",
+    linkedIn: "https://www.linkedin.com/in/rohan-budhraja-97759514/",
     bio: [
       "Rohan Budhraja is a Manager at Bough with over 14+ years of experience in ESG, sustainability, and transaction advisory services. He has worked with leading EPC organizations and Big4s specializing in WASH, wastewater management, and climate change mitigation.",
       "Rohan has led ESG strategy development, compliance, risk assessments, and sustainability reporting (GRI, BRSR). He holds a PGDM in International Business from IIFT and a degree in Chemical Engineering from Panjab University.",
@@ -278,7 +278,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "saket-gupta": {
     name: "Saket Gupta",
     title: "Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/saketgupta/",
+    linkedIn: "https://www.linkedin.com/in/saket-gupta-a1600b85/",
     bio: [
       "Saket is a Senior Consultant at Bough with over three years of experience in ESG consulting. He specializes in end-to-end ESG implementation, from baselining and strategy development to integrating sustainability into corporate operations.",
       "His client portfolio spans diverse sectors, including motorsports, manufacturing, financial services, and the service industry. Saket has a proven track record of enhancing ESG disclosure scores for organizations in frameworks such as CDP and DJSI.",
@@ -297,7 +297,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "khushi-singh": {
     name: "Khushi Singh",
     title: "Associate Consultant",
-    linkedIn: "https://www.linkedin.com/in/khushisingh/",
+    linkedIn: "https://www.linkedin.com/in/khushi-singh-400081236/",
     bio: [
       "Khushi is an Associate at Bough, bringing a rich background in economic research, financial inclusion, and CSR strategy. A recent Economics graduate from Shri Ram College of Commerce, University of Delhi, Khushi has interned at NITI Aayog, HDFC Bank, and SBI, where she analyzed economic data and supported MSME financial inclusion.",
       "As a social entrepreneur with CDF-SRCC, she led impactful projects empowering marginalized communities. Currently working in the ESG consulting space, Khushi aims to integrate environmental stewardship, social responsibility, and governance into finance and policy.",
@@ -315,7 +315,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "rishabh-singhal": {
     name: "Rishabh Singhal",
     title: "Manager",
-    linkedIn: "https://www.linkedin.com/in/rishabhsinghal/",
+    linkedIn: "https://www.linkedin.com/in/rishabh-singhal-497686aa/",
     bio: [
       "Rishabh is a Manager in the IT Enterprise Risk Services division at Bough. He is a Certified Information Systems Auditor (CISA) with extensive experience in IT auditing and specializes in risk-based and general IT controls audits, focusing on SOX and SSAE18 reports for clients in the Financial Services and Life Sciences & Healthcare industries.",
       "Rishabh has formerly worked with firms like EY, Deloitte, KPMG, and Credit Suisse.",
@@ -333,7 +333,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "anoushka-bhati": {
     name: "Anoushka Bhati",
     title: "Manager",
-    linkedIn: "https://www.linkedin.com/in/anoushkabhati/",
+    linkedIn: "https://www.linkedin.com/in/anoushka-bhati-b77678102/",
     bio: [
       "Anoushka is a Manager in Risk Advisory Services at Bough, with 7+ years of work experience, specializing in Sarbanes-Oxley (SOX) compliance and risk management. She has experience in financial audits and risk-based control assessments.",
       "Before joining Bough, Anoushka was part of EY GDS's external audit team, focusing on substantive testing and risk assessment for retail, luxury, and technology clients.",
@@ -352,7 +352,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "sakshi-vaishnav": {
     name: "Sakshi Vaishnav",
     title: "Associate",
-    linkedIn: "https://www.linkedin.com/in/sakshivaishnav/",
+    linkedIn: "https://in.linkedin.com/in/sakshi-vaishnav2003/",
     bio: [
       "Sakshi is an Associate in the Risk Advisory vertical of Bough, where she has been working for the past year. She focuses on helping organizations strengthen their risk management frameworks and streamline processes.",
       "Over the past year, she has gained experience across SOX Assessment, risk and control matrix development, and process improvement initiatives.",
@@ -370,7 +370,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "saurabh-sharma": {
     name: "Saurabh Sharma",
     title: "Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/saurabhsharma/",
+    linkedIn: "https://www.linkedin.com/in/saurabh-sharma-0303/",
     bio: [
       "Saurabh is a Senior Consultant at Bough, working as Risk Management professional in domain of IT Governance Risk & Compliance in the areas of Sarbanes Oxley (SOX) assessments.",
       "Saurabh has 4+ years of experience in IT Enterprise Risk Services, specializing in IT Governance, Risk, and Compliance (GRC), with a focus on SOX 404 assessments. He is skilled in testing the design and operating effectiveness of Internal Controls over Financial Reporting (ICFR), including IT General Controls (ITGC) and IT Application Controls (ITACs) and conducting SOX and SSAE18 SOC1 and SOC2 audits, identifying business risks, enhancing processes, and ensuring compliance.",
@@ -389,7 +389,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "khushbu-singh": {
     name: "Khushbu Singh",
     title: "Senior Visual Communications Designer",
-    linkedIn: "https://www.linkedin.com/in/khushbusingh/",
+    linkedIn: "https://www.linkedin.com/in/khushbu-singh-8b221919b/",
     bio: [
       "Khushbu is a Senior Visual Communications Designer at Bough. With 3+ years of experience in conceptualizing, designing, and strategizing marketing, branding, and communication collaterals. She brings expertise across a diverse range of formats — from impactful PowerPoint presentations to animated and AI-driven videos.",
       "At Bough, she plays a key role in driving creative strategy and visual storytelling across consulting and finance industry clients. She has significantly contributed to the rebranding of Bough and the redesign of its website.",
@@ -409,7 +409,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "uddeshya-pal": {
     name: "Uddeshya Pal",
     title: "Senior Consultant",
-    linkedIn: "https://www.linkedin.com/in/uddeshyapal/",
+    linkedIn: "https://www.linkedin.com/in/uddeshya-pal-279527149",
     bio: [
       "Uddeshya is a Senior Consultant at Bough, leads the Center of Excellence for Automation, Analytics, and AI.",
       "With over 6+ years of experience in analytics and automation, he specializes in identifying and integrating technology-driven solutions that enhance business efficiency and decision-making. Uddeshya has worked across the Insurance, Mortgage, and Telecommunications industries, gaining broad sectoral exposure and a deep understanding of data-driven processes.",
@@ -429,7 +429,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
   "ridhima-arora": {
     name: "Ridhima Arora",
     title: "HR Business Partner",
-    linkedIn: "https://www.linkedin.com/in/ridhimaarora/",
+    linkedIn: "https://www.linkedin.com/in/arora-ridhima/",
     bio: [
       "Ridhima is an HR Business Partner at Bough, where she's the go-to person for all things people-related, from leading recruitment efforts to ensuring compliance and making sure the employee experience is top-notch. With 5+ years of experience, Ridhima is an ambassador for a workplace where people feel valued, supported, and empowered to thrive.",
       "She holds a master's degree from Xavier Institute of Social Service. Outside of work, you'll find Ridhima practicing yoga to find her balance, watching movies, and practicing mindfulness. In short, she believes in balance – at work, in life, and in everything she does.",
