@@ -16,7 +16,7 @@ export default function ServiceCard({
   return (
     <Link className="w-full block" href={"/services/" + serviceType}>
       <div
-        className={`relative h-[180px] sm:h-[220px] md:h-[270px] 2xl:h-[350px] 4xl:h-[400px] 5xl:h-[600px] 5xl:w-[2000px] overflow-hidden bg-gray-200 ${
+        className={`relative h-[180px] sm:h-[220px] md:h-[270px] 2xl:h-[380px] 2xl:w-[130%] 4xl:h-[400px] 5xl:h-[600px] 5xl:w-[80%] overflow-hidden bg-gray-200 ${
           position === "left"
             ? "rounded-tr-[20px] rounded-br-[20px]"
             : "rounded-tl-[20px] rounded-bl-[20px]"

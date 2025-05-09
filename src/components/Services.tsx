@@ -82,7 +82,7 @@ export default function BoughServices({
                 isEven ? "justify-end" : "justify-start"
               } relative z-10`}
             >
-              <div className="w-[95%] md:w-[90%] lg:w-[85%] xl:w-[1010px]">
+              <div className="w-2/3 ">
                 <ServiceCard
                   image={servicePage ? service.sec : service.image}
                   serviceType={service.name}
