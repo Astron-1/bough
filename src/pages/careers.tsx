@@ -59,37 +59,20 @@ export default function Careers() {
         {/* Hero section */}
         <section className="relative pt-20 pb-32 md:pt-32 md:pb-40">
           {/* Blur shapes */}
-          <div className="absolute inset-0 z-0 w-full h-full">
-            <Image
-              src="/careerVector.svg"
-              alt="Decorative vector background"
-              width={200}
-              height={200}
-              className="w-screen -mt-32 "
-              priority
-            />
-          </div>
+
           <div className="absolute w-[200px] h-[300px] sm:w-[300px] sm:h-[400px] md:w-[496px] md:h-[594px] -left-[100px] sm:-left-[150px] md:-left-[197px] top-[100px] sm:top-[150px] md:top-[192px] bg-blue-600/30 rounded-full blur-[150px] sm:blur-[200px] md:blur-[312px]" />
           <div className="absolute w-[200px] h-[300px] sm:w-[300px] sm:h-[400px] md:w-[493px] md:h-[590px] -right-[50px] sm:right-0 top-[80px] sm:top-[100px] md:top-[157px] bg-blue-600/30 rounded-full blur-[150px] sm:blur-[200px] md:blur-[312px]" />
 
           {/* Mobile Images */}
-          <div className="md:hidden w-full h-[200px] absolute left-0 top-[50px] overflow-hidden">
-            <Image
-              src="/career-1.png"
-              alt="City skyline"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-          </div>
 
           {/* Desktop Images */}
           <div className="hidden md:block absolute w-full md:w-96 h-96 left-0 top-[10px] overflow-hidden">
             <Image
               src="/career-1.png"
               alt="City skyline"
-              fill
-              className="object-cover object-center"
+              height={400}
+              width={400}
+              className="object-cover object-center w-full 2xl:w-[120%] "
               priority
             />
           </div>
@@ -97,8 +80,9 @@ export default function Careers() {
             <Image
               src="/career-2.png"
               alt="City skyline"
-              fill
-              className="object-cover object-center"
+              height={400}
+              width={400}
+              className="object-cover object-center w-full 2xl:w-[120%] "
               priority
             />
           </div>
@@ -108,7 +92,7 @@ export default function Careers() {
             <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
               <Text
                 type={Font.GARAMOND}
-                className='font-["EB_Garamond"] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-4 sm:mb-6 text-black'
+                className=" text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-4 sm:mb-6 text-black"
               >
                 Thinking about
                 <br />
