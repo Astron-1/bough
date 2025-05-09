@@ -66,7 +66,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Featured Case Studies */}
-      <div className="" style={{ width: "70rem", maxWidth: "100%" }}>
+      <div className="">
         <CaseStudyCarousel />
       </div>
       <BottomSection
