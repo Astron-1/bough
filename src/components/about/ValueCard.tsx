@@ -1,5 +1,9 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import Text, { Font } from "@app/components/Text";
+import IconWithHover from "@app/components/common/IconWithHover";
+import { LucideProps } from "lucide-react";
 
 interface ValueCardProps {
   title: string;
@@ -34,13 +38,10 @@ export default function ValueCard({
       )}
       
       <div className="flex-shrink-0 relative">
-        {/* Blue circular icon */}
-        <div className="rounded-full bg-[#0074FF] flex items-center justify-center"
-             style={{ width: iconSize, height: iconSize }}>
-          <div className="w-[2.5rem] h-[2.5rem] flex items-center justify-center text-white">
-            {icon}
-          </div>
-        </div>
+        <IconWithHover 
+          icon={icon as React.ReactElement<LucideProps>}
+          size={iconSize}
+        />
         
         {/* Bottom measurement indicator */}
         {showMeasurements && measurementBottomValue && (

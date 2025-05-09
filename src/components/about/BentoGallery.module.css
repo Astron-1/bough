@@ -1,105 +1,172 @@
 .galleryContainer {
-  position: relative;
   width: 100%;
-  min-height: 400px;
-  overflow: hidden;
-  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .galleryItem {
-  position: absolute;
-  will-change: transform;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box;
-  padding: 10px;
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: all 0.3s ease;
+  height: 0;
+  padding-bottom: calc(100% / var(--aspect-ratio));
 }
 
 .galleryItem:hover {
-  z-index: 10;
+  transform: translateY(-4px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .imageWrapper {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  transform-origin: center center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-}
-
-.imageWrapper:hover {
-  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.3);
-  transform: scale(1.03);
 }
 
 .image {
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
   width: 100%;
   height: 100%;
 }
 
-/* Override object-fit for certain aspect ratios to prevent cropping people */
-.galleryItem[data-type="people"] .image,
-.galleryItem[data-type="group"] .image {
-  object-position: center top;
-}
-
-.galleryItem[data-span="2"] .image {
-  object-position: center;
-}
-
-.imageWrapper:hover .image {
+.galleryItem:hover .image {
   transform: scale(1.05);
 }
 
-.caption {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  z-index: 2;
-  text-align: center;
+/* First row - spans full width */
+.galleryItem:nth-child(1) {
+  grid-column: span 1;
+  --aspect-ratio: 1.33;
 }
 
-.imageWrapper:hover .caption {
-  opacity: 0;
-  transform: translateY(0);
+.galleryItem:nth-child(2) {
+  grid-column: span 1;
+  --aspect-ratio: 1;
 }
 
-/* Ensure wider images get proper space and aren't cropped too much */
-@media (min-width: 768px) {
-  .galleryItem[data-span="2"] {
-    z-index: 5;
+.galleryItem:nth-child(3) {
+  grid-column: span 1;
+  --aspect-ratio: 1.33;
+}
+
+.galleryItem:nth-child(4) {
+  grid-column: span 1;
+  --aspect-ratio: 1;
+}
+
+/* Second row */
+.galleryItem:nth-child(5) {
+  grid-column: span 2;
+  --aspect-ratio: 1.77;
+}
+
+.galleryItem:nth-child(6) {
+  grid-column: span 1;
+  --aspect-ratio: 1;
+}
+
+.galleryItem:nth-child(7) {
+  grid-column: span 1;
+  --aspect-ratio: 1.77;
+}
+
+/* Third row */
+.galleryItem:nth-child(8) {
+  grid-column: span 1;
+  --aspect-ratio: 1.33;
+}
+
+.galleryItem:nth-child(9) {
+  grid-column: span 1;
+  --aspect-ratio: 1.5;
+}
+
+.galleryItem:nth-child(10) {
+  grid-column: span 1;
+  --aspect-ratio: 1;
+}
+
+/* Fourth row */
+.galleryItem:nth-child(11) {
+  grid-column: span 1;
+  --aspect-ratio: 1;
+}
+
+.galleryItem:nth-child(12) {
+  grid-column: span 1;
+  --aspect-ratio: 1.5;
+}
+
+.galleryItem:nth-child(13) {
+  grid-column: span 1;
+  --aspect-ratio: 1;
+}
+
+.galleryItem:nth-child(14) {
+  grid-column: span 1;
+  --aspect-ratio: 1.77;
+}
+
+/* Fifth row */
+.galleryItem:nth-child(15) {
+  grid-column: span 1;
+  --aspect-ratio: 1.33;
+}
+
+.galleryItem:nth-child(16) {
+  grid-column: span 1;
+  --aspect-ratio: 1.77;
+}
+
+.galleryItem:nth-child(17) {
+  grid-column: span 1;
+  --aspect-ratio: 1.5;
+}
+
+@media (min-width: 1500px) {
+  .galleryGrid {
+    grid-template-columns: repeat(4, 1fr);
   }
-  
-  .galleryItem[data-span="2"] .imageWrapper {
-    border-radius: 16px;
+}
+
+@media (max-width: 1200px) {
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
   }
 }
 
 @media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
   .galleryItem {
-    padding: 6px;
+    grid-column: span 1 !important;
   }
-  
-  .imageWrapper {
-    border-radius: 8px;
-  }
-  
-  .caption {
-    padding: 10px;
+}
+
+@media (max-width: 500px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 } 

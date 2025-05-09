@@ -237,19 +237,19 @@ export default function AboutUsPage() {
       title: "Power of knowledge",
       description:
         "We believe that knowledge is the key to unlocking endless possibilities. Our relentless pursuit of understanding drives our unwavering dedication to solving the toughest challenges. We thrive in the face of disruption, always pushing forward to ensure our clients' success with consistency and precision.",
-      icon: <ShieldCheck color="white" size={40} />,
+      icon: <ShieldCheck size={40} />,
     },
     {
       title: "Impact that matters",
       description:
         "Our mission goes beyond delivering results; it's about making a meaningful impact on the world around us—both for our clients and our team. We are committed to earning and maintaining the trust of our clients, always going the extra mile to deliver excellence.",
-      icon: <Zap color="white" size={40} />,
+      icon: <Zap size={40} />,
     },
     {
       title: "Pioneering trust and growth",
       description:
         "In everything we do, we strive to be a force for positive change, ensuring that our actions leave a legacy of trust, innovation, and growth.",
-      icon: <BookOpen color="white" size={40} />,
+      icon: <BookOpen size={40} />,
     },
   ];
   // Team section content

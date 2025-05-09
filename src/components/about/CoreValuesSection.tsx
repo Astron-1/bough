@@ -1,10 +1,13 @@
+"use client";
+
 import React from "react";
 import Text, { Font } from "@app/components/Text";
 import { figmaSectionContainer } from "@app/utils/figmaUtils";
-import { Compass, HeartHandshake, Landmark, TrendingUp, Lock } from "lucide-react";
+import { Compass, HeartHandshake, Landmark, TrendingUp, Lock, LucideProps } from "lucide-react";
+import IconWithHover from "@app/components/common/IconWithHover";
 
 interface CoreValueProps {
-  icon: React.ReactNode;
+  icon: React.ReactElement<LucideProps>;
   title: string;
 }
 
@@ -19,23 +22,23 @@ const CoreValuesSection: React.FC<CoreValuesSectionProps> = ({
 }) => {
   const coreValues: CoreValueProps[] = [
     {
-      icon: <Compass  color="white" size={40}/>,
+      icon: <Compass size={40} />,
       title: "Better is not by chance",
     },
     {
-      icon: <HeartHandshake color="white" size={40}/>,
+      icon: <HeartHandshake size={40} />,
       title: "Relations are not entitlements",
     },
     {
-      icon: <Landmark color="white" size={40}/>,
+      icon: <Landmark size={40} />,
       title: "Values are not convenience",
     },
     {
-      icon: <Lock color="white" size={40}/>,
+      icon: <Lock size={40} />,
       title: "Trust is not a coincidence",
     },
     {
-      icon: <TrendingUp color="white" size={40}/>,
+      icon: <TrendingUp size={40} />,
       title: "Profitability is not a reckless pursuit",
     },
   ];
@@ -70,12 +73,14 @@ const CoreValuesSection: React.FC<CoreValuesSectionProps> = ({
               key={index}
               className="flex flex-col items-center text-center px-4"
             >
-              <div className="w-20 h-20 bg-[#0074FF] rounded-full flex items-center justify-center mb-6 shadow-md">
-                <div className="text-white">{value.icon}</div>
-              </div>
+              <IconWithHover 
+                icon={value.icon}
+                size="5rem"
+                iconSize={40}
+              />
               <Text
                 type={Font.SOURCE_SANS}
-                className="text-base font-medium text-[#001F63] mt-4"
+                className="text-base font-medium text-[#001F63] mt-6"
               >
                 {value.title}
               </Text>
