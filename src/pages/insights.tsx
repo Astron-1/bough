@@ -10,7 +10,8 @@ import Text from "@app/components/Text";
 import { Font } from "@app/components/Text";
 import BottomSection from "@app/components/BottomSection";
 import Button from "@app/components/ui/Button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
 // Define the data structure for slider items
 interface InsightItem {
   id: number;
@@ -29,7 +30,7 @@ export default function InsightsPage() {
       title: "Delivering better insights with better data",
       description:
         "Bough helps a global technology company implement an effective data governance program to support data migration for SAP RAR implementation and ongoing business operations",
-      backgroundImage: "/insights-bg.png",
+      backgroundImage: "/case-study-images/1.jpeg",
       url: "/case-study?name=CASE%20STUDY%201%20%E2%80%93%20Data%20optimization%20and%20governance",
     },
     {
@@ -37,7 +38,7 @@ export default function InsightsPage() {
       title: "Delivering change at the speed of light",
       description:
         "Bough helps develop an agile and adaptive accounting solution for a global technology company to meet the ASC 606 revenue reporting requirements",
-      backgroundImage: "/insights-bg-2.jpg",
+      backgroundImage: "/case-study-images/2.jpeg",
       url: "/case-study?name=CASE%20STUDY%202%20%E2%80%93%20ASC%20606%20Reporting%20Solution%20(Plan%20B)",
     },
     {
@@ -45,18 +46,59 @@ export default function InsightsPage() {
       title: "Developing a robust revenue assurance function",
       description:
         "Bough helps a global technology company implement an effective and a cost-effective revenue assurance program to ensure regulatory compliance and meet audit requirements.",
-      backgroundImage: "/insights-bg-3.jpg",
+      backgroundImage: "/case-study-images/3.png",
       url: "/case-study?name=CASE%20STUDY%203%20%E2%80%93%20Revenue%20Assurance%20and%20audit%20readiness",
     },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const userInteractedRef = useRef(false);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<string[]>([]);
+  const [previousImage, setPreviousImage] = useState<string | null>(null);
 
-  // Clear the existing interval
+  // Update previous image when active index changes
+  useEffect(() => {
+    if (currentInsight?.backgroundImage) {
+      setPreviousImage(currentInsight.backgroundImage);
+    }
+  }, [activeIndex]);
+
+  // Enhanced preload images function
+  useEffect(() => {
+    const preloadImages = async () => {
+      try {
+        const imagePromises = insights.map((insight) => {
+          return new Promise<string>((resolve, reject) => {
+            const imgElement = new window.Image();
+            imgElement.src = insight.backgroundImage;
+            imgElement.crossOrigin = "anonymous";
+            
+            imgElement.onload = () => {
+              setLoadedImages(prev => [...prev, insight.backgroundImage]);
+              resolve(insight.backgroundImage);
+            };
+            
+            imgElement.onerror = (error) => {
+              console.error(`Failed to load image: ${insight.backgroundImage}`, error);
+              reject(error);
+            };
+          });
+        });
+
+        await Promise.all(imagePromises);
+        setImagesPreloaded(true);
+      } catch (error) {
+        console.error('Error preloading images:', error);
+        setImagesPreloaded(true);
+      }
+    };
+
+    preloadImages();
+  }, [insights]);
+
   const clearAutoRotation = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -70,19 +112,16 @@ export default function InsightsPage() {
 
     if (!userInteractedRef.current) {
       intervalRef.current = setInterval(() => {
-        setPrevIndex(activeIndex);
         setIsTransitioning(true);
         setActiveIndex((prevIndex) => (prevIndex + 1) % insights.length);
       }, 6000);
     }
-  }, [clearAutoRotation, insights.length, activeIndex]);
+  }, [clearAutoRotation, insights.length]);
 
   const handleIndexChange = useCallback(
     (index: number) => {
       userInteractedRef.current = true;
       clearAutoRotation();
-
-      setPrevIndex(activeIndex);
       setIsTransitioning(true);
       setActiveIndex(index);
 
@@ -91,7 +130,7 @@ export default function InsightsPage() {
         startAutoRotation();
       }, 10000);
     },
-    [clearAutoRotation, startAutoRotation, activeIndex]
+    [clearAutoRotation, startAutoRotation]
   );
 
   useEffect(() => {
@@ -103,17 +142,8 @@ export default function InsightsPage() {
     }
   }, [isTransitioning]);
 
-  useEffect(() => {
-    startAutoRotation();
-
-    return () => {
-      clearAutoRotation();
-    };
-  }, [startAutoRotation, clearAutoRotation]);
-
   // Get current insight data
   const currentInsight = insights[activeIndex];
-  const prevInsight = insights[prevIndex];
 
   return (
     <main className="min-h-screen bg-white overflow-x-hidden relative w-full">
@@ -126,41 +156,67 @@ export default function InsightsPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="relative w-full h-screen -mt-24 overflow-hidden">
-          {/* Previous Background Image */}
-          {isTransitioning && (
-            <motion.div
-              className="absolute inset-0 z-0"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+        <div className="relative w-full h-screen -mt-24 overflow-hidden bg-gray-900">
+          {/* Previous image as background */}
+          {previousImage && (
+            <div className="absolute inset-0 z-0">
               <Image
-                src={prevInsight.backgroundImage}
-                alt="Previous Insight"
+                src={previousImage}
+                alt="Previous background"
                 fill
                 className="object-cover"
                 priority
+                sizes="100vw"
+                quality={90}
               />
-            </motion.div>
+            </div>
           )}
 
-          {/* Current Background Image */}
-          <motion.div
-            key={activeIndex}
-            className="absolute inset-0 z-0"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Image
-              src={currentInsight.backgroundImage}
-              alt="Current Insight"
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
+          <AnimatePresence mode="wait">
+            {imagesPreloaded && (
+              <motion.div
+                key={activeIndex}
+                className="absolute inset-0 z-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ 
+                  duration: 0.8,
+                  ease: [0.645, 0.045, 0.355, 1.000]
+                }}
+              >
+                <div className="relative w-full h-full">
+                  {/* Main image */}
+                  <Image
+                    src={currentInsight.backgroundImage}
+                    alt={currentInsight.title}
+                    fill
+                    className={`object-cover transition-all duration-1000 ${
+                      loadedImages.includes(currentInsight.backgroundImage) ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                    }`}
+                    priority
+                    sizes="100vw"
+                    quality={90}
+                    onLoadingComplete={() => {
+                      setIsTransitioning(false);
+                      if (!loadedImages.includes(currentInsight.backgroundImage)) {
+                        setLoadedImages(prev => [...prev, currentInsight.backgroundImage]);
+                      }
+                    }}
+                  />
+                  
+                  {/* Overlay */}
+                  <motion.div 
+                    className="absolute inset-0 bg-black/30"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.3 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Content Container */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full">
@@ -170,9 +226,14 @@ export default function InsightsPage() {
             >
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ 
+                  duration: 0.6, 
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.1
+                }}
                 className="bg-white/75 backdrop-blur-sm rounded-[20px] p-8 shadow-xl border border-gray-50 h-96 flex flex-col justify-center overflow-hidden"
               >
                 <div className="flex flex-col items-center">
