@@ -173,7 +173,7 @@ export default function ConnectPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f0f7ff] overflow-x-hidden relative w-full">
+    <main className="min-h-screen bg-white overflow-hidden relative w-full">
       {/* Add style tag with keyframes */}
       <style jsx>{animationStyles}</style>
 
@@ -185,8 +185,22 @@ export default function ConnectPage() {
       {/* Main Content */}
       <div className="relative">
         {/* Background Gradients */}
-        <div className="w-[496px] h-[594px] left-[-197px] top-[192px] absolute bg-[rgba(0,116,255,0.30)] shadow-[624px_624px_624px] rounded-full blur-[312px] opacity-70 md:opacity-100"></div>
-        <div className="w-[493px] h-[590px] right-[-100px] top-[157px] absolute bg-[rgba(0,116,255,0.30)] shadow-[624px_624px_624px] rounded-full blur-[312px] opacity-70 md:opacity-100"></div>
+        <Image
+          src="/left.svg"
+          alt="left gradient"
+          width={1100}
+          height={800}
+          className="absolute z-30 -top-20 md:-top-52 left-0 pointer-events-none"
+          priority
+        />
+        <Image
+          src="/right.svg"
+          alt="right gradient"
+          width={1100}
+          height={800}
+          className="absolute z-30 -top-20 md:-top-64 right-0 pointer-events-none"
+          priority
+        />
 
         {/* Wave SVG Background */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
@@ -197,14 +211,14 @@ export default function ConnectPage() {
             left: "-10%",
             top: 0,
             width: '100%',
-            height: '55%'
+            height: '70%'
           }}>
             <Image
               src="/about-us/herosection.svg"
               alt="Wave background"
               fill
               priority
-              className="object-cover object-center opacity-30"
+              className="object-cover object-center opacity-15"
             />
           </div>
         </div>

@@ -37,6 +37,12 @@ interface BackgroundSettings {
   threadsAmplitude: number;
   threadsDistance: number;
   threadsColor: [number, number, number];
+  threadsLineCount: number;
+  threadsLineWidth: number;
+  threadsLineBlur: number;
+  threadsNoiseScale: number;
+  threadsNoiseTimeScale: number;
+  threadsMouseInfluence: number;
 }
 
 export default function BackgroundPattern() {
@@ -67,7 +73,13 @@ export default function BackgroundPattern() {
     // Threads specific options
     threadsAmplitude: 1.5,
     threadsDistance: 0.30,
-    threadsColor: [0.47, 0.68, 1.0] 
+    threadsColor: [0.47, 0.68, 1.0],
+    threadsLineCount: 40,
+    threadsLineWidth: 7.0,
+    threadsLineBlur: 10.0,
+    threadsNoiseScale: 2.5,
+    threadsNoiseTimeScale: 0.1,
+    threadsMouseInfluence: 0.2
   });
 
   // Handle clicks outside the settings panel
@@ -154,6 +166,12 @@ export default function BackgroundPattern() {
           distance={settings.threadsDistance}
           color={settings.threadsColor}
           enableMouseInteraction={true}
+          lineCount={settings.threadsLineCount}
+          lineWidth={settings.threadsLineWidth}
+          lineBlur={settings.threadsLineBlur}
+          noiseScale={settings.threadsNoiseScale}
+          noiseTimeScale={settings.threadsNoiseTimeScale}
+          mouseInfluence={settings.threadsMouseInfluence}
         />
       {/* Settings button */}
       {/* <button 
@@ -586,7 +604,7 @@ export default function BackgroundPattern() {
                 <div>
                   <h3 className="text-sm uppercase tracking-wider font-semibold text-blue-300 mb-3">Threads Properties</h3>
                   
-                  <div className="bg-white rounded-lg overflow-hidden">
+                  <div className="bg-white rounded-lg overflow-hidden space-y-4">
                     <div className="p-4 border-b border-gray-100">
                       <div className="flex justify-between items-center mb-1">
                         <label className="text-sm font-medium text-gray-700">
@@ -626,7 +644,7 @@ export default function BackgroundPattern() {
                       />
                     </div>
 
-                    <div className="p-4">
+                    <div className="p-4 border-b border-gray-100">
                       <div className="flex justify-between items-center mb-1">
                         <label className="text-sm font-medium text-gray-700">
                           Distance
@@ -640,6 +658,113 @@ export default function BackgroundPattern() {
                         step="0.1"
                         value={settings.threadsDistance} 
                         onChange={(e) => handleSettingChange('threadsDistance', parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      />
+                    </div>
+
+                    <div className="p-4 border-b border-gray-100">
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-sm font-medium text-gray-700">
+                          Line Count
+                        </label>
+                        <span className="text-sm text-blue-500 font-medium">{settings.threadsLineCount}</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="10" 
+                        max="100" 
+                        value={settings.threadsLineCount} 
+                        onChange={(e) => handleSettingChange('threadsLineCount', parseInt(e.target.value))}
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      />
+                    </div>
+
+                    <div className="p-4 border-b border-gray-100">
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-sm font-medium text-gray-700">
+                          Line Width
+                        </label>
+                        <span className="text-sm text-blue-500 font-medium">{settings.threadsLineWidth.toFixed(1)}</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="1" 
+                        max="20" 
+                        step="0.5"
+                        value={settings.threadsLineWidth} 
+                        onChange={(e) => handleSettingChange('threadsLineWidth', parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      />
+                    </div>
+
+                    <div className="p-4 border-b border-gray-100">
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-sm font-medium text-gray-700">
+                          Line Blur
+                        </label>
+                        <span className="text-sm text-blue-500 font-medium">{settings.threadsLineBlur.toFixed(1)}</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max="20" 
+                        step="0.5"
+                        value={settings.threadsLineBlur} 
+                        onChange={(e) => handleSettingChange('threadsLineBlur', parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      />
+                    </div>
+
+                    <div className="p-4 border-b border-gray-100">
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-sm font-medium text-gray-700">
+                          Noise Scale
+                        </label>
+                        <span className="text-sm text-blue-500 font-medium">{settings.threadsNoiseScale.toFixed(1)}</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0.5" 
+                        max="5" 
+                        step="0.1"
+                        value={settings.threadsNoiseScale} 
+                        onChange={(e) => handleSettingChange('threadsNoiseScale', parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      />
+                    </div>
+
+                    <div className="p-4 border-b border-gray-100">
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-sm font-medium text-gray-700">
+                          Animation Speed
+                        </label>
+                        <span className="text-sm text-blue-500 font-medium">{settings.threadsNoiseTimeScale.toFixed(2)}</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0.01" 
+                        max="0.5" 
+                        step="0.01"
+                        value={settings.threadsNoiseTimeScale} 
+                        onChange={(e) => handleSettingChange('threadsNoiseTimeScale', parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      />
+                    </div>
+
+                    <div className="p-4">
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-sm font-medium text-gray-700">
+                          Mouse Influence
+                        </label>
+                        <span className="text-sm text-blue-500 font-medium">{settings.threadsMouseInfluence.toFixed(2)}</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max="1" 
+                        step="0.05"
+                        value={settings.threadsMouseInfluence} 
+                        onChange={(e) => handleSettingChange('threadsMouseInfluence', parseFloat(e.target.value))}
                         className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
                       />
                     </div>
@@ -673,7 +798,13 @@ export default function BackgroundPattern() {
                   horizontalWaves: true,
                   threadsAmplitude: 1.0,
                   threadsDistance: 0.5,
-                  threadsColor: [0.47, 0.68, 1.0]
+                  threadsColor: [0.47, 0.68, 1.0],
+                  threadsLineCount: 40,
+                  threadsLineWidth: 7.0,
+                  threadsLineBlur: 10.0,
+                  threadsNoiseScale: 2.5,
+                  threadsNoiseTimeScale: 0.1,
+                  threadsMouseInfluence: 0.2
                 })}
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-colors shadow-sm"
               >

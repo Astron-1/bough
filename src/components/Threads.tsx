@@ -7,6 +7,12 @@ interface ThreadsProps {
   distance?: number;
   enableMouseInteraction?: boolean;
   className?: string;
+  lineCount?: number;
+  lineWidth?: number;
+  lineBlur?: number;
+  noiseScale?: number;
+  noiseTimeScale?: number;
+  mouseInfluence?: number;
 }
 
 const vertexShader = `
@@ -28,12 +34,14 @@ uniform vec3 uColor;
 uniform float uAmplitude;
 uniform float uDistance;
 uniform vec2 uMouse;
+uniform float uLineCount;
+uniform float uLineWidth;
+uniform float uLineBlur;
+uniform float uNoiseScale;
+uniform float uNoiseTimeScale;
+uniform float uMouseInfluence;
 
 #define PI 3.1415926538
-
-const int u_line_count = 40;
-const float u_line_width = 7.0;
-const float u_line_blur = 10.0;
 
 float Perlin2D(vec2 P) {
     vec2 Pi = floor(P);
@@ -61,34 +69,29 @@ float pixel(float count, vec2 resolution) {
 }
 
 float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float time, float amplitude, float distance) {
-    float split_offset = (perc * 0.4);
-    float split_point = 0.1 + split_offset;
-
-    float amplitude_normal = smoothstep(split_point, 0.7, st.x);
     float amplitude_strength = 0.5;
-    float finalAmplitude = amplitude_normal * amplitude_strength
-                           * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
+    float finalAmplitude = amplitude_strength * amplitude * (1.0 + (mouse.y - 0.5) * uMouseInfluence);
 
-    float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
-    float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
+    float time_scaled = time * uNoiseTimeScale + (mouse.x - 0.5) * uMouseInfluence;
+    float blur = perc;
 
     float xnoise = mix(
-        Perlin2D(vec2(time_scaled, st.x + perc) * 2.5),
-        Perlin2D(vec2(time_scaled, st.x + time_scaled) * 3.5) / 1.5,
-        st.x * 0.3
+        Perlin2D(vec2(time_scaled, st.x + perc) * uNoiseScale),
+        Perlin2D(vec2(time_scaled, st.x + time_scaled) * (uNoiseScale * 1.4)) / 1.5,
+        st.x * 0.5
     );
 
-    float y = 0.5 + (perc - 0.5) * distance + xnoise / 2.0 * finalAmplitude;
+    float y = 0.5 + (perc - 0.5) * distance + xnoise * finalAmplitude;
 
     float line_start = smoothstep(
-        y + (width / 2.0) + (u_line_blur * pixel(1.0, iResolution.xy) * blur),
+        y + (width / 2.0) + (uLineBlur * pixel(1.0, iResolution.xy) * blur),
         y,
         st.y
     );
 
     float line_end = smoothstep(
         y,
-        y - (width / 2.0) - (u_line_blur * pixel(1.0, iResolution.xy) * blur),
+        y - (width / 2.0) - (uLineBlur * pixel(1.0, iResolution.xy) * blur),
         st.y
     );
 
@@ -103,11 +106,12 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
 
     float line_strength = 1.0;
-    for (int i = 0; i < u_line_count; i++) {
-        float p = float(i) / float(u_line_count);
+    for (int i = 0; i < 100; i++) {  // Set maximum possible lines to 100
+        if (float(i) >= uLineCount) break;  // Break if we've reached the desired line count
+        float p = float(i) / uLineCount;
         line_strength *= (1.0 - lineFn(
             uv,
-            u_line_width * pixel(1.0, iResolution.xy) * (1.0 - p),
+            uLineWidth * pixel(1.0, iResolution.xy) * (1.0 - p),
             p,
             (PI * 1.0) * p,
             uMouse,
@@ -132,6 +136,12 @@ const Threads: React.FC<ThreadsProps> = ({
   distance = 0,
   enableMouseInteraction = true,
   className = "",
+  lineCount = 40,
+  lineWidth = 7.0,
+  lineBlur = 10.0,
+  noiseScale = 2.5,
+  noiseTimeScale = 0.1,
+  mouseInfluence = 0.2,
   ...rest
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -165,6 +175,12 @@ const Threads: React.FC<ThreadsProps> = ({
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
+        uLineCount: { value: lineCount },
+        uLineWidth: { value: lineWidth },
+        uLineBlur: { value: lineBlur },
+        uNoiseScale: { value: noiseScale },
+        uNoiseTimeScale: { value: noiseTimeScale },
+        uMouseInfluence: { value: mouseInfluence },
       },
     });
 
@@ -210,10 +226,16 @@ const Threads: React.FC<ThreadsProps> = ({
       }
       program.uniforms.iTime.value = t * 0.001;
 
-      // Update amplitude in real-time if it changes
+      // Update all uniforms in real-time if they change
       program.uniforms.uAmplitude.value = amplitude;
       program.uniforms.uDistance.value = distance;
       program.uniforms.uColor.value = new Color(...color);
+      program.uniforms.uLineCount.value = lineCount;
+      program.uniforms.uLineWidth.value = lineWidth;
+      program.uniforms.uLineBlur.value = lineBlur;
+      program.uniforms.uNoiseScale.value = noiseScale;
+      program.uniforms.uNoiseTimeScale.value = noiseTimeScale;
+      program.uniforms.uMouseInfluence.value = mouseInfluence;
 
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
@@ -232,7 +254,7 @@ const Threads: React.FC<ThreadsProps> = ({
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [color, amplitude, distance, enableMouseInteraction]);
+  }, [color, amplitude, distance, enableMouseInteraction, lineCount, lineWidth, lineBlur, noiseScale, noiseTimeScale, mouseInfluence]);
 
   return (
     <div ref={containerRef} className={`w-full h-full absolute inset-0 ${className}`} {...rest} />

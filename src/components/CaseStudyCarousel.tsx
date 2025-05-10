@@ -1,94 +1,152 @@
 "use client";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Text, { Font } from "./Text";
 import { caseStudyContent } from "@app/lib/caseStudyContent";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFade } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-fade";
 
 export default function CaseStudyCarousel() {
   const [current, setCurrent] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const swiperRef = useRef<SwiperType | undefined>(undefined);
 
-  const nextSlide = () =>
-    setCurrent((prev) => (prev + 1) % caseStudyContent.length);
-  const prevSlide = () =>
-    setCurrent(
-      (prev) => (prev - 1 + caseStudyContent.length) % caseStudyContent.length
-    );
+  const nextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    swiperRef.current?.slideNext();
+  };
+
+  const prevSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    swiperRef.current?.slidePrev();
+  };
 
   const progressPercent = ((current + 1) / caseStudyContent.length) * 100;
 
   return (
-    <div className="my-32 w-full px-6 md:px-12 mx-auto relative overflow-hidden">
-      <div className="flex flex-col md:flex-row items-stretch justify-between w-full gap-4">
-        {/* Left: Content */}
-        <div className="flex flex-row justify-between flex-1 max-w-xl z-10 relative">
-          {/* Progress Bar */}
-          <div className="relative h-96 w-6 flex justify-center items-start mt-4 md:ml-6">
-            <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
-              <div
-                className="absolute bottom-0 left-0 w-full transition-all duration-500"
-                style={{
-                  height: `${progressPercent}%`,
-                  backgroundColor: "#53FBFB",
+    <div className="my-32 w-full px-6 md:px-12 mx-auto relative">
+      <div className="container mx-auto">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-8">
+          {/* Left: Content */}
+          <div className="flex flex-row justify-between flex-1 max-w-xl z-10">
+            {/* Progress Bar */}
+            <div className="relative h-[400px] w-6 flex justify-center items-start mt-4 md:ml-6">
+              <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
+                <div
+                  className="absolute bottom-0 left-0 w-full bg-[#53FBFB] transition-all duration-700 ease-in-out"
+                  style={{
+                    height: `${progressPercent}%`,
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="flex-col flex justify-between items-start h-[400px]">
+              <div className="ml-7 mt-2 relative h-[250px] overflow-hidden">
+                <div
+                  className="transition-all duration-700 ease-in-out"
+                  style={{
+                    opacity: isAnimating ? 0 : 1,
+                    transform: `translateY(${isAnimating ? '20px' : '0'})`,
+                  }}
+                >
+                  <h2 className="text-black text-4xl font-bold leading-tight">
+                    <Text className="max-w-[300px]" type={Font.GARAMOND}>
+                      {caseStudyContent[current].heading}
+                    </Text>
+                  </h2>
+                  <div className="text-gray-700 max-h-32 text-sm md:text-lg mt-4">
+                    <Text type={Font.SOURCE_SANS}>
+                      {caseStudyContent[current].at_a_glance}
+                    </Text>
+                  </div>
+                </div>
+              </div>
+
+              {/* Buttons fixed to bottom */}
+              <div className="ml-7 mb-2">
+                <Button
+                  className="outline-1 px-7 mt-1 relative overflow-hidden group"
+                  href={`/case-study?name=${caseStudyContent[current].route}`}
+                >
+                  <ShinyText text="Know More" speed={3} />
+                </Button>
+                <div className="flex space-x-4 mt-6">
+                  <button
+                    onClick={prevSlide}
+                    disabled={isAnimating}
+                    className="w-10 h-10 rounded-full border-2 border-black text-black flex items-center justify-center transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-lg hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none disabled:hover:bg-transparent disabled:hover:text-black group relative overflow-hidden"
+                    aria-label="Previous Slide"
+                  >
+                    <span className="absolute inset-0 w-full h-full bg-black transform scale-0 transition-transform duration-500 ease-in-out group-hover:scale-100 rounded-full" />
+                    <ChevronLeft 
+                      size={20} 
+                      strokeWidth={3}
+                      className="relative z-10 transition-transform duration-500 ease-in-out group-hover:scale-110" 
+                    />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    disabled={isAnimating}
+                    className="w-10 h-10 rounded-full border-2 border-black text-black flex items-center justify-center transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-lg hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none disabled:hover:bg-transparent disabled:hover:text-black group relative overflow-hidden"
+                    aria-label="Next Slide"
+                  >
+                    <span className="absolute inset-0 w-full h-full bg-black transform scale-0 transition-transform duration-500 ease-in-out group-hover:scale-100 rounded-full" />
+                    <ChevronRight 
+                      size={20} 
+                      strokeWidth={3}
+                      className="relative z-10 transition-transform duration-500 ease-in-out group-hover:scale-110" 
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Image */}
+          <div className="hidden md:block w-full md:w-[45%] max-w-[600px] h-[400px]">
+            <div className="relative w-full h-full">
+              <Swiper
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper;
                 }}
-              />
-            </div>
-          </div>
-
-          <div className="flex-col flex justify-between items-start h-[400px]">
-            {/* Static height ensures buttons don’t move */}
-            <div className="ml-7 mt-2">
-              <h2 className="text-black text-4xl font-bold leading-tight">
-                <Text className="max-w-[300px]" type={Font.GARAMOND}>
-                  {caseStudyContent[current].heading}
-                </Text>
-              </h2>
-              <div className="text-gray-700 max-h-32 text-sm md:text-lg mt-4">
-                <Text type={Font.SOURCE_SANS}>
-                  {caseStudyContent[current].at_a_glance}
-                </Text>
-              </div>
-            </div>
-
-            {/* Buttons fixed to bottom */}
-            <div className="ml-7 mb-2">
-              <Button
-                className="outline-1 px-7 mt-1"
-                href={`/case-study?name=${caseStudyContent[current].route}`}
+                onSlideChange={(swiper) => {
+                  setCurrent(swiper.activeIndex);
+                  // Reset animation state after transition
+                  setTimeout(() => {
+                    setIsAnimating(false);
+                  }, 700);
+                }}
+                effect="fade"
+                speed={700}
+                loop={true}
+                modules={[EffectFade]}
+                className="!absolute inset-0 h-full"
+                allowTouchMove={false}
               >
-                <ShinyText text="Know More" speed={3} />
-              </Button>
-              <div className="flex space-x-4 mt-6">
-                <button
-                  onClick={prevSlide}
-                  className="w-10 h-10 rounded-full border font-bold border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
-                  aria-label="Previous Slide"
-                >
-                  <ChevronLeft size={20} strokeWidth={3} />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="w-10 h-10 rounded-full border border-black text-black flex items-center justify-center hover:bg-gray-200 transition"
-                  aria-label="Next Slide"
-                >
-                  <ChevronRight size={20} strokeWidth={3} />
-                </button>
-              </div>
+                {caseStudyContent.map((content, index) => (
+                  <SwiperSlide key={index} className="w-full h-full">
+                    <Image
+                      src={content.image}
+                      alt="Case study image"
+                      fill
+                      className="object-cover rounded-lg"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+                      priority={index === current}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </div>
-        </div>
-
-        {/* Right: Image */}
-        <div className="hidden md:block absolute right-0 z-0 w-[600px] h-auto">
-          <Image
-            src={caseStudyContent[current].image}
-            alt="Case study image"
-            width={600}
-            height={600}
-            className="object-contain rounded-lg min-h-full"
-          />
         </div>
       </div>
     </div>
