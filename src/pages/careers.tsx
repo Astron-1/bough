@@ -66,7 +66,7 @@ export default function Careers() {
           {/* Mobile Images */}
 
           {/* Desktop Images */}
-          <div className="hidden md:block absolute w-full md:w-96 h-96 left-0 top-[10px] overflow-hidden">
+          <div className="hidden xl:block absolute w-full md:w-96 h-96 left-0 top-[10px] overflow-hidden">
             <Image
               src="/career-1.png"
               alt="City skyline"
@@ -76,7 +76,7 @@ export default function Careers() {
               priority
             />
           </div>
-          <div className="hidden md:block absolute w-full md:w-96 h-96 right-0 top-[326px] overflow-hidden">
+          <div className="hidden xl:block absolute w-full md:w-96 h-96 right-0 top-[326px] overflow-hidden">
             <Image
               src="/career-2.png"
               alt="City skyline"
