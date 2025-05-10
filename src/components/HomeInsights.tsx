@@ -1,6 +1,6 @@
 import React from 'react';
 import { Lightbulb, Handshake, Rocket } from "lucide-react";
-import Text from "./Text";
+import Text, { Font } from "./Text";
 import { motion } from "framer-motion";
 import IconWithHover from "./common/IconWithHover";
 import SpotlightCard from "./common/SpotlightCard";
@@ -41,13 +41,19 @@ export default function HomeInsights() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <ScrollReveal
-            Component="h2"
-            containerClassName="mb-6"
-            textClassName="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight font-garamond"
-          >
-            Leveraging leading technologies to maximize impact
-          </ScrollReveal>
+          <div className="mb-6">
+            <Text type={Font.GARAMOND}>
+              <ScrollReveal
+                Component="h2"
+                textClassName="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
+                baseOpacity={0.1}
+                enableBlur={true}
+                blurStrength={4}
+              >
+                Leveraging leading technologies to maximize impact
+              </ScrollReveal>
+            </Text>
+          </div>
           
           <ScrollReveal
             Component="div"

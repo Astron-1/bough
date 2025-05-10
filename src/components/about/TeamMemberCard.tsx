@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Text, { Font } from "@app/components/Text";
 
@@ -30,25 +30,63 @@ const PlaceholderImage = () => (
   </div>
 );
 
+const LoadingSkeleton = () => (
+  <div className="w-full h-full animate-pulse bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-lg" />
+);
+
 const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt, linkedIn }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
   const cardStyle = {
     width: "19rem",
     height: "auto",
     flexShrink: 0
   };
 
+  // Preload image
+  React.useEffect(() => {
+    if (image) {
+      const img = new Image();
+      img.src = image;
+      img.onload = () => setImageLoaded(true);
+      img.onerror = () => setImageError(true);
+    }
+  }, [image]);
+
   const ImageContent = () => (
-    <div className="overflow-hidden rounded-lg w-full">
+    <div className="card-image overflow-hidden rounded-lg w-full">
       {image ? (
-        <div 
-          className="aspect-square w-full transition-all duration-500 ease-in-out filter grayscale hover:grayscale-0 group-hover:grayscale-0 group-hover:scale-105"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-          aria-label={alt || `${name}, ${title}`}
-        />
+        <div className="relative aspect-square">
+          {/* Loading Skeleton */}
+          {!imageLoaded && !imageError && (
+            <div className="absolute inset-0 z-10">
+              <LoadingSkeleton />
+            </div>
+          )}
+          
+          {/* Actual Image */}
+          <div 
+            className={`
+              aspect-square w-full transition-all duration-500 ease-in-out 
+              filter grayscale hover:grayscale-0 group-hover:grayscale-0 group-hover:scale-105
+              ${imageLoaded ? 'opacity-100' : 'opacity-0'}
+            `}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            aria-label={alt || `${name}, ${title}`}
+          />
+
+          {/* Fallback for error */}
+          {imageError && (
+            <div className="absolute inset-0 z-20">
+              <PlaceholderImage />
+            </div>
+          )}
+        </div>
       ) : (
         <div className="aspect-square w-full bg-blue-100 flex items-center justify-center transition-transform duration-500 ease-in-out group-hover:scale-105">
           <PlaceholderImage />
@@ -68,7 +106,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
         <ImageContent />
         
         {/* Content below image */}
-        <div className="mt-4 w-full transition-all duration-500">
+        <div className="card-content mt-4 w-full transition-all duration-500">
           <div className="flex items-start justify-between">
             <div className="text-left">
               <Text 

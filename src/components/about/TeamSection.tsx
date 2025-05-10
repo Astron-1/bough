@@ -21,6 +21,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
   const descriptionRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [gsapLoaded, setGsapLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   // Exact spacing measurements from Figma (kept for measurement indicators)
   const spacing = {
@@ -41,6 +42,19 @@ const TeamSection: React.FC<TeamSectionProps> = ({
 
     initGSAP();
   }, []);
+
+  // Preload images
+  useEffect(() => {
+    members.forEach(member => {
+      if (member.image) {
+        const img = new Image();
+        img.src = member.image;
+        img.onload = () => {
+          setLoadedImages(prev => new Set([...prev, member.id]));
+        };
+      }
+    });
+  }, [members]);
 
   // Setup animations after GSAP is loaded
   useEffect(() => {
@@ -95,6 +109,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({
       // Create separate timelines for each card with individual scroll triggers
       const cards = document.querySelectorAll(".team-member-card");
       cards.forEach((card, index) => {
+        const memberId = card.getAttribute('data-member-id');
+        const isImageLoaded = !members[index].image || loadedImages.has(memberId || '');
+
         const cardTl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -105,58 +122,65 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           }
         });
 
-        cardTl.to(card, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateX: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: index * 0.1
-        });
+        // Only animate if image is loaded or there is no image
+        if (isImageLoaded) {
+          cardTl.to(card, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: index * 0.1
+          });
+        }
 
         // Add hover animations
         const image = card.querySelector(".card-image");
         const content = card.querySelector(".card-content");
 
         card.addEventListener("mouseenter", () => {
-          gsap.to(card, {
-            scale: 1.02,
-            y: -8,
-            duration: 0.4,
-            ease: "power2.out",
-            zIndex: 2
-          });
-          gsap.to(image, {
-            scale: 1.1,
-            duration: 0.4,
-            ease: "power2.out"
-          });
-          gsap.to(content, {
-            y: -5,
-            duration: 0.3,
-            ease: "power2.out"
-          });
+          if (isImageLoaded) {
+            gsap.to(card, {
+              scale: 1.02,
+              y: -8,
+              duration: 0.4,
+              ease: "power2.out",
+              zIndex: 2
+            });
+            gsap.to(image, {
+              scale: 1.1,
+              duration: 0.4,
+              ease: "power2.out"
+            });
+            gsap.to(content, {
+              y: -5,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          }
         });
 
         card.addEventListener("mouseleave", () => {
-          gsap.to(card, {
-            scale: 1,
-            y: 0,
-            duration: 0.4,
-            ease: "power2.out",
-            zIndex: 1
-          });
-          gsap.to(image, {
-            scale: 1,
-            duration: 0.4,
-            ease: "power2.out"
-          });
-          gsap.to(content, {
-            y: 0,
-            duration: 0.3,
-            ease: "power2.out"
-          });
+          if (isImageLoaded) {
+            gsap.to(card, {
+              scale: 1,
+              y: 0,
+              duration: 0.4,
+              ease: "power2.out",
+              zIndex: 1
+            });
+            gsap.to(image, {
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out"
+            });
+            gsap.to(content, {
+              y: 0,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          }
         });
       });
     };
@@ -168,7 +192,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       }
     };
-  }, [gsapLoaded, description]);
+  }, [gsapLoaded, description, loadedImages, members]);
 
   return (
     <div
@@ -219,7 +243,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           {/* Grid layout with responsive columns and proper gap values */}
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[9.56rem] gap-x-[3.48rem]">
             {members.map((member) => (
-              <div key={member.id} className="team-member-card">
+              <div key={member.id} className="team-member-card" data-member-id={member.id}>
                 <TeamMemberCard
                   id={member.id}
                   name={member.name}
