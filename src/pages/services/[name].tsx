@@ -9,6 +9,7 @@ import vector2 from "../../../public/boughVector2.png";
 import careerCTA from "../../../public/serviceCTA.png";
 import BottomSection from "@app/components/BottomSection";
 import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
+import { motion } from "framer-motion";
 
 export default function ServicePage() {
   const router = useRouter();
@@ -66,8 +67,7 @@ export default function ServicePage() {
   return (
     <section>
       <section className=" bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-        <Header />
-        {/* Mobile Top Full-Width Image */}
+        <Header transparent />
         <div className="w-full mb-8 md:hidden">
           <Image
             src={content.heroImage || "/placeholder.svg"}
@@ -77,34 +77,22 @@ export default function ServicePage() {
             height={400}
           />
         </div>
-        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 flex flex-col-reverse md:flex-row items-center justify-center">
-          {/* Left Image for Desktop */}
 
-          <div className="absolute left-0 top-0 bottom-0 w-1/4 hidden md:block">
-            <Image
-              src={content.heroImage || "/placeholder.svg"}
-              alt="heroImage left"
-              className="h-screen w-full object-cover -mt-24 z-0 relative"
-              style={{ clipPath: "inset(0 50% 0 0)" }}
-              width={800}
-              height={800}
-            />
-          </div>
+        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 md:-mt-24 flex flex-col-reverse  items-center justify-center">
+          <Image
+            src={content?.heroImage}
+            fill
+            priority
+            alt="Hero"
+            className="w-full h-screen hidden md:block"
+          />
 
-          {/* Right Image for Desktop */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/4 hidden md:block">
-            <Image
-              src={content.heroImage || "/placeholder.svg"}
-              alt="heroImage right"
-              className="h-screen w-full object-cover -mt-24 z-0 relative"
-              style={{ clipPath: "inset(0 0 0 50%)" }}
-              width={800}
-              height={800}
-            />
-          </div>
-
-          {/* Center Text */}
-          <div className="w-full md:w-3/5 text-center py-12 z-10 mx-auto -mt-20 md:-mt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative z-10 md:bg-white/85 md:rounded-lg w-full max-w-3xl text-center p-6 md:p-12 space-y-4"
+          >
             <Text
               type={Font.GARAMOND}
               className="text-[#1043E8] text-sm sm:text-lg font-semibold"
@@ -113,7 +101,7 @@ export default function ServicePage() {
             </Text>
             <Text
               type={Font.GARAMOND}
-              className="text-4xl text-black my-4 md:text-5xl font-bold"
+              className="text-4xl text-black md:text-5xl font-bold"
             >
               {serviceName}
             </Text>
@@ -123,10 +111,9 @@ export default function ServicePage() {
             >
               {content?.topSubHeading}
             </Text>
-          </div>
+          </motion.div>
         </section>
 
-        {/* The Bough Way */}
         <section className="text-center">
           <div className="space-y-4 px-4 sm:px-12 md:px-24 lg:px-32 mt-10 md:mt-32">
             <Text
@@ -144,7 +131,6 @@ export default function ServicePage() {
           </div>
         </section>
 
-        {/* Our Offerings */}
         <section className="space-y-8 mb-10 mt-20 px-10 md:px-20">
           <div className="md:flex md:justify-between md:items-start gap-10">
             <div className="space-y-6 md:w-1/3">
@@ -164,8 +150,12 @@ export default function ServicePage() {
 
             <div className="space-y-4 w-full md:w-1/2 mt-8 md:mt-0">
               {content.body?.offerings.sections?.map((item, index) => (
-                <details
+                <motion.details
                   key={index}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="bg-blue-50 rounded-lg p-4 group open:bg-blue-100 transition-all duration-200"
                 >
                   <summary className="font-semibold cursor-pointer text-black flex justify-between items-center marker:hidden">
@@ -187,15 +177,20 @@ export default function ServicePage() {
                   <div className="mt-2 text-sm text-gray-700">
                     <Text type={Font.SOURCE_SANS}>{item.content}</Text>
                   </div>
-                </details>
+                </motion.details>
               ))}
             </div>
           </div>
         </section>
-
-        {/* Final CTA */}
       </section>
-      <section className="w-full px-4 sm:px-8 py-10 flex flex-col items-center justify-center bg-gradient-to-r from-[#13294C] to-[#1043e8] relative">
+
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="w-full px-4 sm:px-8 py-10 flex flex-col items-center justify-center bg-gradient-to-r from-[#13294C] to-[#1043e8] relative"
+      >
         <Image
           src={vector2 || "/placeholder.svg"}
           alt="vector decoration"
@@ -209,7 +204,8 @@ export default function ServicePage() {
         >
           {content.bottomText}
         </Text>
-      </section>
+      </motion.section>
+
       <CaseStudyCarousel />
       <BottomSection
         content="Let's drive outcomes by crafting changes for a meaningful tomorrow, now"
