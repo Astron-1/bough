@@ -67,7 +67,8 @@ export default function ServicePage() {
   return (
     <section>
       <section className=" bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-        <Header transparent />
+        <Header transparent customClassName="hidden md:block" />
+        <Header customClassName="block md:hidden" />
         <div className="w-full mb-8 md:hidden">
           <Image
             src={content.heroImage || "/placeholder.svg"}

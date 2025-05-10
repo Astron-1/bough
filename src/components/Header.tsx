@@ -11,9 +11,13 @@ import Text, { Font } from "./Text";
 
 interface HeaderProps {
   transparent?: boolean;
+  customClassName?: string;
 }
 
-export default function Header({ transparent = false }: HeaderProps) {
+export default function Header({
+  transparent = false,
+  customClassName,
+}: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
@@ -71,11 +75,13 @@ export default function Header({ transparent = false }: HeaderProps) {
   return (
     <>
       <header
-        className={`w-full z-[100] transition-all duration-300 ${
-          isSticky
-            ? "fixed top-0 backdrop-blur-md bg-white/30 py-5"
-            : "relative py-6 pt-5"
-        }`}
+        className={
+          `w-full z-[100] transition-all duration-300 ${
+            isSticky
+              ? "fixed top-0 backdrop-blur-md bg-white/30 py-5"
+              : "relative py-6 pt-5"
+          } ` + customClassName
+        }
         style={{
           boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.05)" : "none",
         }}
