@@ -67,7 +67,7 @@ export default function ServicePage() {
   return (
     <section>
       <section className=" bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-        <Header />
+        <Header transparent />
         <div className="w-full mb-8 md:hidden">
           <Image
             src={content.heroImage || "/placeholder.svg"}
@@ -78,7 +78,7 @@ export default function ServicePage() {
           />
         </div>
 
-        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 flex flex-col-reverse  items-center justify-center">
+        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 md:-mt-24 flex flex-col-reverse  items-center justify-center">
           <Image
             src={content?.heroImage}
             fill
