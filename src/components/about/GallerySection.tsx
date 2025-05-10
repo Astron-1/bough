@@ -19,19 +19,12 @@ interface GallerySectionProps {
 const GallerySection: React.FC<GallerySectionProps> = ({ 
   title, 
   description,
-  images
 }) => {
   // Convert regular gallery items to bento gallery items with height
-  const bentoImages = images?.map(img => ({
-    ...img,
-    height: 200 + Math.floor(Math.random() * 200) // Random height between 200-400px
-  }));
-
   return (
     <BentoGallery
       title={title}
       description={description}
-      images={bentoImages}
     />
   );
 

@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Text, { Font } from "@app/components/Text";
-import GallerySkeleton from "./GallerySkeleton";
 import styles from "./BentoGallery.module.css";
 
 interface GalleryItem {
-  id: number | string;
+  id: string;
   imagePath: string;
   altText: string;
-  height?: number;
-  aspectRatio?: number;
   priority?: boolean;
 }
 
@@ -21,197 +18,270 @@ interface BentoGalleryProps {
   images?: GalleryItem[];
 }
 
-// Predefined layout configuration for the exact layout shown
 const defaultGalleryLayout: GalleryItem[] = [
   {
-    id: 1,
+    id: "frame1",
     imagePath: "/collage/1.jpg",
-    altText: "Team members in office",
-    aspectRatio: 4/3,
-    priority: true
+    altText: "Gallery image 1",
+    priority: true,
   },
   {
-    id: 2,
+    id: "frame2",
     imagePath: "/collage/2.jpg",
-    altText: "Better Together banner",
-    aspectRatio: 1,
-    priority: true
+    altText: "Gallery image 2",
+    priority: true,
   },
   {
-    id: 3,
+    id: "frame3",
     imagePath: "/collage/3.jpg",
-    altText: "Large team group photo",
-    aspectRatio: 16/9,
-    priority: true
+    altText: "Gallery image 3",
+    priority: true,
   },
   {
-    id: 4,
+    id: "frame4",
     imagePath: "/collage/4.jpg",
-    altText: "Team member with pet",
-    aspectRatio: 1
+    altText: "Gallery image 4",
   },
   {
-    id: 5,
+    id: "frame5",
     imagePath: "/collage/5.jpg",
-    altText: "Team meeting",
-    aspectRatio: 16/9
+    altText: "Gallery image 5",
   },
   {
-    id: 6,
+    id: "frame6",
     imagePath: "/collage/6.jpg",
-    altText: "Office dog",
-    aspectRatio: 1
+    altText: "Gallery image 6",
   },
   {
-    id: 7,
+    id: "frame7",
     imagePath: "/collage/7.jpg",
-    altText: "Office space",
-    aspectRatio: 16/9
+    altText: "Gallery image 7",
   },
   {
-    id: 8,
+    id: "frame8",
     imagePath: "/collage/8.jpg",
-    altText: "Team casual meeting",
-    aspectRatio: 4/3
+    altText: "Gallery image 8",
   },
   {
-    id: 9,
+    id: "frame9",
     imagePath: "/collage/9.jpg",
-    altText: "Team at event",
-    aspectRatio: 3/2
+    altText: "Gallery image 9",
   },
   {
-    id: 10,
+    id: "frame10",
     imagePath: "/collage/10.jpg",
-    altText: "Office view",
-    aspectRatio: 1
+    altText: "Gallery image 10",
   },
   {
-    id: 11,
+    id: "frame11",
     imagePath: "/collage/11.jpg",
-    altText: "Team event banner",
-    aspectRatio: 1
+    altText: "Gallery image 11",
   },
   {
-    id: 12,
+    id: "frame12",
     imagePath: "/collage/12.jpg",
-    altText: "Team lunch",
-    aspectRatio: 3/2
+    altText: "Gallery image 12",
   },
   {
-    id: 13,
+    id: "frame13",
     imagePath: "/collage/13.jpg",
-    altText: "Pet in office",
-    aspectRatio: 1
+    altText: "Gallery image 13",
   },
   {
-    id: 14,
+    id: "frame14",
     imagePath: "/collage/14.jpg",
-    altText: "Team working",
-    aspectRatio: 16/9
+    altText: "Gallery image 14",
   },
   {
-    id: 15,
+    id: "frame15",
     imagePath: "/collage/15.jpg",
-    altText: "Individual working",
-    aspectRatio: 4/3
+    altText: "Gallery image 15",
   },
   {
-    id: 16,
+    id: "frame16",
     imagePath: "/collage/16.jpg",
-    altText: "Team celebration",
-    aspectRatio: 16/9
+    altText: "Gallery image 16",
   },
   {
-    id: 17,
+    id: "frame17",
     imagePath: "/collage/17.jpg",
-    altText: "Team bonding",
-    aspectRatio: 3/2
+    altText: "Gallery image 17",
   }
 ];
 
 const BentoGallery: React.FC<BentoGalleryProps> = ({
-  title,
-  description,
+  title = "Our journey in pictures",
+  description = "Explore our visual story — moments of collaboration, innovation, and growth that define Bough's culture and commitment to excellence.",
   images: propImages,
 }) => {
-  const [columns, setColumns] = useState<number>(3);
-  const [galleryImages, setGalleryImages] = useState<GalleryItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const galleryRef = useRef<HTMLDivElement>(null);
+  const galleryImages = propImages || defaultGalleryLayout;
+  const gridRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLDivElement>(null);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [gsapLoaded, setGsapLoaded] = useState(false);
 
-  // Handle responsive columns
+  const handleImageLoad = (id: string) => {
+    setLoadedImages(prev => {
+      const newSet = new Set(prev);
+      newSet.add(id);
+      return newSet;
+    });
+  };
+
+  // Initialize GSAP and ScrollTrigger
   useEffect(() => {
-    const updateColumns = () => {
-      if (window.matchMedia("(min-width: 1500px)").matches) {
-        setColumns(4);
-      } else if (window.matchMedia("(min-width: 1200px)").matches) {
-        setColumns(3);
-      } else if (window.matchMedia("(min-width: 768px)").matches) {
-        setColumns(2);
-      } else {
-        setColumns(1);
-      }
+    const initGSAP = async () => {
+      const gsap = (await import('gsap')).default;
+      const ScrollTrigger = (await import('gsap/ScrollTrigger')).default;
+      gsap.registerPlugin(ScrollTrigger);
+      setGsapLoaded(true);
     };
 
-    updateColumns();
-    window.addEventListener("resize", updateColumns);
-    return () => window.removeEventListener("resize", updateColumns);
+    initGSAP();
   }, []);
 
-  // Load and process images
+  // Handle animations after GSAP is loaded
   useEffect(() => {
-    setLoading(true);
-    const processedImages = propImages || defaultGalleryLayout;
-    setGalleryImages(processedImages);
-    setLoading(false);
-  }, [propImages]);
+    if (!gsapLoaded || !gridRef.current) return;
+
+    const initAnimations = async () => {
+      const { default: gsap } = await import('gsap');
+      const { default: ScrollTrigger } = await import('gsap/ScrollTrigger');
+
+      // Create a timeline for smooth orchestration
+      const tl = gsap.timeline({
+        defaults: {
+          ease: "power3.out",
+        }
+      });
+
+      // Animate title and description
+      tl.from(titleRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+      })
+      .from(descRef.current, {
+        y: 20,
+        opacity: 0,
+        duration: 1,
+      }, "-=0.7");
+
+      // Set initial state of grid items
+      gsap.set(".gridItem", {
+        opacity: 0,
+        scale: 0.8,
+        y: 50,
+        rotateX: -15,
+        transformOrigin: "50% 50% -100",
+        filter: "blur(10px)",
+      });
+
+      // Create a separate timeline for grid items
+      const gridTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top center+=100",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate grid items with premium effects
+      gridTl.to(".gridItem", {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotateX: 0,
+        filter: "blur(0px)",
+        duration: 1.2,
+        stagger: {
+          amount: 1.2,
+          grid: "auto",
+          from: "random",
+          ease: "power3.out"
+        }
+      });
+
+      // Add hover animations
+      const gridItems = document.querySelectorAll(".gridItem");
+      gridItems.forEach(item => {
+        item.addEventListener("mouseenter", () => {
+          gsap.to(item, {
+            scale: 1.02,
+            duration: 0.4,
+            ease: "power2.out",
+            zIndex: 2,
+            boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
+          });
+        });
+
+        item.addEventListener("mouseleave", () => {
+          gsap.to(item, {
+            scale: 1,
+            duration: 0.4,
+            ease: "power2.out",
+            zIndex: 1,
+            boxShadow: "none"
+          });
+        });
+      });
+
+      return () => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      };
+    };
+
+    initAnimations();
+  }, [gsapLoaded]);
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      <div className="max-w-[1600px] mx-auto">
-        <Text
-          type={Font.GARAMOND}
-          className="text-[3.5rem] leading-[1.2] font-medium text-left text-black mb-6"
-        >
-          {title}
-        </Text>
+      <div className={styles.galleryContainer}>
+        <div ref={titleRef} className="text-center max-w-4xl mx-auto">
+          <Text
+            type={Font.GARAMOND}
+            className="text-[3.5rem] leading-[1.2] font-medium text-black mb-6"
+          >
+            {title}
+          </Text>
+        </div>
 
-        <Text
-          type={Font.SOURCE_SANS}
-          className="text-xl leading-relaxed text-left max-w-4xl mb-12 text-gray-700"
-        >
-          {description}
-        </Text>
+        <div ref={descRef} className="text-center max-w-3xl mx-auto">
+          <Text
+            type={Font.SOURCE_SANS}
+            className="text-xl leading-relaxed mb-16 text-gray-700"
+          >
+            {description}
+          </Text>
+        </div>
 
-        <div ref={galleryRef} className={styles.galleryContainer}>
-          {loading ? (
-            <GallerySkeleton columns={columns} items={17} />
-          ) : (
-            <div className={styles.galleryGrid}>
-              {galleryImages.map((item) => (
-                <div
-                  key={item.id}
-                  className={styles.galleryItem}
-                  style={{
-                    '--aspect-ratio': item.aspectRatio
-                  } as React.CSSProperties}
-                >
-                  <div className={styles.imageWrapper}>
-                    <Image
-                      src={item.imagePath}
-                      alt={item.altText}
-                      fill
-                      sizes="(max-width: 500px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                      className={styles.image}
-                      priority={item.priority}
-                      loading={item.priority ? "eager" : "lazy"}
-                    />
-                  </div>
+        <div className={styles.gridContainer}>
+          <div className={styles.gridLayout} ref={gridRef}>
+            {galleryImages.map((image, index) => (
+              <div
+                key={image.id}
+                className={`${styles.gridItem} gridItem ${styles[`item${index + 1}`]}`}
+              >
+                <div className={styles.imageWrapper}>
+                  {!loadedImages.has(image.id) && (
+                    <div className={styles.skeleton} />
+                  )}
+                  <Image
+                    src={image.imagePath}
+                    alt={image.altText}
+                    fill
+                    className={`${styles.image} ${
+                      loadedImages.has(image.id) ? styles.loaded : ""
+                    }`}
+                    sizes="(max-width: 500px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                    priority={image.priority}
+                    onLoad={() => handleImageLoad(image.id)}
+                  />
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

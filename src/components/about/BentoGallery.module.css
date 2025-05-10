@@ -1,172 +1,175 @@
 .galleryContainer {
   width: 100%;
+  max-width: 2000px;
   margin: 0 auto;
-  padding: 0;
-}
-
-.galleryGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  padding: 0;
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-.galleryItem {
+  margin-bottom: 6rem;
   position: relative;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-  transition: all 0.3s ease;
+  perspective: 1000px;
+}
+
+.gridContainer {
+  width: 100%;
   height: 0;
-  padding-bottom: calc(100% / var(--aspect-ratio));
+  padding-bottom: 90%;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  transform-style: preserve-3d;
 }
 
-.galleryItem:hover {
-  transform: translateY(-4px);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-}
-
-.imageWrapper {
+.gridLayout {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.gridItem {
+  position: absolute;
+  border-radius: 12px;
   overflow: hidden;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+  transition: box-shadow 0.4s ease;
+  backface-visibility: hidden;
+}
+
+/* Enhanced skeleton loading styles */
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(240, 240, 240, 0.8) 0%,
+    rgba(247, 247, 247, 0.9) 50%,
+    rgba(240, 240, 240, 0.8) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* First row */
+.item1 { left: 0.5%; top: 0.5%; width: 28%; height: 21%; }
+.item2 { left: 29%; top: 0.5%; width: 14%; height: 21%; }
+.item3 { left: 44%; top: 0.5%; width: 34%; height: 21%; }
+.item4 { left: 79%; top: 0.5%; width: 20%; height: 21%; }
+
+/* Second row */
+.item5 { left: 0.5%; top: 22.5%; width: 36%; height: 21%; }
+.item6 { left: 37.5%; top: 22.5%; width: 22%; height: 21%; }
+.item7 { left: 60.5%; top: 22.5%; width: 38.5%; height: 21%; }
+
+/* Third row */
+.item8 { left: 0.5%; top: 44.5%; width: 30%; height: 21%; }
+.item9 { left: 31.5%; top: 44.5%; width: 34%; height: 21%; }
+.item10 { left: 66.5%; top: 44.5%; width: 33%; height: 21%; }
+
+/* Fourth row */
+.item11 { left: 0.5%; top: 66.5%; width: 15%; height: 21%; }
+.item12 { left: 16.5%; top: 66.5%; width: 31%; height: 21%; }
+.item13 { left: 48.5%; top: 66.5%; width: 12%; height: 21%; }
+.item14 { left: 61.5%; top: 66.5%; width: 38%; height: 21%; }
+
+/* Fifth row */
+.item15 { left: 0.5%; top: 88.5%; width: 30%; height: 21%; }
+.item16 { left: 31.5%; top: 88.5%; width: 29%; height: 21%; }
+.item17 { left: 61.5%; top: 88.5%; width: 38%; height: 21%; }
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 
 .image {
   object-fit: cover;
-  transition: transform 0.3s ease;
-  width: 100%;
-  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.4s ease-out;
+  border-radius: 12px;
 }
 
-.galleryItem:hover .image {
+.image.loaded {
+  opacity: 1;
+}
+
+/* Specific styling for the 4th image to ensure head is visible */
+.item4 .image {
+  object-position: top center;
+}
+
+/* Optional: If the above doesn't work well enough, we can try this alternative */
+.item4 .imageWrapper {
+  display: flex;
+  align-items: flex-start; /* Align to top */
+}
+
+/* Premium hover effects */
+.gridItem:hover .image.loaded {
   transform: scale(1.05);
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
-/* First row - spans full width */
-.galleryItem:nth-child(1) {
-  grid-column: span 1;
-  --aspect-ratio: 1.33;
-}
-
-.galleryItem:nth-child(2) {
-  grid-column: span 1;
-  --aspect-ratio: 1;
-}
-
-.galleryItem:nth-child(3) {
-  grid-column: span 1;
-  --aspect-ratio: 1.33;
-}
-
-.galleryItem:nth-child(4) {
-  grid-column: span 1;
-  --aspect-ratio: 1;
-}
-
-/* Second row */
-.galleryItem:nth-child(5) {
-  grid-column: span 2;
-  --aspect-ratio: 1.77;
-}
-
-.galleryItem:nth-child(6) {
-  grid-column: span 1;
-  --aspect-ratio: 1;
-}
-
-.galleryItem:nth-child(7) {
-  grid-column: span 1;
-  --aspect-ratio: 1.77;
-}
-
-/* Third row */
-.galleryItem:nth-child(8) {
-  grid-column: span 1;
-  --aspect-ratio: 1.33;
-}
-
-.galleryItem:nth-child(9) {
-  grid-column: span 1;
-  --aspect-ratio: 1.5;
-}
-
-.galleryItem:nth-child(10) {
-  grid-column: span 1;
-  --aspect-ratio: 1;
-}
-
-/* Fourth row */
-.galleryItem:nth-child(11) {
-  grid-column: span 1;
-  --aspect-ratio: 1;
-}
-
-.galleryItem:nth-child(12) {
-  grid-column: span 1;
-  --aspect-ratio: 1.5;
-}
-
-.galleryItem:nth-child(13) {
-  grid-column: span 1;
-  --aspect-ratio: 1;
-}
-
-.galleryItem:nth-child(14) {
-  grid-column: span 1;
-  --aspect-ratio: 1.77;
-}
-
-/* Fifth row */
-.galleryItem:nth-child(15) {
-  grid-column: span 1;
-  --aspect-ratio: 1.33;
-}
-
-.galleryItem:nth-child(16) {
-  grid-column: span 1;
-  --aspect-ratio: 1.77;
-}
-
-.galleryItem:nth-child(17) {
-  grid-column: span 1;
-  --aspect-ratio: 1.5;
-}
-
-@media (min-width: 1500px) {
-  .galleryGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 1200px) {
-  .galleryGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
+/* Animation classes */
+.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (max-width: 768px) {
-  .galleryGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  .galleryContainer {
+    margin-bottom: 4rem;
   }
 
-  .galleryItem {
-    grid-column: span 1 !important;
+  .gridContainer {
+    padding-bottom: 200%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .gridItem {
+    width: 48% !important;
+    height: 10% !important;
+  }
+  
+  .item1 { left: 1%; top: 1%; }
+  .item2 { left: 51%; top: 1%; }
+  .item3 { left: 1%; top: 12%; }
+  .item4 { left: 51%; top: 12%; }
+  .item5 { left: 1%; top: 23%; }
+  .item6 { left: 51%; top: 23%; }
+  .item7 { left: 1%; top: 34%; }
+  .item8 { left: 51%; top: 34%; }
+  .item9 { left: 1%; top: 45%; }
+  .item10 { left: 51%; top: 45%; }
+  .item11 { left: 1%; top: 56%; }
+  .item12 { left: 51%; top: 56%; }
+  .item13 { left: 1%; top: 67%; }
+  .item14 { left: 51%; top: 67%; }
+  .item15 { left: 1%; top: 78%; }
+  .item16 { left: 51%; top: 78%; }
+  .item17 { left: 1%; top: 89%; }
+  
+  /* Maintain the same image positioning on mobile */
+  .item4 .image {
+    object-position: top center ;
+  }
+  
+  /* Maintain smooth animations on mobile */
+  .gridItem:hover .image.loaded {
+    transform: none;
   }
 }
-
-@media (max-width: 500px) {
-  .galleryGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-} 

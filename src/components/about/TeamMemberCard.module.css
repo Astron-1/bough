@@ -1,0 +1,69 @@
+.cardWrapper {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  aspect-ratio: 4/5;
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.8) 0%,
+    rgba(241, 245, 249, 0.9) 50%,
+    rgba(226, 232, 240, 0.8) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.textSkeleton {
+  height: 1.25rem;
+  width: 80%;
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.8) 0%,
+    rgba(241, 245, 249, 0.9) 50%,
+    rgba(226, 232, 240, 0.8) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.titleSkeleton {
+  height: 1rem;
+  width: 60%;
+}
+
+.image {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.4s ease-out;
+}
+
+.imageLoaded {
+  opacity: 1;
+}
+
+/* Premium hover effects */
+.cardWrapper:hover .imageLoaded {
+  transform: scale(1.05);
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+} 

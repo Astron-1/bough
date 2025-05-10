@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exact SVG Layout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #fff;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    
+    .svg-container {
+      width: 100%;
+      max-width: 1700px;
+      height: 0;
+      padding-bottom: 100%; /* Maintain aspect ratio */
+      position: relative;
+      margin: 0 auto;
+    }
+    
+    .svg-layout {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .rect {
+      position: absolute;
+      background-color: #CCCCCC;
+      border-radius: 8px;
+    }
+    
+    /* Exact positioning based on your SVG */
+    /* First row */
+    .rect-1 {
+      left: 2%;
+      top: 2%;
+      width: 26%;
+      height: 17%;
+    }
+    
+    .rect-2 {
+      left: 31%;
+      top: 2%;
+      width: 13%;
+      height: 17%;
+    }
+    
+    .rect-3 {
+      left: 47%;
+      top: 2%;
+      width: 32%;
+      height: 17%;
+    }
+    
+    .rect-4 {
+      left: 82%;
+      top: 2%;
+      width: 13%;
+      height: 17%;
+    }
+    
+    /* Second row */
+    .rect-5 {
+      left: 2%;
+      top: 22%;
+      width: 34%;
+      height: 17%;
+    }
+    
+    .rect-6 {
+      left: 40%;
+      top: 22%;
+      width: 20%;
+      height: 17%;
+    }
+    
+    .rect-7 {
+      left: 65%;
+      top: 22%;
+      width: 32%;
+      height: 17%;
+    }
+    
+    /* Third row */
+    .rect-8 {
+      left: 2%;
+      top: 42%;
+      width: 28%;
+      height: 17%;
+    }
+    
+    .rect-9 {
+      left: 33%;
+      top: 42%;
+      width: 32%;
+      height: 17%;
+    }
+    
+    .rect-10 {
+      left: 69%;
+      top: 42%;
+      width: 27%;
+      height: 17%;
+    }
+    
+    /* Fourth row */
+    .rect-11 {
+      left: 2%;
+      top: 62%;
+      width: 13%;
+      height: 17%;
+    }
+    
+    .rect-12 {
+      left: 19%;
+      top: 62%;
+      width: 28%;
+      height: 17%;
+    }
+    
+    .rect-13 {
+      left: 51%;
+      top: 62%;
+      width: 10%;
+      height: 17%;
+    }
+    
+    .rect-14 {
+      left: 65%;
+      top: 62%;
+      width: 32%;
+      height: 17%;
+    }
+    
+    /* Fifth row */
+    .rect-15 {
+      left: 2%;
+      top: 82%;
+      width: 28%;
+      height: 17%;
+    }
+    
+    .rect-16 {
+      left: 33%;
+      top: 82%;
+      width: 27%;
+      height: 17%;
+    }
+    
+    .rect-17 {
+      left: 65%;
+      top: 82%;
+      width: 32%;
+      height: 17%;
+    }
+    
+    @media (max-width: 768px) {
+      .svg-container {
+        padding-bottom: 200%; /* Adjust for mobile */
+      }
+      
+      .rect {
+        width: 45% !important;
+        height: 8% !important;
+      }
+      
+      .rect-1 { left: 2%; top: 2%; }
+      .rect-2 { left: 52%; top: 2%; }
+      .rect-3 { left: 2%; top: 12%; }
+      .rect-4 { left: 52%; top: 12%; }
+      .rect-5 { left: 2%; top: 22%; }
+      .rect-6 { left: 52%; top: 22%; }
+      .rect-7 { left: 2%; top: 32%; }
+      .rect-8 { left: 52%; top: 32%; }
+      .rect-9 { left: 2%; top: 42%; }
+      .rect-10 { left: 52%; top: 42%; }
+      .rect-11 { left: 2%; top: 52%; }
+      .rect-12 { left: 52%; top: 52%; }
+      .rect-13 { left: 2%; top: 62%; }
+      .rect-14 { left: 52%; top: 62%; }
+      .rect-15 { left: 2%; top: 72%; }
+      .rect-16 { left: 52%; top: 72%; }
+      .rect-17 { left: 2%; top: 82%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <div class="svg-layout">
+      <div class="rect rect-1"></div>
+      <div class="rect rect-2"></div>
+      <div class="rect rect-3"></div>
+      <div class="rect rect-4"></div>
+      <div class="rect rect-5"></div>
+      <div class="rect rect-6"></div>
+      <div class="rect rect-7"></div>
+      <div class="rect rect-8"></div>
+      <div class="rect rect-9"></div>
+      <div class="rect rect-10"></div>
+      <div class="rect rect-11"></div>
+      <div class="rect rect-12"></div>
+      <div class="rect rect-13"></div>
+      <div class="rect rect-14"></div>
+      <div class="rect rect-15"></div>
+      <div class="rect rect-16"></div>
+      <div class="rect rect-17"></div>
+    </div>
+  </div>
+</body>
+</html>
