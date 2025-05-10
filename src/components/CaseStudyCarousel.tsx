@@ -49,29 +49,44 @@ export default function CaseStudyCarousel() {
               </div>
             </div>
 
-            <div className="flex-col flex justify-between items-start h-[400px]">
+            <div className="flex-col flex justify-between items-start max-h-[450px]">
               <div className="ml-7 mt-2 relative h-[250px] overflow-hidden">
                 <div
                   className="transition-all duration-700 ease-in-out"
                   style={{
                     opacity: isAnimating ? 0 : 1,
-                    transform: `translateY(${isAnimating ? '20px' : '0'})`,
+                    transform: `translateY(${isAnimating ? "20px" : "0"})`,
                   }}
                 >
-                  <h2 className="text-black text-4xl font-bold leading-tight flex flex-col gap-1">
-                    {caseStudyContent[current].heading.split(' ').reduce((acc: string[], word: string, i: number, arr: string[]) => {
-                      if (i % 3 === 0) {
-                        const group = arr.slice(i, i + 3).join(' ');
-                        if (group.trim()) {
-                          acc.push(group);
-                        }
-                      }
-                      return acc;
-                    }, []).map((line, index) => (
-                      <Text key={index} className="max-w-[300px]" type={Font.GARAMOND}>
-                        {line}
-                      </Text>
-                    ))}
+                  <h2 className="text-black text-3xl font-bold leading-tight flex flex-col gap-1">
+                    {caseStudyContent[current].heading
+                      .split(" ")
+                      .reduce(
+                        (
+                          acc: string[],
+                          word: string,
+                          i: number,
+                          arr: string[]
+                        ) => {
+                          if (i % 3 === 0) {
+                            const group = arr.slice(i, i + 3).join(" ");
+                            if (group.trim()) {
+                              acc.push(group);
+                            }
+                          }
+                          return acc;
+                        },
+                        []
+                      )
+                      .map((line, index) => (
+                        <Text
+                          key={index}
+                          className="max-w-[300px]"
+                          type={Font.GARAMOND}
+                        >
+                          {line}
+                        </Text>
+                      ))}
                   </h2>
                   <div className="text-gray-700 max-h-32 text-sm md:text-lg mt-4">
                     <Text type={Font.SOURCE_SANS}>
@@ -82,9 +97,9 @@ export default function CaseStudyCarousel() {
               </div>
 
               {/* Buttons fixed to bottom */}
-              <div className="ml-7 mb-2">
+              <div className="ml-3 mb-2">
                 <Button
-                  className="outline-1 px-7 mt-1 relative overflow-hidden group"
+                  className="outline-1 px-7 mt-1 -ml-3 relative overflow-hidden group"
                   href={`/case-study?name=${caseStudyContent[current].route}`}
                 >
                   <ShinyText text="Know More" speed={3} />
@@ -97,23 +112,25 @@ export default function CaseStudyCarousel() {
                     aria-label="Previous Slide"
                   >
                     <span className="absolute inset-0 w-full h-full bg-black transform scale-0 transition-transform duration-500 ease-in-out group-hover:scale-100 rounded-full" />
-                    <ChevronLeft 
-                      size={20} 
+                    <ChevronLeft
+                      size={20}
                       strokeWidth={3}
-                      className="relative z-10 transition-transform duration-500 ease-in-out group-hover:scale-110" 
+                      className="relative z-10 transition-transform duration-500 ease-in-out group-hover:scale-110"
                     />
                   </button>
                   <button
                     onClick={nextSlide}
-                    disabled={isAnimating || current === caseStudyContent.length - 1}
+                    disabled={
+                      isAnimating || current === caseStudyContent.length - 1
+                    }
                     className="w-10 h-10 rounded-full border-2 border-black text-black flex items-center justify-center transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-lg hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none disabled:hover:bg-transparent disabled:hover:text-black group relative overflow-hidden"
                     aria-label="Next Slide"
                   >
                     <span className="absolute inset-0 w-full h-full bg-black transform scale-0 transition-transform duration-500 ease-in-out group-hover:scale-100 rounded-full" />
-                    <ChevronRight 
-                      size={20} 
+                    <ChevronRight
+                      size={20}
                       strokeWidth={3}
-                      className="relative z-10 transition-transform duration-500 ease-in-out group-hover:scale-110" 
+                      className="relative z-10 transition-transform duration-500 ease-in-out group-hover:scale-110"
                     />
                   </button>
                 </div>
