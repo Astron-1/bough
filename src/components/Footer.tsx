@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Text, { Font } from "./Text";
 
 export default function Footer() {
   const year = new Date();
@@ -148,39 +149,39 @@ export default function Footer() {
                 <li>
                   <p className="hover:text-gray-300 block">Gurugram</p>
                 </li>
-                <li>
-                  <p className="hover:text-gray-300 block">Delhi</p>
-                </li>
               </ul>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-gray-800 pt-6 mt-12 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-center sm:text-left mb-4 sm:mb-0">
-            © {year.getFullYear()}, Bough Consulting, LLC. All rights reserved.
-          </p>
-          <div>
-            <Link
-              target="_blank"
-              href="https://www.linkedin.com/company/boughconsulting/"
-              aria-label="LinkedIn"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                className="fill-current hover:text-gray-300"
+        <Text type={Font.GARAMOND}>
+          <div className="border-t border-gray-800 pt-6 mt-12 flex flex-col sm:flex-row justify-between items-center">
+            <p className="text-sm text-center sm:text-left mb-4 sm:mb-0">
+              © {year.getFullYear()}, Bough Consulting, LLC. All rights
+              reserved.
+            </p>
+            <div>
+              <Link
+                target="_blank"
+                href="https://www.linkedin.com/company/boughconsulting/"
+                aria-label="LinkedIn"
               >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect x="2" y="9" width="4" height="12" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </Link>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  className="fill-current hover:text-gray-300"
+                >
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </Link>
+            </div>
           </div>
-        </div>
+        </Text>
       </div>
     </footer>
   );
