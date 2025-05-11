@@ -148,7 +148,10 @@ export default function Careers() {
         </div>
 
         {/* The Bough Way Section */}
-        <section className="pt-20 sm:pt-32 md:pt-60 pb-12 md:py-24 relative z-10">
+        <section
+          id="boughway"
+          className="pt-20 sm:pt-32 md:pt-60 pb-12 md:py-24 relative z-10"
+        >
           <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-8 sm:gap-12">
             <div className="lg:w-1/3">
               <Text
@@ -196,7 +199,10 @@ export default function Careers() {
         </section>
 
         {/* Hiring Process Section */}
-        <section className="py-12 sm:py-16 md:py-24 relative z-10">
+        <section
+          id="hiringprocess"
+          className="py-12 sm:py-16 md:py-24 relative z-10"
+        >
           <div className="container mx-auto px-4">
             <Text
               type={Font.GARAMOND}
@@ -228,6 +234,7 @@ export default function Careers() {
           backgroundImage={careerCTA}
           buttonText="View current openings"
           className=""
+          href="https://bough.keka.com/careers/"
         />
       </section>
     </>

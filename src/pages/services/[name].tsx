@@ -79,7 +79,7 @@ export default function ServicePage() {
           />
         </div>
 
-        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 md:-mt-24 flex flex-col-reverse  items-center justify-center">
+        <section className="md:h-screen relative w-full px-4 py-16 md:py-24 -mt-14 md:-mt-24 flex flex-col-reverse  items-center justify-center">
           <Image
             src={content?.heroImage}
             fill

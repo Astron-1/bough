@@ -11,6 +11,7 @@ interface BottomCTAInterface {
   backgroundImage: string | StaticImageData;
   buttonText?: string;
   className?: string;
+  href?: string;
 }
 
 export default function BottomSection({
@@ -18,6 +19,7 @@ export default function BottomSection({
   backgroundImage,
   buttonText,
   className,
+  href,
 }: BottomCTAInterface) {
   return (
     <div className="relative w-full flex items-center justify-center overflow-hidden py-24">
@@ -56,7 +58,7 @@ export default function BottomSection({
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          <Button href="/connect" className="outline-1 px-7 mt-8">
+          <Button href={href || "/connect"} className="outline-1 px-7 mt-8">
             <ShinyText text={buttonText || "Connect"} speed={3} />
           </Button>
         </motion.div>

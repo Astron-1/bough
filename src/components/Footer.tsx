@@ -90,7 +90,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/careers/the-bough-way"
+                    href="/careers#boughway"
                     className="hover:text-gray-300 block"
                   >
                     The Bough way
@@ -98,18 +98,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/careers/hiring-process"
+                    href="/careers#hiringprocess"
                     className="hover:text-gray-300 block"
                   >
                     Hiring process
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/careers/transformation"
-                    className="hover:text-gray-300 block"
-                  >
-                    Transformation
                   </Link>
                 </li>
               </ul>
