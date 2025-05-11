@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import { Lightbulb, Handshake, Rocket } from "lucide-react";
-import Text from "./Text";
+import Text, { Font } from "./Text";
 import { motion } from "framer-motion";
 import IconWithHover from "./common/IconWithHover";
 import SpotlightCard from "./common/SpotlightCard";
@@ -41,14 +41,16 @@ export default function HomeInsights() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <ScrollReveal
-            Component="h2"
-            containerClassName="mb-6"
-            textClassName="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight font-garamond"
-          >
-            Leveraging leading technologies to maximize impact
-          </ScrollReveal>
-          
+          <Text type={Font.GARAMOND}>
+            <ScrollReveal
+              Component="h2"
+              containerClassName="mb-6"
+              textClassName="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight font-garamond"
+            >
+              Leveraging leading technologies to maximize impact
+            </ScrollReveal>
+          </Text>
+
           <ScrollReveal
             Component="div"
             containerClassName="max-w-4xl mx-auto"
@@ -56,7 +58,10 @@ export default function HomeInsights() {
             baseRotation={15}
             blurStrength={10}
           >
-            At Bough, we understand that solving complex challenges goes beyond expertise&mdash;it requires collaboration. That&apos;s why we continuously enhance our capabilities and forge strong strategic partnerships with leading technology providers and industry experts.
+            At Bough, we understand that solving complex challenges goes beyond
+            expertise&mdash;it requires collaboration. That&apos;s why we
+            continuously enhance our capabilities and forge strong strategic
+            partnerships with leading technology providers and industry experts.
           </ScrollReveal>
         </motion.div>
 
@@ -73,7 +78,7 @@ export default function HomeInsights() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600 transform origin-left scale-x-0 group-hover/card:scale-x-100 transition-transform duration-300"></div>
 
                 <div className="flex flex-col items-center pt-12 px-8">
-                  <IconWithHover 
+                  <IconWithHover
                     icon={React.createElement(card.icon, { size: 40 })}
                     className="mb-8"
                   />
