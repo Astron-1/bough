@@ -273,7 +273,7 @@ export default function AboutUsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f0f7ff] overflow-x-hidden relative w-full">
+    <main className="min-h-screen  overflow-x-hidden relative w-full">
       {/* Header */}
       <div className="relative z-50">
         <Header transparent={false} />

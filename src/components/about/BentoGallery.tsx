@@ -106,7 +106,7 @@ const defaultGalleryLayout: GalleryItem[] = [
     id: "frame17",
     imagePath: "/collage/17.jpg",
     altText: "Gallery image 17",
-  }
+  },
 ];
 
 const BentoGallery: React.FC<BentoGalleryProps> = ({
@@ -122,7 +122,7 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
   const [gsapLoaded, setGsapLoaded] = useState(false);
 
   const handleImageLoad = (id: string) => {
-    setLoadedImages(prev => {
+    setLoadedImages((prev) => {
       const newSet = new Set(prev);
       newSet.add(id);
       return newSet;
@@ -132,8 +132,8 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
   // Initialize GSAP and ScrollTrigger
   useEffect(() => {
     const initGSAP = async () => {
-      const gsap = (await import('gsap')).default;
-      const ScrollTrigger = (await import('gsap/ScrollTrigger')).default;
+      const gsap = (await import("gsap")).default;
+      const ScrollTrigger = (await import("gsap/ScrollTrigger")).default;
       gsap.registerPlugin(ScrollTrigger);
       setGsapLoaded(true);
     };
@@ -146,14 +146,14 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
     if (!gsapLoaded || !gridRef.current) return;
 
     const initAnimations = async () => {
-      const { default: gsap } = await import('gsap');
-      const { default: ScrollTrigger } = await import('gsap/ScrollTrigger');
+      const { default: gsap } = await import("gsap");
+      const { default: ScrollTrigger } = await import("gsap/ScrollTrigger");
 
       // Create a timeline for smooth orchestration
       const tl = gsap.timeline({
         defaults: {
           ease: "power3.out",
-        }
+        },
       });
 
       // Animate title and description
@@ -161,12 +161,15 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
         y: 30,
         opacity: 0,
         duration: 1,
-      })
-      .from(descRef.current, {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-      }, "-=0.7");
+      }).from(
+        descRef.current,
+        {
+          y: 20,
+          opacity: 0,
+          duration: 1,
+        },
+        "-=0.7"
+      );
 
       // Set initial state of grid items
       gsap.set(".gridItem", {
@@ -183,8 +186,8 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
         scrollTrigger: {
           trigger: gridRef.current,
           start: "top center+=100",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       });
 
       // Animate grid items with premium effects
@@ -199,20 +202,20 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
           amount: 1.2,
           grid: "auto",
           from: "random",
-          ease: "power3.out"
-        }
+          ease: "power3.out",
+        },
       });
 
       // Add hover animations
       const gridItems = document.querySelectorAll(".gridItem");
-      gridItems.forEach(item => {
+      gridItems.forEach((item) => {
         item.addEventListener("mouseenter", () => {
           gsap.to(item, {
             scale: 1.02,
             duration: 0.4,
             ease: "power2.out",
             zIndex: 2,
-            boxShadow: "0 10px 30px rgba(0,0,0,0.15)"
+            boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
           });
         });
 
@@ -222,13 +225,13 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
             duration: 0.4,
             ease: "power2.out",
             zIndex: 1,
-            boxShadow: "none"
+            boxShadow: "none",
           });
         });
       });
 
       return () => {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     };
 
@@ -261,7 +264,9 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
             {galleryImages.map((image, index) => (
               <div
                 key={image.id}
-                className={`${styles.gridItem} gridItem ${styles[`item${index + 1}`]}`}
+                className={`${styles.gridItem} gridItem ${
+                  styles[`item${index + 1}`]
+                }`}
               >
                 <div className={styles.imageWrapper}>
                   {!loadedImages.has(image.id) && (
@@ -274,7 +279,7 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
                     className={`${styles.image} ${
                       loadedImages.has(image.id) ? styles.loaded : ""
                     }`}
-                    sizes="(max-width: 500px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                    sizes="(max-width: 600px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     priority={image.priority}
                     onLoad={() => handleImageLoad(image.id)}
                   />
