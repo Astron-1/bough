@@ -69,10 +69,10 @@ export default function WhoWeAreSection({
   return (
     <div
       id="who-we-are"
-      className="relative z-10 py-12 md:py-16 px-4 sm:px-6"
+      className="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8 xl:px-10"
       style={figmaSectionContainer()}
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-20">
+      <div className="mx-auto max-w-7xl grid grid-cols-1 xl:grid-cols-12 gap-y-12 gap-x-10 lg:gap-x-20">
         {/* Left side - Bento grid layout for photos */}
         <div className="relative md:col-span-5 flex justify-center md:justify-start">
           {/* Create custom bento grid with responsive dimensions */}
