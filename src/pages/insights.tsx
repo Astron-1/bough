@@ -75,14 +75,17 @@ export default function InsightsPage() {
             const imgElement = new window.Image();
             imgElement.src = insight.backgroundImage;
             imgElement.crossOrigin = "anonymous";
-            
+
             imgElement.onload = () => {
-              setLoadedImages(prev => [...prev, insight.backgroundImage]);
+              setLoadedImages((prev) => [...prev, insight.backgroundImage]);
               resolve(insight.backgroundImage);
             };
-            
+
             imgElement.onerror = (error) => {
-              console.error(`Failed to load image: ${insight.backgroundImage}`, error);
+              console.error(
+                `Failed to load image: ${insight.backgroundImage}`,
+                error
+              );
               reject(error);
             };
           });
@@ -91,7 +94,7 @@ export default function InsightsPage() {
         await Promise.all(imagePromises);
         setImagesPreloaded(true);
       } catch (error) {
-        console.error('Error preloading images:', error);
+        console.error("Error preloading images:", error);
         setImagesPreloaded(true);
       }
     };
@@ -180,9 +183,9 @@ export default function InsightsPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ 
+                transition={{
                   duration: 0.8,
-                  ease: [0.645, 0.045, 0.355, 1.000]
+                  ease: [0.645, 0.045, 0.355, 1.0],
                 }}
               >
                 <div className="relative w-full h-full">
@@ -192,21 +195,28 @@ export default function InsightsPage() {
                     alt={currentInsight.title}
                     fill
                     className={`object-cover transition-all duration-1000 ${
-                      loadedImages.includes(currentInsight.backgroundImage) ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                      loadedImages.includes(currentInsight.backgroundImage)
+                        ? "opacity-100 scale-100"
+                        : "opacity-0 scale-105"
                     }`}
                     priority
                     sizes="100vw"
                     quality={90}
                     onLoadingComplete={() => {
                       setIsTransitioning(false);
-                      if (!loadedImages.includes(currentInsight.backgroundImage)) {
-                        setLoadedImages(prev => [...prev, currentInsight.backgroundImage]);
+                      if (
+                        !loadedImages.includes(currentInsight.backgroundImage)
+                      ) {
+                        setLoadedImages((prev) => [
+                          ...prev,
+                          currentInsight.backgroundImage,
+                        ]);
                       }
                     }}
                   />
-                  
+
                   {/* Overlay */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-black/30"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.3 }}
@@ -229,23 +239,23 @@ export default function InsightsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ 
-                  duration: 0.6, 
+                transition={{
+                  duration: 0.6,
                   ease: [0.25, 0.1, 0.25, 1],
-                  delay: 0.1
+                  delay: 0.1,
                 }}
                 className="bg-white/75 backdrop-blur-sm rounded-[20px] p-8 shadow-xl border border-gray-50 h-96 flex flex-col justify-center overflow-hidden"
               >
                 <div className="flex flex-col items-center">
                   <Text
                     type={Font.GARAMOND}
-                    className="text-center text-[#111827] text-3xl md:text-5xl font-semibold leading-[40px] md:leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
+                    className="text-center text-[#111827] text-2xl sm:text-3xl md:text-5xl font-semibold leading-[40px] md:leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
                   >
                     {currentInsight.title}
                   </Text>
                   <Text
                     type={Font.SOURCE_SANS}
-                    className="text-center text-[#333333] text-xl font-normal leading-relaxed mb-8 w-[648px] max-w-full mx-auto"
+                    className="text-center text-[#333333] text-lg font-normal leading-relaxed mb-8 w-[648px] max-w-full mx-auto"
                   >
                     {currentInsight.description}
                   </Text>

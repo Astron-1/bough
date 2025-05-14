@@ -39,9 +39,9 @@ export default function Careers() {
     <>
       <section className="relative min-h-screen overflow-hidden bg-[#F8FBFF]">
         <Header />
-
         {/* Background Wave - positioned to span across hero and part of content */}
-        <div className="absolute h-[100px] overflow-visible w-full pt-120 pb-36">
+
+        <div className="absolute -ml-20 sm:-ml-0 h-[100px] w-[150%] sm:w-[100%] overflow-visible pt-120 pb-36">
           <div
             className="absolute w-[105%] h-full top-30 z-0 "
             style={{ transform: "rotate(-15deg)" }}
@@ -55,7 +55,6 @@ export default function Careers() {
             />
           </div>
         </div>
-
         {/* Hero section */}
         <section className="relative pt-20 pb-32 md:pt-32 md:pb-40">
           {/* Blur shapes */}
@@ -113,10 +112,8 @@ export default function Careers() {
             </div>
           </div>
         </section>
-
         {/* Visual spacer to transition between hero and content */}
         <div className="h-16 md:h-32 relative z-0"></div>
-
         {/* Decorative Background Path */}
         <div
           className="absolute left-0 w-full overflow-visible pointer-events-none"
@@ -146,7 +143,6 @@ export default function Careers() {
             />
           </svg>
         </div>
-
         {/* The Bough Way Section */}
         <section
           id="boughway"
@@ -182,7 +178,6 @@ export default function Careers() {
             </div>
           </div>
         </section>
-
         {/* Team Image */}
         <section className="py-8 sm:py-12 md:py-16 relative z-10">
           <div className="container mx-auto px-4">
@@ -197,7 +192,6 @@ export default function Careers() {
             </div>
           </div>
         </section>
-
         {/* Hiring Process Section */}
         <section
           id="hiringprocess"
@@ -228,7 +222,6 @@ export default function Careers() {
             </div>
           </div>
         </section>
-
         <BottomSection
           content="Set to thrive in, your future?"
           backgroundImage={careerCTA}
