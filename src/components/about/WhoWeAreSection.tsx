@@ -183,7 +183,7 @@ export default function WhoWeAreSection({
           </div>
         </div>
 
-        <div className="md:col-span-6 flex flex-col justify-start md:pl-10 lg:pl-16">
+        <div className="md:col-span-6 flex -mt-3 w-full flex-col justify-start md:pl-10 lg:pl-16">
           <div className="md:max-w-[45rem]">
             <Text
               type={Font.GARAMOND}
@@ -197,7 +197,7 @@ export default function WhoWeAreSection({
                 <Text
                   key={index}
                   type={Font.SOURCE_SANS}
-                  className="text-base md:text-[1.125rem] lg:text-[1.120rem] text-black/90 md:leading-[1.75]"
+                  className="text-base md:text-[1.125rem] lg:text-[1rem] text-black/90 md:leading-[1.75]"
                 >
                   {paragraph}
                 </Text>

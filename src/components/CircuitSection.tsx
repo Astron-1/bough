@@ -119,7 +119,7 @@ const CircuitSection: React.FC<CircuitSectionProps> = ({ className = "" }) => {
             />
 
             {/* Third section circuit */}
-            <path
+            {/* <path
               d="M800 120 H 960 V 280 H 800"
               stroke={activeSection === 2 ? "#53fbfb" : "#13294c"}
               strokeWidth="4"
@@ -127,7 +127,7 @@ const CircuitSection: React.FC<CircuitSectionProps> = ({ className = "" }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{ transition: "stroke 0.5s ease" }}
-            />
+            /> */}
           </svg>
 
           {/* Content Boxes */}
@@ -135,8 +135,9 @@ const CircuitSection: React.FC<CircuitSectionProps> = ({ className = "" }) => {
             {sections.map((section, index) => (
               <div
                 key={index}
-                className="rounded-2xl flex flex-col items-center text-center transition-all duration-300 h-full group relative"
+                className="rounded-2xl flex flex-col items-center text-center transition-all duration-300  group relative"
                 style={{
+                  minHeight: "200%",
                   background: "rgba(10, 20, 50, 0.1)",
                   backdropFilter: "blur(10px)",
                   boxShadow:

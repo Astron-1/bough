@@ -42,10 +42,8 @@ export default function ServiceCard({
           willChange: "transform, box-shadow",
         }}
       >
-        {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
 
-        {/* Text */}
         <Text
           type={Font.GARAMOND}
           className="absolute bottom-6 left-6 text-white text-4xl sm:text-5xl md:text-6xl font-bold"
