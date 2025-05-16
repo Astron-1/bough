@@ -140,17 +140,6 @@ export default function Footer() {
             </div>
 
             {/* Column 5 */}
-            <div>
-              <h3 className="font-semibold mb-4 text-[#53FBFB]">Locations</h3>
-              <ul className="space-y-2">
-                <li>
-                  <p className="hover:text-gray-300 block">United States</p>
-                </li>
-                <li>
-                  <p className="hover:text-gray-300 block">Gurugram</p>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
 
