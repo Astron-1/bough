@@ -65,39 +65,50 @@ export default function Careers() {
           {/* Mobile Images */}
 
           {/* Desktop Images */}
-          <div className="hidden xl:block absolute w-full md:w-96 h-96 left-0 top-[10px] overflow-hidden">
+          <div className="hidden xl:block absolute left-0 top-[10px] overflow-hidden">
             <Image
               src="/career-1.png"
               alt="City skyline"
               height={400}
               width={400}
-              className="object-cover object-center w-full 2xl:w-[120%] "
+              className="
+      object-cover object-center 
+       
+      2xl:w-[450px] 
+      3xl:w-[600px] 
+      4xl:w-[620px]"
               priority
             />
           </div>
-          <div className="hidden xl:block absolute w-full md:w-96 h-96 right-0 top-[326px] overflow-hidden">
+
+          <div className="hidden xl:block absolute right-0 top-[326px] overflow-hidden">
             <Image
               src="/career-2.png"
               alt="City skyline"
               height={400}
               width={400}
-              className="object-cover object-center w-full 2xl:w-[120%] "
+              className="
+      object-cover object-center 
+     
+      2xl:w-[450px] 
+      3xl:w-[600px] 
+      4xl:w-[620px]"
               priority
             />
           </div>
 
           {/* Hero Content */}
           <div className="container mx-auto px-4 relative z-10">
-            <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
+            <div className="2xl:mt-10 flex flex-col items-center text-center max-w-2xl mx-auto">
               <Text
                 type={Font.GARAMOND}
-                className=" text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-4 sm:mb-6 text-black"
+                className=" text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-semibold leading-tight mb-4 sm:mb-6 text-black"
               >
                 Thinking about
                 <br />
                 joining Bough?
               </Text>
-              <Text className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-black">
+              <Text className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 xl:text-2xl text-black">
                 Engage, experience,
                 <br />
                 and elevate your career
@@ -105,9 +116,9 @@ export default function Careers() {
               <Link
                 href="https://bough.keka.com/careers/"
                 target="_blank"
-                className=""
+                className="2xl:text-2xl"
               >
-                <Button>View current openings</Button>
+                <Button className="xl:p-6">View current openings</Button>
               </Link>
             </div>
           </div>
