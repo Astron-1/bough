@@ -88,18 +88,14 @@ export default function InsightsSlider({
           allowTouchMove={true}
           onSwiper={setSwiper}
           onSlideChange={handleSlideChange}
-          className="hidden" // Hide the slides but keep the functionality
+          className="hidden"
         >
           {insights.map((item) => (
-            <SwiperSlide key={item.id}>
-              {/* Each slide is invisible but maintains the Swiper functionality */}
-            </SwiperSlide>
+            <SwiperSlide key={item.id}></SwiperSlide>
           ))}
         </Swiper>
 
-        {/* Custom navigation/indicators that work with Swiper */}
-        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 w-full">
-          {/* Base translucent line */}
+        <div className="absolute mt-5 sm:mt-0 left-0 right-0 top-1/2 -translate-y-1/2 h-1 w-full">
           <div
             className="absolute inset-0 w-full"
             style={{
@@ -109,9 +105,8 @@ export default function InsightsSlider({
             }}
           />
 
-          {/* Progress bar */}
           <div
-            className="absolute left-0 top-1/2 -translate-y-1/2 progress-bar"
+            className="absolute -mt-[0.8] left-0 top-1/2 -translate-y-1/2 progress-bar"
             style={{
               width: `${(100 / insights.length) * (activeIndex + 1)}%`,
               height: "0.25rem",
@@ -123,7 +118,7 @@ export default function InsightsSlider({
         </div>
 
         {/* Custom bullet indicators */}
-        <div className="w-full flex justify-between items-center relative z-20">
+        <div className="w-full mt-10 sm:mt-0 flex flex-row space-x-2 sm:space-x-0 justify-center sm:justify-between items-center relative z-20">
           {insights.map((item, index) => (
             <div
               key={item.id}
@@ -133,7 +128,7 @@ export default function InsightsSlider({
               }
             >
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-base font-medium cursor-pointer bullet-indicator ${
+                className={`w-10 h-10 mb-4 md:mb-0 rounded-full flex items-center justify-center text-xs sm:text-base font-medium cursor-pointer bullet-indicator ${
                   activeIndex === index
                     ? "bullet-active bg-white text-blue-800"
                     : "bg-transparent text-white border-2 border-white hover:bg-white/20"
@@ -142,7 +137,7 @@ export default function InsightsSlider({
                 {item.id}
               </div>
               <p
-                className={` mt-4 text-white text-xs md:text-sm font-medium text-center max-w-[220px] whitespace-normal bullet-text ${
+                className={` mt-4 text-white text-[9px] md:text-sm font-medium text-center max-w-[180px] whitespace-normal bullet-text ${
                   activeIndex === index
                     ? "bullet-text-active opacity-100"
                     : "opacity-70"
