@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import AnimatedParticles from "./OptimizedDotPattern";
+// import AnimatedParticles from "./OptimizedDotPattern";
 import Threads from "./Threads";
 
 // Define types based on what AnimatedParticles expects

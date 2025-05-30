@@ -1,9 +1,11 @@
+"use client";
 import { StaticImageData } from "next/image";
 import Text, { Font } from "./Text";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
+import { use } from "react";
 
 interface ServiceCardProps {
   image: StaticImageData;
@@ -20,7 +22,6 @@ export default function ServiceCard({
     <Link className="w-full block group" href={"/services/" + serviceType}>
       <motion.div
         whileHover={{ 
-          // scale: 1.02,
           boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
         }}
         whileTap={{
@@ -33,13 +34,16 @@ export default function ServiceCard({
           mass: 0.5,
         }}
         className={`relative h-[280px] sm:h-[320px] md:h-[380px] 2xl:h-[450px] 4xl:h-[500px] 5xl:h-[700px] overflow-hidden bg-gray-200`}
-        style={{
-          backgroundImage: `url(${image.src})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          willChange: "transform, box-shadow",
-        }}
       >
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: `url(${image.src})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
 
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 md:p-6 transform transition-all duration-500 ease-in-out translate-y-[calc(100%-5.5rem)] sm:translate-y-[calc(100%-6rem)] md:translate-y-[calc(100%-7rem)] group-hover:translate-y-0">
