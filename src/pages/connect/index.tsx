@@ -763,10 +763,10 @@ export default function ConnectPage() {
               >
                 04-120, Blue 1 Square, Phase IV, Udyog Vihar, Sector 18,
                 Gurugram, Haryana 122016
-                <br className="hidden md:block" />
+                {/* <br className="hidden md:block" />
                 <br className="hidden md:block" />
                 R-13 & 14, LGF, Ansal Chamber - II, 6, Bhikaji Cama Place, New
-                Delhi – 110066
+                Delhi – 110066 */}
               </Text>
             </div>
           </div>

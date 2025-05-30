@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
@@ -8,6 +8,8 @@ import careerCTA from "../../public/careersCTA.png";
 import Button from "@app/components/ui/Button";
 
 export default function Careers() {
+  const [activeStep, setActiveStep] = useState("");
+
   const hiringProcedure = [
     {
       step: "01",
@@ -40,10 +42,9 @@ export default function Careers() {
       <section className="relative min-h-screen overflow-hidden bg-[#F8FBFF]">
         <Header />
         {/* Background Wave - positioned to span across hero and part of content */}
-
         <div className="absolute -ml-20 sm:-ml-0 h-[100px] w-[150%] sm:w-[100%] overflow-visible pt-120 pb-36">
           <div
-            className="absolute w-[105%] h-full top-30 z-0 "
+            className="absolute w-[105%] h-full top-30 z-0"
             style={{ transform: "rotate(-15deg)" }}
           >
             <Image
@@ -206,30 +207,84 @@ export default function Careers() {
         {/* Hiring Process Section */}
         <section
           id="hiringprocess"
-          className="py-12 sm:py-16 md:py-24 relative z-10"
+          className="py-12 sm:py-16 md:py-24 relative"
         >
-          <div className="container mx-auto px-4">
+          <div className="absolute " style={{ zIndex: 1 }}></div>
+          <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
             <Text
               type={Font.GARAMOND}
-              className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-12 text-black"
+              className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-12 text-black capitalize"
             >
               Hiring process
             </Text>
-            <div className="grid sm:grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-10 sm:gap-y-16">
-              {hiringProcedure.map(({ step, title, description }) => (
-                <div key={step} className="flex flex-col">
-                  <span className="text-zinc-400 text-xl sm:text-2xl md:text-3xl font-semibold mb-1">
-                    {step}.
-                  </span>
-                  <div className="w-full h-px bg-zinc-400 mb-3 sm:mb-4" />
-                  <Text className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-black">
-                    {title}
-                  </Text>
-                  <Text className="text-base sm:text-lg md:text-xl leading-relaxed text-black">
-                    {description}
-                  </Text>
-                </div>
-              ))}
+            <div className="relative">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                {/* Full width line */}
+                <div className="hidden md:block absolute w-screen left-1/2 -translate-x-1/2 h-[1px] bg-gray-200 z-[1]" style={{ top: '75px' }} />
+                
+                {/* Sliding indicator */}
+                <div 
+                  className={`hidden md:block absolute h-[8px] bg-[#0047FF] transition-all duration-[850ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-right z-[2]`}
+                  style={{ 
+                    width: '15%',
+                    top: '72px',
+                    left: `calc(${(parseInt(activeStep || "0") - 1) * 25}% + 1.5rem)`,
+                    transform: `scaleX(${activeStep ? 1 : 0})`,
+                    transformOrigin: 'right',
+                    opacity: activeStep ? 1 : 0
+                  }} 
+                />
+                
+                {hiringProcedure.map(({ step, title, description }, index) => (
+                  <div
+                    key={step}
+                    className="relative"
+                    onMouseEnter={() => setActiveStep(step)}
+                    onMouseLeave={() => setActiveStep("")}
+                  >
+                    {/* Content Box */}
+                    <div className="p-6 h-full relative">
+                      <div className="flex flex-col">
+                        <span 
+                          className={`text-3xl sm:text-4xl font-medium transition-colors duration-300 mb-10
+                            ${activeStep === step ? "text-[#0047FF]" : "text-gray-400"}`}
+                        >
+                          {step}
+                        </span>
+                        <Text 
+                          className={`text-lg sm:text-xl font-bold mb-4 transition-colors duration-300
+                            ${activeStep === step ? "text-black" : "text-gray-500"}`}
+                        >
+                          {title}
+                        </Text>
+                        <Text className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                          {description}
+                        </Text>
+                      </div>
+                    </div>
+                    
+                    {/* Arrow */}
+                    {index < hiringProcedure.length - 1 && (
+                      <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10">
+                        <svg
+                          width="32"
+                          height="64"
+                          viewBox="0 0 24 48"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`transition-colors duration-300`}
+                        >
+                          <path
+                            d="M4 0 L12 24 L4 48 L8 48 L20 24 L8 0 Z"
+                            fill={parseInt(activeStep) > (index + 1) || activeStep === String(index + 2).padStart(2, '0')
+                              ? "#0047FF"
+                              : "#E5E7EB"}
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

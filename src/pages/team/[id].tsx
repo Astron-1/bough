@@ -296,7 +296,7 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
 
   "khushi-singh": {
     name: "Khushi Singh",
-    title: "Associate Consultant",
+    title: "Associate",
     linkedIn: "https://www.linkedin.com/in/khushi-singh-400081236/",
     bio: [
       "Khushi is an Associate at Bough, bringing a rich background in economic research, financial inclusion, and CSR strategy. A recent Economics graduate from Shri Ram College of Commerce, University of Delhi, Khushi has interned at NITI Aayog, HDFC Bank, and SBI, where she analyzed economic data and supported MSME financial inclusion.",

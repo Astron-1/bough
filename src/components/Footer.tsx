@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
 
           {/* Footer links */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 lg:w-3/4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 lg:w-2/3">
             {/* Column 1 */}
             <div>
               <h3 className="font-semibold mb-4 text-[#53FBFB]">Services</h3>
@@ -138,8 +138,6 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-
-            {/* Column 5 */}
           </div>
         </div>
 

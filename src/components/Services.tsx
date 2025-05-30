@@ -10,16 +10,17 @@ import RiskSec from "../../public/RiskSec.png";
 import TransformationSec from "../../public/TransformationSec.png";
 import ESGSec from "../../public/ESGSec.png";
 
-// Services array with names and images
+// Services array with names, images, and descriptions
 const services = [
-  { name: "Accounting", image: accountingImage, sec: AccountingSec },
-  { name: "Risk", image: riskImage, sec: RiskSec },
+  { name: "Accounting", image: accountingImage, sec: AccountingSec, description: "Navigating changing regulations and new accounting standards can be daunting. Developing a forward-looking strategy, enriched by diverse insights, often requires resources beyond your current capabilities." },
+  { name: "Risk", image: riskImage, sec: RiskSec, description: "Risk is inevitable in all businesses, and whether minor or significant, it must not be overlooked or underestimated. Bough equips your business with the right defenses and controls to manage and mitigate risks effectively." },
   {
     name: "Transformation",
     image: transformationImage,
     sec: TransformationSec,
+    description: "In a world where disruptive technologies and emerging methodologies have become the norm, not every business can fully capitalize on these constant changes.",
   },
-  { name: "ESG", image: esgImage, sec: ESGSec },
+  { name: "ESG", image: esgImage, sec: ESGSec, description: "We partner with our clients to create comprehensive solutions which enable integration of Environmental, Social and Governance (ESG) Principles with business model and strategy for sustainable value creation." },
 ];
 
 export default function BoughServices({
@@ -57,11 +58,13 @@ export default function BoughServices({
   // }, []);
 
   return (
-    <div className="relative w-full py-16" style={{ minHeight: "100px" }}>
-      {/* Service Cards Container with embedded SVG path */}
+    <div className="relative w-full py-8 md:py-12" style={{ minHeight: "100px" }}> {/* Reduced py for tighter look if needed */}
+      {/* Service Cards Container */}
       <div
         ref={sectionRef}
-        className="relative flex flex-col gap-10 md:gap-20 w-full"
+        // Removed negative margins, relying on no padding/margin on children for no gap
+        // Added justify-start to ensure cards align to the start if not filling the row
+        className="relative flex flex-row flex-wrap w-full justify-start"
       >
         {/* SVG Path connecting the service cards */}
         {/* <ServicePath
@@ -73,25 +76,22 @@ export default function BoughServices({
         /> */}
 
         {services.map((service, i) => {
-          const isEven = i % 2 === 0;
-
           return (
+            // Each card container is now a column in the flex row
+            // Removed px (padding) and mb (margin-bottom) to eliminate gaps
+            // Widths: w-full on smallest, then w-1/2, then w-1/4 for responsiveness
             <div
               key={service.name}
               ref={(el) => {
                 cardRefs.current[i] = el;
               }}
-              className={`w-full flex ${
-                isEven ? "justify-end" : "justify-start"
-              } relative z-10`}
+              className="w-full sm:w-1/2 lg:w-1/4" // No padding/margin for no gaps
             >
-              <div className="w-3/4 md:w-2/3 ">
-                <ServiceCard
-                  image={servicePage ? service.sec : service.image}
-                  serviceType={service.name}
-                  position={isEven ? "right" : "left"}
-                />
-              </div>
+              <ServiceCard
+                image={servicePage ? service.sec : service.image}
+                serviceType={service.name}
+                description={service.description} // Pass description
+              />
             </div>
           );
         })}

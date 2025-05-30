@@ -118,7 +118,7 @@ export const teamMembers = [
   {
     id: "khushi-singh",
     name: "Khushi Singh",
-    title: "Associate Consultant",
+    title: "Associate",
     image: "/profile/Khushi.JPG",
     alt: "Khushi Singh - Associate Consultant",
     linkedIn: "https://www.linkedin.com/in/khushi-singh-400081236/",

@@ -37,14 +37,13 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
         inset-0 
         rounded-full 
         bg-gradient-to-r 
-        from-[#0074FF]/10 
+        from-[#0074FF]/5
         to-[#0074FF]/5
         opacity-0
         group-hover/icon:opacity-100
         transition-opacity
         duration-500
         ease-in-out
-        blur-xl
       "/>
 
       {/* Icon container */}
@@ -62,7 +61,7 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
           duration-500
           ease-in-out
           group-hover/icon:bg-white
-          group-hover/icon:shadow-[0_4px_20px_rgba(0,116,255,0.2)]
+          group-hover/icon:shadow-[0_4px_20px_rgba(0,116,255,0.1)]
           cursor-pointer
           overflow-hidden
         "
@@ -74,7 +73,7 @@ const IconWithHover: React.FC<IconWithHoverProps> = ({
           target.style.transform = 'scale(1.05) rotate(360deg)';
           const svg = target.querySelector('svg');
           if (svg) {
-            svg.style.stroke = '#00c3ff';
+            svg.style.stroke = '#0074FF';
             svg.style.transition = 'stroke 500ms ease-in-out';
           }
         }}
