@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
-import { use } from "react";
+import { useEffect, useState } from "react";
 
 interface ServiceCardProps {
   image: StaticImageData;
@@ -18,22 +18,25 @@ export default function ServiceCard({
   serviceType,
   description,
 }: ServiceCardProps) {
+  // Add client-side only state
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Only enable animations after component mounts on client
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <Link className="w-full block group" href={"/services/" + serviceType}>
-      <motion.div
-        whileHover={{ 
-          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+      <div
+        className={`relative h-[280px] sm:h-[320px] md:h-[380px] 2xl:h-[450px] 4xl:h-[500px] 5xl:h-[700px] overflow-hidden bg-gray-200 transition-all duration-300 ${
+          isMounted ? "transform-gpu" : ""
+        }`}
+        style={{
+          boxShadow: isMounted
+            ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+            : "none",
         }}
-        whileTap={{
-          scale: 0.98,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 12,
-          mass: 0.5,
-        }}
-        className={`relative h-[280px] sm:h-[320px] md:h-[380px] 2xl:h-[450px] 4xl:h-[500px] 5xl:h-[700px] overflow-hidden bg-gray-200`}
       >
         <div 
           className="absolute inset-0 w-full h-full"
@@ -70,7 +73,7 @@ export default function ServiceCard({
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 }
