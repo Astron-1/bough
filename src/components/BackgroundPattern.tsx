@@ -42,7 +42,7 @@ interface BackgroundSettings {
   // Threads specific options
   threadsAmplitude: number;
   threadsDistance: number;
-  threadsColor: [number, number, number];
+  threadsColor: [number, number, number]; // RGB values normalized to 0-1
   threadsLineCount: number;
   threadsLineWidth: number;
   threadsLineBlur: number;
@@ -79,10 +79,10 @@ export default function BackgroundPattern() {
     // Threads specific options
     threadsAmplitude: 1.5,
     threadsDistance: 0.3,
-    threadsColor: [0.47, 0.68, 1.0],
+    threadsColor: [0, 0.322, 1], // #0052ff
     threadsLineCount: 40,
     threadsLineWidth: 7.0,
-    threadsLineBlur: 10.0,
+    threadsLineBlur: 12.0,
     threadsNoiseScale: 2.5,
     threadsNoiseTimeScale: 0.1,
     threadsMouseInfluence: 0.2,
@@ -1043,10 +1043,10 @@ export default function BackgroundPattern() {
                     horizontalWaves: true,
                     threadsAmplitude: 1.0,
                     threadsDistance: 0.5,
-                    threadsColor: [0.47, 0.68, 1.0],
+                    threadsColor: [0, 0.322, 1], // #0052ff
                     threadsLineCount: 40,
                     threadsLineWidth: 7.0,
-                    threadsLineBlur: 10.0,
+                    threadsLineBlur: 12.0,
                     threadsNoiseScale: 2.5,
                     threadsNoiseTimeScale: 0.1,
                     threadsMouseInfluence: 0.2,

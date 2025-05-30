@@ -122,7 +122,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     }
 
     float colorVal = 1.0 - line_strength;
-    fragColor = vec4(uColor * colorVal, colorVal);
+    float opacity = colorVal * 0.6; // Reduce overall opacity by 40%
+    fragColor = vec4(uColor * colorVal, opacity);
 }
 
 void main() {

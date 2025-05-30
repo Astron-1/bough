@@ -39,6 +39,6 @@ body {
 }
 
 /* Add a subtle glow effect to the paths */
-svg path {
+/* svg path {
   filter: drop-shadow(0 0 3px rgba(0, 102, 255, 0.6));
-}
+} */

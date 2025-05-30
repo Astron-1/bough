@@ -54,14 +54,11 @@ export default function BottomSection({
           {content}
         </Text>
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <Button href={href || "/connect"} className="outline-1 px-7 mt-8">
+        <div className="mt-8">
+          <Button href={href || "/connect"} className="outline-1 px-7">
             <ShinyText text={buttonText || "Connect"} speed={3} />
           </Button>
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );
