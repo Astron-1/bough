@@ -207,7 +207,14 @@ export default function ServicePage() {
         </Text>
       </motion.section>
 
-      <CaseStudyCarousel />
+      <div className="relative w-full overflow-hidden">
+        <div className="container mx-auto">
+          <div className="relative right-0 md:-mr-24 lg:-mr-32 xl:-mr-48">
+            <CaseStudyCarousel filter={{ limit: 3 }} />
+          </div>
+        </div>
+      </div>
+
       <BottomSection
         content="Let's drive outcomes by crafting changes for a meaningful tomorrow, now"
         backgroundImage={careerCTA}

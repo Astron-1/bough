@@ -6,6 +6,7 @@ import Text, { Font } from "@app/components/Text";
 import BottomSection from "@app/components/BottomSection";
 import careerCTA from "../../public/careersCTA.png";
 import Button from "@app/components/ui/Button";
+import ShinyText from "@app/components/ui/ShinyText";
 
 export default function Careers() {
   const [activeStep, setActiveStep] = useState("");
@@ -119,7 +120,9 @@ export default function Careers() {
                 target="_blank"
                 className="2xl:text-2xl"
               >
-                <Button className="xl:p-6">View current openings</Button>
+                <Button className="xl:p-6">
+                  <ShinyText text="View current openings" speed={3} />
+                </Button>
               </Link>
             </div>
           </div>
@@ -193,12 +196,12 @@ export default function Careers() {
         {/* Team Image */}
         <section className="py-8 sm:py-12 md:py-16 relative z-10">
           <div className="container mx-auto px-4">
-            <div className="w-full h-[250px] sm:h-[320px] md:h-[400px] relative rounded-lg overflow-hidden">
+            <div className="w-full h-[250px] sm:h-[320px] md:h-[550px] relative rounded-lg overflow-hidden">
               <Image
-                src="/careerbough.png"
+                src="/career.webp"
                 alt="Bough team members collaborating"
                 fill
-                className="object-cover min-w-full"
+                className="object-cover min-w-full object-bottom"
                 priority
               />
             </div>

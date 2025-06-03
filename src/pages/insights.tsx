@@ -12,6 +12,13 @@ import BottomSection from "@app/components/BottomSection";
 import Button from "@app/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Define the excluded case study IDs
+export const FEATURED_CASE_STUDY_IDS = [
+  'Data optimization and governance - 1',
+  'ASC 606 Reporting Solution (Plan B) - 2',
+  'Revenue Assurance and audit readiness - 3'
+];
+
 // Define the data structure for slider items
 interface InsightItem {
   id: number;
@@ -30,7 +37,7 @@ export default function InsightsPage() {
       title: "Delivering better insights with better data",
       description:
         "Bough helps a global technology company implement an effective data governance program to support data migration for SAP RAR implementation and ongoing business operations",
-      backgroundImage: "/case-study-images/1.jpeg",
+      backgroundImage: "/case-study-images/4.jpeg",
       url: "/case-study?name=CASE%20STUDY%201%20%E2%80%93%20Data%20optimization%20and%20governance",
     },
     {
@@ -285,7 +292,7 @@ export default function InsightsPage() {
       {/* Fixed width container for content below hero */}
       <div className="">
         {/* Featured Case Studies */}
-        <CaseStudyCarousel />
+        <CaseStudyCarousel filter={{excludeIds: FEATURED_CASE_STUDY_IDS, limit: 4}}/>
       </div>
 
       {/* Connect CTA Section */}

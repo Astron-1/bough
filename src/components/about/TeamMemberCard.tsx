@@ -57,10 +57,9 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
     </div>
   );
 
-  // Entire card with image linking to profile and name/title below
   return (
     <div className="flex flex-col items-start" style={cardStyle}>
-      {/* Image always links to profile */}
+      {/* Image and main content link */}
       <Link 
         href={`/team/${id}`}
         className="block transition-all duration-500 group w-full"
@@ -84,14 +83,13 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
                 {title}
               </Text>
             </div>
-            
-            {/* LinkedIn icon - improved styling */}
+            {/* LinkedIn link */}
             {linkedIn && (
               <a 
                 href={linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 bg-[#0A66C2] hover:bg-[#004182] text-white p-1.5 rounded transition-colors duration-300 flex items-center justify-center"
+                className="bg-[#0A66C2] hover:bg-[#004182] text-white p-1.5 rounded transition-colors duration-300 flex items-center justify-center ml-4"
                 aria-label={`View ${name}'s LinkedIn profile`}
                 style={{ minWidth: "28px", height: "28px" }}
                 onClick={(e) => e.stopPropagation()}
