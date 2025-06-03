@@ -8,6 +8,7 @@ interface ButtonProps {
   variant?: "primary" | "secondary";
   className?: string;
   onClick?: () => void;
+  asChild?: boolean;
 }
 
 export default function Button({
@@ -16,6 +17,7 @@ export default function Button({
   className = "",
   variant = "primary",
   onClick,
+  asChild = false,
 }: ButtonProps) {
   const baseStyles =
     "group flex justify-center items-center min-w-[8.5rem] px-4 h-[2.5rem] ml-2 rounded-full text-center relative overflow-hidden transition-all duration-500 ease-out hover:shadow-lg active:shadow-inner active:translate-y-[1px]";
@@ -31,6 +33,16 @@ export default function Button({
   } ${className}`;
 
   const childStyles = "relative z-10 transition-colors duration-500";
+
+  if (asChild) {
+    return (
+      <div className={buttonStyles}>
+        <Text>
+          <span className={childStyles}>{children}</span>
+        </Text>
+      </div>
+    );
+  }
 
   if (href) {
     return (

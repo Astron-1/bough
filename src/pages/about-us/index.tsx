@@ -192,10 +192,10 @@ export default function AboutUsPage() {
   const whoWeAreContent = {
     title: "Who we are",
     paragraphs: [
-      "At Bough, culture isn't just a part of who we are—it's at the core of everything we do. We came into existence with a simple but powerful vision: to deliver sustainable long-term solutions for our clients while creating an environment where our professionals can grow and thrive.",
-      'The name "Bough" reflects that vision. Like the main branch of a tree, we provide strength, support, and the foundation for growth. It represents our commitment to being a trusted partner for our clients and a nurturing place for our people. We\'ve built a workplace that fosters creativity, collaboration, and a sense of ownership.',
-      "Here, every voice is heard, and every team member is empowered to take responsibility for the impact they create. At Bough, we believe in the power of collective action, where diverse talents come together to deliver meaningful outcomes. Our approach is simple: We don't just aim to meet expectations—we strive to exceed them. Whether creating innovative solutions or building a workplace that inspires, we're committed to building something that lasts.",
-      "With offices in the United States and India, we're proud to extend this culture across our global presence, ensuring that the values defining us remain strong in everything we do.",
+      "At Bough, culture isn't just a part of who we are—it's at the core of everything we do. We came into existence with a simple but powerful vision: to deliver sustainable long-term solutions for our clients while creating an environment where our professionals can grow and thrive",
+      'The name "Bough" reflects that vision. Like the main branch of a tree, we provide strength, support, and the foundation for growth. It represents our commitment to being a trusted partner for our clients and a nurturing place for our people. We\'ve built a workplace that fosters creativity, collaboration, and a sense of ownership',
+      "Here, every voice is heard, and every team member is empowered to take responsibility for the impact they create. At Bough, we believe in the power of collective action, where diverse talents come together to deliver meaningful outcomes. Our approach is simple: We don't just aim to meet expectations—we strive to exceed them. Whether creating innovative solutions or building a workplace that inspires, we're committed to building something that lasts",
+      "With offices in the United States and India, we're proud to extend this culture across our global presence, ensuring that the values defining us remain strong in everything we do",
     ],
     photos: [
       {
@@ -236,19 +236,19 @@ export default function AboutUsPage() {
     {
       title: "Power of knowledge",
       description:
-        "We believe that knowledge is the key to unlocking endless possibilities. Our relentless pursuit of understanding drives our unwavering dedication to solving the toughest challenges. We thrive in the face of disruption, always pushing forward to ensure our clients' success with consistency and precision.",
+        "We believe that knowledge is the key to unlocking endless possibilities. Our relentless pursuit of understanding drives our unwavering dedication to solving the toughest challenges. We thrive in the face of disruption, always pushing forward to ensure our clients' success with consistency and precision",
       icon: <ShieldCheck size={40} />,
     },
     {
       title: "Impact that matters",
       description:
-        "Our mission goes beyond delivering results; it's about making a meaningful impact on the world around us—both for our clients and our team. We are committed to earning and maintaining the trust of our clients, always going the extra mile to deliver excellence.",
+        "Our mission goes beyond delivering results; it's about making a meaningful impact on the world around us—both for our clients and our team. We are committed to earning and maintaining the trust of our clients, always going the extra mile to deliver excellence",
       icon: <Zap size={40} />,
     },
     {
       title: "Pioneering trust and growth",
       description:
-        "In everything we do, we strive to be a force for positive change, ensuring that our actions leave a legacy of trust, innovation, and growth.",
+        "In everything we do, we strive to be a force for positive change, ensuring that our actions leave a legacy of trust, innovation, and growth",
       icon: <BookOpen size={40} />,
     },
   ];
@@ -269,7 +269,7 @@ export default function AboutUsPage() {
   const galleryContent = {
     title: "Our journey in pictures",
     description:
-      "Explore our visual story — moments of collaboration, innovation, and growth that define Bough's culture and commitment to excellence.",
+      "Explore our visual story — moments of collaboration, innovation, and growth that define Bough's culture and commitment to excellence",
   };
 
   return (

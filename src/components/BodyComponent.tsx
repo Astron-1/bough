@@ -1,5 +1,4 @@
 import BottomSection from "./BottomSection";
-
 import HeroText from "./heroText";
 import PartnersSection from "./PartnersSection";
 import BoughServices from "./Services";
@@ -10,7 +9,6 @@ import HomeInsights from "./HomeInsights";
 export default function BodyComponent() {
   return (
     <div className=" h-full w-full">
-      <HeroText />
       <div className="3xl:mt-96">
         <div
           className="absolute left-0 w-full h-full overflow-visible pointer-events-none"
@@ -40,8 +38,17 @@ export default function BodyComponent() {
             />
           </svg>
         </div>
+        <div className="relative w-full py-8 md:py-12" >
+          <HeroText />
+        </div>
         <BoughServices />
-        <CaseStudyCarousel />
+        <div className="relative w-full overflow-hidden">
+          <div className="container mx-auto">
+            <div className="relative right-0 md:-mr-24 lg:-mr-32 xl:-mr-48">
+              <CaseStudyCarousel filter={{ ids: ['SOX - 7', 'RAR Implementation - 4', 'Data optimization and governance - 1'], limit: 3 }} />
+            </div>
+          </div>
+        </div>
         <HomeInsights />
         <PartnersSection />
         <BottomSection

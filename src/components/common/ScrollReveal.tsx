@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useMemo, ReactNode, RefObject } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { debounce } from "lodash";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -23,10 +24,10 @@ interface ScrollRevealProps {
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   scrollContainerRef,
-  enableBlur = true,
-  baseOpacity = 0.1,
-  baseRotation = 3,
-  blurStrength = 4,
+  enableBlur = false,
+  baseOpacity = 0.5,
+  baseRotation = 2,
+  blurStrength = 2,
   containerClassName = "",
   textClassName = "",
   rotationEnd = "bottom bottom",
@@ -34,88 +35,98 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   Component = "h2",
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
+  const gsapContextRef = useRef<gsap.Context | null>(null);
 
   const splitText = useMemo(() => {
-    const text = typeof children === "string" ? children : "";
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
-      return (
-        <span className="inline-block word" key={index}>
-          {word}
-        </span>
-      );
-    });
+    if (typeof children !== "string") return children;
+    
+    return children.split(/\s+/).map((word, index) => (
+      <span className="inline-block word" key={index}>
+        {word}&nbsp;
+      </span>
+    ));
   }, [children]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    
+    if (typeof window === "undefined" || !containerRef.current) return;
+
     const el = containerRef.current;
-    if (!el) return;
+    const scroller = scrollContainerRef?.current || window;
+    
+    gsapContextRef.current = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          scroller,
+          start: "top bottom-=10%",
+          end: wordAnimationEnd,
+          toggleActions: "play none none reverse",
+        },
+      });
 
-    const scroller =
-      scrollContainerRef && scrollContainerRef.current
-        ? scrollContainerRef.current
-        : window;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
+      tl.fromTo(
         el,
-        { transformOrigin: "0% 50%", rotate: baseRotation },
+        { 
+          transformOrigin: "0% 50%",
+          rotate: baseRotation,
+          opacity: baseOpacity,
+        },
         {
-          ease: "none",
           rotate: 0,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: "top bottom",
-            end: rotationEnd,
-            scrub: true,
-          },
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
         }
       );
 
       const wordElements = el.querySelectorAll<HTMLElement>(".word");
-
-      gsap.fromTo(
-        wordElements,
-        { opacity: baseOpacity, willChange: "opacity" },
-        {
-          ease: "none",
-          opacity: 1,
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: "top bottom-=20%",
-            end: wordAnimationEnd,
-            scrub: true,
-          },
-        }
-      );
-
-      if (enableBlur) {
-        gsap.fromTo(
+      if (wordElements.length > 0) {
+        tl.fromTo(
           wordElements,
-          { filter: `blur(${blurStrength}px)` },
           {
-            ease: "none",
-            filter: "blur(0px)",
-            stagger: 0.05,
-            scrollTrigger: {
-              trigger: el,
-              scroller,
-              start: "top bottom-=20%",
-              end: wordAnimationEnd,
-              scrub: true,
-            },
-          }
+            opacity: baseOpacity,
+            y: 10,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.02,
+            ease: "power2.out",
+          },
+          "-=0.4"
         );
+
+        if (enableBlur) {
+          tl.fromTo(
+            wordElements,
+            {
+              filter: `blur(${blurStrength}px)`,
+            },
+            {
+              filter: "blur(0px)",
+              duration: 0.4,
+              stagger: 0.02,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          );
+        }
       }
     });
 
+    const handleResize = debounce(() => {
+      ScrollTrigger.refresh();
+    }, 250);
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
-      ctx.revert();
+      window.removeEventListener("resize", handleResize);
+      handleResize.cancel();
+      if (gsapContextRef.current) {
+        gsapContextRef.current.revert();
+      }
     };
   }, [
     scrollContainerRef,
@@ -128,13 +139,8 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   ]);
 
   return (
-    <Component
-      ref={containerRef}
-      className={containerClassName}
-    >
-      <span className={textClassName}>
-        {splitText}
-      </span>
+    <Component ref={containerRef} className={containerClassName}>
+      <span className={textClassName}>{splitText}</span>
     </Component>
   );
 };
