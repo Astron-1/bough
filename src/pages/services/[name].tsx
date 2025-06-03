@@ -49,7 +49,7 @@ export default function ServicePage() {
               className="text-gray-600 max-w-md mx-auto"
             >
               {
-                "The service you're looking for doesn’t exist or may have been removed. Please check the URL or return to the home page."
+                "The service you're looking for doesn't exist or may have been removed. Please check the URL or return to the home page."
               }
             </Text>
             <button
@@ -208,8 +208,8 @@ export default function ServicePage() {
       </motion.section>
 
       <div className="relative w-full overflow-hidden">
-        <div className="container mx-auto">
-          <div className="relative right-0 md:-mr-24 lg:-mr-32 xl:-mr-48">
+        <div className="container mx-auto px-4 md:px-0">
+          <div className="relative md:translate-x-[5%]">
             <CaseStudyCarousel filter={{ limit: 3 }} />
           </div>
         </div>

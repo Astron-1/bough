@@ -13,21 +13,21 @@ export default function HomeInsights() {
       category: "Shared success commitment",
       title: "Strategic partnership over prescriptive advice",
       description:
-        "We focus on building long-term partnerships that prioritize your success rather than offering one-size-fits-all solutions.",
+        "We focus on building long-term partnerships that prioritize your success rather than offering one-size-fits-all solutions",
     },
     {
       icon: Lightbulb,
       category: "Build for longevity",
       title: "Empowering your workforce for sustainable change",
       description:
-        "We believe in building capabilities, not dependencies. Our approach centers on empowering your teams with the skills, tools, and confidence needed to drive continuous improvement.",
+        "We believe in building capabilities, not dependencies. Our approach centers on empowering your teams with the skills, tools, and confidence needed to drive continuous improvement",
     },
     {
       icon: Rocket,
       category: "Expertise you can trust",
       title: "Technology that enhances, not replaces",
       description:
-        "Our technology solutions are designed to augment human capabilities, making your team more effective while preserving the human expertise that makes your organization unique.",
+        "Our technology solutions are designed to augment human capabilities, making your team more effective while preserving the human expertise that makes your organization unique",
     },
   ];
 
@@ -64,7 +64,7 @@ export default function HomeInsights() {
               At Bough, we understand that solving complex challenges goes beyond
               expertise&mdash;it requires collaboration. That&apos;s why we
               continuously enhance our capabilities and forge strong strategic
-              partnerships with leading technology providers and industry experts.
+              partnerships with leading technology providers and industry experts
             </ScrollReveal>
           </motion.div>
 

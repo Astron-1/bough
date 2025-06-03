@@ -177,18 +177,18 @@ export default function Careers() {
                 At Bough, we&apos;re not your typical 9 to 5 job. We focus on
                 value-driven, cutting-edge work, offering flexibility,
                 discipline, and balance so you can thrive both professionally
-                and personally.
+                and personally
               </Text>
               <Text>
                 From day one, everyone at Bough is an owner. We empower our team
                 members, helping them realize their potential. Our
                 non-hierarchical approach ensures everyone has a voice in taking
-                us to new heights.
+                us to new heights
               </Text>
               <Text>
                 Our mission goes beyond business; it&apos;s about becoming
                 better humans. We create a humane and happy workspace where
-                growth, creativity, passion, and success flourish.
+                growth, creativity, passion, and success flourish
               </Text>
             </div>
           </div>
@@ -196,12 +196,13 @@ export default function Careers() {
         {/* Team Image */}
         <section className="py-8 sm:py-12 md:py-16 relative z-10">
           <div className="container mx-auto px-4">
-            <div className="w-full h-[250px] sm:h-[320px] md:h-[550px] relative rounded-lg overflow-hidden">
+            <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden">
               <Image
                 src="/career.webp"
                 alt="Bough team members collaborating"
                 fill
-                className="object-cover min-w-full object-bottom"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+                className="object-contain"
                 priority
               />
             </div>

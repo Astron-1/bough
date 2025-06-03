@@ -43,8 +43,8 @@ export default function BodyComponent() {
         </div>
         <BoughServices />
         <div className="relative w-full overflow-hidden">
-          <div className="container mx-auto">
-            <div className="relative right-0 md:-mr-24 lg:-mr-32 xl:-mr-48">
+          <div className="container mx-auto px-4 md:px-0">
+            <div className="relative md:translate-x-[5%]">
               <CaseStudyCarousel filter={{ ids: ['SOX - 7', 'RAR Implementation - 4', 'Data optimization and governance - 1'], limit: 3 }} />
             </div>
           </div>
