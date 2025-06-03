@@ -61,13 +61,13 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   }
 
   return (
-    <div className="my-32 w-full px-6 md:px-12 mx-auto relative">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row items-start justify-between gap-8">
+    <div className="my-32 w-full relative">
+      <div className="container mx-auto px-4 md:px-0">
+        <div className="flex flex-col md:flex-row items-start justify-between md:gap-4">
           {/* Left: Content */}
-          <div className="flex flex-row justify-between flex-1 max-w-xl z-10">
+          <div className="flex flex-row justify-between flex-1 max-w-lg z-10">
             {/* Progress Bar */}
-            <div className="relative h-[400px] w-6 flex justify-center items-start mt-4 md:ml-6">
+            <div className="relative h-[400px] w-6 flex justify-center items-start mt-4 md:ml-0">
               <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
                 <div
                   className="absolute bottom-0 left-0 w-full bg-[#53FBFB] transition-all duration-700 ease-in-out"
@@ -168,7 +168,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
           </div>
 
           {/* Right: Image */}
-          <div className="hidden md:block w-full md:w-[45%] max-w-[600px] h-[400px]">
+          <div className="hidden md:block w-full md:w-[50%] max-w-[650px] h-[400px]">
             <div className="relative w-full h-full">
               <Swiper
                 onSwiper={(swiper) => {

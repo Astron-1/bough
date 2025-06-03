@@ -292,7 +292,13 @@ export default function InsightsPage() {
       {/* Fixed width container for content below hero */}
       <div className="">
         {/* Featured Case Studies */}
-        <CaseStudyCarousel filter={{excludeIds: FEATURED_CASE_STUDY_IDS, limit: 4}}/>
+        <div className="relative w-full overflow-hidden">
+          <div className="container mx-auto px-4 md:px-0">
+            <div className="relative md:translate-x-[5%]">
+              <CaseStudyCarousel filter={{excludeIds: FEATURED_CASE_STUDY_IDS, limit: 4}}/>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Connect CTA Section */}
