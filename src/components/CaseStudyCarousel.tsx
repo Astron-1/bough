@@ -11,7 +11,7 @@ import { EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface CaseStudyCarouselProps {
   filter?: {
@@ -23,7 +23,6 @@ interface CaseStudyCarouselProps {
 
 export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [current, setCurrent] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -160,7 +159,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                   <div className="flex flex-col gap-6">
                     <Button
                       className="outline-1 px-7 relative overflow-hidden group bg-[#0047FF] text-white hover:bg-[#0047FF]/90 transition-all duration-300"
-                      href={`/case-study?name=${encodeURIComponent(filteredCaseStudies[current].route)}&returnSlide=${current}&returnPath=${encodeURIComponent(pathname)}`}
+                      href={`/case-study?name=${filteredCaseStudies[current].route}&returnSlide=${current}`}
                     >
                       <ShinyText text="Know More" speed={3} />
                     </Button>

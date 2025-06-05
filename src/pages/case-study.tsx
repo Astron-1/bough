@@ -32,10 +32,7 @@ export default function CaseStudy({ source, frontMatter, returnSlide }: CaseStud
   const router = useRouter();
 
   const handleBack = () => {
-    const returnPath = router.query.returnPath as string | undefined;
-    const returnSlide = router.query.returnSlide as string | undefined;
-    const baseUrl = returnPath || '/insights';
-    
+    const baseUrl = router.asPath.includes('returnSlide') ? '/' : '/insights';
     if (returnSlide) {
       router.push(`${baseUrl}?slide=${returnSlide}`);
     } else {
