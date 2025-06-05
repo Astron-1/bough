@@ -8,6 +8,7 @@ import BottomSection from "@app/components/BottomSection";
 import serviceCTA from "../../public/serviceCTA.png";
 import CaseStudyCarousel from "@app/components/CaseStudyCarousel";
 import Button from "@app/components/ui/Button";
+import ShinyText from "@app/components/ui/ShinyText";
 
 export default function ServicesPage() {
   return (
@@ -69,11 +70,11 @@ export default function ServicesPage() {
             className="text-black max-w-2xl mx-auto mb-8"
           >
             We are advisors, thought leaders, and problem solvers, dedicated to
-            creating long-term value and sustainable solutions.
-          </Text>
+            creating long-term value and sustainable solutionsv
+          </Text>v
           <div className="text-center flex-row flex justify-center">
-            <Button href="#servicelist">
-              <Text className="font-medium">View Services</Text>
+            <Button href="/connect" className="px-7">
+              <ShinyText text="Connect" speed={3} />
             </Button>
           </div>
         </div>

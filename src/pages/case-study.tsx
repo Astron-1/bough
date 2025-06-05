@@ -60,16 +60,6 @@ export default function CaseStudy({ source, frontMatter, returnSlide }: CaseStud
   return (
     <div className="text-black relative">
       <Header transparent={false} />
-      <div className="container mx-auto px-4 py-4">
-        <Button
-          onClick={handleBack}
-          variant="secondary"
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-        >
-          <ArrowLeft size={20} />
-          Back
-        </Button>
-      </div>
       <BlogHeader
         title={frontMatter.title}
         description={frontMatter.description}

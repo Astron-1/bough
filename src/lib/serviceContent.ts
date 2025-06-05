@@ -1,11 +1,11 @@
-import AccountingImage from "../../public/ac1.webp";
-import ESGImage from "../../public/esg1.webp";
-import RiskImage from "../../public/risk1.webp";
-import TransformationImage from "../../public/transformation1.webp";
-import AccountingSec from "../../public/ac2.webp";
-import RiskSec from "../../public/risk2.webp";
-import TransformationSec from "../../public/transformation2.webp";
-import ESGSec from "../../public/esg2.webp";
+import AccountingImage from "../../public/AccountingImage.jpeg";
+import ESGImage from "../../public/ESGImage.jpeg";
+import RiskImage from "../../public/RiskImage.jpeg";
+import TransformationImage from "../../public/TransformationImage.jpeg";
+import AccountingSec from "../../public/AccountingSec.png";
+import RiskSec from "../../public/RiskSec.png";
+import TransformationSec from "../../public/TransformationSec.png";
+import ESGSec from "../../public/ESGSec.png";
 
 export const serviceContent = {
   Accounting: {

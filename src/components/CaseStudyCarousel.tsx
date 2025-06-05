@@ -6,11 +6,6 @@ import Text, { Font } from "./Text";
 import { caseStudyContent } from "@app/lib/caseStudyContent";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-import "swiper/css";
-import "swiper/css/effect-fade";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface CaseStudyCarouselProps {
@@ -26,8 +21,12 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const searchParams = useSearchParams();
   const [current, setCurrent] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const swiperRef = useRef<SwiperType | undefined>(undefined);
+  const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const isInitialMount = useRef(true);
+  const slideTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
+  const queuedIndex = useRef<number | null>(null);
+  const queuedDirection = useRef<"left" | "right" | null>(null);
+  const ANIMATION_DURATION = 200;
 
   // Memoize filtered case studies to prevent unnecessary recalculations
   const filteredCaseStudies = useMemo(() => {
@@ -53,7 +52,6 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
       const index = Number(slideIndex);
       if (index >= 0 && index < filteredCaseStudies.length) {
         setCurrent(index);
-        swiperRef.current?.slideTo(index, 0);
       }
     }
   }, [searchParams, filteredCaseStudies.length]);
@@ -70,19 +68,68 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     router.replace(`?${params.toString()}`, { scroll: false });
   }, [current, router, searchParams]);
 
-  const nextSlide = useCallback(() => {
-    if (isAnimating || current === filteredCaseStudies.length - 1) return;
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (slideTimeout.current) {
+        clearTimeout(slideTimeout.current);
+      }
+    };
+  }, []);
+
+  // Only render current, previous, and next images
+  const getVisibleIndexes = () => {
+    const prev = current > 0 ? current - 1 : null;
+    const next = current < filteredCaseStudies.length - 1 ? current + 1 : null;
+    return [prev, current, next].filter(idx => idx !== null) as number[];
+  };
+
+  const handleSlideChange = useCallback((newIndex: number, dir: "left" | "right") => {
+    if (isAnimating) {
+      // Only queue if different from current and last queued
+      if (
+        (queuedIndex.current === null && newIndex !== current) ||
+        (queuedIndex.current !== null && newIndex !== queuedIndex.current)
+      ) {
+        queuedIndex.current = newIndex;
+        queuedDirection.current = dir;
+      }
+      return;
+    }
+    if (newIndex === current) return; // Prevent animating to the same slide
     setIsAnimating(true);
-    swiperRef.current?.slideNext();
-  }, [current, isAnimating, filteredCaseStudies.length]);
+    setDirection(dir);
+    setCurrent(newIndex); 
+    if (slideTimeout.current) {
+      clearTimeout(slideTimeout.current);
+    }
+    slideTimeout.current = setTimeout(() => {
+      setIsAnimating(false);
+      setDirection(null);
+      // If a slide is queued, process only the latest one and clear
+      if (queuedIndex.current !== null && queuedDirection.current !== null) {
+        const nextIdx = queuedIndex.current;
+        const nextDir = queuedDirection.current;
+        queuedIndex.current = null;
+        queuedDirection.current = null;
+        handleSlideChange(nextIdx, nextDir);
+      }
+    }, ANIMATION_DURATION);
+  }, [isAnimating, current]);
+
+  const nextSlide = useCallback(() => {
+    if (current === filteredCaseStudies.length - 1) return;
+    handleSlideChange(current + 1, "right");
+  }, [current, filteredCaseStudies.length, handleSlideChange]);
 
   const prevSlide = useCallback(() => {
-    if (isAnimating || current === 0) return;
-    setIsAnimating(true);
-    swiperRef.current?.slidePrev();
-  }, [current, isAnimating]);
+    if (current === 0) return;
+    handleSlideChange(current - 1, "left");
+  }, [current, handleSlideChange]);
 
-  const progressPercent = ((current + 1) / filteredCaseStudies.length) * 100;
+  const progressPercent = useMemo(() => 
+    ((current + 1) / filteredCaseStudies.length) * 100
+  , [current, filteredCaseStudies.length]);
 
   if (filteredCaseStudies.length === 0) {
     return null;
@@ -99,7 +146,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
               <div className="relative h-[400px] w-6 flex justify-center items-start mt-4 md:ml-0">
                 <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
                   <div
-                    className="absolute bottom-0 left-0 w-full bg-[#53FBFB] transition-all duration-700 ease-in-out"
+                    className="absolute bottom-0 left-0 w-full bg-[#53FBFB] transition-all duration-200 ease-linear will-change-transform"
                     style={{
                       height: `${progressPercent}%`,
                     }}
@@ -110,7 +157,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
               <div className="flex-col flex justify-between items-start max-h-[450px]">
                 <div className="ml-7 mt-2 relative min-h-[250px] h-auto">
                   <div
-                    className="transition-transform duration-500 ease-out will-change-transform"
+                    className="transition-transform duration-200 ease-linear will-change-transform"
                     style={{
                       opacity: isAnimating ? 0 : 1,
                       transform: `translateY(${isAnimating ? "20px" : "0"})`,
@@ -120,28 +167,17 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                       {filteredCaseStudies[current].heading
                         .split(" ")
                         .reduce(
-                          (
-                            acc: string[],
-                            word: string,
-                            i: number,
-                            arr: string[]
-                          ) => {
+                          (acc: string[], word: string, i: number, arr: string[]) => {
                             if (i % 3 === 0) {
                               const group = arr.slice(i, i + 3).join(" ");
-                              if (group.trim()) {
-                                acc.push(group);
-                              }
+                              if (group.trim()) acc.push(group);
                             }
                             return acc;
                           },
                           []
                         )
                         .map((line, index) => (
-                          <Text
-                            key={index}
-                            className="max-w-[300px]"
-                            type={Font.GARAMOND}
-                          >
+                          <Text key={index} className="max-w-[300px]" type={Font.GARAMOND}>
                             {line}
                           </Text>
                         ))}
@@ -160,35 +196,36 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                     <Button
                       className="outline-1 px-7 relative overflow-hidden group bg-[#0047FF] text-white hover:bg-[#0047FF]/90 transition-all duration-300"
                       href={`/case-study?name=${filteredCaseStudies[current].route}&returnSlide=${current}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <ShinyText text="Know More" speed={3} />
                     </Button>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 select-none">
                       <button
                         onClick={prevSlide}
                         disabled={isAnimating || current === 0}
-                        className="w-10 h-10 rounded-full border border-[#0047FF] text-[#0047FF] flex items-center justify-center transition-all duration-300 hover:bg-[#0047FF] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-[#0047FF] disabled:border-gray-300 disabled:text-gray-300"
+                        className={`w-10 h-10 rounded-full border transition-colors ${
+                          current === 0
+                            ? "border-gray-300 text-gray-300"
+                            : "border-[#0047FF] text-[#0047FF] hover:bg-[#0047FF] hover:text-white"
+                        } flex items-center justify-center`}
                         aria-label="Previous Slide"
                       >
-                        <ChevronLeft
-                          size={20}
-                          strokeWidth={2.5}
-                          className="transition-transform duration-300"
-                        />
+                        <ChevronLeft size={20} strokeWidth={2.5} />
                       </button>
+                      
                       <button
                         onClick={nextSlide}
-                        disabled={
-                          isAnimating || current === filteredCaseStudies.length - 1
-                        }
-                        className="w-10 h-10 rounded-full border border-[#0047FF] text-[#0047FF] flex items-center justify-center transition-all duration-300 hover:bg-[#0047FF] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-[#0047FF] disabled:border-gray-300 disabled:text-gray-300"
+                        disabled={isAnimating || current === filteredCaseStudies.length - 1}
+                        className={`w-10 h-10 rounded-full border transition-colors ${
+                          current === filteredCaseStudies.length - 1
+                            ? "border-gray-300 text-gray-300"
+                            : "border-[#0047FF] text-[#0047FF] hover:bg-[#0047FF] hover:text-white"
+                        } flex items-center justify-center`}
                         aria-label="Next Slide"
                       >
-                        <ChevronRight
-                          size={20}
-                          strokeWidth={2.5}
-                          className="transition-transform duration-300"
-                        />
+                        <ChevronRight size={20} strokeWidth={2.5} />
                       </button>
                     </div>
                   </div>
@@ -200,39 +237,29 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
           {/* Right: Image */}
           <div className="hidden md:block w-full md:w-[55%] lg:w-[60%] xl:w-[65%] h-[400px]">
             <div className="relative w-full h-full">
-              <Swiper
-                onSwiper={(swiper) => {
-                  swiperRef.current = swiper;
-                }}
-                onSlideChange={(swiper) => {
-                  setCurrent(swiper.activeIndex);
-                  setTimeout(() => {
-                    setIsAnimating(false);
-                  }, 700);
-                }}
-                effect="fade"
-                speed={700}
-                loop={false}
-                modules={[EffectFade]}
-                className="!absolute inset-0 h-full"
-                allowTouchMove={false}
-                initialSlide={current}
-              >
-                {filteredCaseStudies.map((content, index) => (
-                  <SwiperSlide key={content.id} className="w-full h-full">
+              {getVisibleIndexes().map(index => {
+                const content = filteredCaseStudies[index];
+                return (
+                  <div
+                    key={content.id}
+                    className={`absolute inset-0 transition-opacity duration-200 ease-linear ${
+                      index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+                    }`}
+                    aria-hidden={index !== current}
+                  >
                     <Image
                       src={content.image}
                       alt={content.heading}
                       fill
-                      quality={100}
+                      quality={90}
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
                       priority={index === current}
                       loading={index === current ? "eager" : "lazy"}
                     />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

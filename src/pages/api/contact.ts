@@ -56,30 +56,28 @@ export default async function handler(
     });
   }
 
-  // Log environment variables (without sensitive info)
-  console.log("Email configuration:", {
-    host: process.env.EMAIL_SERVER_HOST,
-    port: process.env.EMAIL_SERVER_PORT,
-    secure: process.env.EMAIL_SERVER_SECURE,
-    user: process.env.EMAIL_SERVER_USER ? "✓ Set" : "✗ Not set",
-    pass: process.env.EMAIL_SERVER_PASSWORD ? "✓ Set" : "✗ Not set",
-    from: process.env.EMAIL_FROM,
-    to: process.env.EMAIL_TO || process.env.EMAIL_FROM,
-  });
+  // // Log environment variables (without sensitive info)
+  // console.log("Email configuration:", {
+  //   host: process.env.EMAIL_SERVER_HOST,
+  //   port: process.env.EMAIL_SERVER_PORT,
+  //   secure: process.env.EMAIL_SERVER_SECURE,
+  //   user: process.env.EMAIL_SERVER_USER ? "✓ Set" : "✗ Not set",
+  //   pass: process.env.EMAIL_SERVER_PASSWORD ? "✓ Set" : "✗ Not set",
+  //   from: process.env.EMAIL_FROM,
+  //   to: process.env.EMAIL_TO || process.env.EMAIL_FROM,
+  // });
 
   try {
     // Create a transporter
     console.log("Creating transporter...");
-    console.log(process.env.EMAIL_SERVER_HOST);
-    console.log(process.env.EMAIL_SERVER_PORT);
-    console.log(process.env.EMAIL_SERVER_SECURE);
-    console.log(process.env.EMAIL_SERVER_USER);
-    console.log(process.env.EMAIL_SERVER_PASSWORD);
+    
+    const port = Number(process.env.EMAIL_SERVER_PORT) || 587;
+    const secure = port === 465; // true for 465, false for other ports
 
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_SERVER_HOST || "smtp.mailersend.net",
-      port: Number(process.env.EMAIL_SERVER_PORT) || 587,
-      secure: Boolean(process.env.EMAIL_SERVER_SECURE === "false"),
+      port,
+      secure,
       auth: {
         user: process.env.EMAIL_SERVER_USER,
         pass: process.env.EMAIL_SERVER_PASSWORD ,
@@ -93,7 +91,7 @@ export default async function handler(
     // Prepare email content
     const mailOptions = {
       from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_TO || "arpits.connect@gmail.com",
+      to: "connect@boughcosulting.com,arpits.connect@gmail.com",
       subject: `Contact Form: ${name} from ${company}`,
       replyTo: email,
       text: `

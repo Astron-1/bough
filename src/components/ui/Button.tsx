@@ -9,6 +9,8 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   asChild?: boolean;
+  target?: string;
+  rel?: string;
 }
 
 export default function Button({
@@ -18,6 +20,8 @@ export default function Button({
   variant = "primary",
   onClick,
   asChild = false,
+  target,
+  rel,
 }: ButtonProps) {
   const baseStyles =
     "group flex justify-center items-center min-w-[8.5rem] px-4 h-[2.5rem] ml-2 rounded-full text-center relative overflow-hidden transition-all duration-500 ease-out hover:shadow-lg active:shadow-inner active:translate-y-[1px]";
@@ -46,7 +50,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link href={href} className={buttonStyles}>
+      <Link href={href} className={buttonStyles} target={target} rel={rel}>
         <Text>
           <span className={childStyles}>{children}</span>
         </Text>
