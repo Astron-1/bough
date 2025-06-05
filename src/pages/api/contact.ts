@@ -81,8 +81,8 @@ export default async function handler(
       port: Number(process.env.EMAIL_SERVER_PORT) || 587,
       secure: Boolean(process.env.EMAIL_SERVER_SECURE === "false"),
       auth: {
-        user: process.env.EMAIL_SERVER_USER || "MS_DLVtky@test-51ndgwvzo25lzqx8.mlsender.net",
-        pass: process.env.EMAIL_SERVER_PASSWORD || "mssp.gxPSlj4.o65qngkjv28lwr12.qm0F45i",
+        user: process.env.EMAIL_SERVER_USER,
+        pass: process.env.EMAIL_SERVER_PASSWORD ,
       },
       tls: {
         minVersion: 'TLSv1.2',
@@ -92,7 +92,7 @@ export default async function handler(
 
     // Prepare email content
     const mailOptions = {
-      from: process.env.EMAIL_FROM || "MS_DLVtky@test-51ndgwvzo25lzqx8.mlsender.net",
+      from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO || "arpits.connect@gmail.com",
       subject: `Contact Form: ${name} from ${company}`,
       replyTo: email,
