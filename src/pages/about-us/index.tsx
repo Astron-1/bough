@@ -185,7 +185,7 @@ export default function AboutUsPage() {
   const heroContent = {
     title: "Your growth, powered by Bough",
     subtitle:
-      "Our purpose is fueled by trust and values to create powerful avenues and meaningful outcomes, every day.",
+      "Our purpose is fueled by trust and values to create powerful avenues and meaningful outcomes, every day",
   };
 
   // Who We Are section content
@@ -322,7 +322,7 @@ export default function AboutUsPage() {
 
         {/* Bottom Section */}
         <BottomSection
-          content={"Shaping tomorrow, Starting today"}
+          content={"Shaping tomorrow, starting today"}
           backgroundImage={homeBottomImage}
         />
       </div>

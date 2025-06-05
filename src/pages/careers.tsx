@@ -13,28 +13,28 @@ export default function Careers() {
 
   const hiringProcedure = [
     {
-      step: "01",
+      step: "1",
       title: "Application Submission",
       description:
         "The first step is to submit your application through our careers portal. Our team conducts a thorough evaluation to identify the best potential matches. We carefully review each application to shortlist candidates whose skills and experiences align closely with the role's requirements",
     },
     {
-      step: "02",
+      step: "2",
       title: "Video Introduction",
       description:
-        "After your application is shortlisted, you'll be asked to record a brief 3-5 minute video introduction. In this video, tell us about yourself, your journey so far, and why you're excited about this opportunity. We value authenticity over perfection, so just be yourself.",
+        "After your application is shortlisted, you'll be asked to record a brief 3-5 minute video introduction. In this video, tell us about yourself, your journey so far, and why you're excited about this opportunity. We value authenticity over perfection, so just be yourself",
     },
     {
-      step: "03",
+      step: "3",
       title: "Assessment",
       description:
-        "Depending on the role, you may be asked to complete an assessment that demonstrates your skills and problem-solving abilities. This assessment could include tasks, case studies, or projects designed to gauge your suitability for the position.",
+        "Depending on the role, you may be asked to complete an assessment that demonstrates your skills and problem-solving abilities. This assessment could include tasks, case studies, or projects designed to gauge your suitability for the position",
     },
     {
-      step: "04",
+      step: "4",
       title: "Interview",
       description:
-        "Selected candidates are invited for virtual and in-person interviews tailored to the specific role. During these interviews, you'll have the opportunity to showcase your strengths, discuss your experiences, and learn more about our company culture and values. Our interview process may include multiple rounds to ensure a comprehensive evaluation.",
+        "Selected candidates are invited for virtual and in-person interviews tailored to the specific role. During these interviews, you'll have the opportunity to showcase your strengths, discuss your experiences, and learn more about our company culture and values. Our interview process may include multiple rounds to ensure a comprehensive evaluation",
     },
   ];
 
@@ -120,7 +120,7 @@ export default function Careers() {
                 target="_blank"
                 className="2xl:text-2xl"
               >
-                <Button className="xl:p-6">
+                <Button className="outline-1 px-7">
                   <ShinyText text="View current openings" speed={3} />
                 </Button>
               </Link>

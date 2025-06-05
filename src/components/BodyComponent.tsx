@@ -38,14 +38,16 @@ export default function BodyComponent() {
             />
           </svg>
         </div>
-        <div className="relative w-full py-8 md:py-12" >
+        <div className="relative w-full py-0 md:py-8" >
           <HeroText />
         </div>
         <BoughServices />
         <div className="relative w-full overflow-hidden">
-          <div className="container mx-auto px-4 md:px-0">
-            <div className="relative md:translate-x-[5%]">
-              <CaseStudyCarousel filter={{ ids: ['SOX - 7', 'RAR Implementation - 4', 'Data optimization and governance - 1'], limit: 3 }} />
+          <div className="container-fluid">
+            <div className="relative md:pr-0">
+              <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
+                <CaseStudyCarousel filter={{ ids: ['SOX - 7', 'RAR Implementation - 4', 'Data optimization and governance - 1'], limit: 3 }} />
+              </div>
             </div>
           </div>
         </div>

@@ -67,11 +67,25 @@ export default function ConnectPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    
+    // Special handling for phone field
+    if (id === 'phone') {
+      // Only allow digits and '+' symbol
+      const sanitizedValue = value.replace(/[^\d+]/g, '');
+      // Ensure '+' only appears at the start
+      const formattedValue = sanitizedValue.replace(/\+/g, match => 
+        sanitizedValue.indexOf(match) === 0 ? match : ''
+      );
+      // Limit to 15 digits (excluding '+')
+      const finalValue = formattedValue.slice(0, formattedValue.startsWith('+') ? 16 : 15);
+      setFormData(prev => ({ ...prev, [id]: finalValue }));
+    } else {
+      setFormData(prev => ({ ...prev, [id]: value }));
+    }
 
     // Clear error when user types
     if (errors[id as keyof FormData]) {
-      setErrors((prev) => ({ ...prev, [id]: undefined }));
+      setErrors(prev => ({ ...prev, [id]: undefined }));
     }
   };
 
@@ -104,9 +118,9 @@ export default function ConnectPage() {
 
     // Phone validation (optional field but validate format if provided)
     if (formData.phone.trim()) {
-      const phoneRegex =
-        /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
-      if (!phoneRegex.test(formData.phone)) {
+      // Simple validation: must be between 7 and 15 digits (excluding '+')
+      const digitCount = formData.phone.replace(/\+/g, '').length;
+      if (digitCount < 7 || digitCount > 15) {
         newErrors.phone = "Please enter a valid phone number";
         isValid = false;
       }
@@ -203,17 +217,10 @@ export default function ConnectPage() {
         />
 
         {/* Wave SVG Background */}
-        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <div className="absolute -ml-20 sm:-ml-0 h-[100px] w-[150%] sm:w-[100%] overflow-visible pt-120 pb-36">
           <div
-            style={{
-              transform: "rotate(90deg)",
-              transformOrigin: "center",
-              position: "absolute",
-              left: "-10%",
-              top: 0,
-              width: "100%",
-              height: "70%",
-            }}
+            className="absolute w-[105%] h-full top-30 z-0"
+            style={{ transform: "rotate(-15deg)" }}
           >
             <Image
               src="/about-us/herosection.svg"
@@ -234,7 +241,7 @@ export default function ConnectPage() {
                 type={Font.GARAMOND}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] text-black mb-6 lg:mb-8"
               >
-                Let&apos;s work together to solve your next big challenge.
+                Let&apos;s work together to solve your next big challenge
               </Text>
 
               <div className="text-xl md:text-2xl flex items-center justify-center lg:justify-start mt-4 lg:mt-6">
@@ -508,10 +515,11 @@ export default function ConnectPage() {
                           <input
                             type="tel"
                             id="phone"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your phone number (digits only)"
                             value={formData.phone}
                             onChange={handleChange}
                             className="w-full h-full px-4 bg-transparent text-black placeholder:text-black/50 text-sm font-light focus:outline-none"
+                            maxLength={16}
                           />
                         </div>
                         {errors.phone && (

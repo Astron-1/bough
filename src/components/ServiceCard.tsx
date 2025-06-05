@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface ServiceCardProps {
   image: StaticImageData;
@@ -28,7 +29,7 @@ export default function ServiceCard({
     <Link className="w-full block group" href={"/services/" + serviceType}>
       <div
         suppressHydrationWarning
-        className={`relative h-[280px] sm:h-[320px] md:h-[380px] 2xl:h-[450px] 4xl:h-[500px] 5xl:h-[700px] overflow-hidden bg-gray-200 transition-all duration-300 ${
+        className={`relative h-[280px] sm:h-[320px] md:h-[360px] lg:h-[400px] overflow-hidden bg-gray-200 transition-all duration-300 ${
           isMounted ? "transform-gpu" : ""
         }`}
         style={{
@@ -37,15 +38,22 @@ export default function ServiceCard({
             : "none",
         }}
       >
-        <div 
-          suppressHydrationWarning
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backgroundImage: `url(${image.src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <div className="absolute inset-0">
+          <Image 
+            src={image}
+            alt={serviceType}
+            fill
+            priority
+            quality={100}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-[1.01]"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center center',
+            }}
+            placeholder="blur"
+          />
+        </div>
         
         <div 
           suppressHydrationWarning
@@ -54,26 +62,26 @@ export default function ServiceCard({
 
         <div 
           suppressHydrationWarning
-          className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 md:p-6 transform transition-all duration-500 ease-in-out translate-y-[calc(100%-5.5rem)] sm:translate-y-[calc(100%-6rem)] md:translate-y-[calc(100%-7rem)] group-hover:translate-y-0"
+          className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-4 py-5 md:px-5 md:py-6 transform transition-all duration-500 ease-in-out translate-y-[calc(100%-4.5rem)] sm:translate-y-[calc(100%-5rem)] md:translate-y-[calc(100%-5.5rem)] group-hover:translate-y-0 min-h-[200px] flex flex-col justify-end"
         >
-          <div className="mb-3 md:mb-4">
+          <div className="mb-2 md:mb-3">
             <Text
               type={Font.GARAMOND}
-              className="text-white text-3xl sm:text-4xl md:text-5xl font-bold transform transition-transform duration-500 ease-in-out leading-tight"
+              className="text-white text-2xl sm:text-3xl md:text-4xl font-bold transform transition-transform duration-500 ease-in-out leading-tight"
             >
               {serviceType}
             </Text>
           </div>
           
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex flex-col justify-between h-full">
             <Text
-              className="text-gray-200 text-sm sm:text-base md:text-lg opacity-0 group-hover:opacity-100 max-h-0 group-hover:max-h-[300px] transition-all duration-500 ease-in-out delay-100 group-hover:delay-150 mb-4 leading-relaxed"
+              className="text-gray-200 text-sm sm:text-[15px] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out delay-100 group-hover:delay-150 mb-4 leading-relaxed line-clamp-none"
             >
               {description}
             </Text>
             
-            <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex justify-center">
-              <Button asChild className="!min-w-0 !px-6 !py-2 !ml-0 text-sm">
+            <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex justify-center mt-auto">
+              <Button asChild className="!min-w-0 !px-5 !py-1.5 !ml-0 text-sm">
                 <ShinyText text="Know More" speed={3} />
               </Button>
             </div>
