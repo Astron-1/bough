@@ -1,14 +1,14 @@
 import { useRef } from "react";
 import ServiceCard from "./ServiceCard";
 // import ServicePath from "./ServicePath";
-import accountingImage from "../../public/accounting.png";
-import esgImage from "../../public/esg.png";
-import transformationImage from "../../public/transformation.png";
-import riskImage from "../../public/risk.png";
-import AccountingSec from "../../public/AccountingSec.png";
-import RiskSec from "../../public/RiskSec.png";
-import TransformationSec from "../../public/TransformationSec.png";
-import ESGSec from "../../public/ESGSec.png";
+import accountingImage from "../../public/ac1.webp";
+import esgImage from "../../public/esg1.webp";
+import transformationImage from "../../public/transformation1.webp";
+import riskImage from "../../public/risk1.webp";
+import AccountingSec from "../../public/ac2.webp";
+import RiskSec from "../../public/risk2.webp";
+import TransformationSec from "../../public/transformation2.webp";
+import ESGSec from "../../public/esg2.webp";
 
 // Services array with names, images, and descriptions
 const services = [

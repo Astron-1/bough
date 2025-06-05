@@ -293,9 +293,11 @@ export default function InsightsPage() {
       <div className="">
         {/* Featured Case Studies */}
         <div className="relative w-full overflow-hidden">
-          <div className="container mx-auto px-4 md:px-0">
-            <div className="relative md:translate-x-[5%]">
-              <CaseStudyCarousel filter={{excludeIds: FEATURED_CASE_STUDY_IDS, limit: 4}}/>
+          <div className="container-fluid">
+            <div className="relative md:pr-0">
+              <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
+                <CaseStudyCarousel filter={{excludeIds: FEATURED_CASE_STUDY_IDS, limit: 4}}/>
+              </div>
             </div>
           </div>
         </div>

@@ -96,8 +96,14 @@ export default function ServicesPage() {
       </section>
 
       {/* Featured Case Studies */}
-      <div className="">
-        <CaseStudyCarousel />
+      <div className="relative w-full overflow-hidden">
+        <div className="container-fluid">
+          <div className="relative md:pr-0">
+            <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
+              <CaseStudyCarousel />
+            </div>
+          </div>
+        </div>
       </div>
       <BottomSection
         content="Let's drive outcomes by crafting changes

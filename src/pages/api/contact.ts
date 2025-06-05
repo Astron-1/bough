@@ -77,19 +77,23 @@ export default async function handler(
     console.log(process.env.EMAIL_SERVER_PASSWORD);
 
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_SERVER_HOST,
-      port: Number(process.env.EMAIL_SERVER_PORT),
-      secure: Boolean(process.env.EMAIL_SERVER_SECURE === "true"),
+      host: process.env.EMAIL_SERVER_HOST || "smtp.mailersend.net",
+      port: Number(process.env.EMAIL_SERVER_PORT) || 587,
+      secure: Boolean(process.env.EMAIL_SERVER_SECURE === "false"),
       auth: {
         user: process.env.EMAIL_SERVER_USER,
-        pass: process.env.EMAIL_SERVER_PASSWORD,
+        pass: process.env.EMAIL_SERVER_PASSWORD ,
       },
+      tls: {
+        minVersion: 'TLSv1.2',
+        maxVersion: 'TLSv1.3'
+      }
     });
 
     // Prepare email content
     const mailOptions = {
       from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_TO || process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO || "arpits.connect@gmail.com",
       subject: `Contact Form: ${name} from ${company}`,
       replyTo: email,
       text: `
@@ -102,14 +106,90 @@ ${phone ? `Phone: ${phone}` : ""}
 ${message ? `Message: ${message}` : ""}
       `.trim(),
       html: `
-<h2>New Contact Form Submission</h2>
-<p><strong>Name:</strong> ${name}</p>
-<p><strong>Email:</strong> ${email}</p>
-<p><strong>Company:</strong> ${company}</p>
-${city ? `<p><strong>City:</strong> ${city}</p>` : ""}
-${country ? `<p><strong>Country:</strong> ${country}</p>` : ""}
-${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
-${message ? `<p><strong>Message:</strong> ${message}</p>` : ""}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Contact Form Submission</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f9fafb; font-family: Arial, sans-serif; color: #374151;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 20px 0; text-align: center; background-color: #ffffff;">
+        <h1 style="margin: 0; color: #1f2937; font-size: 24px; font-weight: 600;">New Contact Inquiry</h1>
+      </td>
+    </tr>
+  </table>
+  
+  <table role="presentation" style="width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+    <tr>
+      <td style="padding: 24px;">
+        <table role="presentation" style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">Name</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px;">${name}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">Email</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px;">${email}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">Company</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px;">${company}</p>
+            </td>
+          </tr>
+          ${city ? `
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">City</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px;">${city}</p>
+            </td>
+          </tr>
+          ` : ''}
+          ${country ? `
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">Country</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px;">${country}</p>
+            </td>
+          </tr>
+          ` : ''}
+          ${phone ? `
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">Phone</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px;">${phone}</p>
+            </td>
+          </tr>
+          ` : ''}
+          ${message ? `
+          <tr>
+            <td style="padding: 12px 0;">
+              <p style="margin: 0; color: #6b7280; font-size: 14px;">Message</p>
+              <p style="margin: 4px 0 0; color: #111827; font-size: 16px; white-space: pre-wrap;">${message}</p>
+            </td>
+          </tr>
+          ` : ''}
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+  <table role="presentation" style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 24px; text-align: center;">
+        <p style="margin: 0; color: #6b7280; font-size: 14px;">This is an automated message from your contact form.</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
       `.trim(),
     };
 

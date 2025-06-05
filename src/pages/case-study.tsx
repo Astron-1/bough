@@ -7,6 +7,8 @@ import Header from "@app/components/Header";
 import BlogHeader from "@app/components/case-study/BlogHeader";
 import MDXContent from "@app/components/case-study/MDXContent";
 import { getCaseStudyBySlug, getCaseStudyById } from "@app/lib/mdxUtils";
+import Button from "@app/components/ui/Button";
+import { ArrowLeft } from "lucide-react";
 
 interface FrontMatter {
   title: string;
@@ -23,10 +25,23 @@ interface FrontMatter {
 interface CaseStudyProps {
   source: MDXRemoteSerializeResult;
   frontMatter: FrontMatter;
+  returnSlide?: string;
 }
 
-export default function CaseStudy({ source, frontMatter }: CaseStudyProps) {
+export default function CaseStudy({ source, frontMatter, returnSlide }: CaseStudyProps) {
   const router = useRouter();
+
+  const handleBack = () => {
+    const returnPath = router.query.returnPath as string | undefined;
+    const returnSlide = router.query.returnSlide as string | undefined;
+    const baseUrl = returnPath || '/insights';
+    
+    if (returnSlide) {
+      router.push(`${baseUrl}?slide=${returnSlide}`);
+    } else {
+      router.push(baseUrl);
+    }
+  };
 
   // Debug log for headline
   useEffect(() => {
@@ -48,6 +63,16 @@ export default function CaseStudy({ source, frontMatter }: CaseStudyProps) {
   return (
     <div className="text-black relative">
       <Header transparent={false} />
+      <div className="container mx-auto px-4 py-4">
+        <Button
+          onClick={handleBack}
+          variant="secondary"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+        >
+          <ArrowLeft size={20} />
+          Back
+        </Button>
+      </div>
       <BlogHeader
         title={frontMatter.title}
         description={frontMatter.description}
@@ -94,8 +119,8 @@ function serializeData<T>(data: T): unknown {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // Get case study name from query
-  const { name } = context.query;
+  // Get case study name and return slide from query
+  const { name, returnSlide } = context.query;
   
   if (!name || typeof name !== 'string') {
     return {
@@ -123,6 +148,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       source: mdxSource,
       frontMatter: serializeData(caseStudy.frontMatter),
+      returnSlide: returnSlide || null,
     },
   };
 };
