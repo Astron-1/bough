@@ -91,7 +91,7 @@ export default async function handler(
     // Prepare email content
     const mailOptions = {
       from: process.env.EMAIL_FROM,
-      to: "connect@boughcosulting.com,arpits.connect@gmail.com",
+      to: "connect@boughconsulting.com,arpits.connect@gmail.com",
       subject: `Contact Form: ${name} from ${company}`,
       replyTo: email,
       text: `
