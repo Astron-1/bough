@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Text, { Font } from "@app/components/Text";
 import styles from "./BentoGallery.module.css";
+import useIsMobile from "@app/hooks/useIsMobile";
 
 interface GalleryItem {
   id: string;
@@ -109,6 +110,27 @@ const defaultGalleryLayout: GalleryItem[] = [
   },
 ];
 
+// Mobile sequence array (frame numbers)
+const mobileFrameSequence = [
+  "frame1",  // 1st position
+  "frame2",  // 2nd position
+  "frame4",  // 3rd position
+  "frame5",  // 4th position
+  "frame6",  // 5th position
+  "frame8",  // 6th position
+  "frame9",  // 7th position
+  "frame11", // 8th position
+  "frame12", // 9th position
+  "frame13", // 10th position
+  "frame15", // 11th position
+  "frame14", // 12th position
+  "frame3",  // 13th position
+  "frame7",  // 14th position
+  "frame10", // 15th position
+  "frame16", // 16th position
+  "frame17"  // 17th position
+];
+
 const BentoGallery: React.FC<BentoGalleryProps> = ({
   title = "Our journey in pictures",
   description = "Explore our visual story — moments of collaboration, innovation, and growth that define Bough's culture and commitment to excellence.",
@@ -120,6 +142,7 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
   const descRef = useRef<HTMLDivElement>(null);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [gsapLoaded, setGsapLoaded] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleImageLoad = (id: string) => {
     setLoadedImages((prev) => {
@@ -238,6 +261,16 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
     initAnimations();
   }, [gsapLoaded]);
 
+  // Function to get the correct class name based on mobile sequence
+  const getItemClassName = (frameId: string, index: number) => {
+    if (isMobile) {
+      // Find the position of this frame in the mobile sequence
+      const mobileIndex = mobileFrameSequence.indexOf(frameId);
+      return `${styles.gridItem} gridItem ${styles[`item${mobileIndex + 1}`]}`;
+    }
+    return `${styles.gridItem} gridItem ${styles[`item${index + 1}`]}`;
+  };
+
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <div className={styles.galleryContainer}>
@@ -261,31 +294,35 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
 
         <div className={styles.gridContainer}>
           <div className={styles.gridLayout} ref={gridRef}>
-            {galleryImages.map((image, index) => (
-              <div
-                key={image.id}
-                className={`${styles.gridItem} gridItem ${
-                  styles[`item${index + 1}`]
-                }`}
-              >
-                <div className={styles.imageWrapper}>
-                  {!loadedImages.has(image.id) && (
-                    <div className={styles.skeleton} />
-                  )}
-                  <Image
-                    src={image.imagePath}
-                    alt={image.altText}
-                    fill
-                    className={`${styles.image} ${
-                      loadedImages.has(image.id) ? styles.loaded : ""
-                    }`}
-                    sizes="(max-width: 600px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                    priority={image.priority}
-                    onLoad={() => handleImageLoad(image.id)}
-                  />
+            {galleryImages.map((image, index) => {
+              const currentImage = isMobile 
+                ? galleryImages.find(img => img.id === mobileFrameSequence[index]) || image
+                : image;
+              
+              return (
+                <div
+                  key={currentImage.id}
+                  className={getItemClassName(currentImage.id, index)}
+                >
+                  <div className={styles.imageWrapper}>
+                    {!loadedImages.has(currentImage.id) && (
+                      <div className={styles.skeleton} />
+                    )}
+                    <Image
+                      src={currentImage.imagePath}
+                      alt={currentImage.altText}
+                      fill
+                      className={`${styles.image} ${
+                        loadedImages.has(currentImage.id) ? styles.loaded : ""
+                      }`}
+                      sizes="(max-width: 600px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      priority={currentImage.priority}
+                      onLoad={() => handleImageLoad(currentImage.id)}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

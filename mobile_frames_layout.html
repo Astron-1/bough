@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Frames Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 15px;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .frames-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .frame {
+            position: absolute;
+            background-color: #D7E7FF;
+            border: 1px solid #bfcfef;
+            border-radius: 4px;
+        }
+
+        /* Row 1 - Top frames */
+        .frame-1 {
+            left: 0;
+            top: 0;
+            width: 120px;
+            height: 85px;
+        }
+
+        .frame-2 {
+            left: 130px;
+            top: 0;
+            width: 60px;
+            height: 85px;
+        }
+
+        .frame-3 {
+            left: 200px;
+            top: 0;
+            width: 60px;
+            height: 85px;
+        }
+
+        /* Row 2 */
+        .frame-4 {
+            left: 0;
+            top: 95px;
+            width: 160px;
+            height: 85px;
+        }
+
+        .frame-5 {
+            left: 170px;
+            top: 95px;
+            width: 90px;
+            height: 85px;
+        }
+
+        /* Row 3 */
+        .frame-6 {
+            left: 0;
+            top: 190px;
+            width: 130px;
+            height: 85px;
+        }
+
+        .frame-7 {
+            left: 140px;
+            top: 190px;
+            width: 120px;
+            height: 85px;
+        }
+
+        /* Row 4 */
+        .frame-8 {
+            left: 0;
+            top: 285px;
+            width: 60px;
+            height: 85px;
+        }
+
+        .frame-9 {
+            left: 70px;
+            top: 285px;
+            width: 130px;
+            height: 85px;
+        }
+
+        .frame-10 {
+            left: 210px;
+            top: 285px;
+            width: 50px;
+            height: 85px;
+        }
+
+        /* Row 5 */
+        .frame-11 {
+            left: 0;
+            top: 380px;
+            width: 130px;
+            height: 85px;
+        }
+
+        .frame-12 {
+            left: 140px;
+            top: 380px;
+            width: 120px;
+            height: 85px;
+        }
+
+        /* Row 6 */
+        .frame-13 {
+            left: 0;
+            top: 475px;
+            width: 140px;
+            height: 90px;
+        }
+
+        .frame-14 {
+            left: 150px;
+            top: 475px;
+            width: 110px;
+            height: 90px;
+        }
+
+        /* Row 7 */
+        .frame-15 {
+            left: 0;
+            top: 575px;
+            width: 100px;
+            height: 45px;
+        }
+
+        .frame-16 {
+            left: 110px;
+            top: 575px;
+            width: 150px;
+            height: 45px;
+        }
+
+        /* Row 8 */
+        .frame-17 {
+            left: 0;
+            top: 630px;
+            width: 110px;
+            height: 85px;
+        }
+
+        .frame-18 {
+            left: 120px;
+            top: 630px;
+            width: 140px;
+            height: 85px;
+        }
+
+        /* Row 9 - Bottom full width */
+        .frame-19 {
+            left: 0;
+            top: 725px;
+            width: 260px;
+            height: 90px;
+        }
+
+        /* Container height to accommodate all frames */
+        .frames-container {
+            height: 825px;
+        }
+
+        /* Image styling */
+        .frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        /* For demonstration - you can remove this */
+        .frame-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7a8fb0;
+            font-size: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="frames-container">
+        <div class="frame frame-1">
+            <div class="frame-placeholder">Frame 1</div>
+        </div>
+        
+        <div class="frame frame-2">
+            <div class="frame-placeholder">Frame 2</div>
+        </div>
+        
+        <div class="frame frame-3">
+            <div class="frame-placeholder">Frame 3</div>
+        </div>
+        
+        <div class="frame frame-4">
+            <div class="frame-placeholder">Frame 4</div>
+        </div>
+        
+        <div class="frame frame-5">
+            <div class="frame-placeholder">Frame 5</div>
+        </div>
+        
+        <div class="frame frame-6">
+            <div class="frame-placeholder">Frame 6</div>
+        </div>
+        
+        <div class="frame frame-7">
+            <div class="frame-placeholder">Frame 7</div>
+        </div>
+        
+        <div class="frame frame-8">
+            <div class="frame-placeholder">Frame 8</div>
+        </div>
+        
+        <div class="frame frame-9">
+            <div class="frame-placeholder">Frame 9</div>
+        </div>
+        
+        <div class="frame frame-10">
+            <div class="frame-placeholder">Frame 10</div>
+        </div>
+        
+        <div class="frame frame-11">
+            <div class="frame-placeholder">Frame 11</div>
+        </div>
+        
+        <div class="frame frame-12">
+            <div class="frame-placeholder">Frame 12</div>
+        </div>
+        
+        <div class="frame frame-13">
+            <div class="frame-placeholder">Frame 13</div>
+        </div>
+        
+        <div class="frame frame-14">
+            <div class="frame-placeholder">Frame 14</div>
+        </div>
+        
+        <div class="frame frame-15">
+            <div class="frame-placeholder">Frame 15</div>
+        </div>
+        
+        <div class="frame frame-16">
+            <div class="frame-placeholder">Frame 16</div>
+        </div>
+        
+        <div class="frame frame-17">
+            <div class="frame-placeholder">Frame 17</div>
+        </div>
+        
+        <div class="frame frame-18">
+            <div class="frame-placeholder">Frame 18</div>
+        </div>
+        
+        <div class="frame frame-19">
+            <div class="frame-placeholder">Frame 19</div>
+        </div>
+    </div>
+</body>
+</html>
