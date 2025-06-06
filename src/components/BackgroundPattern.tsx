@@ -33,6 +33,30 @@ export default function BackgroundPattern() {
     threadsMouseInfluence: 0.2,
   });
 
+  // Handle responsive settings
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth <= 768;
+      setSettings(prev => ({
+        ...prev,
+        // Adjust values for mobile
+        threadsLineCount: isMobile ? 30 : 40,
+        threadsLineWidth: isMobile ? 4.0 : 7.0,
+        threadsLineBlur: isMobile ? 8.0 : 12.0,
+        threadsNoiseScale: isMobile ? 2.0 : 2.5,
+      }));
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Handle clicks outside the settings panel
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
