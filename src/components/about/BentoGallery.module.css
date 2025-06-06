@@ -110,6 +110,13 @@
   object-position: top center;
 }
 
+/* Specific styling for the second image to appear zoomed in */
+.item2 .image {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.4);
+}
+
 /* Optional: If the above doesn't work well enough, we can try this alternative */
 .item4 .imageWrapper {
   display: flex;
@@ -132,43 +139,182 @@
 
 @media (max-width: 768px) {
   .galleryContainer {
-    margin-bottom: 4rem;
+    margin-bottom: 12rem;
+    padding: 0 0.5rem;
   }
 
   .gridContainer {
+
     padding-bottom: 200%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .gridLayout {
+    max-width: 100%;
+    margin: 0 auto;
   }
   
   .gridItem {
+    width: 100% !important;
+    height: auto !important;
+    position: absolute;
+    left: 0 !important;
+    margin-bottom: 0;
+  }
+
+  /* Row 1 - Top frames */
+  .item1 {
+    left: 0 !important;
+    top: 0% !important;
+    width: 45% !important;
+    height: 15% !important;
+  }
+
+  .item2 {
+    left: 46% !important;
+    top: 0% !important;
+    width: 25% !important;
+    height: 15% !important;
+  }
+
+  .item3 {
+    left: 72% !important;
+    top: 0% !important;
+    width: 28% !important;
+    height: 15% !important;
+  }
+
+  /* Row 2 */
+  .item4 {
+    left: 0% !important;
+    top: 16% !important;
     width: 48% !important;
-    height: 10% !important;
+    height: 15% !important;
   }
-  
-  .item1 { left: 1%; top: 1%; }
-  .item2 { left: 51%; top: 1%; }
-  .item3 { left: 1%; top: 12%; }
-  .item4 { left: 51%; top: 12%; }
-  .item5 { left: 1%; top: 23%; }
-  .item6 { left: 51%; top: 23%; }
-  .item7 { left: 1%; top: 34%; }
-  .item8 { left: 51%; top: 34%; }
-  .item9 { left: 1%; top: 45%; }
-  .item10 { left: 51%; top: 45%; }
-  .item11 { left: 1%; top: 56%; }
-  .item12 { left: 51%; top: 56%; }
-  .item13 { left: 1%; top: 67%; }
-  .item14 { left: 51%; top: 67%; }
-  .item15 { left: 1%; top: 78%; }
-  .item16 { left: 51%; top: 78%; }
-  .item17 { left: 1%; top: 89%; }
-  
-  /* Maintain the same image positioning on mobile */
-  .item4 .image {
-    object-position: top center ;
+
+  .item5 {
+    left: 49% !important;
+    top: 16% !important;
+    width: 51% !important;
+    height: 15% !important;
   }
-  
-  /* Maintain smooth animations on mobile */
+
+  /* Row 3 */
+  .item6 {
+    left: 0% !important;
+    top: 32% !important;
+    width: 25% !important;
+    height: 15% !important;
+  }
+
+  .item7 {
+    left: 26% !important;
+    top: 32% !important;
+    width: 44% !important;
+    height: 15% !important;
+  }
+
+  .item8 {
+    left: 71% !important;
+    top: 32% !important;
+    width: 29% !important;
+    height: 15% !important;
+  }
+
+  /* Row 4 */
+  .item9 {
+    left: 0% !important;
+    top: 48% !important;
+    width: 48% !important;
+    height: 15% !important;
+  }
+
+  .item10 {
+    left: 49% !important;
+    top: 48% !important;
+    width: 51% !important;
+    height: 15% !important;
+  }
+
+  /* Row 5 */
+  .item11 {
+    left: 0% !important;
+    top: 64% !important;
+    width: 40% !important;
+    height: 15% !important;
+  }
+
+  .item12 {
+    left: 41% !important;
+    top: 64% !important;
+    width: 59% !important;
+    height: 15% !important;
+  }
+
+  /* Row 6 */
+  .item13 {
+    left: 0% !important;
+    top: 80% !important;
+    width: 52% !important;
+    height: 15% !important;
+  }
+
+  .item14 {
+    left: 53% !important;
+    top: 80% !important;
+    width: 47% !important;
+    height: 15% !important;
+  }
+
+  /* Row 7 */
+  .item15 {
+    left: 0% !important;
+    top: 96% !important;
+    width: 48% !important;
+    height: 15% !important;
+  }
+
+  .item16 {
+    left: 49% !important;
+    top: 96% !important;
+    width: 51% !important;
+    height: 15% !important;
+  }
+
+  /* Row 8 - Last item */
+  .item17 {
+    left: 0% !important;
+    top: 112% !important;
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    margin-top: 0.5rem !important;
+    aspect-ratio: 440.8/180 !important;
+  }
+
+  .item17 .imageWrapper {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .item17 .image {
+    object-fit: cover !important;
+    object-position: center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Maintain image quality */
+  .imageWrapper {
+    border-radius: 6px;
+  }
+
+  .image {
+    border-radius: 6px;
+  }
+
+  /* Disable hover effects on mobile */
   .gridItem:hover .image.loaded {
     transform: none;
   }
