@@ -36,7 +36,9 @@ export default function Footer() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 lg:w-2/3">
             {/* Column 1 */}
             <div>
-              <h3 className="font-semibold mb-4 text-[#53FBFB]">Services</h3>
+              <Link href="/services" className="block">
+                <h3 className="font-semibold mb-4 text-[#53FBFB] hover:text-gray-300 transition-colors">Services</h3>
+              </Link>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -75,7 +77,9 @@ export default function Footer() {
 
             {/* Column 2 */}
             <div>
-              <h3 className="font-semibold mb-4 text-[#53FBFB]">Insights</h3>
+              <Link href="/insights" className="block">
+                <h3 className="font-semibold mb-4 text-[#53FBFB] hover:text-gray-300 transition-colors">Insights</h3>
+              </Link>
               <ul className="space-y-2">
                 <li>
                   <Link href="/insights" className="hover:text-gray-300 block">
@@ -87,7 +91,9 @@ export default function Footer() {
 
             {/* Column 3 */}
             <div>
-              <h3 className="font-semibold mb-4 text-[#53FBFB]">Careers</h3>
+              <Link href="/careers" className="block">
+                <h3 className="font-semibold mb-4 text-[#53FBFB] hover:text-gray-300 transition-colors">Careers</h3>
+              </Link>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -110,7 +116,9 @@ export default function Footer() {
 
             {/* Column 4 */}
             <div>
-              <h3 className="font-semibold mb-4 text-[#53FBFB]">About us</h3>
+              <Link href="/about-us" className="block">
+                <h3 className="font-semibold mb-4 text-[#53FBFB] hover:text-gray-300 transition-colors">About us</h3>
+              </Link>
               <ul className="space-y-2">
                 <li>
                   <Link

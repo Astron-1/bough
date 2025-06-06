@@ -1,12 +1,11 @@
 "use client";
+import { useRef, useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState, useCallback, useMemo, useEffect } from "react";
 import Text, { Font } from "./Text";
 import { caseStudyContent } from "@app/lib/caseStudyContent";
 import Button from "./ui/Button";
 import ShinyText from "./ui/ShinyText";
-import { useRouter, useSearchParams } from "next/navigation";
 
 interface CaseStudyCarouselProps {
   filter?: {
@@ -16,17 +15,22 @@ interface CaseStudyCarouselProps {
   };
 }
 
+const IMAGE_SIZES = {
+  mobile: 640,
+  tablet: 1024,
+  desktop: 1280,
+} as const;
+
+const BLUR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
+
 export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const [current, setCurrent] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [direction, setDirection] = useState<"left" | "right" | null>(null);
-  const isInitialMount = useRef(true);
-  const slideTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
-  const queuedIndex = useRef<number | null>(null);
-  const queuedDirection = useRef<"left" | "right" | null>(null);
-  const ANIMATION_DURATION = 200;
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const ANIMATION_DURATION = 300;
 
   // Memoize filtered case studies to prevent unnecessary recalculations
   const filteredCaseStudies = useMemo(() => {
@@ -45,108 +49,144 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     return studies;
   }, [filter]);
 
-  // Initialize current slide from URL on mount
+  // Preload next and previous images
   useEffect(() => {
-    const slideIndex = searchParams.get('slide');
-    if (slideIndex && !isNaN(Number(slideIndex))) {
-      const index = Number(slideIndex);
-      if (index >= 0 && index < filteredCaseStudies.length) {
-        setCurrent(index);
-      }
-    }
-  }, [searchParams, filteredCaseStudies.length]);
+    const preloadImage = (src: string): Promise<Event> => {
+      return new Promise((resolve, reject) => {
+        const img = new globalThis.Image();
+        img.onload = (event: Event) => resolve(event);
+        img.onerror = reject;
+        img.src = src;
+      });
+    };
 
-  // Update URL when slide changes
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('slide', current.toString());
-    router.replace(`?${params.toString()}`, { scroll: false });
-  }, [current, router, searchParams]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (slideTimeout.current) {
-        clearTimeout(slideTimeout.current);
+    const preloadNextAndPrev = async () => {
+      try {
+        const promises: Promise<Event>[] = [];
+        
+        // Preload next image
+        if (current < filteredCaseStudies.length - 1) {
+          promises.push(preloadImage(filteredCaseStudies[current + 1].image));
+        }
+        // Preload previous image
+        if (current > 0) {
+          promises.push(preloadImage(filteredCaseStudies[current - 1].image));
+        }
+        
+        await Promise.all(promises);
+      } catch (error) {
+        console.error('Error preloading images:', error);
       }
     };
+
+    preloadNextAndPrev();
+  }, [current, filteredCaseStudies]);
+
+  // Handle touch events for swipe
+  useEffect(() => {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEndX = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+      const swipeDistance = touchEndX - touchStartX;
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          prevSlide();
+        } else {
+          nextSlide();
+        }
+      }
+    };
+
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+      carousel.addEventListener('touchmove', handleTouchMove, { passive: true });
+      carousel.addEventListener('touchend', handleTouchEnd);
+
+      return () => {
+        carousel.removeEventListener('touchstart', handleTouchStart);
+        carousel.removeEventListener('touchmove', handleTouchMove);
+        carousel.removeEventListener('touchend', handleTouchEnd);
+      };
+    }
   }, []);
 
-  // Only render current, previous, and next images
-  const getVisibleIndexes = () => {
-    const prev = current > 0 ? current - 1 : null;
-    const next = current < filteredCaseStudies.length - 1 ? current + 1 : null;
-    return [prev, current, next].filter(idx => idx !== null) as number[];
-  };
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT') return;
+      
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+      }
+    };
 
-  const handleSlideChange = useCallback((newIndex: number, dir: "left" | "right") => {
-    if (isAnimating) {
-      // Only queue if different from current and last queued
-      if (
-        (queuedIndex.current === null && newIndex !== current) ||
-        (queuedIndex.current !== null && newIndex !== queuedIndex.current)
-      ) {
-        queuedIndex.current = newIndex;
-        queuedDirection.current = dir;
-      }
-      return;
-    }
-    if (newIndex === current) return; // Prevent animating to the same slide
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleSlideChange = useCallback((newIndex: number) => {
+    if (isAnimating || newIndex === current) return;
+    
     setIsAnimating(true);
-    setDirection(dir);
-    setCurrent(newIndex); 
-    if (slideTimeout.current) {
-      clearTimeout(slideTimeout.current);
-    }
-    slideTimeout.current = setTimeout(() => {
-      setIsAnimating(false);
-      setDirection(null);
-      // If a slide is queued, process only the latest one and clear
-      if (queuedIndex.current !== null && queuedDirection.current !== null) {
-        const nextIdx = queuedIndex.current;
-        const nextDir = queuedDirection.current;
-        queuedIndex.current = null;
-        queuedDirection.current = null;
-        handleSlideChange(nextIdx, nextDir);
-      }
-    }, ANIMATION_DURATION);
+    setIsImageLoading(true);
+    setSlideDirection(newIndex > current ? 'next' : 'prev');
+    setCurrent(newIndex);
+
+    // Use requestAnimationFrame for smoother animations
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, ANIMATION_DURATION);
+    });
   }, [isAnimating, current]);
 
   const nextSlide = useCallback(() => {
     if (current === filteredCaseStudies.length - 1) return;
-    handleSlideChange(current + 1, "right");
+    handleSlideChange(current + 1);
   }, [current, filteredCaseStudies.length, handleSlideChange]);
 
   const prevSlide = useCallback(() => {
     if (current === 0) return;
-    handleSlideChange(current - 1, "left");
+    handleSlideChange(current - 1);
   }, [current, handleSlideChange]);
 
   const progressPercent = useMemo(() => 
     ((current + 1) / filteredCaseStudies.length) * 100
   , [current, filteredCaseStudies.length]);
 
+  const handleImageLoad = useCallback(() => {
+    setIsImageLoading(false);
+  }, []);
+
   if (filteredCaseStudies.length === 0) {
     return null;
   }
 
   return (
-    <div className="w-full py-12 md:py-16">
-      <div className="w-full pl-4 md:pl-0">
-        <div className="flex flex-col md:flex-row items-center justify-end gap-8 md:gap-16 lg:gap-20">
+    <div className="w-full py-6 md:py-12 lg:py-16" ref={carouselRef}>
+      <div className="w-full pl-2 md:pl-4 lg:pl-0">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-end gap-4 md:gap-8 lg:gap-16 xl:gap-20">
           {/* Left: Content */}
           <div className="w-full md:w-[45%] lg:w-[40%] xl:w-[35%]">
-            <div className="flex flex-row justify-between flex-1 max-w-lg z-10 ml-auto pr-4 md:pr-12 lg:pr-16">
+            <div className="flex flex-row justify-between flex-1 max-w-lg z-10 ml-auto pr-2 md:pr-4 lg:pr-12 xl:pr-16">
               {/* Progress Bar */}
-              <div className="relative h-[400px] w-6 flex justify-center items-start mt-4 md:ml-0">
-                <div className="relative h-full w-5 rounded bg-[#0074FF] overflow-hidden">
+              <div className="relative h-[300px] md:h-[400px] w-4 md:w-6 flex justify-center items-start mt-2 md:mt-4">
+                <div className="relative h-full w-3 md:w-5 rounded bg-[#0074FF] overflow-hidden">
                   <div
-                    className="absolute bottom-0 left-0 w-full bg-[#53FBFB] transition-all duration-200 ease-linear will-change-transform"
+                    className="absolute bottom-0 left-0 w-full bg-[#53FBFB] transition-all duration-150 ease-out will-change-transform"
                     style={{
                       height: `${progressPercent}%`,
                     }}
@@ -154,16 +194,17 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 </div>
               </div>
 
-              <div className="flex-col flex justify-between items-start max-h-[450px]">
-                <div className="ml-7 mt-2 relative min-h-[250px] h-auto">
+              <div className="flex-col flex justify-between items-start max-h-[350px] md:max-h-[450px]">
+                <div className="ml-4 md:ml-7 mt-0 md:mt-2 relative min-h-[150px] md:min-h-[200px] h-auto" ref={contentRef}>
                   <div
-                    className="transition-transform duration-200 ease-linear will-change-transform"
+                    key={current}
+                    className="transition-all duration-150 ease-out will-change-transform"
                     style={{
                       opacity: isAnimating ? 0 : 1,
                       transform: `translateY(${isAnimating ? "20px" : "0"})`,
                     }}
                   >
-                    <h2 className="text-black text-2xl md:text-3xl font-bold leading-tight flex flex-col gap-1">
+                    <h2 className="text-black text-xl sm:text-2xl md:text-3xl font-bold leading-tight flex flex-col gap-1">
                       {filteredCaseStudies[current].heading
                         .split(" ")
                         .reduce(
@@ -177,13 +218,20 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                           []
                         )
                         .map((line, index) => (
-                          <Text key={index} className="max-w-[300px]" type={Font.GARAMOND}>
+                          <Text 
+                            key={`${current}-${index}`} 
+                            className="max-w-[300px] text-[clamp(16px,4vw,24px)] md:text-[24px] leading-tight" 
+                            type={Font.GARAMOND}
+                          >
                             {line}
                           </Text>
                         ))}
                     </h2>
-                    <div className="text-gray-700 mt-4">
-                      <Text type={Font.SOURCE_SANS} className="text-xs md:text-sm lg:text-base">
+                    <div className="text-gray-700 mt-2 md:mt-3">
+                      <Text 
+                        type={Font.SOURCE_SANS} 
+                        className="text-[clamp(14px,4vw,16px)] md:text-sm lg:text-base"
+                      >
                         {filteredCaseStudies[current].at_a_glance}
                       </Text>
                     </div>
@@ -191,41 +239,43 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 </div>
 
                 {/* Buttons fixed to bottom */}
-                <div className="ml-7 mb-2">
-                  <div className="flex flex-col gap-6">
+                <div className="ml-4 md:ml-7 mt-2 md:mt-3">
+                  <div className="flex flex-col gap-2 md:gap-4">
                     <Button
-                      className="outline-1 px-7 relative overflow-hidden group bg-[#0047FF] text-white hover:bg-[#0047FF]/90 transition-all duration-300"
-                      href={`/case-study?name=${filteredCaseStudies[current].route}&returnSlide=${current}`}
+                      className="outline-1 px-4 md:px-7 py-2 md:py-3 relative overflow-hidden group bg-[#0047FF] text-white hover:bg-[#0047FF]/90 transition-all duration-300 text-sm md:text-base"
+                      href={`/case-study?name=${filteredCaseStudies[current].route}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <ShinyText text="Know More" speed={3} />
                     </Button>
-                    <div className="flex space-x-4 select-none">
+                    <div className="flex space-x-2 md:space-x-4 select-none">
                       <button
                         onClick={prevSlide}
                         disabled={isAnimating || current === 0}
-                        className={`w-10 h-10 rounded-full border transition-colors ${
+                        className={`w-8 h-8 md:w-10 md:h-10 rounded-full border transition-colors ${
                           current === 0
                             ? "border-gray-300 text-gray-300"
                             : "border-[#0047FF] text-[#0047FF] hover:bg-[#0047FF] hover:text-white"
                         } flex items-center justify-center`}
                         aria-label="Previous Slide"
                       >
-                        <ChevronLeft size={20} strokeWidth={2.5} />
+                        <ChevronLeft size={16} strokeWidth={2.5} className="md:hidden" />
+                        <ChevronLeft size={20} strokeWidth={2.5} className="hidden md:block" />
                       </button>
                       
                       <button
                         onClick={nextSlide}
                         disabled={isAnimating || current === filteredCaseStudies.length - 1}
-                        className={`w-10 h-10 rounded-full border transition-colors ${
+                        className={`w-8 h-8 md:w-10 md:h-10 rounded-full border transition-colors ${
                           current === filteredCaseStudies.length - 1
                             ? "border-gray-300 text-gray-300"
                             : "border-[#0047FF] text-[#0047FF] hover:bg-[#0047FF] hover:text-white"
                         } flex items-center justify-center`}
                         aria-label="Next Slide"
                       >
-                        <ChevronRight size={20} strokeWidth={2.5} />
+                        <ChevronRight size={16} strokeWidth={2.5} className="md:hidden" />
+                        <ChevronRight size={20} strokeWidth={2.5} className="hidden md:block" />
                       </button>
                     </div>
                   </div>
@@ -235,31 +285,88 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
           </div>
 
           {/* Right: Image */}
-          <div className="hidden md:block w-full md:w-[55%] lg:w-[60%] xl:w-[65%] h-[400px]">
+          <div className="hidden md:block w-full md:w-[55%] lg:w-[60%] xl:w-[65%] h-[400px] overflow-hidden">
             <div className="relative w-full h-full">
-              {getVisibleIndexes().map(index => {
-                const content = filteredCaseStudies[index];
-                return (
-                  <div
-                    key={content.id}
-                    className={`absolute inset-0 transition-opacity duration-200 ease-linear ${
-                      index === current ? "opacity-100 z-10" : "opacity-0 z-0"
-                    }`}
-                    aria-hidden={index !== current}
-                  >
-                    <Image
-                      src={content.image}
-                      alt={content.heading}
-                      fill
-                      quality={90}
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
-                      priority={index === current}
-                      loading={index === current ? "eager" : "lazy"}
-                    />
-                  </div>
-                );
-              })}
+              <div
+                key={`image-${current}`}
+                className={`absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                  isImageLoading ? 'opacity-0' : 'opacity-100'
+                } ${
+                  isAnimating 
+                    ? slideDirection === 'next' 
+                      ? 'translate-x-full' 
+                      : '-translate-x-full'
+                    : 'translate-x-0'
+                }`}
+                style={{
+                  willChange: 'transform, opacity'
+                }}
+              >
+                <div className="absolute inset-0 bg-gray-100 animate-pulse" />
+                <Image
+                  src={filteredCaseStudies[current].image}
+                  alt={filteredCaseStudies[current].heading}
+                  fill
+                  quality={75}
+                  className="object-cover"
+                  sizes={`(max-width: ${IMAGE_SIZES.mobile}px) 100vw, 
+                         (max-width: ${IMAGE_SIZES.tablet}px) 45vw,
+                         ${IMAGE_SIZES.desktop}px`}
+                  priority
+                  onLoad={handleImageLoad}
+                  loading="eager"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                />
+              </div>
+              {/* Previous Image for Smooth Transition */}
+              {isAnimating && current > 0 && (
+                <div
+                  className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                  style={{
+                    transform: 'translateX(-100%)',
+                    willChange: 'transform'
+                  }}
+                >
+                  <Image
+                    src={filteredCaseStudies[current - 1].image}
+                    alt={filteredCaseStudies[current - 1].heading}
+                    fill
+                    quality={75}
+                    className="object-cover"
+                    sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
+                           ${IMAGE_SIZES.desktop}px`}
+                    priority={false}
+                    loading="eager"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                  />
+                </div>
+              )}
+              {/* Next Image for Smooth Transition */}
+              {isAnimating && current < filteredCaseStudies.length - 1 && (
+                <div
+                  className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                  style={{
+                    transform: 'translateX(100%)',
+                    willChange: 'transform'
+                  }}
+                >
+                  <Image
+                    src={filteredCaseStudies[current + 1].image}
+                    alt={filteredCaseStudies[current + 1].heading}
+                    fill
+                    quality={75}
+                    className="object-cover"
+                    sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
+                           ${IMAGE_SIZES.desktop}px`}
+                    priority={false}
+                    loading="eager"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
