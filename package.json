@@ -15,6 +15,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@types/lodash": "^4.17.17",
+    "@types/scheduler": "^0.26.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
     "framer-motion": "^12.9.2",
@@ -31,7 +32,9 @@
     "react-spring": "^9.7.5",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "swiper": "^11.2.6"
+    "scheduler": "^0.26.0",
+    "swiper": "^11.2.6",
+    "use-transition-effect": "^0.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
