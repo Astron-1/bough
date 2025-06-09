@@ -8,7 +8,7 @@ import Threads from "./Threads";
 interface BackgroundSettings {
   threadsAmplitude: number;
   threadsDistance: number;
-  threadsColor: [number, number, number]; // RGB values normalized to 0-1
+  threadsColor: [number, number, number]; 
   threadsLineCount: number;
   threadsLineWidth: number;
   threadsLineBlur: number;

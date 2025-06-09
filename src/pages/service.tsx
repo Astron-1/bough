@@ -70,7 +70,7 @@ export default function ServicesPage() {
             className="text-black max-w-2xl mx-auto mb-8"
           >
             We are advisors, thought leaders, and problem solvers, dedicated to
-            creating long-term value and sustainable solutionsv
+            creating long-term value and sustainable solutions
           </Text>v
           <div className="text-center flex-row flex justify-center">
             <Button href="/connect" className="px-7">

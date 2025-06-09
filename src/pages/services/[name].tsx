@@ -157,12 +157,12 @@ export default function ServicePage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="bg-blue-50 rounded-lg p-4 group open:bg-blue-100 transition-all duration-200"
+                  className="bg-blue-50 rounded-lg p-4 group open:bg-blue-100 transition-all duration-500 ease-in-out"
                 >
                   <summary className="font-semibold cursor-pointer text-black flex justify-between items-center marker:hidden">
                     <Text type={Font.SOURCE_SANS}>{item.heading}</Text>
                     <svg
-                      className="w-4 h-4 ml-2 transition-transform duration-200 transform group-open:rotate-180"
+                      className="w-4 h-4 ml-2 transition-transform duration-500 ease-in-out transform group-open:rotate-180"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
@@ -175,7 +175,7 @@ export default function ServicePage() {
                       />
                     </svg>
                   </summary>
-                  <div className="mt-2 text-sm text-gray-700">
+                  <div className="mt-2 text-sm text-gray-700 overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out group-open:max-h-96 group-open:opacity-100 max-h-0 opacity-0">
                     <Text type={Font.SOURCE_SANS}>{item.content}</Text>
                   </div>
                 </motion.details>
