@@ -14,8 +14,6 @@ const PrivacyPolicy: NextPage = () => {
       <main className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <article className="prose prose-slate max-w-none">
           <Text type={Font.GARAMOND} className="text-4xl font-bold mb-4 text-black">Privacy Policy</Text>
-          <Text className="text-base text-gray-600 mb-8">Last updated: June 04, 2025</Text>
-
           <div className="space-y-6">
             <section>
               <Text className="text-gray-700">
