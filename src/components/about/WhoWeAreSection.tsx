@@ -45,36 +45,31 @@ export default function WhoWeAreSection({
   paragraphs,
   photos,
 }: WhoWeAreSectionProps) {
+  const SCALE_FACTOR = 0.85; // Desktop scale
+  const MOBILE_SCALE = 0.9; // Increased mobile scale
   const bentoGridDimensions = {
-    mobileGrid1Width: "8.77rem",
-    grid1Width: "12.77344rem",
-    grid1Height: "8.29519rem",
-    grid2Width: "12.7735rem",
-    grid2Height: "13.24163rem",
-    grid3Width: "12.77344rem",
-    grid3Height: "13.24163rem",
-    grid4Width: "12.7735rem",
-    grid4Height: "8.29513rem",
-    grid5Width: "17.19463rem",
-    grid5Height: "6.97394rem",
-    grid6Width: "8.08713rem",
-    grid6Height: "6.97394rem",
-    spacingH: "0.85rem",
-    spacingV: "0.85rem",
-
-    // Extra small overrides
-    xsGrid1Width: "6.5rem",
-    xsGrid1Height: "5rem",
-    xsGrid2Width: "6.5rem",
-    xsGrid2Height: "6.5rem",
-    xsGrid3Width: "6.5rem",
-    xsGrid3Height: "6.5rem",
-    xsGrid4Width: "6.5rem",
-    xsGrid4Height: "5rem",
-    xsGrid5Width: "10rem",
-    xsGrid5Height: "4rem",
-    xsGrid6Width: "5rem",
-    xsGrid6Height: "4rem",
+    // Grid dimensions with SCALE_FACTOR
+    grid1Width: `${205 * SCALE_FACTOR}px`,
+    grid1Height: `${133 * SCALE_FACTOR}px`,
+    
+    grid2Width: `${205 * SCALE_FACTOR}px`,
+    grid2Height: `${213 * SCALE_FACTOR}px`,
+    
+    grid3Width: `${205 * SCALE_FACTOR}px`,
+    grid3Height: `${213 * SCALE_FACTOR}px`,
+    
+    grid4Width: `${205 * SCALE_FACTOR}px`,
+    grid4Height: `${134 * SCALE_FACTOR}px`,
+    
+    grid5Width: `${276 * SCALE_FACTOR}px`,
+    grid5Height: `${112 * SCALE_FACTOR}px`,
+    
+    grid6Width: `${131 * SCALE_FACTOR}px`,
+    grid6Height: `${112 * SCALE_FACTOR}px`,
+    
+    spacingH: "0.75rem",
+    spacingV: "0.75rem",
+    xsScaleFactor: 0.6,
   };
 
   const responsiveVars = createResponsiveVars(bentoGridDimensions);
@@ -85,55 +80,71 @@ export default function WhoWeAreSection({
       className="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8 xl:px-10"
       style={figmaSectionContainer()}
     >
-      <div className="mx-auto max-w-xl  sm:max-w-7xl grid grid-cols-1 xl:grid-cols-12 gap-y-12 gap-x-10 lg:gap-x-20">
-        <div className="relative col-span-3 md:col-span-5 flex justify-center md:justify-start">
-          <div className="relative w-full max-w-[26rem]">
+      <div className="mx-auto max-w-xl sm:max-w-7xl grid grid-cols-1 xl:grid-cols-2 gap-y-8 gap-x-6 lg:gap-x-8">
+        <div className="relative flex justify-start w-full">
+          <div className="relative w-full sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-full">
             <style jsx>{`
               .bento-container {
                 ${responsiveVars}
+                width: 100%;
               }
               @media (max-width: 639px) {
-                :root {
-                  --grid1Width: var(--xsGrid1Width);
-                  --grid1Height: var(--xsGrid1Height);
-                  --grid2Width: var(--xsGrid2Width);
-                  --grid2Height: var(--xsGrid2Height);
-                  --grid3Width: var(--xsGrid3Width);
-                  --grid3Height: var(--xsGrid3Height);
-                  --grid4Width: var(--xsGrid4Width);
-                  --grid4Height: var(--xsGrid4Height);
-                  --grid5Width: var(--xsGrid5Width);
-                  --grid5Height: var(--xsGrid5Height);
-                  --grid6Width: var(--xsGrid6Width);
-                  --grid6Height: var(--xsGrid6Height);
+                .bento-container {
+                  transform: scale(${MOBILE_SCALE});
+                  transform-origin: top left;
+                  margin-bottom: -80px;
+                  width: 92%;
+                  margin-right: 1rem;
                 }
+              }
+              @media (min-width: 640px) and (max-width: 767px) {
+                .bento-container {
+                  transform: scale(0.95);
+                  transform-origin: top left;
+                  margin-bottom: -60px;
+                  width: 95%;
+                  margin-right: 1.5rem;
+                }
+              }
+              @media (min-width: 768px) and (max-width: 1279px) {
+                .bento-container {
+                  transform: scale(1);
+                  transform-origin: top left;
+                  margin-bottom: -40px;
+                  width: 98%;
+                  margin-right: 2rem;
+                }
+              }
+              .team-photo {
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                transition: all 0.3s ease;
+              }
+              .team-photo:hover {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                transform: translateY(-2px);
               }
             `}</style>
 
             <div className="bento-container relative">
               {[0, 1, 2, 3, 4, 5].map((index) => {
                 const positions = [
-                  { top: "0", left: "0" },
-                  {
-                    top: "0",
-                    left: "calc(var(--grid1Width) + var(--spacingH))",
-                  },
-                  {
-                    top: "calc(var(--grid1Height) + var(--spacingV))",
-                    left: "0",
-                  },
+                  { top: "0", left: "0" }, // Grid 1
+                  { top: "0", left: "calc(var(--grid1Width) + var(--spacingH))" }, // Grid 2
+                  { top: "calc(var(--grid1Height) + var(--spacingV))", left: "0" }, // Grid 3
                   {
                     top: "calc(var(--grid2Height) + var(--spacingV))",
-                    left: "calc(var(--grid3Width) + var(--spacingH))",
-                  },
+                    left: "calc(var(--grid1Width) + var(--spacingH))"
+                  }, // Grid 4
                   {
                     top: "calc(var(--grid1Height) + var(--spacingV) + var(--grid3Height) + var(--spacingV))",
-                    left: "0",
-                  },
+                    left: "0"
+                  }, // Grid 5
                   {
                     top: "calc(var(--grid1Height) + var(--spacingV) + var(--grid3Height) + var(--spacingV))",
-                    left: "calc(var(--grid5Width) + var(--spacingH))",
-                  },
+                    left: "calc(var(--grid5Width) + var(--spacingH))"
+                  }, // Grid 6
                 ];
 
                 const widths = [
@@ -144,6 +155,7 @@ export default function WhoWeAreSection({
                   "var(--grid5Width)",
                   "var(--grid6Width)",
                 ];
+
                 const heights = [
                   "var(--grid1Height)",
                   "var(--grid2Height)",
@@ -166,8 +178,11 @@ export default function WhoWeAreSection({
                       alt={photos[index]?.alt || `Team Photo ${index + 1}`}
                       src={photos[index]?.src}
                       placeholderText={photos[index]?.placeholderText}
-                      style={{ width: widths[index], height: heights[index] }}
-                      className={`w-[${widths[index]}] h-[${heights[index]}] sm:w-auto sm:h-auto`}
+                      style={{
+                        width: widths[index],
+                        height: heights[index],
+                      }}
+                      className="team-photo"
                     />
                   </div>
                 );
@@ -175,24 +190,23 @@ export default function WhoWeAreSection({
 
               <div
                 style={{
-                  height:
-                    "calc(var(--grid1Height) + var(--spacingV) + var(--grid3Height) + var(--spacingV) + var(--grid5Height))",
+                  height: "calc(var(--grid1Height) + var(--spacingV) + var(--grid3Height) + var(--spacingV) + var(--grid5Height))",
                 }}
               ></div>
             </div>
           </div>
         </div>
 
-        <div className="md:col-span-6 flex -mt-3 w-full flex-col justify-start md:pl-10 lg:pl-16">
-          <div className="md:max-w-[45rem]">
+        <div className="flex flex-col justify-start xl:-ml-20">
+          <div className="w-full sm:w-[95%] md:w-[90%] lg:w-[85%] xl:max-w-[37rem] space-y-4">
             <Text
               type={Font.GARAMOND}
-              className="text-3xl md:text-[2.5rem] lg:text-[2.75rem] font-semibold text-black mb-5 md:leading-[1.2]"
+              className="text-3xl md:text-[2.5rem] lg:text-[2.75rem] font-semibold text-black mb-4 md:leading-[1.2] mt-8 sm:mt-12 xl:mt-0"
             >
               {title}
             </Text>
 
-            <div className="space-y-5">
+            <div className="space-y-4 pr-4 sm:pr-6 md:pr-8 xl:pr-0">
               {paragraphs.map((paragraph, index) => (
                 <Text
                   key={index}

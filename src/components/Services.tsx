@@ -12,15 +12,15 @@ import ESGSec from "../../public/esg2.webp";
 
 // Services array with names, images, and descriptions
 const services = [
-  { name: "Accounting", image: accountingImage, sec: AccountingSec, description: "Navigating changing regulations and new accounting standards can be daunting. Developing a forward-looking strategy, enriched by diverse insights, often requires resources beyond your current capabilities." },
-  { name: "Risk", image: riskImage, sec: RiskSec, description: "Risk is inevitable in all businesses, and whether minor or significant, it must not be overlooked or underestimated. Bough equips your business with the right defenses and controls to manage and mitigate risks effectively." },
+  { name: "Accounting", image: accountingImage, sec: AccountingSec, description: "Navigating changing regulations and new accounting standards can be daunting. Developing a forward-looking strategy, enriched by diverse insights, often requires resources beyond your current capabilities" },
+  { name: "Risk", image: riskImage, sec: RiskSec, description: "Risk is inevitable in all businesses, and whether minor or significant, it must not be overlooked or underestimated. Bough equips your business with the right defenses and controls to manage and mitigate risks effectively" },
   {
     name: "Transformation",
     image: transformationImage,
     sec: TransformationSec,
-    description: "In a world where disruptive technologies and emerging methodologies have become the norm, not every business can fully capitalize on these constant changes.",
+    description: "In a world where disruptive technologies and emerging methodologies have become the norm, not every business can fully capitalize on these constant changes",
   },
-  { name: "ESG", image: esgImage, sec: ESGSec, description: "We partner with our clients to create comprehensive solutions which enable integration of Environmental, Social and Governance (ESG) Principles with business model and strategy for sustainable value creation." },
+  { name: "ESG", image: esgImage, sec: ESGSec, description: "We partner with our clients to create comprehensive solutions which enable integration of Environmental, Social and Governance (ESG) Principles with business model and strategy for sustainable value creation" },
 ];
 
 export default function BoughServices({
