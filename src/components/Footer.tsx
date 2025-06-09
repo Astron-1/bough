@@ -36,7 +36,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 lg:w-2/3">
             {/* Column 1 */}
             <div>
-              <Link href="/services" className="block">
+              <Link href="/service" className="block">
                 <h3 className="font-semibold mb-4 text-[#53FBFB] hover:text-gray-300 transition-colors">Services</h3>
               </Link>
               <ul className="space-y-2">
