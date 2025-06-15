@@ -63,7 +63,7 @@ export default function InsightsPage() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const userInteractedRef = useRef(false);
   const [imagesPreloaded, setImagesPreloaded] = useState(false);
-  const [loadedImages, setLoadedImages] = useState<string[]>([]);
+  const loadedImagesRef = useRef<Set<string>>(new Set());
   const [previousImage, setPreviousImage] = useState<string | null>(null);
 
   // Update previous image when active index changes
@@ -73,32 +73,29 @@ export default function InsightsPage() {
     }
   }, [activeIndex]);
 
-  // Enhanced preload images function
+  // Enhanced preload images function with caching
   useEffect(() => {
+    if (imagesPreloaded) return; // Skip if already preloaded
+
     const preloadImages = async () => {
       try {
-        const imagePromises = insights.map((insight) => {
-          return new Promise<string>((resolve, reject) => {
-            const imgElement = new window.Image();
-            imgElement.src = insight.backgroundImage;
-            imgElement.crossOrigin = "anonymous";
+        await Promise.all(
+          insights.map((insight) => {
+            if (loadedImagesRef.current.has(insight.backgroundImage)) {
+              return Promise.resolve();
+            }
 
-            imgElement.onload = () => {
-              setLoadedImages((prev) => [...prev, insight.backgroundImage]);
-              resolve(insight.backgroundImage);
-            };
-
-            imgElement.onerror = (error) => {
-              console.error(
-                `Failed to load image: ${insight.backgroundImage}`,
-                error
-              );
-              reject(error);
-            };
-          });
-        });
-
-        await Promise.all(imagePromises);
+            return new Promise<void>((resolve, reject) => {
+              const img = new window.Image();
+              img.src = insight.backgroundImage;
+              img.onload = () => {
+                loadedImagesRef.current.add(insight.backgroundImage);
+                resolve();
+              };
+              img.onerror = (error) => reject(error);
+            });
+          })
+        );
         setImagesPreloaded(true);
       } catch (error) {
         console.error("Error preloading images:", error);
@@ -107,7 +104,7 @@ export default function InsightsPage() {
     };
 
     preloadImages();
-  }, [insights]);
+  }, [insights, imagesPreloaded]);
 
   const clearAutoRotation = useCallback(() => {
     if (intervalRef.current) {
@@ -201,24 +198,13 @@ export default function InsightsPage() {
                     src={currentInsight.backgroundImage}
                     alt={currentInsight.title}
                     fill
-                    className={`object-cover transition-all duration-1000 ${
-                      loadedImages.includes(currentInsight.backgroundImage)
-                        ? "opacity-100 scale-100"
-                        : "opacity-0 scale-105"
-                    }`}
+                    className="object-cover transition-all duration-1000"
                     priority
                     sizes="100vw"
                     quality={90}
                     onLoadingComplete={() => {
                       setIsTransitioning(false);
-                      if (
-                        !loadedImages.includes(currentInsight.backgroundImage)
-                      ) {
-                        setLoadedImages((prev) => [
-                          ...prev,
-                          currentInsight.backgroundImage,
-                        ]);
-                      }
+                      loadedImagesRef.current.add(currentInsight.backgroundImage);
                     }}
                   />
 

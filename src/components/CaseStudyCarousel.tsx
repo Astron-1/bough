@@ -21,7 +21,7 @@ const IMAGE_SIZES = {
   desktop: 1280,
 } as const;
 
-const BLUR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
+const BLUR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
 
 export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const [current, setCurrent] = useState<number>(0);
@@ -220,7 +220,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                         .map((line, index) => (
                           <Text 
                             key={`${current}-${index}`} 
-                            className="max-w-[300px] text-[clamp(16px,4vw,24px)] md:text-[24px] leading-tight" 
+                            className="max-w-[300px] text-[clamp(20px,5vw,24px)] md:text-[24px] leading-tight" 
                             type={Font.GARAMOND}
                           >
                             {line}
@@ -230,7 +230,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                     <div className="text-gray-700 mt-2 md:mt-3">
                       <Text 
                         type={Font.SOURCE_SANS} 
-                        className="text-[clamp(14px,4vw,16px)] md:text-sm lg:text-base"
+                        className="text-[clamp(14px,3.5vw,16px)] md:text-sm lg:text-base"
                       >
                         {filteredCaseStudies[current].at_a_glance}
                       </Text>
@@ -285,7 +285,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
           </div>
 
           {/* Right: Image */}
-          <div className="hidden md:block w-full md:w-[55%] lg:w-[60%] xl:w-[65%] h-[400px] overflow-hidden">
+          <div className="hidden md:block w-full md:w-[55%] lg:w-[60%] xl:w-[65%] md:h-[400px] overflow-hidden">
             <div className="relative w-full h-full">
               <div
                 key={`image-${current}`}
@@ -303,24 +303,25 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 }}
               >
                 <div className="absolute inset-0 bg-gray-100 animate-pulse" />
-                <Image
-                  src={filteredCaseStudies[current].image}
-                  alt={filteredCaseStudies[current].heading}
-                  fill
-                  quality={75}
-                  className="object-cover"
-                  sizes={`(max-width: ${IMAGE_SIZES.mobile}px) 100vw, 
-                         (max-width: ${IMAGE_SIZES.tablet}px) 45vw,
-                         ${IMAGE_SIZES.desktop}px`}
-                  priority
-                  onLoad={handleImageLoad}
-                  loading="eager"
-                  placeholder="blur"
-                  blurDataURL={BLUR_DATA_URL}
-                />
+                {typeof window !== 'undefined' && window.innerWidth >= 768 && (
+                  <Image
+                    src={filteredCaseStudies[current].image}
+                    alt={filteredCaseStudies[current].heading}
+                    fill
+                    quality={75}
+                    className="object-cover"
+                    sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
+                           ${IMAGE_SIZES.desktop}px`}
+                    priority={!isAnimating}
+                    onLoad={handleImageLoad}
+                    loading={isAnimating ? "lazy" : "eager"}
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                  />
+                )}
               </div>
               {/* Previous Image for Smooth Transition */}
-              {isAnimating && current > 0 && (
+              {isAnimating && current > 0 && typeof window !== 'undefined' && window.innerWidth >= 768 && (
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{
@@ -337,14 +338,14 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                     sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
                            ${IMAGE_SIZES.desktop}px`}
                     priority={false}
-                    loading="eager"
+                    loading="lazy"
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
                   />
                 </div>
               )}
               {/* Next Image for Smooth Transition */}
-              {isAnimating && current < filteredCaseStudies.length - 1 && (
+              {isAnimating && current < filteredCaseStudies.length - 1 && typeof window !== 'undefined' && window.innerWidth >= 768 && (
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{
@@ -361,7 +362,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                     sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
                            ${IMAGE_SIZES.desktop}px`}
                     priority={false}
-                    loading="eager"
+                    loading="lazy"
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
                   />
