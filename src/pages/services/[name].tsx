@@ -218,7 +218,18 @@ export default function ServicePage() {
         <div className="container-fluid">
           <div className="relative">
             <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
-              <CaseStudyCarousel filter={{ limit: 3 }} />
+              <CaseStudyCarousel filter={{ 
+                ids: serviceName === 'Accounting' 
+                  ? ['FinOps Maury - 6', 'ASC 606 Reporting Solution (Plan B) - 2', 'Revenue Assurance and audit readiness - 3']
+                  : serviceName === 'Risk' 
+                  ? ['DRBCP Case Study - 5', 'SOX - 7']
+                  : serviceName === 'Transformation'
+                  ? ['RAR Implementation - 4', 'Data optimization and governance - 1']
+                  : serviceName === 'ESG'
+                  ? ['RAR Implementation - 4', 'Data optimization and governance - 1']
+                  : ['Data optimization and governance - 1', 'ASC 606 Reporting Solution (Plan B) - 2', 'Revenue Assurance and audit readiness - 3'],
+                limit: 3 
+              }} />
             </div>
           </div>
         </div>

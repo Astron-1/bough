@@ -21,7 +21,7 @@ const IMAGE_SIZES = {
   desktop: 1280,
 } as const;
 
-const BLUR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
+const BLUR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
 
 export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const [current, setCurrent] = useState<number>(0);
@@ -37,6 +37,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     let studies = [...caseStudyContent];
     
     if (filter?.ids) {
+      // Filter by IDs and ensure the case study exists
       studies = studies.filter(study => filter.ids!.includes(study.id));
     } else if (filter?.excludeIds) {
       studies = studies.filter(study => !filter.excludeIds!.includes(study.id));
@@ -49,8 +50,15 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     return studies;
   }, [filter]);
 
+  // Reset current index when filtered case studies change
+  useEffect(() => {
+    setCurrent(0);
+  }, [filteredCaseStudies]);
+
   // Preload next and previous images
   useEffect(() => {
+    if (!filteredCaseStudies.length) return;
+
     const preloadImage = (src: string): Promise<Event> => {
       return new Promise((resolve, reject) => {
         const img = new globalThis.Image();
@@ -172,7 +180,27 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   }, []);
 
   if (filteredCaseStudies.length === 0) {
-    return null;
+    return (
+      <div className="w-full py-6 md:py-12 lg:py-16 text-center">
+        <Text type={Font.SOURCE_SANS} className="text-gray-600">
+          No case studies available at the moment.
+        </Text>
+      </div>
+    );
+  }
+
+  // Ensure current index is within bounds
+  const safeCurrentIndex = Math.min(current, filteredCaseStudies.length - 1);
+  const currentCaseStudy = filteredCaseStudies[safeCurrentIndex];
+
+  if (!currentCaseStudy) {
+    return (
+      <div className="w-full py-6 md:py-12 lg:py-16 text-center">
+        <Text type={Font.SOURCE_SANS} className="text-gray-600">
+          Error loading case study. Please try again later.
+        </Text>
+      </div>
+    );
   }
 
   return (
@@ -197,7 +225,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
               <div className="flex-col flex justify-between items-start max-h-[350px] md:max-h-[450px]">
                 <div className="ml-4 md:ml-7 mt-0 md:mt-2 relative min-h-[150px] md:min-h-[200px] h-auto" ref={contentRef}>
                   <div
-                    key={current}
+                    key={safeCurrentIndex}
                     className="transition-all duration-150 ease-out will-change-transform"
                     style={{
                       opacity: isAnimating ? 0 : 1,
@@ -205,7 +233,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                     }}
                   >
                     <h2 className="text-black text-xl sm:text-2xl md:text-3xl font-bold leading-tight flex flex-col gap-1">
-                      {filteredCaseStudies[current].heading
+                      {currentCaseStudy.heading
                         .split(" ")
                         .reduce(
                           (acc: string[], word: string, i: number, arr: string[]) => {
@@ -219,7 +247,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                         )
                         .map((line, index) => (
                           <Text 
-                            key={`${current}-${index}`} 
+                            key={`${safeCurrentIndex}-${index}`} 
                             className="max-w-[300px] text-[clamp(20px,5vw,24px)] md:text-[24px] leading-tight" 
                             type={Font.GARAMOND}
                           >
@@ -232,7 +260,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                         type={Font.SOURCE_SANS} 
                         className="text-[clamp(14px,3.5vw,16px)] md:text-sm lg:text-base"
                       >
-                        {filteredCaseStudies[current].at_a_glance}
+                        {currentCaseStudy.at_a_glance}
                       </Text>
                     </div>
                   </div>
@@ -243,7 +271,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                   <div className="flex flex-col gap-2 md:gap-4">
                     <Button
                       className="outline-1 px-4 md:px-7 py-2 md:py-3 relative overflow-hidden group bg-[#0047FF] text-white hover:bg-[#0047FF]/90 transition-all duration-300 text-sm md:text-base"
-                      href={`/case-study?name=${filteredCaseStudies[current].route}`}
+                      href={`/case-study?name=${currentCaseStudy.route}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -252,9 +280,9 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                     <div className="flex space-x-2 md:space-x-4 select-none">
                       <button
                         onClick={prevSlide}
-                        disabled={isAnimating || current === 0}
+                        disabled={isAnimating || safeCurrentIndex === 0}
                         className={`w-8 h-8 md:w-10 md:h-10 rounded-full border transition-colors ${
-                          current === 0
+                          safeCurrentIndex === 0
                             ? "border-gray-300 text-gray-300"
                             : "border-[#0047FF] text-[#0047FF] hover:bg-[#0047FF] hover:text-white"
                         } flex items-center justify-center`}
@@ -266,9 +294,9 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                       
                       <button
                         onClick={nextSlide}
-                        disabled={isAnimating || current === filteredCaseStudies.length - 1}
+                        disabled={isAnimating || safeCurrentIndex === filteredCaseStudies.length - 1}
                         className={`w-8 h-8 md:w-10 md:h-10 rounded-full border transition-colors ${
-                          current === filteredCaseStudies.length - 1
+                          safeCurrentIndex === filteredCaseStudies.length - 1
                             ? "border-gray-300 text-gray-300"
                             : "border-[#0047FF] text-[#0047FF] hover:bg-[#0047FF] hover:text-white"
                         } flex items-center justify-center`}
@@ -288,7 +316,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
           <div className="hidden md:block w-full md:w-[55%] lg:w-[60%] xl:w-[65%] md:h-[400px] overflow-hidden">
             <div className="relative w-full h-full">
               <div
-                key={`image-${current}`}
+                key={`image-${safeCurrentIndex}`}
                 className={`absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                   isImageLoading ? 'opacity-0' : 'opacity-100'
                 } ${
@@ -304,8 +332,8 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
               >
                 <div className="absolute inset-0 bg-gray-100 animate-pulse" />
                 <Image
-                  src={filteredCaseStudies[current].image}
-                  alt={filteredCaseStudies[current].heading}
+                  src={currentCaseStudy.image}
+                  alt={currentCaseStudy.heading}
                   fill
                   quality={75}
                   className="object-cover"
@@ -319,7 +347,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 />
               </div>
               {/* Previous Image for Smooth Transition */}
-              {isAnimating && current > 0 && (
+              {isAnimating && safeCurrentIndex > 0 && (
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{
@@ -328,8 +356,8 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                   }}
                 >
                   <Image
-                    src={filteredCaseStudies[current - 1].image}
-                    alt={filteredCaseStudies[current - 1].heading}
+                    src={filteredCaseStudies[safeCurrentIndex - 1].image}
+                    alt={filteredCaseStudies[safeCurrentIndex - 1].heading}
                     fill
                     quality={75}
                     className="object-cover"
@@ -343,7 +371,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 </div>
               )}
               {/* Next Image for Smooth Transition */}
-              {isAnimating && current < filteredCaseStudies.length - 1 && (
+              {isAnimating && safeCurrentIndex < filteredCaseStudies.length - 1 && (
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{
@@ -352,8 +380,8 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                   }}
                 >
                   <Image
-                    src={filteredCaseStudies[current + 1].image}
-                    alt={filteredCaseStudies[current + 1].heading}
+                    src={filteredCaseStudies[safeCurrentIndex + 1].image}
+                    alt={filteredCaseStudies[safeCurrentIndex + 1].heading}
                     fill
                     quality={75}
                     className="object-cover"
