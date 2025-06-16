@@ -162,8 +162,9 @@ export default function InsightsPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
+        className="relative"
       >
-        <div className="relative w-full h-screen -mt-24 overflow-hidden bg-gray-900">
+        <div className="relative w-full min-h-[100vh] flex flex-col -mt-24 bg-gray-900">
           {/* Previous image as background */}
           {previousImage && (
             <div className="absolute inset-0 z-0">
@@ -202,7 +203,7 @@ export default function InsightsPage() {
                     priority
                     sizes="100vw"
                     quality={90}
-                    onLoadingComplete={() => {
+                    onLoad={() => {
                       setIsTransitioning(false);
                       loadedImagesRef.current.add(currentInsight.backgroundImage);
                     }}
@@ -221,56 +222,63 @@ export default function InsightsPage() {
             )}
           </AnimatePresence>
 
-          {/* Content Container */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-full">
-            <div
-              className="mx-auto"
-              style={{ width: "728px", maxWidth: "95%" }}
-            >
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{
-                  duration: 0.6,
-                  ease: [0.25, 0.1, 0.25, 1],
-                  delay: 0.1,
-                }}
-                className="bg-white/75 backdrop-blur-sm rounded-[20px] p-8 shadow-xl border border-gray-50 h-96 flex flex-col justify-center overflow-hidden"
+          {/* Main content wrapper */}
+          <div className="flex flex-col min-h-[100vh] justify-between">
+            {/* Content Container */}
+            <div className="flex-grow flex items-center justify-center z-30 pt-32 sm:pt-40 md:pt-40">
+              <div
+                className="mx-auto px-4"
+                style={{ width: "728px", maxWidth: "95%" }}
               >
-                <div className="flex flex-col items-center">
-                  <Text
-                    type={Font.GARAMOND}
-                    className="text-center text-[#111827] text-2xl sm:text-3xl md:text-5xl font-semibold leading-[40px] md:leading-[60px] mb-5 w-[648px] max-w-full mx-auto"
-                  >
-                    {currentInsight.title}
-                  </Text>
-                  <Text
-                    type={Font.SOURCE_SANS}
-                    className="text-center text-[#333333] text-lg font-normal leading-relaxed mb-8 w-[648px] max-w-full mx-auto"
-                  >
-                    {currentInsight.description}
-                  </Text>
-                  <div className="flex justify-center">
-                    <Link href={currentInsight.url}>
-                      <Button className=" text-white py-2.5 px-8 text-sm transition-colors shadow-md">
-                        Read more
-                      </Button>
-                    </Link>
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    delay: 0.1,
+                  }}
+                  className="bg-white/75 backdrop-blur-sm rounded-[20px] p-6 md:p-8 shadow-xl border border-gray-50 min-h-[320px] md:min-h-[384px] flex flex-col justify-center"
+                >
+                  <div className="flex flex-col items-center">
+                    <Text
+                      type={Font.GARAMOND}
+                      className="text-center text-[#111827] text-2xl sm:text-3xl md:text-5xl font-semibold leading-[32px] sm:leading-[44px] md:leading-[60px] mb-4 md:mb-5 w-full md:w-[648px] max-w-full mx-auto"
+                    >
+                      {currentInsight.title}
+                    </Text>
+                    <Text
+                      type={Font.SOURCE_SANS}
+                      className="text-center text-[#333333] text-base sm:text-lg font-normal leading-relaxed mb-6 md:mb-8 w-full md:w-[648px] max-w-full mx-auto"
+                    >
+                      {currentInsight.description}
+                    </Text>
+                    <div className="flex justify-center">
+                      <Link href={currentInsight.url}>
+                        <Button className="text-white py-2 md:py-2.5 px-6 md:px-8 text-sm transition-colors shadow-md">
+                          Read more
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
-          </div>
 
-          {/* Slider at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 bg-gradient-to-t from-black/60 to-transparent pt-20">
-            <InsightsSlider
-              insights={insights}
-              activeIndex={activeIndex}
-              onIndexChange={handleIndexChange}
-            />
+            {/* Slider at bottom */}
+            <div className="z-20 mt-auto">
+              <div className="bg-gradient-to-t from-black/90 via-black/50 to-transparent py-8 md:py-12">
+                <div className="container mx-auto">
+                  <InsightsSlider
+                    insights={insights}
+                    activeIndex={activeIndex}
+                    onIndexChange={handleIndexChange}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>

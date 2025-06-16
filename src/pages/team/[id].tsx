@@ -54,10 +54,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     linkedIn: "https://www.linkedin.com/in/rohitqamra/",
     bio: [
       'Rohit founded Bough with a clear mission: to create a business rooted in ethos, pathos, and logos. The name "Bough" reflects values like trust, reliability, dependability, honesty, humility, and nurturing, positioning it as the main branch clients can lean on and trust.',
-      "He brings 26 years of experience in management consulting, with deep expertise in accounting advisory, finance transformation, financial reporting, and operations management. He also excels in regulatory compliance, internal audit, and risk management. His work with senior and board-level executives has been pivotal in developing solutions that align with strategic goals and drive success.",
-      "Before founding Bough, Rohit held key leadership roles at EXL, managing clients across diverse sectors such as technology, retail, distribution, services, manufacturing, and utilities. His career started at Deloitte, where he led audit and assurance engagements for major clients. At American Express, he assessed global corporations for corporate programs and spearheaded product development and market studies.",
-      "Rohit is actively building Bough's ESG and market research businesses and steering the company to become a GenAI-led consulting firm through partnerships with leading GenAI technology players.",
-      "Outside of work, Rohit and his wife are motorcycle enthusiasts, avid campers, and have completed the NYC marathon. Rohit holds a Bachelor's degree in Commerce from Shri Ram College of Commerce, Delhi University, and is a Chartered Accountant from the Institute of Chartered Accountants of India.",
+      "He brings 26 years of experience in management consulting, with deep expertise in accounting advisory, finance transformation, financial reporting, and operations management. He also excels in regulatory compliance, internal audit, and risk management. His work with senior and board-level executives has been pivotal in developing solutions that align with strategic goals and drive success",
+      "Before founding Bough, Rohit held key leadership roles at EXL, managing clients across diverse sectors such as technology, retail, distribution, services, manufacturing, and utilities. His career started at Deloitte, where he led audit and assurance engagements for major clients. At American Express, he assessed global corporations for corporate programs and spearheaded product development and market studies",
+      "Rohit is actively building Bough's ESG and market research businesses and steering the company to become a GenAI-led consulting firm through partnerships with leading GenAI technology players",
+      "Outside of work, Rohit and his wife are motorcycle enthusiasts, avid campers, and have completed the NYC marathon. Rohit holds a Bachelor's degree in Commerce from Shri Ram College of Commerce, Delhi University, and is a Chartered Accountant from the Institute of Chartered Accountants of India",
     ],
     skills: [
       "Management Consulting",
@@ -73,9 +73,9 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Chief People Officer",
     linkedIn: "https://www.linkedin.com/in/ratanpostwalla/",
     bio: [
-      "Ratan is the Chief People Officer at Bough, responsible for leading the talent strategy of the organization. With a 26-year career spanning management consulting, leadership coaching, career strategy, and academia, Ratan has gained extensive experience in India, the USA, the UK, the Middle East, and the Asia-Pacific.",
-      "Ratan is a co-founder of People Trust and a visiting faculty member at the BITS School of Management. He has previously held key positions at EXL and KPMG. His diverse expertise and global perspective have made him a pivotal figure in shaping organizational talent strategies.",
-      "Ratan holds a Bachelor of Commerce degree from St. Xavier's College, Kolkata, and an MBA from the Indian School of Business (ISB), Hyderabad. His interests include sports, travel, theatre, and philanthropy, and he currently serves on the boards of various non-profits.",
+      "Ratan is the Chief People Officer at Bough, responsible for leading the talent strategy of the organization. With a 26-year career spanning management consulting, leadership coaching, career strategy, and academia, Ratan has gained extensive experience in India, the USA, the UK, the Middle East, and the Asia-Pacific",
+      "Ratan is a co-founder of People Trust and a visiting faculty member at the BITS School of Management. He has previously held key positions at EXL and KPMG. His diverse expertise and global perspective have made him a pivotal figure in shaping organizational talent strategies",
+      "Ratan holds a Bachelor of Commerce degree from St. Xavier's College, Kolkata, and an MBA from the Indian School of Business (ISB), Hyderabad. His interests include sports, travel, theatre, and philanthropy, and he currently serves on the boards of various non-profits",
     ],
     skills: [
       "Talent Strategy",
@@ -91,10 +91,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Manager",
     linkedIn: "https://www.linkedin.com/in/akshendra-sahi-a4883221/",
     bio: [
-      "Akshendra is a Senior Manager at Bough, with over 14 years of progressive consulting experience in driving growth, process improvement, risk management, and technology transformation initiatives across global organizations. Currently, he spearheads our transformation advisory practice, leading the digital finance transformation vertical.",
-      "He also leads the company's growth initiatives, playing a multifaceted go-to-market role at the intersection of business development, client success, partnerships, and sales. He has his vision set to build Bough into a niche player in the market by developing growth strategies and executing plans to drive the company's next phase of growth.",
-      "Passionate about improving organizational performance and developing talent, Akshendra collaborates with C-suite executives, assesses business risks and opportunities of emerging technologies, and translates insights into practical solutions. His expertise lies in fostering client relationships, overseeing client engagements, managing global operations, and driving strategic initiatives.",
-      "Akshendra holds a Bachelor of Arts Honours in Economics from Hans Raj College, University of Delhi.",
+      "Akshendra is a Senior Manager at Bough, with over 14 years of progressive consulting experience in driving growth, process improvement, risk management, and technology transformation initiatives across global organizations. Currently, he spearheads our transformation advisory practice, leading the digital finance transformation vertical",
+      "He also leads the company's growth initiatives, playing a multifaceted go-to-market role at the intersection of business development, client success, partnerships, and sales. He has his vision set to build Bough into a niche player in the market by developing growth strategies and executing plans to drive the company's next phase of growth",
+      "Passionate about improving organizational performance and developing talent, Akshendra collaborates with C-suite executives, assesses business risks and opportunities of emerging technologies, and translates insights into practical solutions. His expertise lies in fostering client relationships, overseeing client engagements, managing global operations, and driving strategic initiatives",
+      "Akshendra holds a Bachelor of Arts Honours in Economics from Hans Raj College, University of Delhi",
     ],
     skills: [
       "Transformation Advisory",
@@ -110,10 +110,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Manager",
     linkedIn: "https://www.linkedin.com/in/sanya-singh-55635a35/",
     bio: [
-      "Sanya is a Senior Manager in Accounting Advisory services at Bough, has been with the organization for over 8 years. With more than 13 years of experience in accounting advisory, audit assurance, and finance transformation, she manages several accounting advisory engagements and oversees client delivery for India operations.",
-      "Sanya works closely with clients' controllership and finance leadership teams to support their technical and operational accounting needs and drive process improvements to enhance efficiency and effectiveness.",
-      "Sanya's expertise includes technical knowledge of US GAAP and IndAS, financial analysis and reporting, compliance, and team and project management. An alumna of the KPMG External Audit practice in India, she has conducted financial audits for companies across various sectors, including FMCG, trading, manufacturing, real estate, print media, healthcare, technology, hospitality, and other services.",
-      "Sanya holds a master's degree in finance and accounting and a bachelor's degree in commerce.",
+      "Sanya is a Senior Manager in Accounting Advisory services at Bough, has been with the organization for over 8 years. With more than 13 years of experience in accounting advisory, audit assurance, and finance transformation, she manages several accounting advisory engagements and oversees client delivery for India operations",
+      "Sanya works closely with clients' controllership and finance leadership teams to support their technical and operational accounting needs and drive process improvements to enhance efficiency and effectiveness",
+      "Sanya's expertise includes technical knowledge of US GAAP and IndAS, financial analysis and reporting, compliance, and team and project management. An alumna of the KPMG External Audit practice in India, she has conducted financial audits for companies across various sectors, including FMCG, trading, manufacturing, real estate, print media, healthcare, technology, hospitality, and other services",
+      "Sanya holds a master's degree in finance and accounting and a bachelor's degree in commerce",
     ],
     skills: [
       "Accounting Advisory",
@@ -129,10 +129,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Manager",
     linkedIn: "https://www.linkedin.com/in/jason-polyzou-49382450/",
     bio: [
-      "Jason brings over 13 years of extensive experience in financial planning and analysis. At Bough, he oversees financial systems and processes, ensuring seamless operations and strategic financial management.",
-      "His career spans a diverse range of industries, including technology, medical manufacturing, logistics, and data management, showcasing his versatility and adaptability.",
-      "Jason has successfully supported organizations from small businesses to large global corporations with revenues exceeding $3 billion. His expertise in systems, processes, and communication has been pivotal in streamlining financial analytics, optimizing budget forecasts, and enhancing overall financial performance.",
-      "Prior to joining Bough, Jason provided critical financial support to the global IT team, managed financial analytics, and oversaw the OneStream consolidation and planning platform at his former organization.",
+      "Jason brings over 13 years of extensive experience in financial planning and analysis. At Bough, he oversees financial systems and processes, ensuring seamless operations and strategic financial management",
+      "His career spans a diverse range of industries, including technology, medical manufacturing, logistics, and data management, showcasing his versatility and adaptability",
+      "Jason has successfully supported organizations from small businesses to large global corporations with revenues exceeding $3 billion. His expertise in systems, processes, and communication has been pivotal in streamlining financial analytics, optimizing budget forecasts, and enhancing overall financial performance",
+      "Prior to joining Bough, Jason provided critical financial support to the global IT team, managed financial analytics, and oversaw the OneStream consolidation and planning platform at his former organization",
     ],
     skills: [
       "Financial Planning",
@@ -148,10 +148,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Consultant",
     linkedIn: "https://www.linkedin.com/in/abhishek-anand-a95a93212",
     bio: [
-      "Abhishek is a Senior Consultant in Accounting Advisory Services at Bough. He holds a BCom Professional degree from Christ University and is a CIMA Affiliate (EC) from AICPA & CIMA UK, currently pursuing CGMA/ACMA certification.",
-      "With over three years of experience, Abhishek specializes in optimizing financial functions, developing robust financial models, and conducting comprehensive data analysis. He excels in streamlining processes, enhancing value, and ensuring timely delivery of top-tier outcomes.",
-      "His expertise includes US GAAP, ASC 606 revenue recognition, financial analysis, and financial reporting. Known for his strategic financial analysis and cross-functional collaboration, Abhishek is dedicated to driving business growth and enhancing operational efficiency.",
-      "Outside of work, Abhishek is an avid football fan and enjoys playing football on weekends. He also enjoys traveling and experiencing diverse cultures. Additionally, he is passionate about gaming, often diving into virtual worlds to unwind.",
+      "Abhishek is a Senior Consultant in Accounting Advisory Services at Bough. He holds a BCom Professional degree from Christ University and is a CIMA Affiliate (EC) from AICPA & CIMA UK, currently pursuing CGMA/ACMA certification",
+      "With over three years of experience, Abhishek specializes in optimizing financial functions, developing robust financial models, and conducting comprehensive data analysis. He excels in streamlining processes, enhancing value, and ensuring timely delivery of top-tier outcomes",
+      "His expertise includes US GAAP, ASC 606 revenue recognition, financial analysis, and financial reporting. Known for his strategic financial analysis and cross-functional collaboration, Abhishek is dedicated to driving business growth and enhancing operational efficiency",
+      "Outside of work, Abhishek is an avid football fan and enjoys playing football on weekends. He also enjoys traveling and experiencing diverse cultures. Additionally, he is passionate about gaming, often diving into virtual worlds to unwind",
     ],
     skills: [
       "Accounting Advisory",
@@ -168,10 +168,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     linkedIn: "https://www.linkedin.com/in/gunjan-rajpal-776790109/",
     bio: [
       "Gunjan is a Manager in Accounting Advisory services at Bough. She specializes in streamlining processes, enhancing value, and ensuring timely delivery of top-tier outcomes.",
-      "Gunjan has expertise in US GAAP, ASC 606 revenue recognition, and excels in audit planning and reporting. She is proficient with software systems such as SAP, Salesforce, and other data management tools.",
-      "Before joining Bough, Gunjan worked at Deloitte, leading external audits for a diverse portfolio of consumer and industrial clients. Her role included oversight of SOX Controls, substantive testing, and risk assessment.",
-      "Gunjan holds a Bachelor's degree in Commerce from Shaheed Bhagat Singh College, Delhi University, and is a licensed Certified Public Accountant (US CPA).",
-      "Outside of work, Gunjan enjoys home décor, dancing, and traveling to explore new cultures and places.",
+      "Gunjan has expertise in US GAAP, ASC 606 revenue recognition, and excels in audit planning and reporting. She is proficient with software systems such as SAP, Salesforce, and other data management tools",
+      "Before joining Bough, Gunjan worked at Deloitte, leading external audits for a diverse portfolio of consumer and industrial clients. Her role included oversight of SOX Controls, substantive testing, and risk assessment",
+      "Gunjan holds a Bachelor's degree in Commerce from Shaheed Bhagat Singh College, Delhi University, and is a licensed Certified Public Accountant (US CPA)",
+      "Outside of work, Gunjan enjoys home décor, dancing, and traveling to explore new cultures and places",
     ],
     skills: [
       "Accounting Advisory",
@@ -187,10 +187,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Manager",
     linkedIn: "https://www.linkedin.com/in/firdaush-ansari-12ba08120/",
     bio: [
-      "Firdaush is a Manager in Accounting Advisory Services at Bough, where he has been contributing for over 3 years. With extensive experience in Accounting Advisory, financial analysis & reporting and project management, Firdaush specializes in revenue assurance, particularly focusing on ASC 606 for technology clients.",
-      "Firdaush is proficient in US GAAP and ASC 606 revenue recognition and reporting. He collaborates closely with clients' finance leadership teams to support their technical and operational accounting needs.",
-      "Additionally, Firdaush oversees the quarter-end close process, which includes reconciling accounts, and updating financial records to ensure accuracy and completeness.",
-      "Firdaush holds a bachelor's degree in commerce from Symbiosis College of Arts & Commerce, Pune. Outside of work, he enjoys cricket, exploring new cafes, and experiencing different cultures.",
+      "Firdaush is a Manager in Accounting Advisory Services at Bough, where he has been contributing for over 3 years. With extensive experience in Accounting Advisory, financial analysis & reporting and project management, Firdaush specializes in revenue assurance, particularly focusing on ASC 606 for technology clients",
+      "Firdaush is proficient in US GAAP and ASC 606 revenue recognition and reporting. He collaborates closely with clients' finance leadership teams to support their technical and operational accounting needs",
+      "Additionally, Firdaush oversees the quarter-end close process, which includes reconciling accounts, and updating financial records to ensure accuracy and completeness",
+      "Firdaush holds a bachelor's degree in commerce from Symbiosis College of Arts & Commerce, Pune. Outside of work, he enjoys cricket, exploring new cafes, and experiencing different cultures",
     ],
     skills: [
       "Accounting Advisory",
@@ -206,10 +206,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Consultant",
     linkedIn: "https://www.linkedin.com/in/asharma13598/",
     bio: [
-      "Aditya is a Senior Consultant in the Accounting Advisory Services at Bough, with 5+ years of experience in accounting advisory, audit, and assurance. He excels at statutory audit, ASC 606 financial reporting, and process transformations; and has led accounting and transformation engagements.",
-      "Aditya previously worked at Deloitte, where he audited UK-based consumer and retail businesses; performed substantive testing procedures and analyzed their internal controls per the PCAOB standards.",
-      "He holds a Bachelor's degree in Commerce from Shaheed Bhagat Singh College, Delhi University, and has cleared CFA Level 1.",
-      "Outside of work, Aditya enjoys playing golf and badminton on weekends and is a dedicated gym enthusiast. He is also passionate about animal welfare, actively collaborating with an NGO to provide food and shelter for stray dogs.",
+      "Aditya is a Senior Consultant in the Accounting Advisory Services at Bough, with 5+ years of experience in accounting advisory, audit, and assurance. He excels at statutory audit, ASC 606 financial reporting, and process transformations; and has led accounting and transformation engagements",
+      "Aditya previously worked at Deloitte, where he audited UK-based consumer and retail businesses; performed substantive testing procedures and analyzed their internal controls per the PCAOB standards",
+      "He holds a Bachelor's degree in Commerce from Shaheed Bhagat Singh College, Delhi University, and has cleared CFA Level 1",
+      "Outside of work, Aditya enjoys playing golf and badminton on weekends and is a dedicated gym enthusiast. He is also passionate about animal welfare, actively collaborating with an NGO to provide food and shelter for stray dogs",
     ],
     skills: [
       "Accounting Advisory",
@@ -225,9 +225,9 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Consultant",
     linkedIn: "https://www.linkedin.com/in/shubham-kapoor61/",
     bio: [
-      "Shubham is a consultant at Bough with over 2+ years of experience. He drives strategic FP&A engagements for diverse clients and leverage various tools like Excel, Power BI, Salesforce, and NetSuite to deliver impactful, actionable, key, and data-driven insights.",
-      "He performs comprehensive financial risk and flux analyses to pinpoint financial outliers and provide insights. He has also created dynamic, user-friendly Excel dashboards and project planners to streamline workflows, automated manual tasks with Power Automate, and advanced macros.",
-      "Holding a B.Com (Hons) from the University of Delhi, Shubham has also cleared CFA Level I and FRM Part I. Outside work, he enjoys dissecting finance and macroeconomic trends, playing basketball, and going to the gym.",
+      "Shubham is a consultant at Bough with over 2+ years of experience. He drives strategic FP&A engagements for diverse clients and leverage various tools like Excel, Power BI, Salesforce, and NetSuite to deliver impactful, actionable, key, and data-driven insights",
+      "He performs comprehensive financial risk and flux analyses to pinpoint financial outliers and provide insights. He has also created dynamic, user-friendly Excel dashboards and project planners to streamline workflows, automated manual tasks with Power Automate, and advanced macros",
+      "Holding a B.Com (Hons) from the University of Delhi, Shubham has also cleared CFA Level I and FRM Part I. Outside work, he enjoys dissecting finance and macroeconomic trends, playing basketball, and going to the gym",
     ],
     skills: [
       "Financial Planning & Analysis",
@@ -243,10 +243,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "ESG Advisor",
     linkedIn: "https://in.linkedin.com/in/ca-puneeta-puri-35208b9",
     bio: [
-      "Puneeta is a seasoned professional with over 25+ years of experience in finance, governance, assurance, and risk management. She is deeply involved in ESG (Environmental, Social, and Governance) and serves as a Consultant with the Sustainability Reporting Standards Board (SRSB) at the Institute of Chartered Accountants of India (ICAI) and as a Director at the Indian ESG Network.",
-      "Her expertise includes building capacity for sustainable practices and providing training on ESG Readiness and BRSR (Business Responsibility and Sustainability Reporting) reporting and disclosures. Puneeta is passionate about environmental awareness and excels in researching and developing resources to enhance ESG capabilities.",
-      "Puneeta aims to guide stakeholders towards sustainable transformation by integrating ESG principles into their business operations. She is also a frequent speaker at various forums, simplifying ESG complexities for her audience.",
-      "Puneeta believes that life is defined by experiences, not just qualifications. This blend of passion and knowledge shapes her purpose as an ESG and Sustainability professional and mentor, working with corporates, startups, and impact groups to drive sustainable change.",
+      "Puneeta is a seasoned professional with over 25+ years of experience in finance, governance, assurance, and risk management. She is deeply involved in ESG (Environmental, Social, and Governance) and serves as a Consultant with the Sustainability Reporting Standards Board (SRSB) at the Institute of Chartered Accountants of India (ICAI) and as a Director at the Indian ESG Network",
+      "Her expertise includes building capacity for sustainable practices and providing training on ESG Readiness and BRSR (Business Responsibility and Sustainability Reporting) reporting and disclosures. Puneeta is passionate about environmental awareness and excels in researching and developing resources to enhance ESG capabilities",
+      "Puneeta aims to guide stakeholders towards sustainable transformation by integrating ESG principles into their business operations. She is also a frequent speaker at various forums, simplifying ESG complexities for her audience",
+      "Puneeta believes that life is defined by experiences, not just qualifications. This blend of passion and knowledge shapes her purpose as an ESG and Sustainability professional and mentor, working with corporates, startups, and impact groups to drive sustainable change",
     ],
     skills: [
       "ESG Advisory",
@@ -262,9 +262,9 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Manager",
     linkedIn: "https://www.linkedin.com/in/rohan-budhraja-97759514/",
     bio: [
-      "Rohan Budhraja is a Manager at Bough with over 14+ years of experience in ESG, sustainability, and transaction advisory services. He has worked with leading EPC organizations and Big4s specializing in WASH, wastewater management, and climate change mitigation.",
-      "Rohan has led ESG strategy development, compliance, risk assessments, and sustainability reporting (GRI, BRSR). He holds a PGDM in International Business from IIFT and a degree in Chemical Engineering from Panjab University.",
-      "His expertise supports clients in transitioning to sustainable practices, adopting renewable energy, and strengthening climate resilience.",
+      "Rohan Budhraja is a Manager at Bough with over 14+ years of experience in ESG, sustainability, and transaction advisory services. He has worked with leading EPC organizations and Big4s specializing in WASH, wastewater management, and climate change mitigation",
+      "Rohan has led ESG strategy development, compliance, risk assessments, and sustainability reporting (GRI, BRSR). He holds a PGDM in International Business from IIFT and a degree in Chemical Engineering from Panjab University",
+      "His expertise supports clients in transitioning to sustainable practices, adopting renewable energy, and strengthening climate resilience",
     ],
     skills: [
       "ESG Strategy",
@@ -280,10 +280,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Consultant",
     linkedIn: "https://www.linkedin.com/in/saket-gupta-a1600b85/",
     bio: [
-      "Saket is a Senior Consultant at Bough with over three years of experience in ESG consulting. He specializes in end-to-end ESG implementation, from baselining and strategy development to integrating sustainability into corporate operations.",
-      "His client portfolio spans diverse sectors, including motorsports, manufacturing, financial services, and the service industry. Saket has a proven track record of enhancing ESG disclosure scores for organizations in frameworks such as CDP and DJSI.",
-      "Saket holds a Diploma, Bachelor's, and M.Tech in Plastic Technology, along with a Post Graduate Diploma in Environmental Law & Policy from NLU Delhi. As a CII-certified Greenhouse Gas (GHG) accounting practitioner, he is trained in measuring and reporting organizational carbon emissions based on recognized international standards.",
-      "Outside of work, Saket stays active through fitness activities and finds balance by riding his bike to remote mountain villages, immersing himself in nature.",
+      "Saket is a Senior Consultant at Bough with over three years of experience in ESG consulting. He specializes in end-to-end ESG implementation, from baselining and strategy development to integrating sustainability into corporate operations",
+      "His client portfolio spans diverse sectors, including motorsports, manufacturing, financial services, and the service industry. Saket has a proven track record of enhancing ESG disclosure scores for organizations in frameworks such as CDP and DJSI",
+      "Saket holds a Diploma, Bachelor's, and M.Tech in Plastic Technology, along with a Post Graduate Diploma in Environmental Law & Policy from NLU Delhi. As a CII-certified Greenhouse Gas (GHG) accounting practitioner, he is trained in measuring and reporting organizational carbon emissions based on recognized international standards",
+      "Outside of work, Saket stays active through fitness activities and finds balance by riding his bike to remote mountain villages, immersing himself in nature",
     ],
     skills: [
       "ESG Consulting",
@@ -299,9 +299,9 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Associate",
     linkedIn: "https://www.linkedin.com/in/khushi-singh-400081236/",
     bio: [
-      "Khushi is an Associate at Bough, bringing a rich background in economic research, financial inclusion, and CSR strategy. A recent Economics graduate from Shri Ram College of Commerce, University of Delhi, Khushi has interned at NITI Aayog, HDFC Bank, and SBI, where she analyzed economic data and supported MSME financial inclusion.",
-      "As a social entrepreneur with CDF-SRCC, she led impactful projects empowering marginalized communities. Currently working in the ESG consulting space, Khushi aims to integrate environmental stewardship, social responsibility, and governance into finance and policy.",
-      "Outside work, she enjoys basketball, theatre, and animal welfare.",
+      "Khushi is an Associate at Bough, bringing a rich background in economic research, financial inclusion, and CSR strategy. A recent Economics graduate from Shri Ram College of Commerce, University of Delhi, Khushi has interned at NITI Aayog, HDFC Bank, and SBI, where she analyzed economic data and supported MSME financial inclusion",
+      "As a social entrepreneur with CDF-SRCC, she led impactful projects empowering marginalized communities. Currently working in the ESG consulting space, Khushi aims to integrate environmental stewardship, social responsibility, and governance into finance and policy",
+      "Outside work, she enjoys basketball, theatre, and animal welfare",
     ],
     skills: [
       "Economic Research",
@@ -317,9 +317,9 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Manager",
     linkedIn: "https://www.linkedin.com/in/rishabh-singhal-497686aa/",
     bio: [
-      "Rishabh is a Manager in the IT Enterprise Risk Services division at Bough. He is a Certified Information Systems Auditor (CISA) with extensive experience in IT auditing and specializes in risk-based and general IT controls audits, focusing on SOX and SSAE18 reports for clients in the Financial Services and Life Sciences & Healthcare industries.",
-      "Rishabh has formerly worked with firms like EY, Deloitte, KPMG, and Credit Suisse.",
-      "He holds a Bachelor of Technology in Computer Science from The NorthCap University, Gurgaon. Beyond his professional work, Rishabh is dedicated to giving back to the community, actively volunteering with Literacy India, a non-profit organization committed to providing holistic education and vocational skills to underprivileged children, youth, and women across India.",
+      "Rishabh is a Manager in the IT Enterprise Risk Services division at Bough. He is a Certified Information Systems Auditor (CISA) with extensive experience in IT auditing and specializes in risk-based and general IT controls audits, focusing on SOX and SSAE18 reports for clients in the Financial Services and Life Sciences & Healthcare industries",
+      "Rishabh has formerly worked with firms like EY, Deloitte, KPMG, and Credit Suisse",
+      "He holds a Bachelor of Technology in Computer Science from The NorthCap University, Gurgaon. Beyond his professional work, Rishabh is dedicated to giving back to the community, actively volunteering with Literacy India, a non-profit organization committed to providing holistic education and vocational skills to underprivileged children, youth, and women across India",
     ],
     skills: [
       "IT Auditing",
@@ -335,10 +335,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Manager",
     linkedIn: "https://www.linkedin.com/in/anoushka-bhati-b77678102/",
     bio: [
-      "Anoushka is a Manager in Risk Advisory Services at Bough, with 7+ years of work experience, specializing in Sarbanes-Oxley (SOX) compliance and risk management. She has experience in financial audits and risk-based control assessments.",
-      "Before joining Bough, Anoushka was part of EY GDS's external audit team, focusing on substantive testing and risk assessment for retail, luxury, and technology clients.",
+      "Anoushka is a Manager in Risk Advisory Services at Bough, with 7+ years of work experience, specializing in Sarbanes-Oxley (SOX) compliance and risk management. She has experience in financial audits and risk-based control assessments",
+      "Before joining Bough, Anoushka was part of EY GDS's external audit team, focusing on substantive testing and risk assessment for retail, luxury, and technology clients",
       "Anoushka finds joy in creating connections, whether it's through hosting meaningful gatherings or unwinding with her dog. She also loves the thrill of driving on wide, open roads - a simple pleasure that lets her escape the buzz of the city!",
-      "Anoushka holds a Bachelor of Commerce degree from Mount Carmel College, Bangalore.",
+      "Anoushka holds a Bachelor of Commerce degree from Mount Carmel College, Bangalore",
     ],
     skills: [
       "SOX Compliance",
@@ -354,9 +354,9 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Associate",
     linkedIn: "https://in.linkedin.com/in/sakshi-vaishnav2003/",
     bio: [
-      "Sakshi is an Associate in the Risk Advisory vertical of Bough, where she has been working for the past year. She focuses on helping organizations strengthen their risk management frameworks and streamline processes.",
-      "Over the past year, she has gained experience across SOX Assessment, risk and control matrix development, and process improvement initiatives.",
-      "Sakshi holds a Bachelor of Commerce (Finance & Accountancy) degree from Christ University, Bangalore, where she graduated among the top of her class. Outside of work, she is passionate about painting, reading about entrepreneurship, and exploring creative side projects.",
+      "Sakshi is an Associate in the Risk Advisory vertical of Bough, where she has been working for the past year. She focuses on helping organizations strengthen their risk management frameworks and streamline processes",
+      "Over the past year, she has gained experience across SOX Assessment, risk and control matrix development, and process improvement initiatives",
+      "Sakshi holds a Bachelor of Commerce (Finance & Accountancy) degree from Christ University, Bangalore, where she graduated among the top of her class. Outside of work, she is passionate about painting, reading about entrepreneurship, and exploring creative side projects",
     ],
     skills: [
       "Risk Advisory",
@@ -372,10 +372,10 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Consultant",
     linkedIn: "https://www.linkedin.com/in/saurabh-sharma-0303/",
     bio: [
-      "Saurabh is a Senior Consultant at Bough, working as Risk Management professional in domain of IT Governance Risk & Compliance in the areas of Sarbanes Oxley (SOX) assessments.",
-      "Saurabh has 4+ years of experience in IT Enterprise Risk Services, specializing in IT Governance, Risk, and Compliance (GRC), with a focus on SOX 404 assessments. He is skilled in testing the design and operating effectiveness of Internal Controls over Financial Reporting (ICFR), including IT General Controls (ITGC) and IT Application Controls (ITACs) and conducting SOX and SSAE18 SOC1 and SOC2 audits, identifying business risks, enhancing processes, and ensuring compliance.",
-      "His academic background includes a bachelor in Bachelor of Computer Applications and MBA in Business Analytics. Saurabh has also obtained the certification in Lean Six Sigma Green Belt and Business Statistics.",
-      "Outside of his professional role, Saurabh loves to learn different musical instruments and enjoys singing and attending musical sessions.",
+      "Saurabh is a Senior Consultant at Bough, working as Risk Management professional in domain of IT Governance Risk & Compliance in the areas of Sarbanes Oxley (SOX) assessments",
+      "Saurabh has 4+ years of experience in IT Enterprise Risk Services, specializing in IT Governance, Risk, and Compliance (GRC), with a focus on SOX 404 assessments. He is skilled in testing the design and operating effectiveness of Internal Controls over Financial Reporting (ICFR), including IT General Controls (ITGC) and IT Application Controls (ITACs) and conducting SOX and SSAE18 SOC1 and SOC2 audits, identifying business risks, enhancing processes, and ensuring compliance",
+      "His academic background includes a bachelor in Bachelor of Computer Applications and MBA in Business Analytics. Saurabh has also obtained the certification in Lean Six Sigma Green Belt and Business Statistics",
+      "Outside of his professional role, Saurabh loves to learn different musical instruments and enjoys singing and attending musical sessions",
     ],
     skills: [
       "IT Governance",
@@ -391,11 +391,11 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Visual Communications Designer",
     linkedIn: "https://www.linkedin.com/in/khushbu-singh-8b221919b/",
     bio: [
-      "Khushbu is a Senior Visual Communications Designer at Bough. With 3+ years of experience in conceptualizing, designing, and strategizing marketing, branding, and communication collaterals. She brings expertise across a diverse range of formats — from impactful PowerPoint presentations to animated and AI-driven videos.",
-      "At Bough, she plays a key role in driving creative strategy and visual storytelling across consulting and finance industry clients. She has significantly contributed to the rebranding of Bough and the redesign of its website.",
-      "In her previous roles, she worked on office branding projects and provided design support to the launch of an award-winning ad film campaign, earning her the Rising Star Award.",
-      "Passionate about communicating stories and bringing even the smallest ideas to life, Khushbu crafts designs that transform concepts into memorable visual experiences.",
-      "Outside of work, she is a trekking and travelling enthusiast who also likes to read and play video games. Khushbu holds a bachelor's degree in design from the National Institute of Fashion Technology (NIFT), Mumbai.",
+      "Khushbu is a Senior Visual Communications Designer at Bough. With 3+ years of experience in conceptualizing, designing, and strategizing marketing, branding, and communication collaterals. She brings expertise across a diverse range of formats — from impactful PowerPoint presentations to animated and AI-driven videos",
+      "At Bough, she plays a key role in driving creative strategy and visual storytelling across consulting and finance industry clients. She has significantly contributed to the rebranding of Bough and the redesign of its website",
+      "In her previous roles, she worked on office branding projects and provided design support to the launch of an award-winning ad film campaign, earning her the Rising Star Award",
+      "Passionate about communicating stories and bringing even the smallest ideas to life, Khushbu crafts designs that transform concepts into memorable visual experiences",
+      "Outside of work, she is a trekking and travelling enthusiast who also likes to read and play video games. Khushbu holds a bachelor's degree in design from the National Institute of Fashion Technology (NIFT), Mumbai",
     ],
     skills: [
       "Visual Design",
@@ -411,11 +411,11 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "Senior Consultant",
     linkedIn: "https://www.linkedin.com/in/uddeshya-pal-279527149",
     bio: [
-      "Uddeshya is a Senior Consultant at Bough, leads the Center of Excellence for Automation, Analytics, and AI.",
-      "With over 6+ years of experience in analytics and automation, he specializes in identifying and integrating technology-driven solutions that enhance business efficiency and decision-making. Uddeshya has worked across the Insurance, Mortgage, and Telecommunications industries, gaining broad sectoral exposure and a deep understanding of data-driven processes.",
-      "His academic background includes a Bachelor's degree in Economics from the University of Delhi and a Master's degree in Economics from Guru Gobind Singh Indraprastha University.",
-      "Passionate about the transformative potential of emerging technologies, he takes a keen interest in how AI and automation are reshaping industries and the future of work.",
-      "Outside of his professional role, Uddeshya enjoys exploring creativity through cooking and finds balance on the basketball court. An avid manga reader and plant enthusiast, he believes in continuous learning and nurturing growth — both personally and professionally.",
+      "Uddeshya is a Senior Consultant at Bough, leads the Center of Excellence for Automation, Analytics, and AI",
+      "With over 6+ years of experience in analytics and automation, he specializes in identifying and integrating technology-driven solutions that enhance business efficiency and decision-making. Uddeshya has worked across the Insurance, Mortgage, and Telecommunications industries, gaining broad sectoral exposure and a deep understanding of data-driven processes",
+      "His academic background includes a Bachelor's degree in Economics from the University of Delhi and a Master's degree in Economics from Guru Gobind Singh Indraprastha University",
+      "Passionate about the transformative potential of emerging technologies, he takes a keen interest in how AI and automation are reshaping industries and the future of work",
+      "Outside of his professional role, Uddeshya enjoys exploring creativity through cooking and finds balance on the basketball court. An avid manga reader and plant enthusiast, he believes in continuous learning and nurturing growth — both personally and professionally",
     ],
     skills: [
       "Automation",
@@ -431,8 +431,8 @@ const teamMembersBio: Record<string, Partial<TeamMember>> = {
     title: "HR Business Partner",
     linkedIn: "https://www.linkedin.com/in/arora-ridhima/",
     bio: [
-      "Ridhima is an HR Business Partner at Bough, where she's the go-to person for all things people-related, from leading recruitment efforts to ensuring compliance and making sure the employee experience is top-notch. With 5+ years of experience, Ridhima is an ambassador for a workplace where people feel valued, supported, and empowered to thrive.",
-      "She holds a master's degree from Xavier Institute of Social Service. Outside of work, you'll find Ridhima practicing yoga to find her balance, watching movies, and practicing mindfulness. In short, she believes in balance – at work, in life, and in everything she does.",
+      "Ridhima is an HR Business Partner at Bough, where she's the go-to person for all things people-related, from leading recruitment efforts to ensuring compliance and making sure the employee experience is top-notch. With 5+ years of experience, Ridhima is an ambassador for a workplace where people feel valued, supported, and empowered to thrive",
+      "She holds a master's degree from Xavier Institute of Social Service. Outside of work, you'll find Ridhima practicing yoga to find her balance, watching movies, and practicing mindfulness. In short, she believes in balance – at work, in life, and in everything she does",
     ],
     skills: [
       "HR Management",
