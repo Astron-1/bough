@@ -30,41 +30,90 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
   const carouselRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const animationTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const ANIMATION_DURATION = 300;
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    const cleanup = () => {
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+    };
+    return cleanup;
+  }, []);
+
+  // Add error boundary state
+  const [hasError, setHasError] = useState(false);
+
+  // Error recovery
+  useEffect(() => {
+    if (hasError) {
+      setIsAnimating(false);
+      setIsImageLoading(false);
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+    }
+  }, [hasError]);
 
   // Memoize filtered case studies to prevent unnecessary recalculations
   const filteredCaseStudies = useMemo(() => {
-    let studies = [...caseStudyContent];
-    
-    if (filter?.ids) {
-      // Filter by IDs and ensure the case study exists
-      studies = studies.filter(study => filter.ids!.includes(study.id));
-    } else if (filter?.excludeIds) {
-      studies = studies.filter(study => !filter.excludeIds!.includes(study.id));
+    try {
+      let studies = [...caseStudyContent];
+      
+      if (filter?.ids) {
+        studies = studies.filter(study => filter.ids!.includes(study.id));
+      } else if (filter?.excludeIds) {
+        studies = studies.filter(study => !filter.excludeIds!.includes(study.id));
+      }
+      
+      if (filter?.limit) {
+        studies = studies.slice(0, filter.limit);
+      }
+      
+      return studies;
+    } catch (error) {
+      console.error('Error filtering case studies:', error);
+      setHasError(true);
+      return [];
     }
-    
-    if (filter?.limit) {
-      studies = studies.slice(0, filter.limit);
-    }
-    
-    return studies;
   }, [filter]);
 
   // Reset current index when filtered case studies change
   useEffect(() => {
-    setCurrent(0);
+    try {
+      setCurrent(0);
+      setIsAnimating(false);
+      setIsImageLoading(true);
+      setHasError(false);
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+    } catch (error) {
+      console.error('Error resetting carousel state:', error);
+      setHasError(true);
+    }
   }, [filteredCaseStudies]);
 
-  // Preload next and previous images
+  // Preload next and previous images with error handling
   useEffect(() => {
     if (!filteredCaseStudies.length) return;
 
     const preloadImage = (src: string): Promise<Event> => {
       return new Promise((resolve, reject) => {
-        const img = new globalThis.Image();
-        img.onload = (event: Event) => resolve(event);
-        img.onerror = reject;
-        img.src = src;
+        try {
+          const img = new globalThis.Image();
+          img.onload = (event: Event) => resolve(event);
+          img.onerror = (event: Event | string) => {
+            console.error('Error preloading image:', src, event);
+            reject(new Error('Failed to load image'));
+          };
+          img.src = src;
+        } catch (error) {
+          console.error('Error creating image:', error);
+          reject(new Error('Failed to create image'));
+        }
       });
     };
 
@@ -72,18 +121,24 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
       try {
         const promises: Promise<Event>[] = [];
         
+        // Always preload current image first
+        if (filteredCaseStudies[current]?.image) {
+          promises.push(preloadImage(filteredCaseStudies[current].image));
+        }
+        
         // Preload next image
-        if (current < filteredCaseStudies.length - 1) {
+        if (current < filteredCaseStudies.length - 1 && filteredCaseStudies[current + 1]?.image) {
           promises.push(preloadImage(filteredCaseStudies[current + 1].image));
         }
         // Preload previous image
-        if (current > 0) {
+        if (current > 0 && filteredCaseStudies[current - 1]?.image) {
           promises.push(preloadImage(filteredCaseStudies[current - 1].image));
         }
         
         await Promise.all(promises);
       } catch (error) {
         console.error('Error preloading images:', error);
+        setHasError(true);
       }
     };
 
@@ -146,28 +201,38 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   }, []);
 
   const handleSlideChange = useCallback((newIndex: number) => {
-    if (isAnimating || newIndex === current) return;
-    
-    setIsAnimating(true);
-    setIsImageLoading(true);
-    setSlideDirection(newIndex > current ? 'next' : 'prev');
-    setCurrent(newIndex);
+    try {
+      if (isAnimating || newIndex === current || newIndex < 0 || newIndex >= filteredCaseStudies.length) return;
+      
+      // Clear any existing animation timeout
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
+      
+      setIsAnimating(true);
+      setIsImageLoading(true);
+      setSlideDirection(newIndex > current ? 'next' : 'prev');
+      setCurrent(newIndex);
 
-    // Use requestAnimationFrame for smoother animations
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, ANIMATION_DURATION);
-    });
-  }, [isAnimating, current]);
+      // Use requestAnimationFrame for smoother animations
+      requestAnimationFrame(() => {
+        animationTimeoutRef.current = setTimeout(() => {
+          setIsAnimating(false);
+        }, ANIMATION_DURATION);
+      });
+    } catch (error) {
+      console.error('Error changing slide:', error);
+      setHasError(true);
+    }
+  }, [isAnimating, current, filteredCaseStudies.length]);
 
   const nextSlide = useCallback(() => {
-    if (current === filteredCaseStudies.length - 1) return;
+    if (current >= filteredCaseStudies.length - 1) return;
     handleSlideChange(current + 1);
   }, [current, filteredCaseStudies.length, handleSlideChange]);
 
   const prevSlide = useCallback(() => {
-    if (current === 0) return;
+    if (current <= 0) return;
     handleSlideChange(current - 1);
   }, [current, handleSlideChange]);
 
@@ -176,14 +241,17 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   , [current, filteredCaseStudies.length]);
 
   const handleImageLoad = useCallback(() => {
-    setIsImageLoading(false);
+    // Add a small delay to ensure smooth transition
+    setTimeout(() => {
+      setIsImageLoading(false);
+    }, 50);
   }, []);
 
-  if (filteredCaseStudies.length === 0) {
+  if (hasError) {
     return (
       <div className="w-full py-6 md:py-12 lg:py-16 text-center">
         <Text type={Font.SOURCE_SANS} className="text-gray-600">
-          No case studies available at the moment.
+          An error occurred while loading the case studies. Please refresh the page to try again.
         </Text>
       </div>
     );
@@ -322,12 +390,18 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 } ${
                   isAnimating 
                     ? slideDirection === 'next' 
-                      ? 'translate-x-full' 
-                      : '-translate-x-full'
-                    : 'translate-x-0'
+                      ? 'translate-x-full opacity-0' 
+                      : '-translate-x-full opacity-0'
+                    : 'translate-x-0 opacity-100'
                 }`}
                 style={{
-                  willChange: 'transform, opacity'
+                  willChange: 'transform, opacity',
+                  transform: isAnimating 
+                    ? slideDirection === 'next' 
+                      ? 'translateX(100%)' 
+                      : 'translateX(-100%)'
+                    : 'translateX(0)',
+                  transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
                 <div className="absolute inset-0 bg-gray-100 animate-pulse" />
