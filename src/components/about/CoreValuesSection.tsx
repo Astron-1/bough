@@ -27,11 +27,11 @@ const CoreValuesSection: React.FC<CoreValuesSectionProps> = ({
     },
     {
       icon: <HeartHandshake size={40} />,
-      title: "Relationships are not entitlements.",
+      title: "Relationships are not entitlements",
     },
     {
       icon: <Landmark size={40} />,
-      title: "Values are not convenience",
+      title: "Values are not a convenience",
     },
     {
       icon: <Lock size={40} />,
