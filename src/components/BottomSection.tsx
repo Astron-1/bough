@@ -22,10 +22,10 @@ export default function BottomSection({
   href,
 }: BottomCTAInterface) {
   return (
-    <div className="relative w-full flex items-center justify-center overflow-hidden py-24">
+    <div className="relative w-full flex items-center justify-center overflow-hidden py-12 md:py-24">
       {/* Background Image with fade-in */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 h-[110%] md:h-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
@@ -34,14 +34,14 @@ export default function BottomSection({
           src={backgroundImage}
           alt="bottom image"
           layout="fill"
-          objectFit="cover"
+          className="object-cover scale-110 md:scale-100"
           priority
         />
       </motion.div>
 
       {/* Overlay Content */}
       <motion.div
-        className="z-10 flex flex-col justify-center items-center space-y-4  py-16 text-center"
+        className="z-10 flex flex-col justify-center items-center space-y-4 py-8 md:py-16 text-center px-4 md:px-8"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}

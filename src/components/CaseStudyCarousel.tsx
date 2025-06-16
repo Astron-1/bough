@@ -303,25 +303,23 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 }}
               >
                 <div className="absolute inset-0 bg-gray-100 animate-pulse" />
-                {typeof window !== 'undefined' && window.innerWidth >= 768 && (
-                  <Image
-                    src={filteredCaseStudies[current].image}
-                    alt={filteredCaseStudies[current].heading}
-                    fill
-                    quality={75}
-                    className="object-cover"
-                    sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
-                           ${IMAGE_SIZES.desktop}px`}
-                    priority={!isAnimating}
-                    onLoad={handleImageLoad}
-                    loading={isAnimating ? "lazy" : "eager"}
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                  />
-                )}
+                <Image
+                  src={filteredCaseStudies[current].image}
+                  alt={filteredCaseStudies[current].heading}
+                  fill
+                  quality={75}
+                  className="object-cover"
+                  sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
+                         ${IMAGE_SIZES.desktop}px`}
+                  priority={true}
+                  onLoad={handleImageLoad}
+                  loading="eager"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                />
               </div>
               {/* Previous Image for Smooth Transition */}
-              {isAnimating && current > 0 && typeof window !== 'undefined' && window.innerWidth >= 768 && (
+              {isAnimating && current > 0 && (
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{
@@ -345,7 +343,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 </div>
               )}
               {/* Next Image for Smooth Transition */}
-              {isAnimating && current < filteredCaseStudies.length - 1 && typeof window !== 'undefined' && window.innerWidth >= 768 && (
+              {isAnimating && current < filteredCaseStudies.length - 1 && (
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{

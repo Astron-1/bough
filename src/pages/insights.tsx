@@ -278,9 +278,16 @@ export default function InsightsPage() {
       {/* Fixed width container for content below hero */}
       <div className="">
         {/* Featured Case Studies */}
-        <div className="relative w-full overflow-hidden">
+        <div className="relative w-full overflow-hidden pt-24">
+          <div className="container mx-auto max-w-7xl px-4 mb-8">
+            <h2 className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem]">
+              <Text type={Font.GARAMOND}>
+                Highlights of our work
+              </Text>
+            </h2>
+          </div>
           <div className="container-fluid">
-            <div className="relative md:pr-0">
+            <div className="relative">
               <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
                 <CaseStudyCarousel filter={{excludeIds: FEATURED_CASE_STUDY_IDS, limit: 4}}/>
               </div>
@@ -292,10 +299,9 @@ export default function InsightsPage() {
       {/* Connect CTA Section */}
       <div className="mt-16">
         <BottomSection
-          content="Let's drive outcomes by crafting changes
-for a meaningful tomorrow, now"
+          content="Let's drive outcomes by crafting changes for a meaningful tomorrow, now"
           backgroundImage={ConnectCTA}
-          className="md:px-4 text-xl md:text-2xl"
+          className="px-4 md:px-12 lg:px-32 text-xl md:text-2xl lg:text-3xl"
         />
       </div>
     </main>

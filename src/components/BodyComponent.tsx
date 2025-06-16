@@ -5,6 +5,7 @@ import BoughServices from "./Services";
 import CaseStudyCarousel from "./CaseStudyCarousel";
 import homeBottomImage from "../../public/bottomImage.png";
 import HomeInsights from "./HomeInsights";
+import Text, { Font } from "./Text";
 
 export default function BodyComponent() {
   return (
@@ -42,9 +43,16 @@ export default function BodyComponent() {
           <HeroText />
         </div>
         <BoughServices />
-        <div className="relative w-full overflow-hidden">
+        <div className="relative w-full overflow-hidden pt-24">
+          <div className="container mx-auto max-w-7xl px-4 mb-8">
+            <h2 className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem]">
+              <Text type={Font.GARAMOND}>
+                Highlights of our work
+              </Text>
+            </h2>
+          </div>
           <div className="container-fluid">
-            <div className="relative md:pr-0">
+            <div className="relative">
               <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
                 <CaseStudyCarousel filter={{ ids: ['SOX - 7', 'RAR Implementation - 4', 'Data optimization and governance - 1'], limit: 3 }} />
               </div>
