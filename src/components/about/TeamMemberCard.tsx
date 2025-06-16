@@ -32,7 +32,8 @@ const PlaceholderImage = () => (
 
 const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt, linkedIn }) => {
   const cardStyle = {
-    width: "19rem",
+    width: "100%",
+    maxWidth: "100%",
     height: "auto",
     flexShrink: 0
   };
@@ -58,7 +59,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
   );
 
   return (
-    <div className="flex flex-col items-start" style={cardStyle}>
+    <div className="flex flex-col items-start w-full" style={cardStyle}>
       {/* Image and main content link */}
       <Link 
         href={`/team/${id}`}
@@ -67,18 +68,53 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
         <ImageContent />
         
         {/* Content below image */}
-        <div className="mt-4 w-full transition-all duration-500">
-          <div className="flex items-start justify-between">
-            <div className="text-left">
+        <div className="mt-2 sm:mt-4 w-full transition-all duration-500">
+          <div className="flex items-start justify-between gap-2">
+            <div className="text-left flex-1">
               <Text 
                 type={Font.GARAMOND} 
-                className="text-xl font-semibold mb-1 text-gray-700 group-hover:text-black transition-colors duration-500"
+                className="text-base sm:text-xl font-semibold text-gray-700 group-hover:text-black transition-colors duration-500 block"
               >
                 {name}
               </Text>
+              <div className="sm:hidden">
+                {(() => {
+                  // Mobile view: Split into multiple lines
+                  const words = title.split(' ');
+                  let firstLine, secondLine;
+                  
+                  if (words.length >= 3) {
+                    const midPoint = Math.ceil(words.length / 2);
+                    firstLine = words.slice(0, midPoint).join(' ');
+                    secondLine = words.slice(midPoint).join(' ');
+                  } else {
+                    [firstLine, secondLine = ''] = words;
+                  }
+                  
+                  return (
+                    <>
+                      <Text 
+                        type={Font.SOURCE_SANS} 
+                        className="text-sm text-gray-500 group-hover:text-blue-600 transition-colors duration-500 leading-snug block"
+                      >
+                        {firstLine}
+                      </Text>
+                      {secondLine && (
+                        <Text 
+                          type={Font.SOURCE_SANS} 
+                          className="text-sm text-gray-500 group-hover:text-blue-600 transition-colors duration-500 leading-snug block"
+                        >
+                          {secondLine}
+                        </Text>
+                      )}
+                    </>
+                  );
+                })()}
+              </div>
+              {/* Desktop view: Single line */}
               <Text 
                 type={Font.SOURCE_SANS} 
-                className="text-base text-gray-500 group-hover:text-blue-600 transition-colors duration-500"
+                className="hidden sm:block text-base text-gray-500 group-hover:text-blue-600 transition-colors duration-500"
               >
                 {title}
               </Text>
@@ -89,12 +125,12 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({ id, name, title, image, alt
                 href={linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#0A66C2] hover:bg-[#004182] text-white p-1.5 rounded transition-colors duration-300 flex items-center justify-center ml-4"
+                className="bg-[#0A66C2] hover:bg-[#004182] text-white p-1.5 rounded transition-colors duration-300 flex items-center justify-center shrink-0 self-start"
                 aria-label={`View ${name}'s LinkedIn profile`}
-                style={{ minWidth: "28px", height: "28px" }}
+                style={{ minWidth: "24px", height: "24px" }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
               </a>

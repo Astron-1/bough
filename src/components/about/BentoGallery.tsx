@@ -277,7 +277,7 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({
         <div ref={titleRef} className="text-center max-w-4xl mx-auto">
           <Text
             type={Font.GARAMOND}
-            className="text-[3.5rem] leading-[1.2] font-medium text-black mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black mb-6"
           >
             {title}
           </Text>

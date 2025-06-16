@@ -207,10 +207,19 @@ export default function ServicePage() {
         </Text>
       </motion.section>
 
-      <div className="relative w-full overflow-hidden">
-        <div className="container mx-auto px-4 md:px-0">
-          <div className="relative md:translate-x-[5%]">
-            <CaseStudyCarousel filter={{ limit: 3 }} />
+      <div className="relative w-full overflow-hidden pt-24">
+        <div className="container mx-auto max-w-7xl px-4 mb-8">
+          <h2 className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem]">
+            <Text type={Font.GARAMOND}>
+              Highlights of our work
+            </Text>
+          </h2>
+        </div>
+        <div className="container-fluid">
+          <div className="relative">
+            <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
+              <CaseStudyCarousel filter={{ limit: 3 }} />
+            </div>
           </div>
         </div>
       </div>
@@ -218,7 +227,7 @@ export default function ServicePage() {
       <BottomSection
         content="Let's drive outcomes by crafting changes for a meaningful tomorrow, now"
         backgroundImage={careerCTA}
-        className="px-4 md:px-12 lg:px-32"
+        className="px-4 md:px-12 lg:px-32 text-xl md:text-2xl lg:text-3xl"
       />
     </section>
   );

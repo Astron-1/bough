@@ -67,9 +67,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           )}
 
           {/* Fixed grid layout with exactly 3 cards per row */}
-          <div className="w-full overflow-hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="w-full overflow-hidden grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8 lg:gap-10 auto-rows-fr">
             {members.map((member) => (
-              <div key={member.id} className="flex justify-center items-start">
+              <div key={member.id} className="flex justify-center items-start w-full h-full">
                 <TeamMemberCard
                   id={member.id}
                   name={member.name}

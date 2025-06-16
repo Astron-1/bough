@@ -81,7 +81,7 @@ export default function HomeInsights() {
                 }}
                 viewport={{ once: true, margin: "-50px" }}
               >
-                <SpotlightCard className="group/card min-h-full rounded-2xl bg-white border border-slate-100 hover:shadow-xl transition-all duration-300 will-change-transform hover:-translate-y-2">
+                <SpotlightCard className="group/card min-h-full rounded-2xl bg-white border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.08)] md:shadow-none hover:shadow-xl transition-all duration-300 will-change-transform hover:-translate-y-2">
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600 transform origin-left scale-x-0 group-hover/card:scale-x-100 transition-transform duration-300"></div>
 
                   <div className="flex flex-col items-center pt-12 px-8">

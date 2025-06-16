@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectFade } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
@@ -13,6 +13,7 @@ interface InsightItem {
   id: number;
   title: string;
   description: string;
+  backgroundImage: string;
 }
 
 interface InsightsSliderProps {
@@ -28,6 +29,7 @@ export default function InsightsSlider({
 }: InsightsSliderProps) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const loadedImagesRef = useRef<Set<string>>(new Set());
 
   // Add custom styles for smoother transitions
   useEffect(() => {
@@ -89,6 +91,7 @@ export default function InsightsSlider({
           onSwiper={setSwiper}
           onSlideChange={handleSlideChange}
           className="hidden"
+          updateOnWindowResize={true}
         >
           {insights.map((item) => (
             <SwiperSlide key={item.id}></SwiperSlide>
@@ -118,11 +121,11 @@ export default function InsightsSlider({
         </div>
 
         {/* Custom bullet indicators */}
-        <div className="w-full mt-10 sm:mt-0 flex flex-row space-x-2 sm:space-x-0 justify-center sm:justify-between items-center relative z-20">
+        <div className="w-full mt-10 sm:mt-0 flex flex-row space-x-2 sm:space-x-0 justify-center sm:justify-between items-start sm:items-center relative z-20">
           {insights.map((item, index) => (
             <div
               key={item.id}
-              className="flex flex-col items-center cursor-pointer"
+              className="flex flex-col items-center cursor-pointer min-w-[80px] sm:min-w-0"
               onClick={() =>
                 !isTransitioning && swiper && swiper.slideTo(index)
               }
@@ -137,12 +140,12 @@ export default function InsightsSlider({
                 {item.id}
               </div>
               <p
-                className={` mt-4 text-white text-[9px] md:text-sm font-medium text-center max-w-[180px] whitespace-normal bullet-text ${
+                className={`mt-6 text-white text-[12px] md:text-sm font-semibold text-center max-w-[180px] min-h-[4em] leading-[1.3] whitespace-pre-wrap break-words bullet-text ${
                   activeIndex === index
                     ? "bullet-text-active opacity-100"
-                    : "opacity-70"
+                    : "opacity-90"
                 }`}
-                style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.9)" }}
+                style={{ textShadow: "1px 1px 3px rgba(0,0,0,0.5)" }}
               >
                 {item.title}
               </p>

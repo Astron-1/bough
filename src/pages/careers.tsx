@@ -223,10 +223,13 @@ export default function Careers() {
             </Text>
             <div className="relative">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                {/* Full width line */}
+                {/* Full width line for desktop */}
                 <div className="hidden md:block absolute w-screen left-1/2 -translate-x-1/2 h-[1px] bg-gray-200 z-[1]" style={{ top: '75px' }} />
                 
-                {/* Sliding indicator */}
+                {/* Vertical line for mobile */}
+                <div className="md:hidden absolute h-[calc(100%-40px)] w-[1px] bg-gray-200 z-[1] left-[24px] top-[60px]" />
+                
+                {/* Sliding indicator for desktop */}
                 <div 
                   className={`hidden md:block absolute h-[8px] bg-[#0047FF] transition-all duration-[850ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-right z-[2]`}
                   style={{ 
@@ -235,6 +238,18 @@ export default function Careers() {
                     left: `calc(${(parseInt(activeStep || "0") - 1) * 25}% + 1.5rem)`,
                     transform: `scaleX(${activeStep ? 1 : 0})`,
                     transformOrigin: 'right',
+                    opacity: activeStep ? 1 : 0
+                  }} 
+                />
+                
+                {/* Sliding indicator for mobile */}
+                <div 
+                  className={`md:hidden absolute w-[8px] bg-[#0047FF] transition-all duration-[850ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-top z-[2] left-[20.5px]`}
+                  style={{ 
+                    height: '15%',
+                    top: `calc(${(parseInt(activeStep || "0") - 1) * 25}% + 75px)`,
+                    transform: `scaleY(${activeStep ? 1 : 0})`,
+                    transformOrigin: 'top',
                     opacity: activeStep ? 1 : 0
                   }} 
                 />
@@ -249,25 +264,29 @@ export default function Careers() {
                     {/* Content Box */}
                     <div className="p-6 h-full relative">
                       <div className="flex flex-col">
-                        <span 
-                          className={`text-3xl sm:text-4xl font-medium transition-colors duration-300 mb-10
-                            ${activeStep === step ? "text-[#0047FF]" : "text-gray-400"}`}
-                        >
-                          {step}
-                        </span>
-                        <Text 
-                          className={`text-lg sm:text-xl font-bold mb-4 transition-colors duration-300
-                            ${activeStep === step ? "text-black" : "text-gray-500"}`}
-                        >
-                          {title}
-                        </Text>
-                        <Text className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                          {description}
-                        </Text>
+                        <div className="flex items-center mb-10">
+                          <span 
+                            className={`text-3xl sm:text-4xl font-medium transition-colors duration-300 w-[60px] md:w-auto pl-[12px] md:pl-0
+                              ${activeStep === step ? "text-[#0047FF]" : "text-gray-400"}`}
+                          >
+                            {step}
+                          </span>
+                        </div>
+                        <div className="pl-[60px] md:pl-0">
+                          <Text 
+                            className={`text-lg sm:text-xl font-bold mb-4 transition-colors duration-300
+                              ${activeStep === step ? "text-black" : "text-gray-500"}`}
+                          >
+                            {title}
+                          </Text>
+                          <Text className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                            {description}
+                          </Text>
+                        </div>
                       </div>
                     </div>
                     
-                    {/* Arrow */}
+                    {/* Arrow for desktop only */}
                     {index < hiringProcedure.length - 1 && (
                       <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10">
                         <svg
