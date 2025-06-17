@@ -120,7 +120,7 @@ export default function Careers() {
                 target="_blank"
                 className="2xl:text-2xl"
               >
-                <Button className="outline-1 px-7">
+                <Button className="outline-1">
                   <ShinyText text="View current openings" speed={3} />
                 </Button>
               </Link>
@@ -214,7 +214,10 @@ export default function Careers() {
           className="py-12 sm:py-16 md:py-24 relative"
         >
           <div className="absolute " style={{ zIndex: 1 }}></div>
-          <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
+          <div
+            className="container mx-auto px-4 relative"
+            style={{ zIndex: 2 }}
+          >
             <Text
               type={Font.GARAMOND}
               className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-12 text-black capitalize"
@@ -224,36 +227,43 @@ export default function Careers() {
             <div className="relative">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {/* Full width line for desktop */}
-                <div className="hidden md:block absolute w-screen left-1/2 -translate-x-1/2 h-[1px] bg-gray-200 z-[1]" style={{ top: '75px' }} />
-                
+                <div
+                  className="hidden md:block absolute w-screen left-1/2 -translate-x-1/2 h-[1px] bg-gray-200 z-[1]"
+                  style={{ top: "75px" }}
+                />
+
                 {/* Vertical line for mobile */}
                 <div className="md:hidden absolute h-[calc(100%-40px)] w-[1px] bg-gray-200 z-[1] left-[24px] top-[60px]" />
-                
+
                 {/* Sliding indicator for desktop */}
-                <div 
+                <div
                   className={`hidden md:block absolute h-[8px] bg-[#0047FF] transition-all duration-[850ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-right z-[2]`}
-                  style={{ 
-                    width: '15%',
-                    top: '72px',
-                    left: `calc(${(parseInt(activeStep || "0") - 1) * 25}% + 1.5rem)`,
+                  style={{
+                    width: "15%",
+                    top: "72px",
+                    left: `calc(${
+                      (parseInt(activeStep || "0") - 1) * 25
+                    }% + 1.5rem)`,
                     transform: `scaleX(${activeStep ? 1 : 0})`,
-                    transformOrigin: 'right',
-                    opacity: activeStep ? 1 : 0
-                  }} 
+                    transformOrigin: "right",
+                    opacity: activeStep ? 1 : 0,
+                  }}
                 />
-                
+
                 {/* Sliding indicator for mobile */}
-                <div 
+                <div
                   className={`md:hidden absolute w-[8px] bg-[#0047FF] transition-all duration-[850ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-top z-[2] left-[20.5px]`}
-                  style={{ 
-                    height: '15%',
-                    top: `calc(${(parseInt(activeStep || "0") - 1) * 25}% + 75px)`,
+                  style={{
+                    height: "15%",
+                    top: `calc(${
+                      (parseInt(activeStep || "0") - 1) * 25
+                    }% + 75px)`,
                     transform: `scaleY(${activeStep ? 1 : 0})`,
-                    transformOrigin: 'top',
-                    opacity: activeStep ? 1 : 0
-                  }} 
+                    transformOrigin: "top",
+                    opacity: activeStep ? 1 : 0,
+                  }}
                 />
-                
+
                 {hiringProcedure.map(({ step, title, description }, index) => (
                   <div
                     key={step}
@@ -265,17 +275,25 @@ export default function Careers() {
                     <div className="p-6 h-full relative">
                       <div className="flex flex-col">
                         <div className="flex items-center mb-10">
-                          <span 
+                          <span
                             className={`text-3xl sm:text-4xl font-medium transition-colors duration-300 w-[60px] md:w-auto pl-[12px] md:pl-0
-                              ${activeStep === step ? "text-[#0047FF]" : "text-gray-400"}`}
+                              ${
+                                activeStep === step
+                                  ? "text-[#0047FF]"
+                                  : "text-gray-400"
+                              }`}
                           >
                             {step}
                           </span>
                         </div>
                         <div className="pl-[60px] md:pl-0">
-                          <Text 
+                          <Text
                             className={`text-lg sm:text-xl font-bold mb-4 transition-colors duration-300
-                              ${activeStep === step ? "text-black" : "text-gray-500"}`}
+                              ${
+                                activeStep === step
+                                  ? "text-black"
+                                  : "text-gray-500"
+                              }`}
                           >
                             {title}
                           </Text>
@@ -285,7 +303,7 @@ export default function Careers() {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Arrow for desktop only */}
                     {index < hiringProcedure.length - 1 && (
                       <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10">
@@ -298,9 +316,12 @@ export default function Careers() {
                         >
                           <path
                             d="M4 0 L12 24 L4 48 L8 48 L20 24 L8 0 Z"
-                            fill={parseInt(activeStep) > (index + 1) || activeStep === String(index + 2).padStart(2, '0')
-                              ? "#0047FF"
-                              : "#E5E7EB"}
+                            fill={
+                              parseInt(activeStep) > index + 1 ||
+                              activeStep === String(index + 2).padStart(2, "0")
+                                ? "#0047FF"
+                                : "#E5E7EB"
+                            }
                           />
                         </svg>
                       </div>
