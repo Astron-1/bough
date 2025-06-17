@@ -71,7 +71,8 @@ export default function ServicesPage() {
           >
             We are advisors, thought leaders, and problem solvers, dedicated to
             creating long-term value and sustainable solutions
-          </Text>v
+          </Text>
+
           <div className="text-center flex-row flex justify-center">
             <Button href="/connect" className="px-7">
               <ShinyText text="Connect" speed={3} />
@@ -86,7 +87,7 @@ export default function ServicesPage() {
             alt="Plant growing from coins"
             width={500}
             height={400}
-            className="h-screen object-contain w-full"
+            className="h-screen object-contain w-auto"
           />
         </div>
       </section>
@@ -100,9 +101,7 @@ export default function ServicesPage() {
       <div className="relative w-full overflow-hidden">
         <div className="container mx-auto max-w-7xl px-4 mb-16">
           <h2 className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem]">
-            <Text type={Font.GARAMOND}>
-              Highlights of our work
-            </Text>
+            <Text type={Font.GARAMOND}>Highlights of our work</Text>
           </h2>
         </div>
         <div className="container-fluid">

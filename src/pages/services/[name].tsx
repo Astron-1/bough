@@ -141,12 +141,6 @@ export default function ServicePage() {
               >
                 Our offerings
               </Text>
-              <Text
-                type={Font.SOURCE_SANS}
-                className="text-gray-700 text-sm sm:text-base"
-              >
-                {content.body?.offerings.subheading}
-              </Text>
             </div>
 
             <div className="space-y-4 w-full md:w-1/2 mt-8 md:mt-0">
@@ -210,26 +204,41 @@ export default function ServicePage() {
       <div className="relative w-full overflow-hidden pt-24">
         <div className="container mx-auto max-w-7xl px-4 mb-8">
           <h2 className="text-center text-black text-[2.5rem] font-semibold leading-[2.5rem]">
-            <Text type={Font.GARAMOND}>
-              Highlights of our work
-            </Text>
+            <Text type={Font.GARAMOND}>Highlights of our work</Text>
           </h2>
         </div>
         <div className="container-fluid">
           <div className="relative">
             <div className="ml-auto md:w-[95%] lg:w-[90%] xl:w-[85%]">
-              <CaseStudyCarousel filter={{ 
-                ids: serviceName === 'Accounting' 
-                  ? ['FinOps Maury - 6', 'ASC 606 Reporting Solution (Plan B) - 2', 'Revenue Assurance and audit readiness - 3']
-                  : serviceName === 'Risk' 
-                  ? ['DRBCP Case Study - 5', 'SOX - 7']
-                  : serviceName === 'Transformation'
-                  ? ['RAR Implementation - 4', 'Data optimization and governance - 1']
-                  : serviceName === 'ESG'
-                  ? ['RAR Implementation - 4', 'Data optimization and governance - 1']
-                  : ['Data optimization and governance - 1', 'ASC 606 Reporting Solution (Plan B) - 2', 'Revenue Assurance and audit readiness - 3'],
-                limit: 3 
-              }} />
+              <CaseStudyCarousel
+                filter={{
+                  ids:
+                    serviceName === "Accounting"
+                      ? [
+                          "FinOps Maury - 6",
+                          "ASC 606 Reporting Solution (Plan B) - 2",
+                          "Revenue Assurance and audit readiness - 3",
+                        ]
+                      : serviceName === "Risk"
+                      ? ["DRBCP Case Study - 5", "SOX - 7"]
+                      : serviceName === "Transformation"
+                      ? [
+                          "RAR Implementation - 4",
+                          "Data optimization and governance - 1",
+                        ]
+                      : serviceName === "ESG"
+                      ? [
+                          "RAR Implementation - 4",
+                          "Data optimization and governance - 1",
+                        ]
+                      : [
+                          "Data optimization and governance - 1",
+                          "ASC 606 Reporting Solution (Plan B) - 2",
+                          "Revenue Assurance and audit readiness - 3",
+                        ],
+                  limit: 3,
+                }}
+              />
             </div>
           </div>
         </div>

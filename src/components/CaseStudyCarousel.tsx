@@ -21,17 +21,18 @@ const IMAGE_SIZES = {
   desktop: 1280,
 } as const;
 
-const BLUR_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
+const BLUR_DATA_URL =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
 
 export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const [current, setCurrent] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
+  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const carouselRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const animationTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
-  const ANIMATION_DURATION = 300;
+  const ANIMATION_DURATION = 400;
 
   // Clear timeout on unmount
   useEffect(() => {
@@ -61,20 +62,22 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   const filteredCaseStudies = useMemo(() => {
     try {
       let studies = [...caseStudyContent];
-      
+
       if (filter?.ids) {
-        studies = studies.filter(study => filter.ids!.includes(study.id));
+        studies = studies.filter((study) => filter.ids!.includes(study.id));
       } else if (filter?.excludeIds) {
-        studies = studies.filter(study => !filter.excludeIds!.includes(study.id));
+        studies = studies.filter(
+          (study) => !filter.excludeIds!.includes(study.id)
+        );
       }
-      
+
       if (filter?.limit) {
         studies = studies.slice(0, filter.limit);
       }
-      
+
       return studies;
     } catch (error) {
-      console.error('Error filtering case studies:', error);
+      console.error("Error filtering case studies:", error);
       setHasError(true);
       return [];
     }
@@ -91,7 +94,7 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
         clearTimeout(animationTimeoutRef.current);
       }
     } catch (error) {
-      console.error('Error resetting carousel state:', error);
+      console.error("Error resetting carousel state:", error);
       setHasError(true);
     }
   }, [filteredCaseStudies]);
@@ -106,13 +109,13 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
           const img = new globalThis.Image();
           img.onload = (event: Event) => resolve(event);
           img.onerror = (event: Event | string) => {
-            console.error('Error preloading image:', src, event);
-            reject(new Error('Failed to load image'));
+            console.error("Error preloading image:", src, event);
+            reject(new Error("Failed to load image"));
           };
           img.src = src;
         } catch (error) {
-          console.error('Error creating image:', error);
-          reject(new Error('Failed to create image'));
+          console.error("Error creating image:", error);
+          reject(new Error("Failed to create image"));
         }
       });
     };
@@ -120,24 +123,27 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     const preloadNextAndPrev = async () => {
       try {
         const promises: Promise<Event>[] = [];
-        
+
         // Always preload current image first
         if (filteredCaseStudies[current]?.image) {
           promises.push(preloadImage(filteredCaseStudies[current].image));
         }
-        
+
         // Preload next image
-        if (current < filteredCaseStudies.length - 1 && filteredCaseStudies[current + 1]?.image) {
+        if (
+          current < filteredCaseStudies.length - 1 &&
+          filteredCaseStudies[current + 1]?.image
+        ) {
           promises.push(preloadImage(filteredCaseStudies[current + 1].image));
         }
         // Preload previous image
         if (current > 0 && filteredCaseStudies[current - 1]?.image) {
           promises.push(preloadImage(filteredCaseStudies[current - 1].image));
         }
-        
+
         await Promise.all(promises);
       } catch (error) {
-        console.error('Error preloading images:', error);
+        console.error("Error preloading images:", error);
         setHasError(true);
       }
     };
@@ -172,14 +178,18 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
 
     const carousel = carouselRef.current;
     if (carousel) {
-      carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
-      carousel.addEventListener('touchmove', handleTouchMove, { passive: true });
-      carousel.addEventListener('touchend', handleTouchEnd);
+      carousel.addEventListener("touchstart", handleTouchStart, {
+        passive: true,
+      });
+      carousel.addEventListener("touchmove", handleTouchMove, {
+        passive: true,
+      });
+      carousel.addEventListener("touchend", handleTouchEnd);
 
       return () => {
-        carousel.removeEventListener('touchstart', handleTouchStart);
-        carousel.removeEventListener('touchmove', handleTouchMove);
-        carousel.removeEventListener('touchend', handleTouchEnd);
+        carousel.removeEventListener("touchstart", handleTouchStart);
+        carousel.removeEventListener("touchmove", handleTouchMove);
+        carousel.removeEventListener("touchend", handleTouchEnd);
       };
     }
   }, []);
@@ -187,44 +197,53 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (document.activeElement?.tagName === 'INPUT') return;
-      
-      if (e.key === 'ArrowLeft') {
+      if (document.activeElement?.tagName === "INPUT") return;
+
+      if (e.key === "ArrowLeft") {
         prevSlide();
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         nextSlide();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleSlideChange = useCallback((newIndex: number) => {
-    try {
-      if (isAnimating || newIndex === current || newIndex < 0 || newIndex >= filteredCaseStudies.length) return;
-      
-      // Clear any existing animation timeout
-      if (animationTimeoutRef.current) {
-        clearTimeout(animationTimeoutRef.current);
-      }
-      
-      setIsAnimating(true);
-      setIsImageLoading(true);
-      setSlideDirection(newIndex > current ? 'next' : 'prev');
-      setCurrent(newIndex);
+  const handleSlideChange = useCallback(
+    (newIndex: number) => {
+      try {
+        if (
+          isAnimating ||
+          newIndex === current ||
+          newIndex < 0 ||
+          newIndex >= filteredCaseStudies.length
+        )
+          return;
 
-      // Use requestAnimationFrame for smoother animations
-      requestAnimationFrame(() => {
-        animationTimeoutRef.current = setTimeout(() => {
-          setIsAnimating(false);
-        }, ANIMATION_DURATION);
-      });
-    } catch (error) {
-      console.error('Error changing slide:', error);
-      setHasError(true);
-    }
-  }, [isAnimating, current, filteredCaseStudies.length]);
+        // Clear any existing animation timeout
+        if (animationTimeoutRef.current) {
+          clearTimeout(animationTimeoutRef.current);
+        }
+
+        setIsAnimating(true);
+        setSlideDirection(newIndex > current ? "next" : "prev");
+        setIsImageLoading(true);
+
+        // Wait till animation ends, then set index
+        requestAnimationFrame(() => {
+          animationTimeoutRef.current = setTimeout(() => {
+            setCurrent(newIndex); // ⬅ move here
+            setIsAnimating(false);
+          }, ANIMATION_DURATION);
+        });
+      } catch (error) {
+        console.error("Error changing slide:", error);
+        setHasError(true);
+      }
+    },
+    [isAnimating, current, filteredCaseStudies.length]
+  );
 
   const nextSlide = useCallback(() => {
     if (current >= filteredCaseStudies.length - 1) return;
@@ -236,9 +255,10 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     handleSlideChange(current - 1);
   }, [current, handleSlideChange]);
 
-  const progressPercent = useMemo(() => 
-    ((current + 1) / filteredCaseStudies.length) * 100
-  , [current, filteredCaseStudies.length]);
+  const progressPercent = useMemo(
+    () => ((current + 1) / filteredCaseStudies.length) * 100,
+    [current, filteredCaseStudies.length]
+  );
 
   const handleImageLoad = useCallback(() => {
     // Add a small delay to ensure smooth transition
@@ -251,7 +271,8 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
     return (
       <div className="w-full py-6 md:py-12 lg:py-16 text-center">
         <Text type={Font.SOURCE_SANS} className="text-gray-600">
-          An error occurred while loading the case studies. Please refresh the page to try again.
+          An error occurred while loading the case studies. Please refresh the
+          page to try again.
         </Text>
       </div>
     );
@@ -291,7 +312,10 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
               </div>
 
               <div className="flex-col flex justify-between items-start max-h-[350px] md:max-h-[450px]">
-                <div className="ml-4 md:ml-7 mt-0 md:mt-2 relative min-h-[150px] md:min-h-[200px] h-auto" ref={contentRef}>
+                <div
+                  className="ml-4 md:ml-7 mt-0 md:mt-2 relative min-h-[150px] md:min-h-[200px] h-auto"
+                  ref={contentRef}
+                >
                   <div
                     key={safeCurrentIndex}
                     className="transition-all duration-150 ease-out will-change-transform"
@@ -304,7 +328,12 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                       {currentCaseStudy.heading
                         .split(" ")
                         .reduce(
-                          (acc: string[], word: string, i: number, arr: string[]) => {
+                          (
+                            acc: string[],
+                            word: string,
+                            i: number,
+                            arr: string[]
+                          ) => {
                             if (i % 3 === 0) {
                               const group = arr.slice(i, i + 3).join(" ");
                               if (group.trim()) acc.push(group);
@@ -314,9 +343,9 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                           []
                         )
                         .map((line, index) => (
-                          <Text 
-                            key={`${safeCurrentIndex}-${index}`} 
-                            className="max-w-[300px] text-[clamp(20px,5vw,24px)] md:text-[24px] leading-tight" 
+                          <Text
+                            key={`${safeCurrentIndex}-${index}`}
+                            className="max-w-[300px] text-[clamp(20px,5vw,24px)] md:text-[24px] leading-tight"
                             type={Font.GARAMOND}
                           >
                             {line}
@@ -324,8 +353,8 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                         ))}
                     </h2>
                     <div className="text-gray-700 mt-2 md:mt-3">
-                      <Text 
-                        type={Font.SOURCE_SANS} 
+                      <Text
+                        type={Font.SOURCE_SANS}
                         className="text-[clamp(14px,3.5vw,16px)] md:text-sm lg:text-base"
                       >
                         {currentCaseStudy.at_a_glance}
@@ -356,13 +385,24 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                         } flex items-center justify-center`}
                         aria-label="Previous Slide"
                       >
-                        <ChevronLeft size={16} strokeWidth={2.5} className="md:hidden" />
-                        <ChevronLeft size={20} strokeWidth={2.5} className="hidden md:block" />
+                        <ChevronLeft
+                          size={16}
+                          strokeWidth={2.5}
+                          className="md:hidden"
+                        />
+                        <ChevronLeft
+                          size={20}
+                          strokeWidth={2.5}
+                          className="hidden md:block"
+                        />
                       </button>
-                      
+
                       <button
                         onClick={nextSlide}
-                        disabled={isAnimating || safeCurrentIndex === filteredCaseStudies.length - 1}
+                        disabled={
+                          isAnimating ||
+                          safeCurrentIndex === filteredCaseStudies.length - 1
+                        }
                         className={`w-8 h-8 md:w-10 md:h-10 rounded-full border transition-colors ${
                           safeCurrentIndex === filteredCaseStudies.length - 1
                             ? "border-gray-300 text-gray-300"
@@ -370,8 +410,16 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                         } flex items-center justify-center`}
                         aria-label="Next Slide"
                       >
-                        <ChevronRight size={16} strokeWidth={2.5} className="md:hidden" />
-                        <ChevronRight size={20} strokeWidth={2.5} className="hidden md:block" />
+                        <ChevronRight
+                          size={16}
+                          strokeWidth={2.5}
+                          className="md:hidden"
+                        />
+                        <ChevronRight
+                          size={20}
+                          strokeWidth={2.5}
+                          className="hidden md:block"
+                        />
                       </button>
                     </div>
                   </div>
@@ -386,22 +434,22 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
               <div
                 key={`image-${safeCurrentIndex}`}
                 className={`absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                  isImageLoading ? 'opacity-0' : 'opacity-100'
+                  isImageLoading ? "opacity-0" : "opacity-100"
                 } ${
-                  isAnimating 
-                    ? slideDirection === 'next' 
-                      ? 'translate-x-full opacity-0' 
-                      : '-translate-x-full opacity-0'
-                    : 'translate-x-0 opacity-100'
+                  isAnimating
+                    ? slideDirection === "next"
+                      ? "translate-x-full opacity-0"
+                      : "-translate-x-full opacity-0"
+                    : "translate-x-0 opacity-100"
                 }`}
                 style={{
-                  willChange: 'transform, opacity',
-                  transform: isAnimating 
-                    ? slideDirection === 'next' 
-                      ? 'translateX(100%)' 
-                      : 'translateX(-100%)'
-                    : 'translateX(0)',
-                  transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  willChange: "transform, opacity",
+                  transform: isAnimating
+                    ? slideDirection === "next"
+                      ? "translateX(100%)"
+                      : "translateX(-100%)"
+                    : "translateX(0)",
+                  transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
               >
                 <div className="absolute inset-0 bg-gray-100 animate-pulse" />
@@ -425,8 +473,8 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 <div
                   className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
                   style={{
-                    transform: 'translateX(-100%)',
-                    willChange: 'transform'
+                    transform: "translateX(-100%)",
+                    willChange: "transform",
                   }}
                 >
                   <Image
@@ -445,29 +493,30 @@ export default function CaseStudyCarousel({ filter }: CaseStudyCarouselProps) {
                 </div>
               )}
               {/* Next Image for Smooth Transition */}
-              {isAnimating && safeCurrentIndex < filteredCaseStudies.length - 1 && (
-                <div
-                  className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
-                  style={{
-                    transform: 'translateX(100%)',
-                    willChange: 'transform'
-                  }}
-                >
-                  <Image
-                    src={filteredCaseStudies[safeCurrentIndex + 1].image}
-                    alt={filteredCaseStudies[safeCurrentIndex + 1].heading}
-                    fill
-                    quality={75}
-                    className="object-cover"
-                    sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
+              {isAnimating &&
+                safeCurrentIndex < filteredCaseStudies.length - 1 && (
+                  <div
+                    className="absolute inset-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    style={{
+                      transform: "translateX(100%)",
+                      willChange: "transform",
+                    }}
+                  >
+                    <Image
+                      src={filteredCaseStudies[safeCurrentIndex + 1].image}
+                      alt={filteredCaseStudies[safeCurrentIndex + 1].heading}
+                      fill
+                      quality={75}
+                      className="object-cover"
+                      sizes={`(max-width: ${IMAGE_SIZES.tablet}px) 45vw,
                            ${IMAGE_SIZES.desktop}px`}
-                    priority={false}
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                  />
-                </div>
-              )}
+                      priority={false}
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
+                    />
+                  </div>
+                )}
             </div>
           </div>
         </div>
