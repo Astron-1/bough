@@ -141,6 +141,12 @@ export default function ServicePage() {
               >
                 Our offerings
               </Text>
+              <Text
+                type={Font.SOURCE_SANS}
+                className="text-gray-700 text-sm sm:text-base"
+              >
+                {content.body?.offerings.subheading}
+              </Text>
             </div>
 
             <div className="space-y-4 w-full md:w-1/2 mt-8 md:mt-0">

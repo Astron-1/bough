@@ -17,8 +17,7 @@ export const serviceContent = {
       heading2: "Our offerings",
       contentHeading1:
         "We dive deep into your toughest accounting challenges, offering hands-on expertise to ensure your finance and accounting operations run smoothly and with integrity.From implementing complex accounting standards to managing risks and uncertainties, we don’t just consult—we roll up our sleeves and work alongside you. Our goal is straightforward: to handle the complexities of accounting and regulations so you can stay focused on confidently moving your business forward",
-      contentHeading2:
-        "",
+      contentHeading2: "",
       offerings: {
         subheading:
           "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential",
@@ -61,11 +60,10 @@ export const serviceContent = {
       heading2: "Our offerings",
       contentHeading1:
         "We delve deep into your business to uncover and understand the full spectrum of risks you face. By identifying potential vulnerabilities early, we help you stay ahead of the curve.Through comprehensive and cohesive risk assessments, we work to minimize exposure, optimize controls, and provide a clear, actionable path forward. With the right systems and people in place, we support your organization in managing and mitigating risks across all levels—people, processes, and technology",
-      contentHeading2:
-        "",
+      contentHeading2: "",
       offerings: {
         subheading:
-          "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential. Internal audit and co-sourcing; Enterprise risk management; SOX readiness and compliance; Vendor risk management; Operational risk and transformation; Cybersecurity risk assessment",
+          "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential. Internal audit and co-sourcing;",
         sections: [
           {
             heading: "Internal audit and co-sourcing",
@@ -114,8 +112,7 @@ export const serviceContent = {
       heading2: "Our offerings",
       contentHeading1:
         "We help CFOs and finance leaders navigate transformation by identifying inefficiencies, implementing automation, and aligning operations with future-ready goals.Transformation isn’t a one-time act—it’s a mindset. We reduce costs, remove manual burdens, and leverage technologies like GenAI and advanced analytics to unlock your team’s full potential",
-      contentHeading2:
-        "",
+      contentHeading2: "",
       offerings: {
         subheading:
           "Finance process reengineering, systems strategy and design, data optimization and governance, and GenAI-driven automation are at the core of our approach to scalable, intelligent transformation",
@@ -156,10 +153,10 @@ export const serviceContent = {
       heading2: "Our offerings",
       contentHeading1:
         "Our world faces numerous global challenges, climate change, transitioning from a linear economy to a circular one, increasing inequality, balancing economic needs with societal needs. We provide strategic, operational, and financial solutions that not only meet regulatory requirements but also drive sustainable growth and resilience",
-      contentHeading2:
-        "",
+      contentHeading2: "",
       offerings: {
-        subheading: "Our diverse expertise in accounting, risk, controls, information technology, finance & business transformation and ESG provides a  comprehensive solution to establish a strong foundation to build a sustainable organization. We co-create fully integrated and comprehensive solutions to seamlessly pick up from your current state, addressing any gaps from earlier phases and facilitating your success at every step",
+        subheading:
+          "Our diverse expertise in accounting, risk, controls, information technology, finance & business transformation and ESG provides a  comprehensive solution to establish a strong foundation to build a sustainable organization. We co-create fully integrated and comprehensive solutions to seamlessly pick up from your current state, addressing any gaps from earlier phases and facilitating your success at every step",
         sections: [
           {
             heading: "Decarbonization",
