@@ -63,7 +63,7 @@ export const serviceContent = {
       contentHeading2: "",
       offerings: {
         subheading:
-          "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential. Internal audit and co-sourcing;",
+          "Our specialized services are designed for CFOs, CAOs, and Corporate Controllers, addressing your most pressing challenges and unlocking your organization’s full financial potential.",
         sections: [
           {
             heading: "Internal audit and co-sourcing",
